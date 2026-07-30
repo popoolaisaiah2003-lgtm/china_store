@@ -3,153 +3,212 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}{{ company_name }} | HPLC Verified Pharmaceutical Grade Peptides{% endblock %}</title>
-  <meta name="description" content="Premium research peptides with guaranteed >=99.8% purity, HPLC certification, and fast international delivery.">
-  <meta name="author" content="Popoola Isaiah Oluwakayode">
-  <meta name="keywords" content="research peptides, pharmaceutical grade peptides, HPLC verified peptides, high purity peptides, peptide synthesis, peptide research chemicals, peptide suppliers, peptide catalog, peptide ordering, peptide delivery">
-  <link rel="icon" href="{{ url_for('static', filename='images/logo/favicon.ico') }}" type="image/x-icon">
+  <title>{% block title %}Yan Zhen Peptide | Precision Research Peptides & HPLC Analytical Standards{% endblock %}</title>
+
+  <!-- Local Bootstrap 5 CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
   {% block extra_css %}{% endblock %}
 </head>
-<body dir="ltr">
+<body>
 
-  <!-- Navigation (Always LTR Layout) -->
+  <!-- Biotech Main Navigation -->
   <nav class="navbar">
     <div class="container nav-container">
       <a href="{{ url_for('main.index') }}" class="brand-logo">
-        <img src="{{ url_for('static', filename='images/logo/logo.png') }}" alt="{{ company_name }}" style="height: 32px; width: auto;" class="logo-img">
-        <span>YAN ZHEN <span class="accent-gold">PEPTIDE</span></span>
-        <span class="brand-badge">Wholesale</span>
+        <img src="{{ url_for('static', filename='images/logo/logo.png') }}" alt="Yan Zhen Peptide Logo" onerror="this.style.display='none'">
+        <span>Yan Zhen <span style="color: var(--gold-primary);">Peptide</span></span>
+        <span class="brand-badge">Biotech HPLC</span>
       </a>
 
-      <button class="mobile-toggle" id="mobileNavToggle" aria-label="Toggle navigation">
-        ☰
-      </button>
+      <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation">☰</button>
 
       <ul class="nav-links" id="navLinks">
         <li><a href="{{ url_for('main.index') }}" class="{{ 'active' if request.endpoint == 'main.index' }}">{{ _('home') }}</a></li>
-        <li><a href="{{ url_for('main.products') }}" class="{{ 'active' if request.endpoint == 'main.products' or request.endpoint == 'main.product_detail' }}">{{ _('catalog') }}</a></li>
+        <li><a href="{{ url_for('main.products') }}" class="{{ 'active' if request.endpoint == 'main.products' }}">{{ _('catalog') }}</a></li>
         <li><a href="{{ url_for('main.coa_list') }}" class="{{ 'active' if request.endpoint == 'main.coa_list' }}">{{ _('coa_certificates') }}</a></li>
+        <li><a href="{{ url_for('blog.index') }}" class="{{ 'active' if request.endpoint == 'blog.index' }}">{{ _('research_journal') }}</a></li>
+        <li><a href="{{ url_for('main.contact') }}" class="{{ 'active' if request.endpoint == 'main.contact' }}">{{ _('contact') }}</a></li>
+
         <li>
-          <a href="{{ url_for('main.order') }}" class="cart-nav-link {{ 'active' if request.endpoint == 'main.order' or request.endpoint == 'main.checkout' }}">
-            📋 {{ _('quotation_cart') }}
-            <span class="cart-badge">{{ cart_total_count }}</span>
+          <a href="{{ url_for('main.order') }}" class="btn btn-sm btn-primary" id="reviewQuotationNavBtn">
+            📋 {{ _('quotation_cart') }} <span class="cart-badge">{{ cart_total_count }}</span>
           </a>
         </li>
-        <li><a href="{{ url_for('blog.index') }}" class="{{ 'active' if request.endpoint and 'blog' in request.endpoint }}">{{ _('journal') }}</a></li>
-        <li><a href="{{ url_for('main.contact') }}" class="{{ 'active' if request.endpoint == 'main.contact' }}">{{ _('contact') }}</a></li>
-        
-        <!-- Language Switcher Dropdown -->
-        <li style="position: relative;" class="dropdown">
-          <a href="#" class="btn btn-sm btn-outline" style="color: white; border-color: rgba(255,255,255,0.3); font-size: 0.85rem;">
-            🌐 {{ lang.upper() }} ▾
+
+        <!-- Language Selector Dropdown -->
+        <li class="dropdown" style="position: relative;">
+          <a href="#" class="dropdown-toggle" style="color: white; font-weight: 600; font-size: 0.85rem;" data-bs-toggle="dropdown" aria-expanded="false">
+            🌐 {{ lang|upper }}
           </a>
-          <ul class="dropdown-menu">
-            <li><a href="{{ url_for('main.set_language', lang_code='en') }}">🇬🇧 English</a></li>
-            <li><a href="{{ url_for('main.set_language', lang_code='zh') }}">🇨🇳 中文 (Chinese)</a></li>
-            <li><a href="{{ url_for('main.set_language', lang_code='es') }}">🇪🇸 Español (Spanish)</a></li>
-            <li><a href="{{ url_for('main.set_language', lang_code='ar') }}">🇸🇦 العربية (Arabic)</a></li>
-            <li><a href="{{ url_for('main.set_language', lang_code='fr') }}">🇫🇷 Français (French)</a></li>
+          <ul class="dropdown-menu dropdown-menu-end shadow-lg" style="background: var(--navy-deep); border: 1px solid var(--gold-primary);">
+            <li><a class="dropdown-item" style="color: white;" href="{{ url_for('main.set_language', lang_code='en') }}">🇺🇸 English</a></li>
+            <li><a class="dropdown-item" style="color: white;" href="{{ url_for('main.set_language', lang_code='zh') }}">🇨🇳 中文 (Chinese)</a></li>
+            <li><a class="dropdown-item" style="color: white;" href="{{ url_for('main.set_language', lang_code='es') }}">🇪🇸 Español (Spanish)</a></li>
+            <li><a class="dropdown-item" style="color: white;" href="{{ url_for('main.set_language', lang_code='ar') }}">🇸🇦 العربية (Arabic)</a></li>
+            <li><a class="dropdown-item" style="color: white;" href="{{ url_for('main.set_language', lang_code='fr') }}">🇫🇷 Français (French)</a></li>
           </ul>
         </li>
       </ul>
     </div>
   </nav>
 
-  <!-- First Visit Language Modal -->
-  {% if show_lang_modal %}
-  <div class="modal-overlay" id="langModal">
-    <div class="modal-content">
-      <h3 style="margin-bottom: 0.5rem; color: var(--navy-deep);">🌐 {{ _('choose_language') }}</h3>
-      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
-        {{ _('language_subtitle') }}
-      </p>
-      
-      <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-        <a href="{{ url_for('main.set_language', lang_code='en') }}" class="btn btn-navy" style="width: 100%;">🇬🇧 English</a>
-        <a href="{{ url_for('main.set_language', lang_code='zh') }}" class="btn btn-primary" style="width: 100%;">🇨🇳 中文 (Chinese)</a>
-        <a href="{{ url_for('main.set_language', lang_code='es') }}" class="btn btn-outline" style="width: 100%;">🇪🇸 Español (Spanish)</a>
-        <a href="{{ url_for('main.set_language', lang_code='ar') }}" class="btn btn-outline" style="width: 100%;">🇸🇦 العربية (Arabic)</a>
-        <a href="{{ url_for('main.set_language', lang_code='fr') }}" class="btn btn-outline" style="width: 100%;">🇫🇷 Français (French)</a>
-      </div>
-    </div>
-  </div>
-  {% endif %}
-
-  <!-- Flash Messages -->
-  <div class="container" style="margin-top: 1.5rem;">
+  <!-- Flash Notification System -->
+  <div class="container" style="margin-top: 1rem;">
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         {% for category, message in messages %}
-          <div class="alert alert-{{ category }}">
+          <div class="alert alert-{{ category if category != 'message' else 'info' }} alert-dismissible fade show" role="alert">
             {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
         {% endfor %}
       {% endif %}
     {% endwith %}
   </div>
 
-  <!-- Main Content -->
-  <main style="flex: 1;">
+  <!-- Main View Content -->
+  <main>
     {% block content %}{% endblock %}
   </main>
 
-  <!-- Floating WhatsApp Button -->
-  <a href="https://wa.me/{{ whatsapp_number }}?text=Hello%20Yan%20Zhen%20Peptide%2C%20I%20have%20an%20inquiry%20regarding%20wholesale%20ordering." 
-     class="whatsapp-float" target="_blank" rel="noopener noreferrer" title="Direct Wholesale WhatsApp Help Desk">
-    💬
-  </a>
-
-  <!-- Footer -->
-  <footer class="footer">
+  <!-- Biotech Footer -->
+  <footer>
     <div class="container">
-      <div class="footer-grid">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2.5rem; margin-bottom: 3rem;">
         <div>
-          <div class="footer-brand">{{ company_name }}</div>
-          <p style="max-width: 320px; font-size: 0.9rem;">
-            {{ _('footer_desc') }}
+          <div style="font-weight: 800; font-size: 1.25rem; color: white; margin-bottom: 0.75rem;">
+            Yan Zhen <span style="color: var(--gold-primary);">Peptide</span>
+          </div>
+          <p style="font-size: 0.88rem; line-height: 1.6; color: #94A3B8;">
+            High-purity lyophilized research peptides, HPLC certified analytical standards, and custom synthesis services for global research laboratories.
           </p>
         </div>
-        <div class="footer-links">
-          <h4>{{ _('navigation') }}</h4>
-          <ul>
-            <li><a href="{{ url_for('main.index') }}">{{ _('home') }}</a></li>
-            <li><a href="{{ url_for('main.products') }}">{{ _('catalog') }}</a></li>
-            <li><a href="{{ url_for('main.coa_list') }}">{{ _('coa_certificates') }}</a></li>
-            <li><a href="{{ url_for('main.order') }}">{{ _('quotation_cart') }}</a></li>
+
+        <div>
+          <h4 style="color: white; font-size: 1rem; margin-bottom: 1rem;">Quick Navigation</h4>
+          <ul style="list-style: none; padding: 0; line-height: 2;">
+            <li><a href="{{ url_for('main.products') }}" style="color: #94A3B8;">Wholesale Catalog</a></li>
+            <li><a href="{{ url_for('main.coa_list') }}" style="color: #94A3B8;">COA Certificate Search</a></li>
+            <li><a href="{{ url_for('blog.index') }}" style="color: #94A3B8;">Research Journal</a></li>
+            <li><a href="{{ url_for('main.contact') }}" style="color: #94A3B8;">Global Inquiries</a></li>
           </ul>
         </div>
-        <div class="footer-links">
-          <h4>{{ _('wholesale_support') }}</h4>
-          <ul>
-            <li><a href="{{ url_for('main.faq') }}">{{ _('faq') }}</a></li>
-            <li><a href="{{ url_for('main.contact') }}">{{ _('contact') }}</a></li>
-            <li><a href="https://wa.me/{{ whatsapp_number }}" target="_blank">{{ _('direct_whatsapp_line') }}</a></li>
+
+        <div>
+          <h4 style="color: white; font-size: 1rem; margin-bottom: 1rem;">Quality Assurance</h4>
+          <ul style="list-style: none; padding: 0; line-height: 2; color: #94A3B8; font-size: 0.88rem;">
+            <li>✓ HPLC Purity Verified (&ge; 99.8%)</li>
+            <li>✓ Mass Spectrometry Confirmed</li>
+            <li>✓ ISO 9001 Cleanroom Facility</li>
+            <li>✓ Temperature-Controlled Cold Chain</li>
           </ul>
         </div>
-        <div class="footer-links">
-          <h4>{{ _('direct_ordering') }}</h4>
-          <p style="font-size: 0.85rem; color: #CBD5E1; margin-bottom: 0.75rem;">
-            {{ _('wholesale_desk_wa') }}
-          </p>
-          <a href="https://wa.me/{{ whatsapp_number }}" class="btn btn-sm btn-whatsapp" target="_blank">+{{ whatsapp_number }}</a>
+
+        <div>
+          <h4 style="color: white; font-size: 1rem; margin-bottom: 1rem;">Wholesale Support Desk</h4>
+          <p style="font-size: 0.88rem; color: #94A3B8; margin-bottom: 1rem;">Direct inquiries and bulk quotation dispatch via WhatsApp:</p>
+          <a href="https://wa.me/{{ whatsapp_number }}?text=Hello%20Yan%20Zhen%20Peptide%2C%20I%20would%20like%20to%20inquire%20about%20wholesale%20peptides." target="_blank" class="btn btn-whatsapp" style="width: 100%;">
+            💬 WhatsApp: +{{ whatsapp_number }}
+          </a>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; {{ 2026 }} {{ company_name }}. {{ _('copyright') }}</p>
+
+      <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.82rem;">
+        <div>
+          &copy; {{ 2026 }} Yan Zhen Biotechnology Co., Ltd. All rights reserved. For research laboratory use only.
+        </div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="{{ url_for('main.faq') }}" style="color: #94A3B8;">FAQ</a>
+          <a href="{{ url_for('main.contact') }}" style="color: #94A3B8;">Terms of Quotation</a>
+        </div>
       </div>
     </div>
   </footer>
 
-  <!-- Toast Container (Bottom Right, Stackable) -->
+  <!-- IMPORTANT ORDER INFORMATION MODAL POPUP -->
+  <div class="modal fade" id="orderInfoModal" tabindex="-1" aria-labelledby="orderInfoModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content" style="border: 2px solid var(--navy-deep); border-radius: var(--radius-lg); overflow: hidden;">
+        
+        <!-- Modal Header -->
+        <div class="modal-header modal-header-biotech">
+          <h5 class="modal-title font-weight-bold" id="orderInfoModalLabel" style="color: white; font-size: 1.25rem;">
+            📋 Important Order Information
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="modal-body" style="padding: 1.75rem; background: var(--bg-primary);">
+          
+          <p style="font-size: 0.95rem; color: var(--navy-deep); font-weight: 600; margin-bottom: 1.25rem;">
+            Please review our official payment methods, shipping procedures, and minimum transaction thresholds before proceeding to checkout:
+          </p>
+
+          <!-- Payment Methods Box -->
+          <div class="payment-method-box">
+            <h6 style="font-weight: 800; color: var(--navy-deep); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+              <span>💳</span> Accepted Payment Methods
+            </h6>
+            <ul style="margin: 0; padding-left: 1.25rem; font-size: 0.88rem; color: var(--text-main); line-height: 1.8;">
+              <td><strong>USDT Cryptographic Payment</strong> (TRC20 / ERC20) — <em>Fastest Processing</em></td>
+              <li><strong>Bank Wire Transfer</strong> (TT / International Wire)</li>
+              <li><strong>Western Union</strong> Direct Transfer</li>
+              <li><strong>DHgate Escrow Platform</strong> (Available strictly for orders of <strong>$350 USD and above only</strong>)</li>
+            </ul>
+          </div>
+
+          <!-- Shipping & Delivery Box -->
+          <div class="payment-method-box">
+            <h6 style="font-weight: 800; color: var(--navy-deep); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+              <span>✈️</span> Shipping & International Delivery
+            </h6>
+            <ul style="margin: 0; padding-left: 1.25rem; font-size: 0.88rem; color: var(--text-main); line-height: 1.8;">
+              <li><strong>Transit Time:</strong> 3–7 Working Days via Express Air Courier</li>
+              <li><strong>Coverage:</strong> Worldwide Temperature-Controlled Cold-Chain Shipping</li>
+              <li><strong>Dispatch Timeline:</strong> Dispatched immediately following payment confirmation & HPLC quality verification</li>
+            </ul>
+          </div>
+
+          <!-- DHgate Warning Box (Red Highlighted) -->
+          <div class="dhgate-warning-box">
+            <div style="font-weight: 800; font-size: 0.95rem; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.5rem;">
+              <span>⚠️</span> DHgate Payment Threshold Warning
+            </div>
+            <div style="font-size: 0.86rem; line-height: 1.5;">
+              “DHgate payment is available only for orders of <strong>$350 USD and above</strong> due to the 15% deduction charged on every transaction. For orders below $350, please use USDT, Bank Transfer, or Western Union.”
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer" style="background: white; border-top: 1px solid var(--border-color); padding: 1rem 1.5rem; justify-content: space-between;">
+          <button type="button" class="btn btn-outline" data-bs-dismiss="modal">
+            Go Back
+          </button>
+          <button type="button" class="btn btn-primary" id="btnAcknowledgeAndContinue" style="padding: 0.75rem 1.75rem;">
+            I Understand & Continue &rarr;
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container for Stackable Cart Notifications -->
   <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toastContainer" style="z-index: 1090;"></div>
 
+  <!-- Local Bootstrap 5 JavaScript & Custom main.js -->
   <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-{% block extra_js %}{% endblock %}
+  {% block extra_js %}{% endblock %}
 </body>
 </html>

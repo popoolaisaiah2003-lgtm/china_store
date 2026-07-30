@@ -3,46 +3,114 @@
 {% block title %}Yan Zhen Peptide | Precision Research Peptides & HPLC Analytical Standards{% endblock %}
 
 {% block content %}
-<!-- Hero Section with Professional Banner Image -->
-<section class="hero" style="background: linear-gradient(135deg, rgba(11, 31, 58, 0.92) 0%, rgba(11, 31, 58, 0.85) 100%), url('{{ url_for('static', filename='images/hero/hero-banner.jpg') }}') center/cover no-repeat; padding: 5rem 0;">
-  <div class="container hero-grid">
-    <div>
-      <h1 class="hero-title">{{ _('hero_title') }}</h1>
-      <p class="hero-subtitle">
-        {{ _('hero_subtitle') }}
-      </p>
-      
-      <div class="hero-badges">
-        <span class="pharma-badge">{{ _('mass_spec_tested') }}</span>
-        <span class="pharma-badge">{{ _('hplc_verified') }}</span>
-        <span class="pharma-badge">{{ _('express_shipping') }}</span>
-      </div>
+<!-- Full-Width Hero Section with Laboratory Video / Static Image Overlay -->
+<section class="hero">
+  <!-- Desktop Video Loop Background (Hidden on Mobile via CSS) -->
+  <video autoplay loop muted playsinline class="hero-video-bg" poster="{{ url_for('static', filename='images/hero/hero-banner.jpg') }}">
+    <source src="{{ url_for('static', filename='videos/hero-lab.mp4') }}" type="video/mp4">
+  </video>
 
-      <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;">
-        <a href="{{ url_for('main.products') }}" class="btn btn-primary">{{ _('browse_catalog') }}</a>
-        <a href="https://wa.me/{{ whatsapp_number }}?text=Hello%20Yan%20Zhen%20Peptide%2C%20I%20would%20like%20to%20inquire%20about%20bulk%20orders." class="btn btn-whatsapp" target="_blank">{{ _('order_whatsapp') }}</a>
-      </div>
-    </div>
+  <!-- Dark Blue Gradient Overlay -->
+  <div class="hero-overlay"></div>
 
-    <div style="text-align: center;">
-      <div style="background: rgba(11, 31, 58, 0.75); padding: 2rem; border-radius: var(--radius-lg); border: 1.5px solid var(--gold-primary); backdrop-filter: blur(12px); box-shadow: var(--shadow-lg);">
-        <img src="{{ url_for('static', filename='images/products/peptide-generic.jpg') }}" alt="Yan Zhen Analytical Vial" style="height: 140px; width: auto; margin: 0 auto 1rem auto; border-radius: 8px; object-fit: contain;">
-        <h3 style="color: white; margin-bottom: 0.5rem;">{{ _('analytical_excellence') }}</h3>
-        <p style="color: #CBD5E1; font-size: 0.85rem; line-height: 1.5;">
-          {{ _('analytical_desc') }}
+  <div class="container hero-content">
+    <div class="hero-grid">
+      <div>
+        <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(200, 169, 107, 0.15); border: 1px solid var(--gold-primary); padding: 0.35rem 0.85rem; border-radius: 50px; margin-bottom: 1.25rem;">
+          <span style="font-size: 0.75rem; font-weight: 800; color: var(--gold-primary); text-transform: uppercase; letter-spacing: 0.08em;">
+            🇨🇳 Chinese Biotech Precision Manufacturing
+          </span>
+        </div>
+
+        <h1 class="hero-title">
+          Premium Research Peptides for Global Laboratories
+        </h1>
+
+        <p class="hero-subtitle">
+          High Purity • Reliable Quality • Worldwide Shipping
         </p>
+        
+        <div class="hero-cta-group">
+          <a href="{{ url_for('main.products') }}" class="btn btn-primary" style="padding: 0.85rem 2rem; font-size: 1rem;">
+            🧪 View Products
+          </a>
+          <a href="https://wa.me/{{ whatsapp_number }}?text=Hello%20Yan%20Zhen%20Peptide%2C%20I%20would%20like%20to%20request%20a%20wholesale%20quotation." target="_blank" class="btn btn-whatsapp" style="padding: 0.85rem 2rem; font-size: 1rem;">
+            💬 Request a Quote
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Feature Card -->
+      <div>
+        <div class="hero-card">
+          <div style="background: rgba(2, 132, 199, 0.15); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1rem; display: inline-block;">
+            <img src="{{ url_for('static', filename='images/products/peptide-generic.jpg') }}" alt="Yan Zhen Lyophilized Vial" style="height: 130px; width: auto; object-fit: contain;">
+          </div>
+          <h3 style="color: white; font-size: 1.2rem; margin-bottom: 0.5rem;">Analytical Excellence</h3>
+          <p style="color: #CBD5E1; font-size: 0.85rem; line-height: 1.5;">
+            Guaranteed ≥99.8% purity verified via High-Performance Liquid Chromatography (HPLC) and Mass Spectrometry (MS).
+          </p>
+          <div style="margin-top: 1rem; pt: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+            <a href="{{ url_for('main.coa_list') }}" style="color: var(--gold-primary); font-size: 0.85rem; font-weight: 700;">
+              Browse COA Reports &rarr;
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Category Pill Showcase -->
+<!-- Trust Bar Under Hero -->
+<section class="trust-bar">
+  <div class="container">
+    <div class="trust-grid">
+      
+      <div class="trust-item">
+        <div class="trust-icon">🔬</div>
+        <div>
+          <div class="trust-label">≥99% Purity</div>
+          <div class="trust-sublabel">HPLC Verified Standards</div>
+        </div>
+      </div>
+
+      <div class="trust-item">
+        <div class="trust-icon">🧪</div>
+        <div>
+          <div class="trust-label">Strict QC</div>
+          <div class="trust-sublabel">ISO Cleanroom Batch Testing</div>
+        </div>
+      </div>
+
+      <div class="trust-item">
+        <div class="trust-icon">📄</div>
+        <div>
+          <div class="trust-label">COA Available</div>
+          <div class="trust-sublabel">Public Report Repository</div>
+        </div>
+      </div>
+
+      <div class="trust-item">
+        <div class="trust-icon">✈️</div>
+        <div>
+          <div class="trust-label">Global Shipping</div>
+          <div class="trust-sublabel">Temperature Controlled Dispatch</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Category Pills Section -->
 <section class="section" style="background-color: white; padding: 2.5rem 0; border-bottom: 1px solid var(--border-color);">
   <div class="container">
     <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
-      <span style="font-weight: 700; color: var(--navy-deep); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.05em;">{{ _('explore_categories') }}</span>
-      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-        <a href="{{ url_for('main.products') }}" class="btn btn-sm btn-outline">{{ _('all_categories') }}</a>
+      <span style="font-weight: 800; color: var(--navy-deep); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.05em;">
+        Research Compound Categories
+      </span>
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <a href="{{ url_for('main.products') }}" class="btn btn-sm btn-outline">All Products</a>
         {% for cat in categories %}
           <a href="{{ url_for('main.products', category=cat.slug) }}" class="btn btn-sm btn-outline">{{ cat.name }}</a>
         {% endfor %}
@@ -51,13 +119,17 @@
   </div>
 </section>
 
-<!-- Featured Products Section -->
-<section class="section">
+<!-- Featured Glass-Style Product Cards Section -->
+<section class="section" style="padding: 4rem 0;">
   <div class="container">
-    <div class="section-header">
-      <div class="section-subtitle">{{ _('featured_compounds') }}</div>
-      <h2>{{ _('hplc_tested_peptides') }}</h2>
-      <p style="color: var(--text-muted);">{{ _('featured_desc') }}</p>
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <div style="font-size: 0.85rem; font-weight: 800; color: var(--gold-primary); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.35rem;">
+        Featured Research Formulations
+      </div>
+      <h2 style="font-size: 2rem; color: var(--navy-deep);">HPLC-Verified Peptide Formulations</h2>
+      <p style="color: var(--text-muted); max-width: 600px; margin: 0.5rem auto 0 auto;">
+        Explore our primary GLP-1 analogues, tissue regeneration peptides, and somatropin research compounds.
+      </p>
     </div>
 
     <div class="product-grid">
@@ -65,61 +137,34 @@
         <div class="product-card">
           <div class="product-thumb">
             <span class="purity-tag">{{ product.purity }}</span>
-            <img src="{{ url_for('static', filename=product.catalog_image) }}" alt="{{ product.name }}" style="max-height: 160px; width: 100%; object-fit: contain; padding: 0.5rem;">
+            <img src="{{ url_for('static', filename=product.catalog_image) }}" alt="{{ product.name }}">
           </div>
           <div class="product-body">
-            <div class="product-category">{{ product.category.name if product.category else 'General' }}</div>
+            <div class="product-category">{{ product.category.name if product.category else 'General Peptides' }}</div>
             <h3 class="product-title">
               <a href="{{ url_for('main.product_detail', slug=product.slug) }}">{{ product.name }}</a>
             </h3>
-            <p class="product-meta">{{ product.short_description or 'High-purity lyophilized research peptide vial.' }}</p>
-            <div class="product-price">
-              <span>${{ "%.2f"|format(product.price) }}</span>
-              <a href="{{ url_for('main.product_detail', slug=product.slug) }}" class="btn btn-sm btn-primary">{{ _('view_specs') }}</a>
+            <p class="product-meta">{{ product.short_description or 'Lyophilized research peptide vial.' }}</p>
+            
+            <div class="product-price-row">
+              <div class="product-price">${{ "%.2f"|format(product.price) }}</div>
+              
+              <form method="POST" action="{{ url_for('main.cart_add', product_id=product.id) }}" style="display: flex; gap: 0.4rem;">
+                <input type="number" name="quantity" min="1" max="1000" value="1" style="width: 50px; padding: 0.25rem; border-radius: 4px; border: 1px solid var(--border-color); text-align: center; font-size: 0.85rem;" title="Select quantity">
+                <button type="submit" class="btn btn-sm btn-primary">
+                  + Add to Order
+                </button>
+              </form>
             </div>
           </div>
         </div>
       {% endfor %}
     </div>
 
-    <div style="text-align: center; margin-top: 3rem;">
-      <a href="{{ url_for('main.products') }}" class="btn btn-navy">{{ _('view_all_products') }} &rarr;</a>
-    </div>
-  </div>
-</section>
-
-<!-- Why Choose Us -->
-<section class="section" style="background: white; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-subtitle">{{ _('yan_zhen_advantage') }}</div>
-      <h2>{{ _('built_for_researchers') }}</h2>
-    </div>
-
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
-      <div style="padding: 2rem; border-radius: var(--radius-md); background: var(--bg-secondary); border: 1px solid var(--border-color);">
-        <div style="font-size: 2.25rem; margin-bottom: 1rem; color: var(--gold-primary);">🔬</div>
-        <h3 style="margin-bottom: 0.5rem; font-size: 1.15rem;">{{ _('hplc_ms_testing') }}</h3>
-        <p style="font-size: 0.9rem; color: var(--text-muted);">
-          {{ _('hplc_ms_desc') }}
-        </p>
-      </div>
-
-      <div style="padding: 2rem; border-radius: var(--radius-md); background: var(--bg-secondary); border: 1px solid var(--border-color);">
-        <div style="font-size: 2.25rem; margin-bottom: 1rem; color: var(--gold-primary);">❄️</div>
-        <h3 style="margin-bottom: 0.5rem; font-size: 1.15rem;">{{ _('cold_chain') }}</h3>
-        <p style="font-size: 0.9rem; color: var(--text-muted);">
-          {{ _('cold_chain_desc') }}
-        </p>
-      </div>
-
-      <div style="padding: 2rem; border-radius: var(--radius-md); background: var(--bg-secondary); border: 1px solid var(--border-color);">
-        <div style="font-size: 2.25rem; margin-bottom: 1rem; color: var(--gold-primary);">💬</div>
-        <h3 style="margin-bottom: 0.5rem; font-size: 1.15rem;">{{ _('direct_whatsapp_desk') }}</h3>
-        <p style="font-size: 0.9rem; color: var(--text-muted);">
-          {{ _('whatsapp_desk_desc') }}
-        </p>
-      </div>
+    <div style="text-align: center; margin-top: 3.5rem;">
+      <a href="{{ url_for('main.products') }}" class="btn btn-navy" style="padding: 0.85rem 2.25rem;">
+        View All 169 Wholesale Products &rarr;
+      </a>
     </div>
   </div>
 </section>

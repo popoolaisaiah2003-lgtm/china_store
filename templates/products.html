@@ -3,34 +3,36 @@
 {% block title %}{{ _('b2b_catalog_title') }} | Yan Zhen Peptide{% endblock %}
 
 {% block content %}
-<section style="background: var(--navy-deep); color: white; padding: 2.75rem 0; border-bottom: 3px solid var(--gold-primary);">
+<section style="background: var(--navy-deep); color: white; padding: 3rem 0; border-bottom: 3px solid var(--gold-primary);">
   <div class="container">
-    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
       <div>
-        <h1 style="color: white; margin-bottom: 0.35rem;">{{ _('b2b_catalog_title') }}</h1>
-        <p style="color: #94A3B8; max-width: 650px;">
+        <div style="font-size: 0.8rem; font-weight: 800; color: var(--gold-primary); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.35rem;">
+          🇨🇳 High-Purity Lyophilized Peptide Catalog
+        </div>
+        <h1 style="color: white; margin-bottom: 0.35rem; font-size: 2.25rem;">{{ _('b2b_catalog_title') }}</h1>
+        <p style="color: #94A3B8; max-width: 650px; font-size: 0.95rem;">
           {{ _('b2b_catalog_desc') }}
         </p>
       </div>
 
       <div>
-        <a href="{{ url_for('main.order') }}" class="btn btn-primary" style="padding: 0.75rem 1.5rem;">
-          {{ _('review_quotation_sheet') }} ({{ cart_total_count }})
+        <a href="{{ url_for('main.order') }}" class="btn btn-primary trigger-checkout-modal" style="padding: 0.85rem 1.75rem;">
+          📋 Review Quotation Sheet (<span class="cart-badge">{{ cart_total_count }}</span>)
         </a>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section" style="padding: 3rem 0;">
   <div class="container">
     
-    <!-- Filter, Search, and Sort Header Bar -->
-    <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 2rem; box-shadow: var(--shadow-sm);">
+    <!-- Filter, Search, and Sort Bar -->
+    <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 2.5rem; box-shadow: var(--shadow-sm);">
       
-      <!-- Top Search & Sort Row -->
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;">
-        <form method="GET" action="{{ url_for('main.products') }}" style="display: flex; gap: 0.75rem; flex: 1; min-width: 280px; max-width: 500px;">
+        <form method="GET" action="{{ url_for('main.products') }}" style="display: flex; gap: 0.75rem; flex: 1; min-width: 280px; max-width: 520px;">
           <input type="text" name="q" value="{{ search_query }}" placeholder="{{ _('search_placeholder') }}" class="form-control">
           {% if selected_category %}
             <input type="hidden" name="category" value="{{ selected_category.slug }}">
@@ -40,8 +42,8 @@
         </form>
 
         <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-          <span style="font-weight: 700; color: var(--navy-deep); font-size: 0.9rem;">
-            {{ _('showing') }} {{ products|length }} {{ _('products') }}
+          <span style="font-weight: 800; color: var(--navy-deep); font-size: 0.95rem;">
+            Showing all {{ products|length }} Products
           </span>
 
           <form method="GET" action="{{ url_for('main.products') }}" style="display: flex; align-items: center; gap: 0.5rem;">
@@ -51,7 +53,7 @@
             {% if selected_category %}
               <input type="hidden" name="category" value="{{ selected_category.slug }}">
             {% endif %}
-            <label for="sort" style="font-size: 0.85rem; font-weight: 600; color: var(--navy-deep);">{{ _('sort_by') }}</label>
+            <label for="sort" style="font-size: 0.85rem; font-weight: 700; color: var(--navy-deep);">{{ _('sort_by') }}</label>
             <select name="sort" id="sort" class="form-control" style="width: auto; padding: 0.4rem 0.85rem;" onchange="this.form.submit()">
               <option value="name_asc" {{ 'selected' if sort_by == 'name_asc' }}>{{ _('sort_name_asc') }}</option>
               <option value="name_desc" {{ 'selected' if sort_by == 'name_desc' }}>{{ _('sort_name_desc') }}</option>
@@ -66,7 +68,7 @@
       <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; border-top: 1px solid var(--border-color); padding-top: 1rem;">
         <a href="{{ url_for('main.products', sort=sort_by, q=search_query) }}" 
            class="btn btn-sm {{ 'btn-primary' if not selected_category else 'btn-outline' }}">
-          {{ _('all_peptides') }}
+          All Peptides
         </a>
         {% for cat in categories %}
           <a href="{{ url_for('main.products', category=cat.slug, sort=sort_by, q=search_query) }}" 
@@ -78,80 +80,45 @@
 
     </div>
 
-    <!-- Compact B2B Catalog List Table (Full 169 Products List) -->
-    <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm);">
-      <div style="overflow-x: auto;">
-        <table class="order-table" style="margin-bottom: 0;">
-          <thead>
-            <tr>
-              <th style="width: 32%;">{{ _('product_spec_col') }}</th>
-              <th style="width: 20%;">{{ _('category_col') }}</th>
-              <th style="width: 12%;">{{ _('purity_col') }}</th>
-              <th style="width: 14%;">{{ _('price_usd_col') }}</th>
-              <th style="width: 22%; text-align: right;">{{ _('wholesale_order_col') }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for product in products %}
-              <tr>
-                <td>
-                  <div style="display: flex; align-items: center; gap: 0.75rem;">
-                    <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); padding: 0.15rem; border-radius: var(--radius-sm); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0;">
-                      <img src="{{ url_for('static', filename=product.catalog_image) }}" alt="{{ product.name }}" style="width: 100%; height: 100%; object-fit: contain;">
-                    </div>
-                    <div>
-                      <a href="{{ url_for('main.product_detail', slug=product.slug) }}" style="font-weight: 700; color: var(--navy-deep); font-size: 0.95rem;">
-                        {{ product.name }}
-                      </a>
-                      {% if product.sequence_or_cas %}
-                        <div style="font-size: 0.75rem; color: var(--text-muted);">
-                          {{ _('code_label') }} <code>{{ product.sequence_or_cas }}</code>
-                        </div>
-                      {% endif %}
-                    </div>
-                  </div>
-                </td>
+    <!-- Glass-Style Product Cards Grid (All 169 Items Displayed) -->
+    <div class="product-grid" style="margin-bottom: 3rem;">
+      {% for product in products %}
+        <div class="product-card">
+          <div class="product-thumb">
+            <span class="purity-tag">{{ product.purity }}</span>
+            <img src="{{ url_for('static', filename=product.catalog_image) }}" alt="{{ product.name }}">
+          </div>
+          <div class="product-body">
+            <div class="product-category">{{ product.category.name if product.category else 'General Peptides' }}</div>
+            <h3 class="product-title">
+              <a href="{{ url_for('main.product_detail', slug=product.slug) }}">{{ product.name }}</a>
+            </h3>
+            {% if product.sequence_or_cas %}
+              <div style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+                Code: <code>{{ product.sequence_or_cas }}</code>
+              </div>
+            {% endif %}
 
-                <td>
-                  <span style="font-size: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-color); color: var(--navy-deep); padding: 0.2rem 0.5rem; border-radius: var(--radius-sm); font-weight: 600;">
-                    {{ product.category.name if product.category else 'General' }}
-                  </span>
-                </td>
-
-                <td>
-                  <span style="font-size: 0.8rem; color: var(--gold-primary); font-weight: 700;">
-                    {{ product.purity }}
-                  </span>
-                </td>
-
-                <td>
-                  <span style="font-size: 1.1rem; font-weight: 800; color: var(--navy-deep);">
-                    ${{ "%.2f"|format(product.price) }}
-                  </span>
-                </td>
-
-                <td style="text-align: right;">
-                  <form method="POST" action="{{ url_for('main.cart_add', product_id=product.id) }}" style="display: inline-flex; gap: 0.5rem; justify-content: flex-end; align-items: center;">
-                    <input type="number" name="quantity" min="1" max="1000" value="1" class="qty-input-sm" style="width: 65px; padding: 0.35rem;" title="Select quantity">
-                    <button type="submit" class="btn btn-sm btn-primary" style="padding: 0.4rem 0.75rem; font-size: 0.8rem;">
-                      {{ _('add_to_order') }}
-                    </button>
-                  </form>
-                </td>
-              </tr>
-            {% else %}
-              <tr>
-                <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 4rem;">
-                  <div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
-                  <h3>{{ _('no_peptides_found') }}</h3>
-                  <p>{{ _('no_peptides_desc') }}</p>
-                  <a href="{{ url_for('main.products') }}" class="btn btn-sm btn-outline" style="margin-top: 1rem;">{{ _('reset_search') }}</a>
-                </td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
+            <div class="product-price-row">
+              <div class="product-price">${{ "%.2f"|format(product.price) }}</div>
+              
+              <form method="POST" action="{{ url_for('main.cart_add', product_id=product.id) }}" style="display: flex; gap: 0.4rem; align-items: center;">
+                <input type="number" name="quantity" min="1" max="1000" value="1" style="width: 55px; padding: 0.3rem; border-radius: 4px; border: 1px solid var(--border-color); text-align: center; font-size: 0.85rem;" title="Select quantity">
+                <button type="submit" class="btn btn-sm btn-primary">
+                  + Add to Order
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <div style="grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: 5rem 2rem; background: white; border-radius: var(--radius-lg); border: 1px dashed var(--border-color);">
+          <div style="font-size: 3.5rem; margin-bottom: 1rem;">🔍</div>
+          <h3>{{ _('no_peptides_found') }}</h3>
+          <p>{{ _('no_peptides_desc') }}</p>
+          <a href="{{ url_for('main.products') }}" class="btn btn-sm btn-outline" style="margin-top: 1rem;">{{ _('reset_search') }}</a>
+        </div>
+      {% endfor %}
     </div>
 
   </div>

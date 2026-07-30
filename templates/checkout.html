@@ -19,6 +19,18 @@
       <!-- Left: Customer Info Form -->
       <div>
         <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2.5rem; box-shadow: var(--shadow-sm);">
+          
+          <!-- DHgate Threshold Status Notice Banner -->
+          {% if grand_total < 350 %}
+            <div class="dhgate-notice-orange">
+              ⚠️ DHgate Payment Notice: DHgate is not available for this order (Order Total: ${{ "%.2f"|format(grand_total) }} USD). DHgate is available only for orders of $350 USD and above. Please use USDT, Bank Transfer, or Western Union.
+            </div>
+          {% else %}
+            <div class="dhgate-notice-green">
+              ✓ DHgate Payment Available: DHgate payment is available for this order (Order Total: ${{ "%.2f"|format(grand_total) }} USD &ge; $350).
+            </div>
+          {% endif %}
+
           <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">{{ _('customer_information') }}</h2>
           <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">
             {{ _('enter_logistics') }}

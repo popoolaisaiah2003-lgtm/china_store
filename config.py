@@ -6,8 +6,8 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'yan-zhen-peptide-production-secret-2026'
     
-    # MySQL Database Connection (yan_zhen_peptide with utf8mb4)
-    MYSQL_URI = 'mysql+pymysql://root:@localhost/yan_zhen_peptide?charset=utf8mb4'
+    # MySQL Database Connection (yan_zhen_peptide via 127.0.0.1 with utf8mb4)
+    MYSQL_URI = 'mysql+pymysql://root:@127.0.0.1/yan_zhen_peptide?charset=utf8mb4'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or MYSQL_URI
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     

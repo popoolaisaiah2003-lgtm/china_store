@@ -1,4 +1,4 @@
-// Yan Zhen Peptide - Main Interactivity & Stackable AJAX Cart UX
+// Yan Zhen Peptide - Chinese Biotech Interactivity & Modal Checkout Workflow
 
 document.addEventListener('DOMContentLoaded', () => {
   // Mobile Navigation Toggle
@@ -11,23 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Language Persistence in localStorage
+  // Language Persistence
   const currentLangMatch = window.location.pathname.match(/\/set_language\/([a-z]{2})/);
   if (currentLangMatch && currentLangMatch[1]) {
     localStorage.setItem('yz_language', currentLangMatch[1]);
   }
 
-  // Auto-dismiss Flash Alerts
-  const alerts = document.querySelectorAll('.alert');
-  alerts.forEach(alert => {
-    setTimeout(() => {
-      alert.style.opacity = '0';
-      alert.style.transition = 'opacity 0.5s ease';
-      setTimeout(() => alert.remove(), 500);
-    }, 4000);
-  });
-
-  // Stackable Toast System Helper
+  // Stackable Toast Notification Helper
   const toastContainer = document.getElementById('toastContainer');
 
   function showToast(title, message = '', isError = false) {
@@ -102,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await response.json();
 
       if (data.success) {
-        // Update all navbar cart badges instantly
+        // Update all navbar cart badges
         const cartBadges = document.querySelectorAll('.cart-badge');
         cartBadges.forEach(badge => {
           badge.textContent = data.cart_total_count;
@@ -127,4 +117,44 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
+
+  // Modal Trigger Logic for Checkout Flow ("Proceed to Checkout" / "Proceed to Order")
+  const checkoutTriggers = document.querySelectorAll('.trigger-checkout-modal, a[href*="/checkout"], .btn-proceed-checkout');
+  const orderModalEl = document.getElementById('orderInfoModal');
+  const btnAcknowledgeAndContinue = document.getElementById('btnAcknowledgeAndContinue');
+
+  let orderInfoModal = null;
+  if (orderModalEl && window.bootstrap && bootstrap.Modal) {
+    orderInfoModal = new bootstrap.Modal(orderModalEl);
+  }
+
+  checkoutTriggers.forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+      const isAcknowledged = sessionStorage.getItem('yz_order_info_acknowledged') === 'true';
+
+      if (!isAcknowledged) {
+        e.preventDefault();
+        if (orderInfoModal) {
+          orderInfoModal.show();
+        } else if (orderModalEl) {
+          orderModalEl.classList.add('show');
+          orderModalEl.style.display = 'block';
+        }
+      }
+    });
+  });
+
+  if (btnAcknowledgeAndContinue) {
+    btnAcknowledgeAndContinue.addEventListener('click', () => {
+      // Store acknowledgment in sessionStorage
+      sessionStorage.setItem('yz_order_info_acknowledged', 'true');
+      
+      if (orderInfoModal) {
+        orderInfoModal.hide();
+      }
+      
+      // Proceed to checkout page
+      window.location.href = '/checkout';
+    });
+  }
 });

@@ -1,0 +1,106 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Research Journal CMS | Yan Zhen Admin Console{% endblock %}
+
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+  <div>
+    <h1 style="font-size: 1.75rem; margin-bottom: 0.25rem;">📰 Research Journal (Blog CMS)</h1>
+    <p style="color: var(--text-muted); font-size: 0.9rem;">Manage published scientific research, clinical articles, and product news.</p>
+  </div>
+  <div>
+    <a href="{{ url_for('admin.blog_new') }}" class="btn btn-primary">+ Create New Article</a>
+  </div>
+</div>
+
+<div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm);">
+  <div style="overflow-x: auto;">
+    <table class="order-table" style="margin-bottom: 0;">
+      <thead>
+        <tr>
+          <th style="width: 30%;">Title & Slug</th>
+          <th style="width: 10%;">Language</th>
+          <th style="width: 12%;">Published</th>
+          <th style="width: 12%;">Featured</th>
+          <th style="width: 12%;">Created</th>
+          <th style="width: 12%;">Updated</th>
+          <th style="width: 12%; text-align: right;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for post in posts %}
+          <tr>
+            <td>
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                {% if post.image_filename %}
+                  <img src="{{ url_for('static', filename='uploads/blog/' ~ post.image_filename) }}" alt="{{ post.title }}" style="width: 44px; height: 44px; object-fit: cover; border-radius: var(--radius-sm); border: 1px solid var(--border-color); flex-shrink: 0;">
+                {% else %}
+                  <div style="width: 44px; height: 44px; background: var(--bg-secondary); border-radius: var(--radius-sm); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;">📰</div>
+                {% endif %}
+                <div>
+                  <a href="{{ url_for('blog.detail', slug=post.slug) }}" target="_blank" style="font-weight: 700; color: var(--navy-deep); font-size: 0.95rem;">
+                    {{ post.title }} ↗
+                  </a>
+                  <div style="font-size: 0.75rem; color: var(--text-muted);">
+                    <code>/blog/{{ post.slug }}</code>
+                  </div>
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <span style="font-weight: 700; font-size: 0.8rem; text-transform: uppercase; padding: 0.2rem 0.5rem; border-radius: 4px; background: var(--bg-secondary); border: 1px solid var(--border-color);">
+                {{ post.language }}
+              </span>
+            </td>
+
+            <td>
+              <form method="POST" action="{{ url_for('admin.blog_toggle_publish', id=post.id) }}" style="display: inline;">
+                <button type="submit" class="btn btn-sm {{ 'btn-success' if post.is_published else 'btn-outline' }}" style="padding: 0.25rem 0.65rem; font-size: 0.78rem;" title="Click to toggle publication status">
+                  {{ 'Published' if post.is_published else 'Draft / Hidden' }}
+                </button>
+              </form>
+            </td>
+
+            <td>
+              <form method="POST" action="{{ url_for('admin.blog_toggle_featured', id=post.id) }}" style="display: inline;">
+                <button type="submit" class="btn btn-sm {{ 'btn-whatsapp' if post.is_featured else 'btn-outline' }}" style="padding: 0.25rem 0.65rem; font-size: 0.78rem;" title="Click to toggle featured placement at top of blog">
+                  {{ '⭐ Featured' if post.is_featured else 'Standard' }}
+                </button>
+              </form>
+            </td>
+
+            <td style="font-size: 0.8rem; color: var(--text-muted);">
+              {{ post.created_at.strftime('%Y-%m-%d') if post.created_at else '-' }}
+            </td>
+
+            <td style="font-size: 0.8rem; color: var(--text-muted);">
+              {{ post.updated_at.strftime('%Y-%m-%d %H:%M') if post.updated_at else (post.created_at.strftime('%Y-%m-%d') if post.created_at else '-') }}
+            </td>
+
+            <td style="text-align: right;">
+              <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+                <a href="{{ url_for('admin.blog_edit', id=post.id) }}" class="btn btn-sm btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.8rem;">
+                  Edit
+                </a>
+
+                <form method="POST" action="{{ url_for('admin.blog_delete', id=post.id) }}" onsubmit="return confirm('Are you sure you want to delete article \'{{ post.title }}\'? This cannot be undone.');" style="display: inline;">
+                  <button type="submit" class="btn btn-sm btn-danger" style="padding: 0.3rem 0.6rem; font-size: 0.8rem;">
+                    Delete
+                  </button>
+                </form>
+              </div>
+            </td>
+          </tr>
+        {% else %}
+          <tr>
+            <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 3rem;">
+              No research articles found. <a href="{{ url_for('admin.blog_new') }}">Create your first blog post</a>.
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

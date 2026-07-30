@@ -1,0 +1,103 @@
+from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField, FloatField, SelectField, BooleanField, IntegerField
+from wtforms.validators import DataRequired, Length, Optional, NumberRange, Email, EqualTo
+
+class LoginForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired(), Length(min=3, max=64)])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Sign In to Dashboard')
+
+
+class ChangePasswordForm(FlaskForm):
+    current_password = PasswordField('Current Password *', validators=[DataRequired()])
+    new_password = PasswordField('New Password *', validators=[DataRequired(), Length(min=8, max=64)])
+    confirm_password = PasswordField('Confirm New Password *', validators=[
+        DataRequired(),
+        EqualTo('new_password', message='New passwords must match.')
+    ])
+    submit = SubmitField('Update Password')
+
+
+class CategoryForm(FlaskForm):
+    name = StringField('Category Name', validators=[DataRequired(), Length(max=100)])
+    description = TextAreaField('Description', validators=[Optional()])
+    submit = SubmitField('Save Category')
+
+
+class ProductForm(FlaskForm):
+    category_id = SelectField('Category *', coerce=int, validators=[DataRequired(message="Please select a product category.")])
+    name = StringField('Product Name *', validators=[DataRequired(message="Product name is required."), Length(max=150)])
+    purity = StringField('Purity Grade (e.g. >= 99.8%)', validators=[Optional()], default='>= 99.8%')
+    molecular_formula = StringField('Molecular Formula', validators=[Optional()])
+    sequence_or_cas = StringField('Sequence / CAS Number / Product Code', validators=[Optional()])
+    price = FloatField('Price ($ USD) *', validators=[DataRequired(message="Please enter a valid price."), NumberRange(min=0)])
+    short_description = StringField('Short Specification Summary', validators=[Optional(), Length(max=255)])
+    description = TextAreaField('Detailed Specification & Description', validators=[Optional()])
+    storage_info = StringField('Storage Information', validators=[Optional()], default='-20°C Desiccated / Climate Controlled')
+    stock_status = SelectField('Stock Status', choices=[
+        ('In Stock', 'In Stock'),
+        ('Limited Stock', 'Limited Stock'),
+        ('Out of Stock', 'Out of Stock')
+    ], default='In Stock')
+    is_featured = BooleanField('Feature on Homepage')
+    image = FileField('Main Product Image', validators=[Optional(), FileAllowed(['jpg', 'png', 'jpeg', 'webp', 'svg'], 'Images only!')])
+    submit = SubmitField('Save Product')
+
+
+class COAForm(FlaskForm):
+    product_id = SelectField('Related Product *', coerce=int, validators=[DataRequired()])
+    batch_number = StringField('Batch / Lot Number *', validators=[DataRequired(), Length(max=100)])
+    issue_date = StringField('Issue Date *', validators=[DataRequired(), Length(max=50)])
+    coa_pdf = FileField('COA Document (PDF/Image) *', validators=[FileAllowed(['pdf', 'jpg', 'png', 'jpeg'], 'PDF or Images only!')])
+    preview_image = FileField('Optional Certificate Preview Image', validators=[FileAllowed(['jpg', 'png', 'jpeg', 'webp'], 'Images only!')])
+    active = BooleanField('Activate / Publish COA', default=True)
+    submit = SubmitField('Upload Certificate of Analysis')
+
+
+class BlogPostForm(FlaskForm):
+    title = StringField('Article Title *', validators=[DataRequired(message="Article title is required."), Length(max=200)])
+    slug = StringField('URL Slug', validators=[Optional(), Length(max=220)])
+    summary = TextAreaField('Executive Summary / Excerpt', validators=[Optional()])
+    content = TextAreaField('Full Body Content *', validators=[DataRequired(message="Article body content is required.")])
+    image = FileField('Cover Image', validators=[Optional(), FileAllowed(['jpg', 'png', 'jpeg', 'webp'], 'Images only!')])
+    seo_title = StringField('SEO Title', validators=[Optional(), Length(max=200)])
+    meta_description = StringField('Meta Description', validators=[Optional(), Length(max=255)])
+    language = SelectField('Article Language', choices=[
+        ('en', 'English'),
+        ('zh', 'Chinese (中文)'),
+        ('es', 'Spanish (Español)'),
+        ('ar', 'Arabic (العربية)'),
+        ('fr', 'French (Français)')
+    ], default='en')
+    tags = StringField('Tags (comma separated)', validators=[Optional()])
+    is_published = BooleanField('Publish Article Immediately', default=True)
+    is_featured = BooleanField('Feature at Top of Blog', default=False)
+    submit = SubmitField('Save Blog Post')
+
+
+class CheckoutForm(FlaskForm):
+    full_name = StringField('Full Name *', validators=[DataRequired(), Length(max=100)])
+    phone = StringField('Phone Number *', validators=[DataRequired(), Length(max=30)])
+    email = StringField('Email Address', validators=[Optional(), Email(), Length(max=120)])
+    country = StringField('Country *', validators=[DataRequired(), Length(max=100)])
+    address = TextAreaField('Shipping Address *', validators=[DataRequired(), Length(max=300)])
+    notes = TextAreaField('Additional Notes / Specific Requests', validators=[Optional(), Length(max=500)])
+    submit = SubmitField('Generate Wholesale Order on WhatsApp')
+
+
+class SettingForm(FlaskForm):
+    company_name = StringField('Company Name', validators=[DataRequired()], default='Yan Zhen Peptide')
+    whatsapp_number = StringField('WhatsApp Support Number', validators=[DataRequired()], default='2348181882418')
+    email = StringField('Contact Email', validators=[Optional()])
+    address = StringField('Facility Address', validators=[Optional()])
+    default_language = SelectField('Default Site Language', choices=[
+        ('en', 'English'),
+        ('zh', 'Chinese (中文)'),
+        ('es', 'Spanish'),
+        ('ar', 'Arabic'),
+        ('fr', 'French')
+    ], default='en')
+    seo_title = StringField('Default SEO Meta Title', validators=[Optional()])
+    meta_description = TextAreaField('Default SEO Meta Description', validators=[Optional()])
+    submit = SubmitField('Save System Settings')

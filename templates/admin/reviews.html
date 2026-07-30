@@ -1,0 +1,51 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Product Reviews | AntiGravity Admin Console{% endblock %}
+
+{% block content %}
+<div style="margin-bottom: 2rem;">
+  <h1 style="font-size: 1.75rem;">Product Reviews</h1>
+  <p style="color: var(--text-muted); font-size: 0.9rem;">Moderate verified buyer reviews and laboratory feedback.</p>
+</div>
+
+<div style="background: white; border-radius: var(--radius-md); border: 1px solid var(--border-color); overflow: hidden;">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Reviewer</th>
+        <th>Product</th>
+        <th>Rating</th>
+        <th>Comment</th>
+        <th>Date</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for review in reviews %}
+        <tr>
+          <td>#{{ review.id }}</td>
+          <td style="font-weight: 600;">{{ review.reviewer_name }}</td>
+          <td>{{ review.product.name if review.product else 'General' }}</td>
+          <td><span style="color: #F59E0B; font-weight: 700;">{{ review.rating }} ★</span></td>
+          <td style="font-size: 0.9rem;">{{ review.comment }}</td>
+          <td style="font-size: 0.85rem; color: var(--text-muted);">{{ review.created_at.strftime('%Y-%m-%d') }}</td>
+          <td>
+            {% if review.is_approved %}
+              <span style="background: #D1FAE5; color: #065F46; font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 700;">Approved</span>
+            {% else %}
+              <span style="background: #FEF3C7; color: #92400E; font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 700;">Pending</span>
+            {% endif %}
+          </td>
+        </tr>
+      {% else %}
+        <tr>
+          <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 3rem;">
+            No customer reviews logged in the database yet.
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

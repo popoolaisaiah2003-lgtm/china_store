@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login | AntiGravity Peptides</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body style="background: var(--navy-deep); display: flex; align-items: center; justify-content: center; min-height: 100vh;">
+
+  <div style="width: 100%; max-width: 420px; padding: 2rem;">
+    
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <a href="{{ url_for('main.index') }}" class="brand-logo" style="justify-content: center;">
+        <span>Anti<span class="accent-gold">Gravity</span></span>
+      </a>
+      <p style="color: #94A3B8; font-size: 0.9rem; margin-top: 0.5rem;">Laboratory Management Portal</p>
+    </div>
+
+    <div style="background: white; padding: 2.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); border-top: 4px solid var(--gold-primary);">
+      <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center;">Administrator Sign In</h2>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}" style="font-size: 0.85rem; padding: 0.75rem 1rem;">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <form method="POST" action="{{ url_for('admin.login') }}">
+        {{ form.csrf_token }}
+        
+        <div class="order-form-group">
+          <label for="username">Username</label>
+          {{ form.username(class="form-control", placeholder="Enter admin username", id="username") }}
+        </div>
+
+        <div class="order-form-group" style="margin-bottom: 1.5rem;">
+          <label for="password">Password</label>
+          {{ form.password(class="form-control", placeholder="Enter password", id="password") }}
+        </div>
+
+        <button type="submit" class="btn btn-navy" style="width: 100%; padding: 0.85rem;">Sign In to Console</button>
+      </form>
+    </div>
+
+    <div style="text-align: center; margin-top: 1.5rem;">
+      <a href="{{ url_for('main.index') }}" style="color: #94A3B8; font-size: 0.85rem;">&larr; Return to Public Website</a>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,519 @@
+import os
+import time
+import re
+from datetime import datetime
+from flask import Blueprint, render_template, redirect, url_for, flash, request, current_app, abort
+from flask_login import login_user, logout_user, login_required, current_user
+from werkzeug.utils import secure_filename
+
+from extensions import db
+from models import Admin, Product, Category, ProductImage, COA, BlogPost, Review, Comment, Setting, OrderRecord
+from forms import LoginForm, CategoryForm, ProductForm, COAForm, BlogPostForm, SettingForm, ChangePasswordForm
+
+admin = Blueprint('admin', __name__, url_prefix='/secure-panel')
+
+# In-memory Failed Login Tracking (Rate limiting: max 5 failed attempts per 15 minutes)
+FAILED_ATTEMPTS = {}
+
+def is_rate_limited(key):
+    now = time.time()
+    attempts = FAILED_ATTEMPTS.get(key, [])
+    valid_attempts = [t for t in attempts if now - t < 900]
+    FAILED_ATTEMPTS[key] = valid_attempts
+    return len(valid_attempts) >= 5
+
+def record_failed_attempt(key):
+    now = time.time()
+    attempts = FAILED_ATTEMPTS.get(key, [])
+    attempts.append(now)
+    FAILED_ATTEMPTS[key] = attempts
+
+def clear_failed_attempts(key):
+    FAILED_ATTEMPTS.pop(key, None)
+
+def slugify(text):
+    text = text.lower().strip()
+    text = re.sub(r'[^\w\s-]', '', text)
+    text = re.sub(r'[\s_-]+', '-', text)
+    return text
+
+def admin_required(func):
+    """Decorator to enforce Admin authentication"""
+    def wrapper(*args, **kwargs):
+        if not current_user.is_authenticated:
+            return redirect(url_for('admin.login', next=request.url))
+        return func(*args, **kwargs)
+    wrapper.__name__ = func.__name__
+    return wrapper
+
+
+@admin.route('/login', methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('admin.dashboard'))
+        
+    client_ip = request.remote_addr or 'unknown'
+    form = LoginForm()
+
+    if is_rate_limited(client_ip):
+        flash('Account temporarily locked due to multiple failed login attempts. Please try again in 15 minutes.', 'danger')
+        return render_template('admin/login.html', form=form)
+
+    if form.validate_on_submit():
+        admin_account = Admin.query.filter_by(username=form.username.data.strip()).first()
+        if admin_account and admin_account.check_password(form.password.data):
+            clear_failed_attempts(client_ip)
+            admin_account.last_login = datetime.utcnow()
+            db.session.commit()
+            
+            login_user(admin_account, remember=False)
+            flash('Welcome to Yan Zhen Secure Management Console.', 'success')
+            next_page = request.args.get('next')
+            return redirect(next_page or url_for('admin.dashboard'))
+        else:
+            record_failed_attempt(client_ip)
+            flash('Invalid admin credentials. Failed attempt logged.', 'danger')
+            
+    return render_template('admin/login.html', form=form)
+
+@admin.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('Logged out of Secure Panel.', 'info')
+    return redirect(url_for('admin.login'))
+
+@admin.route('/dashboard')
+@admin_required
+def dashboard():
+    total_products = Product.query.count()
+    total_categories = Category.query.count()
+    total_coas = COA.query.count()
+    total_posts = BlogPost.query.count()
+    total_reviews = Review.query.count()
+    total_orders = OrderRecord.query.count()
+    
+    recent_products = Product.query.order_by(Product.created_at.desc()).limit(5).all()
+    recent_coas = COA.query.order_by(COA.created_at.desc()).limit(5).all()
+    
+    return render_template(
+        'admin/dashboard.html',
+        total_products=total_products,
+        total_categories=total_categories,
+        total_coas=total_coas,
+        total_posts=total_posts,
+        total_reviews=total_reviews,
+        total_orders=total_orders,
+        recent_products=recent_products,
+        recent_coas=recent_coas
+    )
+
+# ---------------- SECURE CHANGE PASSWORD ----------------
+@admin.route('/change-password', methods=['GET', 'POST'])
+@admin_required
+def change_password():
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        if not current_user.check_password(form.current_password.data):
+            flash('Current password is incorrect.', 'danger')
+        else:
+            current_user.set_password(form.new_password.data)
+            db.session.commit()
+            flash('Password updated successfully! Please use your new credentials for future logins.', 'success')
+            return redirect(url_for('admin.dashboard'))
+
+    return render_template('admin/change_password.html', form=form)
+
+
+# ---------------- PRODUCT CRUD ----------------
+@admin.route('/products')
+@admin_required
+def products():
+    page = request.args.get('page', 1, type=int)
+    search_q = request.args.get('q', '').strip()
+    query = Product.query
+    if search_q:
+        query = query.filter(Product.name.ilike(f'%{search_q}%') | Product.sequence_or_cas.ilike(f'%{search_q}%'))
+    pagination = query.order_by(Product.name.asc()).paginate(page=page, per_page=20, error_out=False)
+    return render_template('admin/products.html', products=pagination.items, pagination=pagination, search_q=search_q)
+
+@admin.route('/products/new', methods=['GET', 'POST'])
+@admin_required
+def product_new():
+    form = ProductForm()
+    form.category_id.choices = [(c.id, c.name) for c in Category.query.order_by(Category.name).all()]
+    
+    if not form.category_id.choices:
+        flash('Please create at least one Category before adding products.', 'warning')
+        return redirect(url_for('admin.categories'))
+
+    if form.validate_on_submit():
+        slug = slugify(form.name.data)
+        existing = Product.query.filter_by(slug=slug).first()
+        if existing:
+            slug = f"{slug}-{Product.query.count() + 1}"
+
+        product = Product(
+            name=form.name.data,
+            slug=slug,
+            category_id=form.category_id.data,
+            purity=form.purity.data or '>= 99.8%',
+            molecular_formula=form.molecular_formula.data,
+            sequence_or_cas=form.sequence_or_cas.data,
+            price=form.price.data,
+            short_description=form.short_description.data,
+            description=form.description.data,
+            storage_info=form.storage_info.data,
+            stock_status=form.stock_status.data,
+            is_featured=form.is_featured.data
+        )
+        db.session.add(product)
+        db.session.flush()
+
+        if form.image.data:
+            file = form.image.data
+            filename = secure_filename(file.filename) if hasattr(file, 'filename') and file.filename else None
+            if filename:
+                ext = filename.rsplit('.', 1)[1].lower() if '.' in filename else 'jpg'
+                new_filename = f"prod_{product.id}_{slug}.{ext}"
+                file_path = os.path.join(current_app.config['PRODUCT_UPLOAD_FOLDER'], new_filename)
+                file.save(file_path)
+                
+                img = ProductImage(product_id=product.id, image_filename=new_filename, is_primary=True)
+                db.session.add(img)
+
+        db.session.commit()
+        flash('Product created successfully.', 'success')
+        return redirect(url_for('admin.products'))
+    elif request.method == 'POST':
+        print(f"[Admin Product Form Validation Failed] Errors: {form.errors}")
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash(f"Validation Error ({field}): {error}", 'danger')
+
+    return render_template('admin/product_form.html', form=form, title="Add New Product", is_edit=False)
+
+@admin.route('/products/edit/<int:id>', methods=['GET', 'POST'])
+@admin_required
+def product_edit(id):
+    product = Product.query.get_or_404(id)
+    form = ProductForm(obj=product)
+    form.category_id.choices = [(c.id, c.name) for c in Category.query.order_by(Category.name).all()]
+
+    if form.validate_on_submit():
+        product.name = form.name.data
+        product.category_id = form.category_id.data
+        product.purity = form.purity.data
+        product.molecular_formula = form.molecular_formula.data
+        product.sequence_or_cas = form.sequence_or_cas.data
+        product.price = form.price.data
+        product.short_description = form.short_description.data
+        product.description = form.description.data
+        product.storage_info = form.storage_info.data
+        product.stock_status = form.stock_status.data
+        product.is_featured = form.is_featured.data
+
+        if form.image.data:
+            file = form.image.data
+            filename = secure_filename(file.filename)
+            if filename:
+                ext = filename.rsplit('.', 1)[1].lower() if '.' in filename else 'jpg'
+                new_filename = f"prod_{product.id}_{product.slug}.{ext}"
+                file_path = os.path.join(current_app.config['PRODUCT_UPLOAD_FOLDER'], new_filename)
+                file.save(file_path)
+
+                ProductImage.query.filter_by(product_id=product.id).update({'is_primary': False})
+                img = ProductImage(product_id=product.id, image_filename=new_filename, is_primary=True)
+                db.session.add(img)
+
+        db.session.commit()
+        flash(f'Product "{product.name}" updated successfully.', 'success')
+        return redirect(url_for('admin.products'))
+
+    return render_template('admin/product_form.html', form=form, product=product, title=f"Edit {product.name}", is_edit=True)
+
+@admin.route('/products/delete/<int:id>', methods=['POST'])
+@admin_required
+def product_delete(id):
+    product = Product.query.get_or_404(id)
+    name = product.name
+    db.session.delete(product)
+    db.session.commit()
+    flash(f'Product "{name}" deleted.', 'info')
+    return redirect(url_for('admin.products'))
+
+
+# ---------------- COA MANAGEMENT ----------------
+@admin.route('/coa')
+@admin_required
+def coa_index():
+    coas = COA.query.order_by(COA.created_at.desc()).all()
+    return render_template('admin/coa_list.html', coas=coas)
+
+@admin.route('/coa/new', methods=['GET', 'POST'])
+@admin_required
+def coa_new():
+    form = COAForm()
+    form.product_id.choices = [(p.id, p.name) for p in Product.query.order_by(Product.name).all()]
+
+    if form.validate_on_submit():
+        file = form.coa_pdf.data
+        filename = secure_filename(file.filename)
+        ext = filename.rsplit('.', 1)[1].lower() if '.' in filename else 'pdf'
+        coa_filename = f"COA_{form.product_id.data}_{form.batch_number.data}.{ext}"
+        file_path = os.path.join(current_app.config['COA_UPLOAD_FOLDER'], coa_filename)
+        file.save(file_path)
+
+        preview_filename = None
+        if form.preview_image.data:
+            pfile = form.preview_image.data
+            pname = secure_filename(pfile.filename)
+            pext = pname.rsplit('.', 1)[1].lower() if '.' in pname else 'jpg'
+            preview_filename = f"COA_preview_{form.product_id.data}_{form.batch_number.data}.{pext}"
+            pfile.save(os.path.join(current_app.config['COA_UPLOAD_FOLDER'], preview_filename))
+
+        coa = COA(
+            product_id=form.product_id.data,
+            batch_number=form.batch_number.data,
+            issue_date=form.issue_date.data,
+            file_url=coa_filename,
+            preview_image=preview_filename,
+            active=form.active.data
+        )
+        db.session.add(coa)
+        db.session.commit()
+        flash('COA Certificate uploaded successfully.', 'success')
+        return redirect(url_for('admin.coa_index'))
+
+    return render_template('admin/coa_form.html', form=form)
+
+@admin.route('/coa/delete/<int:id>', methods=['POST'])
+@admin_required
+def coa_delete(id):
+    coa = COA.query.get_or_404(id)
+    db.session.delete(coa)
+    db.session.commit()
+    flash('COA deleted successfully.', 'info')
+    return redirect(url_for('admin.coa_index'))
+
+
+# ---------------- CATEGORIES CRUD ----------------
+@admin.route('/categories', methods=['GET', 'POST'])
+@admin_required
+def categories():
+    form = CategoryForm()
+    if form.validate_on_submit():
+        slug = slugify(form.name.data)
+        existing = Category.query.filter_by(slug=slug).first()
+        if existing:
+            flash('A category with a similar name already exists.', 'warning')
+        else:
+            cat = Category(name=form.name.data, slug=slug, description=form.description.data)
+            db.session.add(cat)
+            db.session.commit()
+            flash(f'Category "{cat.name}" added successfully.', 'success')
+            return redirect(url_for('admin.categories'))
+
+    categories_list = Category.query.order_by(Category.name).all()
+    return render_template('admin/categories.html', form=form, categories=categories_list)
+
+@admin.route('/categories/delete/<int:id>', methods=['POST'])
+@admin_required
+def category_delete(id):
+    cat = Category.query.get_or_404(id)
+    name = cat.name
+    db.session.delete(cat)
+    db.session.commit()
+    flash(f'Category "{name}" deleted.', 'info')
+    return redirect(url_for('admin.categories'))
+
+
+# ---------------- BLOG CMS ----------------
+@admin.route('/blog')
+@admin_required
+def blog_posts():
+    posts = BlogPost.query.order_by(BlogPost.is_featured.desc(), BlogPost.created_at.desc()).all()
+    return render_template('admin/blog_posts.html', posts=posts)
+
+@admin.route('/blog/new', methods=['GET', 'POST'])
+@admin_required
+def blog_new():
+    form = BlogPostForm()
+    if form.validate_on_submit():
+        slug = slugify(form.slug.data.strip()) if form.slug.data and form.slug.data.strip() else slugify(form.title.data)
+        existing = BlogPost.query.filter_by(slug=slug).first()
+        if existing:
+            slug = f"{slug}-{BlogPost.query.count() + 1}"
+
+        image_filename = None
+        if form.image.data:
+            bfile = form.image.data
+            bname = secure_filename(bfile.filename) if hasattr(bfile, 'filename') and bfile.filename else None
+            if bname:
+                bext = bname.rsplit('.', 1)[1].lower() if '.' in bname else 'jpg'
+                image_filename = f"blog_{slug}.{bext}"
+                bfile.save(os.path.join(current_app.config['BLOG_UPLOAD_FOLDER'], image_filename))
+
+        post = BlogPost(
+            title=form.title.data,
+            slug=slug,
+            summary=form.summary.data,
+            content=form.content.data,
+            image_filename=image_filename,
+            seo_title=form.seo_title.data,
+            meta_description=form.meta_description.data,
+            language=form.language.data,
+            tags=form.tags.data,
+            is_published=form.is_published.data,
+            is_featured=form.is_featured.data
+        )
+        db.session.add(post)
+        db.session.commit()
+        flash('Blog article created successfully.', 'success')
+        return redirect(url_for('admin.blog_posts'))
+    elif request.method == 'POST':
+        print(f"[Blog New Form Errors]: {form.errors}")
+        for field, errors in form.errors.items():
+            for err in errors:
+                flash(f"Error in {field}: {err}", 'danger')
+
+    return render_template('admin/blog_form.html', form=form, title="Create Research Article", is_edit=False)
+
+@admin.route('/blog/<int:id>/edit', methods=['GET', 'POST'])
+@admin_required
+def blog_edit(id):
+    post = BlogPost.query.get_or_404(id)
+    form = BlogPostForm(obj=post)
+
+    if form.validate_on_submit():
+        post.title = form.title.data
+        if form.slug.data and form.slug.data.strip():
+            new_slug = slugify(form.slug.data.strip())
+            existing = BlogPost.query.filter(BlogPost.slug == new_slug, BlogPost.id != id).first()
+            if not existing:
+                post.slug = new_slug
+        
+        post.summary = form.summary.data
+        post.content = form.content.data
+        post.seo_title = form.seo_title.data
+        post.meta_description = form.meta_description.data
+        post.language = form.language.data
+        post.tags = form.tags.data
+        post.is_published = form.is_published.data
+        post.is_featured = form.is_featured.data
+        post.updated_at = datetime.utcnow()
+
+        if form.image.data:
+            bfile = form.image.data
+            bname = secure_filename(bfile.filename) if hasattr(bfile, 'filename') and bfile.filename else None
+            if bname:
+                bext = bname.rsplit('.', 1)[1].lower() if '.' in bname else 'jpg'
+                new_image_filename = f"blog_{post.slug}.{bext}"
+                bfile.save(os.path.join(current_app.config['BLOG_UPLOAD_FOLDER'], new_image_filename))
+                post.image_filename = new_image_filename
+
+        db.session.commit()
+        flash('Blog article updated successfully.', 'success')
+        return redirect(url_for('admin.blog_posts'))
+    elif request.method == 'POST':
+        print(f"[Blog Edit Form Errors]: {form.errors}")
+        for field, errors in form.errors.items():
+            for err in errors:
+                flash(f"Error in {field}: {err}", 'danger')
+
+    return render_template('admin/blog_form.html', form=form, post=post, title=f"Edit {post.title}", is_edit=True)
+
+@admin.route('/blog/delete/<int:id>', methods=['POST'])
+@admin_required
+def blog_delete(id):
+    post = BlogPost.query.get_or_404(id)
+    title = post.title
+    
+    if post.image_filename:
+        file_path = os.path.join(current_app.config['BLOG_UPLOAD_FOLDER'], post.image_filename)
+        other_uses = BlogPost.query.filter(BlogPost.image_filename == post.image_filename, BlogPost.id != id).count()
+        if other_uses == 0 and os.path.exists(file_path):
+            try:
+                os.remove(file_path)
+            except OSError as e:
+                print(f"Error deleting blog image {file_path}: {e}")
+
+    db.session.delete(post)
+    db.session.commit()
+    flash(f'Article "{title}" deleted successfully.', 'info')
+    return redirect(url_for('admin.blog_posts'))
+
+@admin.route('/blog/toggle-publish/<int:id>', methods=['POST'])
+@admin_required
+def blog_toggle_publish(id):
+    post = BlogPost.query.get_or_404(id)
+    post.is_published = not post.is_published
+    post.updated_at = datetime.utcnow()
+    db.session.commit()
+    status_str = "published" if post.is_published else "unpublished"
+    flash(f'Article "{post.title}" is now {status_str}.', 'success')
+    return redirect(url_for('admin.blog_posts'))
+
+@admin.route('/blog/toggle-featured/<int:id>', methods=['POST'])
+@admin_required
+def blog_toggle_featured(id):
+    post = BlogPost.query.get_or_404(id)
+    post.is_featured = not post.is_featured
+    post.updated_at = datetime.utcnow()
+    db.session.commit()
+    status_str = "featured at top" if post.is_featured else "unfeatured"
+    flash(f'Article "{post.title}" is now {status_str}.', 'success')
+    return redirect(url_for('admin.blog_posts'))
+
+
+# ---------------- ORDERS & REVIEWS ----------------
+@admin.route('/orders')
+@admin_required
+def orders():
+    orders_list = OrderRecord.query.order_by(OrderRecord.created_at.desc()).all()
+    return render_template('admin/orders.html', orders=orders_list)
+
+@admin.route('/reviews')
+@admin_required
+def reviews():
+    reviews_list = Review.query.order_by(Review.created_at.desc()).all()
+    return render_template('admin/reviews.html', reviews=reviews_list)
+
+@admin.route('/comments')
+@admin_required
+def comments():
+    comments_list = Comment.query.order_by(Comment.created_at.desc()).all()
+    return render_template('admin/comments.html', comments=comments_list)
+
+
+# ---------------- LANGUAGES & SETTINGS ----------------
+@admin.route('/languages')
+@admin_required
+def languages():
+    return render_template('admin/languages.html')
+
+@admin.route('/settings', methods=['GET', 'POST'])
+@admin_required
+def settings():
+    form = SettingForm()
+    if request.method == 'GET':
+        form.company_name.data = Setting.get_val('company_name', 'Yan Zhen Peptide')
+        form.whatsapp_number.data = Setting.get_val('whatsapp_number', '2348181882418')
+        form.email.data = Setting.get_val('email', 'wholesale@yanzhenpeptide.com')
+        form.address.data = Setting.get_val('address', 'Yan Zhen Biotechnology Facility, Cleanroom Suite 4')
+        form.default_language.data = Setting.get_val('default_language', 'en')
+        form.seo_title.data = Setting.get_val('seo_title', 'Yan Zhen Peptide | HPLC Certified Wholesale Peptides')
+        form.meta_description.data = Setting.get_val('meta_description', 'High-purity laboratory research peptides with guaranteed >=99.8% purity.')
+
+    if form.validate_on_submit():
+        Setting.set_val('company_name', form.company_name.data)
+        Setting.set_val('whatsapp_number', form.whatsapp_number.data)
+        Setting.set_val('email', form.email.data)
+        Setting.set_val('address', form.address.data)
+        Setting.set_val('default_language', form.default_language.data)
+        Setting.set_val('seo_title', form.seo_title.data)
+        Setting.set_val('meta_description', form.meta_description.data)
+        flash('System settings updated successfully.', 'success')
+        return redirect(url_for('admin.settings'))
+
+    return render_template('admin/settings.html', form=form)

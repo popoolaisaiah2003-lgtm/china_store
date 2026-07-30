@@ -1,0 +1,57 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}System Settings | Yan Zhen Admin Portal{% endblock %}
+
+{% block content %}
+<div style="margin-bottom: 2rem;">
+  <h1 style="font-size: 1.75rem;">System & SEO Settings</h1>
+  <p style="color: var(--text-muted); font-size: 0.9rem;">Manage global branding, WhatsApp ordering hotline, facility address, and SEO meta tags.</p>
+</div>
+
+<div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2.5rem; max-width: 850px; box-shadow: var(--shadow-sm);">
+  <form method="POST">
+    {{ form.csrf_token }}
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+      <div class="order-form-group">
+        <label for="company_name">Company Brand Name *</label>
+        {{ form.company_name(class="form-control") }}
+      </div>
+
+      <div class="order-form-group">
+        <label for="whatsapp_number">WhatsApp Support Number *</label>
+        {{ form.whatsapp_number(class="form-control") }}
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+      <div class="order-form-group">
+        <label for="email">Contact Email</label>
+        {{ form.email(class="form-control") }}
+      </div>
+
+      <div class="order-form-group">
+        <label for="default_language">Default System Language</label>
+        {{ form.default_language(class="form-control") }}
+      </div>
+    </div>
+
+    <div class="order-form-group" style="margin-bottom: 1.5rem;">
+      <label for="address">Facility Address</label>
+      {{ form.address(class="form-control") }}
+    </div>
+
+    <div class="order-form-group" style="margin-bottom: 1.5rem;">
+      <label for="seo_title">Default SEO Meta Title</label>
+      {{ form.seo_title(class="form-control") }}
+    </div>
+
+    <div class="order-form-group" style="margin-bottom: 2rem;">
+      <label for="meta_description">Default SEO Meta Description</label>
+      {{ form.meta_description(class="form-control", rows="3") }}
+    </div>
+
+    <button type="submit" class="btn btn-primary" style="padding: 0.85rem 2.5rem;">Save System Settings</button>
+  </form>
+</div>
+{% endblock %}

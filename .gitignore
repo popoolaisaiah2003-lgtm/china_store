@@ -1,0 +1,43 @@
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+
+# Python Cache & Compiled Files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Flask / SQLite Local Instance
+instance/
+*.db
+*.sqlite3
+
+# Environment Variables & Secrets
+.env
+.env.local
+
+# User Uploaded Static Files (Dynamic Admin Uploads)
+static/uploads/*
+!static/uploads/.gitkeep
+!static/uploads/products/.gitkeep
+!static/uploads/blog/.gitkeep
+!static/uploads/coa/.gitkeep
+
+# Migrations Cache
+migrations/__pycache__/
+migrations/versions/__pycache__/
+
+# OS System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE & Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo

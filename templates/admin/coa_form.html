@@ -1,0 +1,57 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Upload COA Certificate | Yan Zhen Admin Portal{% endblock %}
+
+{% block content %}
+<div style="margin-bottom: 1.5rem;">
+  <a href="{{ url_for('admin.coa_index') }}" style="color: var(--text-muted); font-size: 0.9rem;">&larr; Back to COA Repository</a>
+  <h1 style="font-size: 1.75rem; margin-top: 0.5rem;">Upload Certificate of Analysis (COA)</h1>
+</div>
+
+<div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2.5rem; max-width: 800px; box-shadow: var(--shadow-sm);">
+  <form method="POST" enctype="multipart/form-data">
+    {{ form.csrf_token }}
+
+    <div class="order-form-group" style="margin-bottom: 1.5rem;">
+      <label for="product_id">Related Product *</label>
+      {{ form.product_id(class="form-control") }}
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+      <div class="order-form-group">
+        <label for="batch_number">Batch / Lot Number *</label>
+        {{ form.batch_number(class="form-control", placeholder="e.g. BATCH-2026-081") }}
+      </div>
+
+      <div class="order-form-group">
+        <label for="issue_date">Issue Date *</label>
+        {{ form.issue_date(class="form-control", placeholder="e.g. July 2026") }}
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+      <div class="order-form-group">
+        <label for="coa_pdf">Upload COA Document (PDF) *</label>
+        {{ form.coa_pdf(class="form-control") }}
+      </div>
+
+      <div class="order-form-group">
+        <label for="preview_image">Optional Preview Image</label>
+        {{ form.preview_image(class="form-control") }}
+      </div>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 2rem;">
+      {{ form.active(style="width: 20px; height: 20px;") }}
+      <label for="active" style="font-weight: 600; color: var(--navy-deep); cursor: pointer;">
+        Activate / Publish Immediately on Public Website
+      </label>
+    </div>
+
+    <div style="display: flex; gap: 1rem;">
+      <button type="submit" class="btn btn-primary" style="padding: 0.85rem 2.5rem;">Upload Certificate</button>
+      <a href="{{ url_for('admin.coa_index') }}" class="btn btn-outline">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

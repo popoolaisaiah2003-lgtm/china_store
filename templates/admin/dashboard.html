@@ -1,0 +1,87 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Dashboard | AntiGravity Admin Console{% endblock %}
+
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+  <div>
+    <h1 style="font-size: 1.75rem;">Dashboard Overview</h1>
+    <p style="color: var(--text-muted); font-size: 0.9rem;">Manage product catalog, HPLC purity specifications, and categories.</p>
+  </div>
+  <a href="{{ url_for('admin.product_new') }}" class="btn btn-primary">+ Add New Product</a>
+</div>
+
+<!-- Metrics Cards Grid -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem;">
+  
+  <div class="stat-card">
+    <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Total Products</div>
+    <div class="stat-number">{{ total_products }}</div>
+    <div style="font-size: 0.8rem; color: var(--gold-primary); margin-top: 0.25rem;">Live Catalog Items</div>
+  </div>
+
+  <div class="stat-card">
+    <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Categories</div>
+    <div class="stat-number">{{ total_categories }}</div>
+    <div style="font-size: 0.8rem; color: var(--navy-deep); margin-top: 0.25rem;">Active Groups</div>
+  </div>
+
+  <div class="stat-card">
+    <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Blog Articles</div>
+    <div class="stat-number">{{ total_posts }}</div>
+    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">Published Papers</div>
+  </div>
+
+  <div class="stat-card">
+    <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Reviews</div>
+    <div class="stat-number">{{ total_reviews }}</div>
+    <div style="font-size: 0.8rem; color: var(--success); margin-top: 0.25rem;">Approved Feedback</div>
+  </div>
+
+</div>
+
+<!-- Recent Products Table -->
+<div style="background: white; border-radius: var(--radius-md); border: 1px solid var(--border-color); padding: 1.5rem;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+    <h2 style="font-size: 1.25rem;">Recently Added Peptides</h2>
+    <a href="{{ url_for('admin.products') }}" style="font-size: 0.85rem; font-weight: 600; color: var(--gold-primary);">View All Products &rarr;</a>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Category</th>
+        <th>Purity Grade</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in recent_products %}
+        <tr>
+          <td style="font-weight: 600; color: var(--navy-deep);">{{ product.name }}</td>
+          <td>{{ product.category.name if product.category else 'N/A' }}</td>
+          <td><span style="font-weight: 700; color: var(--gold-primary);">{{ product.purity }}</span></td>
+          <td>${{ "%.2f"|format(product.price) }}</td>
+          <td>
+            <span style="font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 4px; background: #D1FAE5; color: #065F46; font-weight: 700;">
+              {{ product.stock_status }}
+            </span>
+          </td>
+          <td>
+            <a href="{{ url_for('admin.product_edit', id=product.id) }}" class="btn btn-sm btn-outline">Edit</a>
+          </td>
+        </tr>
+      {% else %}
+        <tr>
+          <td colspan="6" style="text-align: center; color: var(--text-muted); padding: 2rem;">
+            No products found. Click "+ Add New Product" to create your first item.
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

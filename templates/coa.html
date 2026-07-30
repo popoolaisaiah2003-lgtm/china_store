@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ _('coa_repo_title') }} | Yan Zhen Peptide{% endblock %}
+
+{% block content %}
+<section style="background: var(--navy-deep); color: white; padding: 2.75rem 0; border-bottom: 3px solid var(--gold-primary);">
+  <div class="container">
+    <h1 style="color: white; margin-bottom: 0.5rem;">{{ _('coa_repo_title') }}</h1>
+    <p style="color: #94A3B8; max-width: 650px;">
+      {{ _('coa_repo_desc') }}
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    
+    <!-- Filter & Search Bar -->
+    <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 2.5rem; box-shadow: var(--shadow-sm);">
+      <form method="GET" action="{{ url_for('main.coa_list') }}" style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+        <input type="text" name="q" value="{{ query_str }}" placeholder="{{ _('coa_search_placeholder') }}" class="form-control" style="flex: 2; min-width: 280px;">
+        
+        <select name="category_id" class="form-control" style="flex: 1; min-width: 200px;" onchange="this.form.submit()">
+          <option value="">{{ _('all_product_categories') }}</option>
+          {% for cat in categories %}
+            <option value="{{ cat.id }}" {{ 'selected' if category_id == cat.id }}>{{ cat.name }}</option>
+          {% endfor %}
+        </select>
+
+        <button type="submit" class="btn btn-navy">{{ _('search_certificates') }}</button>
+      </form>
+    </div>
+
+    <!-- COA Grid -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem;">
+      {% for coa in coas %}
+        <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-sm);">
+          <div style="background: var(--bg-secondary); padding: 1.5rem; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between;">
+            <div>
+              <span style="font-size: 0.75rem; background: #D1FAE5; color: #065F46; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 4px;">
+                ✓ {{ coa.product.purity }}
+              </span>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.35rem;">
+                {{ _('issue_date') }} {{ coa.issue_date }}
+              </div>
+            </div>
+            <div style="width: 50px; height: 50px; overflow: hidden; border-radius: 6px; border: 1px solid var(--border-color); flex-shrink: 0;">
+              {% if coa.preview_image %}
+                <img src="{{ url_for('static', filename='uploads/coa/' + coa.preview_image) }}" alt="COA Preview" style="width: 100%; height: 100%; object-fit: cover;">
+              {% else %}
+                <img src="{{ url_for('static', filename='images/placeholders/coa-placeholder.png') }}" alt="COA Preview" style="width: 100%; height: 100%; object-fit: cover;">
+              {% endif %}
+            </div>
+          </div>
+
+          <div style="padding: 1.5rem; flex-grow: 1;">
+            <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem; color: var(--navy-deep);">
+              <a href="{{ url_for('main.product_detail', slug=coa.product.slug) }}">{{ coa.product.name }}</a>
+            </h3>
+
+            <div style="font-size: 0.85rem; color: var(--navy-deep); margin-bottom: 0.75rem;">
+              <strong>{{ _('batch_lot_no') }}</strong> <code>{{ coa.batch_number }}</code>
+            </div>
+
+            <div style="font-size: 0.85rem; color: var(--text-muted);">
+              {{ _('category_col') }}: {{ coa.product.category.name if coa.product.category else 'General' }}
+            </div>
+          </div>
+
+          <div style="padding: 1rem 1.5rem; border-top: 1px solid var(--border-color); background: var(--bg-secondary); display: flex; gap: 0.75rem;">
+            <a href="{{ url_for('main.coa_download', id=coa.id) }}" class="btn btn-sm btn-primary" style="flex: 1;">
+              {{ _('download_pdf') }}
+            </a>
+            <a href="{{ url_for('main.product_detail', slug=coa.product.slug) }}" class="btn btn-sm btn-outline">
+              {{ _('view_product') }}
+            </a>
+          </div>
+        </div>
+      {% else %}
+        <div style="grid-column: 1 / -1; text-align: center; padding: 4rem; background: white; border-radius: var(--radius-lg); border: 1px dashed var(--border-color);">
+          <div style="font-size: 3.5rem; margin-bottom: 1rem;">📑</div>
+          <h3>{{ _('no_coas_found') }}</h3>
+          <p style="color: var(--text-muted);">{{ _('no_coas_desc') }}</p>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+{% endblock %}

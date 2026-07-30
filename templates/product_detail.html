@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.name }} | {{ product.purity }} | Yan Zhen Peptide{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 3rem 1.25rem;">
+  
+  <div style="margin-bottom: 1.5rem; font-size: 0.9rem; color: var(--text-muted);">
+    <a href="{{ url_for('main.index') }}">{{ _('home') }}</a> &nbsp;/&nbsp; 
+    <a href="{{ url_for('main.products') }}">{{ _('catalog') }}</a> &nbsp;/&nbsp; 
+    <span style="color: var(--navy-deep); font-weight: 600;">{{ product.name }}</span>
+  </div>
+
+  <div class="product-detail-grid">
+    <!-- Left: Gallery / Display -->
+    <div>
+      <div class="product-detail-gallery">
+        <div style="text-align: center;">
+          <span class="purity-tag" style="position: relative; top: 0; right: 0; display: inline-block; margin-bottom: 1rem;">
+            HPLC Certified {{ product.purity }}
+          </span>
+          <img src="{{ url_for('static', filename=product.catalog_image) }}" alt="{{ product.name }}" style="max-height: 280px; width: 100%; margin: 0 auto; border-radius: var(--radius-md); object-fit: contain;">
+          <div style="font-weight: 700; color: var(--navy-deep); margin-top: 1rem;">
+            {{ _('lyophilized_vial') }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Product Info & COA Badge & Quotation Action -->
+    <div>
+      <div style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700; color: var(--gold-primary); letter-spacing: 0.05em; margin-bottom: 0.35rem;">
+        {{ product.category.name if product.category else 'Research Compound' }}
+      </div>
+      <h1 style="font-size: 2.25rem; margin-bottom: 0.5rem;">{{ product.name }}</h1>
+      
+      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem;">
+        <span style="font-size: 2rem; font-weight: 800; color: var(--navy-deep);">${{ "%.2f"|format(product.price) }}</span>
+        <span style="background: #E0F2FE; color: #0369A1; font-weight: 600; font-size: 0.8rem; padding: 0.25rem 0.75rem; border-radius: var(--radius-sm);">
+          {{ product.stock_status }}
+        </span>
+      </div>
+
+      <!-- COA Available Badge Box -->
+      {% if product.latest_coa %}
+        <div style="background: #ECFDF5; border: 1.5px solid #10B981; border-radius: var(--radius-md); padding: 1rem 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+          <div>
+            <div style="font-weight: 700; color: #065F46; font-size: 0.9rem;">
+              ✓ {{ _('coa_available') }} (Batch: {{ product.latest_coa.batch_number }})
+            </div>
+            <div style="font-size: 0.8rem; color: #047857;">
+              {{ _('issue_date') }} {{ product.latest_coa.issue_date }}
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <a href="{{ url_for('main.coa_download', id=product.latest_coa.id) }}" class="btn btn-sm btn-whatsapp" style="font-size: 0.8rem;">
+              {{ _('download_latest_coa') }}
+            </a>
+            <a href="{{ url_for('main.coa_list') }}" class="btn btn-sm btn-outline" style="font-size: 0.8rem;">
+              {{ _('view_all_coas') }}
+            </a>
+          </div>
+        </div>
+      {% else %}
+        <div style="background: #F8FAFC; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 0.75rem 1rem; margin-bottom: 1.5rem; font-size: 0.85rem; color: var(--text-muted); display: flex; align-items: center; justify-content: space-between;">
+          <span>{{ _('coa_request_note') }}</span>
+          <a href="{{ url_for('main.coa_list') }}" style="color: var(--gold-primary); font-weight: 600;">{{ _('coa_repo_link') }}</a>
+        </div>
+      {% endif %}
+
+      <!-- Specifications Table -->
+      <table class="spec-table">
+        <tr>
+          <th>{{ _('analytical_purity') }}</th>
+          <td>{{ product.purity }} {{ _('hplc_verified_tag') }}</td>
+        </tr>
+        {% if product.sequence_or_cas %}
+        <tr>
+          <th>{{ _('product_code_cas') }}</th>
+          <td><code>{{ product.sequence_or_cas }}</code></td>
+        </tr>
+        {% endif %}
+        <tr>
+          <th>{{ _('storage') }}</th>
+          <td>{{ product.storage_info or '-20°C Desiccated / Climate Controlled' }}</td>
+        </tr>
+      </table>
+
+      <!-- Wholesale Quotation Box -->
+      <div class="order-box">
+        <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--navy-deep);">
+          {{ _('add_to_wholesale_quotation') }}
+        </h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+          {{ _('select_quantity_note') }}
+        </p>
+
+        <form method="POST" action="{{ url_for('main.cart_add', product_id=product.id) }}">
+          <div class="order-form-group" style="margin-bottom: 1.25rem;">
+            <label for="quantity">{{ _('quantity_label') }}</label>
+            <input type="number" id="quantity" name="quantity" min="1" max="1000" value="1" class="form-control" style="width: 140px;">
+          </div>
+
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <button type="submit" class="btn btn-primary" style="flex: 1; padding: 0.85rem;">
+              {{ _('add_to_order') }}
+            </button>
+            <a href="{{ url_for('main.order') }}" class="btn btn-navy" style="padding: 0.85rem;">
+              {{ _('quotation_cart') }}
+            </a>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Related Products Section -->
+  {% if related_products %}
+  <div style="margin-top: 4rem; border-top: 1px solid var(--border-color); padding-top: 3rem;">
+    <h3 style="margin-bottom: 1.5rem; font-size: 1.35rem; color: var(--navy-deep);">
+      Related {{ product.category.name if product.category else 'Research' }} Peptides
+    </h3>
+
+    <div class="product-grid">
+      {% for rel in related_products %}
+        <div class="product-card">
+          <div class="product-thumb">
+            <span class="purity-tag">{{ rel.purity }}</span>
+            <img src="{{ url_for('static', filename=rel.catalog_image) }}" alt="{{ rel.name }}" style="max-height: 140px; width: 100%; object-fit: contain; padding: 0.5rem;">
+          </div>
+          <div class="product-body">
+            <h3 class="product-title">
+              <a href="{{ url_for('main.product_detail', slug=rel.slug) }}">{{ rel.name }}</a>
+            </h3>
+            <div class="product-price">
+              <span>${{ "%.2f"|format(rel.price) }}</span>
+              <a href="{{ url_for('main.product_detail', slug=rel.slug) }}" class="btn btn-sm btn-primary">{{ _('view_specs') }}</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Yan Zhen Admin Console{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+  <!-- Admin Header -->
+  <header class="navbar" style="border-bottom-color: var(--gold-primary);">
+    <div class="container nav-container">
+      <a href="{{ url_for('admin.dashboard') }}" class="brand-logo">
+        <span>Yan Zhen <span class="accent-gold">Peptide</span></span>
+        <span class="brand-badge" style="background:#EF4444; color:white;">Admin Portal</span>
+      </a>
+
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <a href="{{ url_for('main.index') }}" class="btn btn-sm btn-outline" style="color:white; border-color:rgba(255,255,255,0.3);" target="_blank">↗ View Public Site</a>
+        <a href="{{ url_for('admin.logout') }}" class="btn btn-sm btn-primary">Logout</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Admin Layout -->
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold-primary); margin-bottom: 1rem; font-weight: 700;">
+        Management Console
+      </div>
+      <ul class="admin-nav">
+        <li><a href="{{ url_for('admin.dashboard') }}" class="{{ 'active' if request.endpoint == 'admin.dashboard' }}">📊 Dashboard</a></li>
+        <li><a href="{{ url_for('admin.products') }}" class="{{ 'active' if 'product' in request.endpoint }}">🧪 Catalog</a></li>
+        <li><a href="{{ url_for('admin.categories') }}" class="{{ 'active' if request.endpoint == 'admin.categories' }}">📁 Categories</a></li>
+        <li><a href="{{ url_for('admin.coa_index') }}" class="{{ 'active' if 'coa' in request.endpoint }}">🔬 COA Certificates</a></li>
+        <li><a href="{{ url_for('admin.blog_posts') }}" class="{{ 'active' if 'blog' in request.endpoint }}">📰 Blog CMS</a></li>
+        <li><a href="{{ url_for('admin.reviews') }}" class="{{ 'active' if request.endpoint == 'admin.reviews' }}">⭐ Product Reviews</a></li>
+        <li><a href="{{ url_for('admin.orders') }}" class="{{ 'active' if request.endpoint == 'admin.orders' }}">📦 Orders Inquiry</a></li>
+        <li><a href="{{ url_for('admin.languages') }}" class="{{ 'active' if request.endpoint == 'admin.languages' }}">🌐 Languages</a></li>
+        <li><a href="{{ url_for('admin.settings') }}" class="{{ 'active' if request.endpoint == 'admin.settings' }}">⚙️ Settings</a></li>
+        <li><a href="{{ url_for('admin.change_password') }}" class="{{ 'active' if request.endpoint == 'admin.change_password' }}">🔑 Change Password</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-content">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+
+  <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

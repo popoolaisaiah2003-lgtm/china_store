@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wholesale Quotation {{ quotation_number }} | Yan Zhen Peptide</title>
+  <style>
+    body { font-family: system-ui, -apple-system, sans-serif; color: #0F172A; margin: 0; padding: 2rem; background: white; }
+    .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #C8A96B; padding-bottom: 1.5rem; margin-bottom: 2rem; }
+    .logo { font-size: 1.75rem; font-weight: 800; color: #0B1F3A; text-transform: uppercase; }
+    .logo span { color: #C8A96B; }
+    .title { font-size: 1.25rem; font-weight: 700; color: #0B1F3A; }
+    .meta { font-size: 0.9rem; color: #64748B; margin-top: 0.25rem; }
+    .table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; }
+    .table th, .table td { padding: 0.85rem; border-bottom: 1px solid #E2E8F0; text-align: left; }
+    .table th { background: #F8FAFC; color: #0B1F3A; font-size: 0.85rem; text-transform: uppercase; }
+    .total-box { background: #F9F5EC; border: 1.5px solid #C8A96B; padding: 1.25rem; border-radius: 8px; text-align: right; margin-bottom: 2rem; }
+    .total-amount { font-size: 2rem; font-weight: 800; color: #0B1F3A; }
+    .footer { font-size: 0.85rem; color: #64748B; text-align: center; border-top: 1px solid #E2E8F0; padding-top: 1.5rem; }
+    @media print { .no-print { display: none; } }
+  </style>
+</head>
+<body>
+
+  <div class="no-print" style="margin-bottom: 1.5rem; text-align: right;">
+    <button onclick="window.print()" style="background: #0B1F3A; color: white; border: none; padding: 0.65rem 1.5rem; border-radius: 6px; font-weight: 600; cursor: pointer;">
+      🖨️ Print / Save as PDF
+    </button>
+  </div>
+
+  <div class="header">
+    <div>
+      <div class="logo">Yan Zhen <span>Peptide</span></div>
+      <div class="meta">Analytical Grade Research Peptides & Synthesis Facility</div>
+    </div>
+    <div style="text-align: right;">
+      <div class="title">WHOLESALE QUOTATION</div>
+      <div class="meta"><strong>Ref:</strong> {{ quotation_number }}</div>
+      <div class="meta"><strong>Date:</strong> {{ today_date }}</div>
+    </div>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Item Description</th>
+        <th>Unit Price</th>
+        <th>Quantity</th>
+        <th>Line Total (USD)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in cart_items %}
+        <tr>
+          <td><strong>{{ item.name }}</strong></td>
+          <td>${{ "%.2f"|format(item.price) }}</td>
+          <td>{{ item.quantity }}</td>
+          <td><strong>${{ "%.2f"|format(item.line_total) }}</strong></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="total-box">
+    <div style="font-size: 0.9rem; color: #64748B; margin-bottom: 0.25rem;">Total Items: {{ total_quantity }}</div>
+    <div><span style="font-size: 1.1rem; font-weight: 700; color: #0B1F3A;">Grand Total (USD):</span> <span class="total-amount">${{ "%.2f"|format(grand_total) }}</span></div>
+  </div>
+
+  <div class="footer">
+    <p>Yan Zhen Peptide Facility • Direct WhatsApp Desk: +234 818 188 2418 • For Research Purposes Only</p>
+  </div>
+
+</body>
+</html>

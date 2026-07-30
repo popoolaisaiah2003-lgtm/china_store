@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Support & Ordering Desk | AntiGravity Peptides{% endblock %}
+
+{% block content %}
+<section style="background: var(--navy-deep); color: white; padding: 3rem 0; border-bottom: 3px solid var(--gold-primary);">
+  <div class="container">
+    <h1 style="color: white; margin-bottom: 0.5rem;">Contact & Direct Order Support</h1>
+    <p style="color: #94A3B8; max-width: 600px;">
+      Have questions regarding custom synthesis, COA verification, or bulk scientific ordering? Contact our dedicated research support desk.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="max-width: 900px;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+      
+      <!-- Direct Contact Card -->
+      <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2rem;">
+        <h3 style="margin-bottom: 1rem; color: var(--navy-deep);">Direct WhatsApp Support</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+          Connect directly with our logistics team to confirm real-time stock availability, custom peptide sequences, and international shipping rates.
+        </p>
+
+        <div style="background: var(--gold-light); border: 1px solid var(--gold-primary); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.5rem;">
+          <div style="font-size: 0.85rem; font-weight: 700; color: var(--navy-deep); margin-bottom: 0.25rem;">WhatsApp Order Desk:</div>
+          <div style="font-size: 1.25rem; font-weight: 800; color: var(--navy-deep);">+234 818 188 2418</div>
+        </div>
+
+        <a href="https://wa.me/2348181882418?text=Hello%20AntiGravity%20Peptides%2C%20I%20have%20an%20inquiry." class="btn btn-whatsapp" style="width: 100%;" target="_blank">
+          💬 Open WhatsApp Chat
+        </a>
+      </div>
+
+      <!-- Laboratory Standards & Info -->
+      <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2rem;">
+        <h3 style="margin-bottom: 1rem; color: var(--navy-deep);">Laboratory Facility</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem;">
+          All AntiGravity peptides are synthesized under strict ISO-9001 quality management guidelines and stored at -20°C in climate-controlled cleanroom storage.
+        </p>
+
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.9rem; color: var(--navy-deep);">
+          <li style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="color: var(--gold-primary);">✔</span> HPLC & MS Certificates provided
+          </li>
+          <li style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="color: var(--gold-primary);">✔</span> Same-day dispatch for catalog items
+          </li>
+          <li style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="color: var(--gold-primary);">✔</span> Secure cold-chain thermal packaging
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}

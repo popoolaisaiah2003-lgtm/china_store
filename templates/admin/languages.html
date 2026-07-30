@@ -1,0 +1,49 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}International Languages | Yan Zhen Admin Portal{% endblock %}
+
+{% block content %}
+<div style="margin-bottom: 2rem;">
+  <h1 style="font-size: 1.75rem;">Internationalization & Language Settings</h1>
+  <p style="color: var(--text-muted); font-size: 0.9rem;">Manage multi-language translations and active site locales.</p>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;">
+  
+  <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem;">
+    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🇬🇧</div>
+    <h3 style="font-size: 1.1rem; color: var(--navy-deep);">English (en)</h3>
+    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Primary International Locale</p>
+    <span style="background: #D1FAE5; color: #065F46; font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 700;">Active & Enabled</span>
+  </div>
+
+  <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem;">
+    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🇨🇳</div>
+    <h3 style="font-size: 1.1rem; color: var(--navy-deep);">中文 (zh - Chinese)</h3>
+    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Direct Factory & Asia Locale</p>
+    <span style="background: #D1FAE5; color: #065F46; font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 700;">Active & Enabled</span>
+  </div>
+
+  <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem;">
+    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🇪🇸</div>
+    <h3 style="font-size: 1.1rem; color: var(--navy-deep);">Español (es - Spanish)</h3>
+    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Latin America & Europe</p>
+    <span style="background: #D1FAE5; color: #065F46; font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 700;">Active & Enabled</span>
+  </div>
+
+  <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem;">
+    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🇸🇦</div>
+    <h3 style="font-size: 1.1rem; color: var(--navy-deep);">العربية (ar - Arabic)</h3>
+    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Middle East / Gulf Region (RTL)</p>
+    <span style="background: #D1FAE5; color: #065F46; font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 700;">Active & Enabled</span>
+  </div>
+
+  <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem;">
+    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🇫🇷</div>
+    <h3 style="font-size: 1.1rem; color: var(--navy-deep);">Français (fr - French)</h3>
+    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Europe & North Africa</p>
+    <span style="background: #D1FAE5; color: #065F46; font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 700;">Active & Enabled</span>
+  </div>
+
+</div>
+{% endblock %}

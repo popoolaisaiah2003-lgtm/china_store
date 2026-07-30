@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ _('wholesale_checkout') }} | Yan Zhen Peptide{% endblock %}
+
+{% block content %}
+<section style="background: var(--navy-deep); color: white; padding: 2.75rem 0; border-bottom: 3px solid var(--gold-primary);">
+  <div class="container">
+    <h1 style="color: white; margin-bottom: 0.5rem;">{{ _('wholesale_checkout') }}</h1>
+    <p style="color: #94A3B8; max-width: 650px;">
+      {{ _('checkout_desc') }}
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: 1fr 400px; gap: 2.5rem;">
+      
+      <!-- Left: Customer Info Form -->
+      <div>
+        <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2.5rem; box-shadow: var(--shadow-sm);">
+          <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">{{ _('customer_information') }}</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">
+            {{ _('enter_logistics') }}
+          </p>
+
+          <form method="POST">
+            {{ form.csrf_token }}
+
+            <div class="order-form-group" style="margin-bottom: 1.5rem;">
+              <label for="full_name">{{ _('full_name') }}</label>
+              {{ form.full_name(class="form-control", placeholder="e.g. Dr. Alexander Wright") }}
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+              <div class="order-form-group">
+                <label for="phone">{{ _('phone_number') }}</label>
+                {{ form.phone(class="form-control", placeholder="e.g. +1 555 019 2831") }}
+              </div>
+
+              <div class="order-form-group">
+                <label for="country">{{ _('country') }}</label>
+                {{ form.country(class="form-control", placeholder="e.g. United States / Germany") }}
+              </div>
+            </div>
+
+            <div class="order-form-group" style="margin-bottom: 1.5rem;">
+              <label for="email">{{ _('email_address') }}</label>
+              {{ form.email(class="form-control", placeholder="e.g. research@institution.edu") }}
+            </div>
+
+            <div class="order-form-group" style="margin-bottom: 1.5rem;">
+              <label for="address">{{ _('shipping_address') }}</label>
+              {{ form.address(class="form-control", rows="3", placeholder="Street Address, Suite / Lab No, City, Postal Code") }}
+            </div>
+
+            <div class="order-form-group" style="margin-bottom: 2rem;">
+              <label for="notes">{{ _('notes_label') }}</label>
+              {{ form.notes(class="form-control", rows="3", placeholder="Specify any custom vial packing requests, temperature logs, or shipping carrier preferences.") }}
+            </div>
+
+            {% if not whatsapp_url %}
+              <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem; font-size: 1.05rem;">
+                {{ _('generate_whatsapp_btn') }}
+              </button>
+            {% endif %}
+          </form>
+
+          {% if whatsapp_url %}
+            <div style="margin-top: 2rem; background: #DCFCE7; border: 2px solid #22C55E; border-radius: var(--radius-md); padding: 1.75rem; text-align: center;">
+              <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📱</div>
+              <h3 style="color: #14532D; margin-bottom: 0.5rem;">{{ _('order_form_validated') }}</h3>
+              <p style="color: #166534; font-size: 0.9rem; margin-bottom: 1.5rem;">
+                {{ _('launch_whatsapp_note') }}
+              </p>
+              <a href="{{ whatsapp_url }}" class="btn btn-whatsapp" target="_blank" style="padding: 1rem 2rem; font-size: 1.1rem; width: 100%;">
+                {{ _('launch_whatsapp_btn') }}
+              </a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Right: Summary Sidebar -->
+      <div>
+        <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.75rem; position: sticky; top: 100px; box-shadow: var(--shadow-sm);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+            <h3 style="font-size: 1.15rem;">{{ _('quotation_items_summary') }}</h3>
+            <a href="{{ url_for('main.order') }}" style="font-size: 0.85rem; color: var(--gold-primary); font-weight: 600;">{{ _('edit_cart') }}</a>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 0.85rem; margin-bottom: 1.5rem; max-height: 340px; overflow-y: auto; padding-right: 0.5rem;">
+            {% for item in cart_items %}
+              <div style="display: flex; justify-content: space-between; font-size: 0.9rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem;">
+                <div>
+                  <div style="font-weight: 700; color: var(--navy-deep);">{{ item.name }}</div>
+                  <div style="font-size: 0.78rem; color: var(--text-muted);">Qty: {{ item.quantity }} × ${{ "%.2f"|format(item.price) }}</div>
+                </div>
+                <div style="font-weight: 700; color: var(--navy-deep);">
+                  ${{ "%.2f"|format(item.line_total) }}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+
+          <div style="background: var(--bg-secondary); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span style="font-size: 0.85rem; color: var(--text-muted);">{{ _('total_items') }}</span>
+              <span style="font-weight: 700;">{{ total_quantity }}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed var(--border-color); padding-top: 0.75rem;">
+              <span style="font-weight: 800; color: var(--navy-deep);">{{ _('grand_total_usd') }}</span>
+              <span style="font-size: 1.5rem; font-weight: 800; color: var(--navy-deep);">${{ "%.2f"|format(grand_total) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,123 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}{{ title }} | Yan Zhen Admin Console{% endblock %}
+
+{% block content %}
+<div style="margin-bottom: 1.5rem;">
+  <a href="{{ url_for('admin.products') }}" style="color: var(--text-muted); font-size: 0.9rem;">&larr; Back to Products</a>
+  <h1 style="font-size: 1.75rem; margin-top: 0.5rem;">{{ title }}</h1>
+</div>
+
+<div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2.5rem; max-width: 900px; box-shadow: var(--shadow-sm);">
+  <form method="POST" action="" enctype="multipart/form-data">
+    {{ form.csrf_token }}
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+      
+      <div class="order-form-group">
+        <label for="name">Product Name *</label>
+        {{ form.name(class="form-control", placeholder="e.g. Test Product") }}
+        {% if form.name.errors %}
+          <div style="color: #DC2626; font-size: 0.8rem; margin-top: 0.35rem; font-weight: 600;">{{ form.name.errors[0] }}</div>
+        {% endif %}
+      </div>
+
+      <div class="order-form-group">
+        <label for="category_id">Category *</label>
+        {{ form.category_id(class="form-control") }}
+        {% if form.category_id.errors %}
+          <div style="color: #DC2626; font-size: 0.8rem; margin-top: 0.35rem; font-weight: 600;">{{ form.category_id.errors[0] }}</div>
+        {% endif %}
+      </div>
+
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+      
+      <div class="order-form-group">
+        <label for="purity">Purity Grade</label>
+        {{ form.purity(class="form-control", placeholder="e.g. >= 99.8%") }}
+        {% if form.purity.errors %}
+          <div style="color: #DC2626; font-size: 0.8rem; margin-top: 0.35rem; font-weight: 600;">{{ form.purity.errors[0] }}</div>
+        {% endif %}
+      </div>
+
+      <div class="order-form-group">
+        <label for="price">Price ($ USD) *</label>
+        {{ form.price(class="form-control", placeholder="e.g. 10") }}
+        {% if form.price.errors %}
+          <div style="color: #DC2626; font-size: 0.8rem; margin-top: 0.35rem; font-weight: 600;">{{ form.price.errors[0] }}</div>
+        {% endif %}
+      </div>
+
+      <div class="order-form-group">
+        <label for="stock_status">Stock Status</label>
+        {{ form.stock_status(class="form-control") }}
+        {% if form.stock_status.errors %}
+          <div style="color: #DC2626; font-size: 0.8rem; margin-top: 0.35rem; font-weight: 600;">{{ form.stock_status.errors[0] }}</div>
+        {% endif %}
+      </div>
+
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+      
+      <div class="order-form-group">
+        <label for="molecular_formula">Molecular Formula</label>
+        {{ form.molecular_formula(class="form-control", placeholder="e.g. C187H291N45O59") }}
+        {% if form.molecular_formula.errors %}
+          <div style="color: #DC2626; font-size: 0.8rem; margin-top: 0.35rem; font-weight: 600;">{{ form.molecular_formula.errors[0] }}</div>
+        {% endif %}
+      </div>
+
+      <div class="order-form-group">
+        <label for="sequence_or_cas">Sequence / CAS / Code</label>
+        {{ form.sequence_or_cas(class="form-control", placeholder="e.g. TEST001") }}
+        {% if form.sequence_or_cas.errors %}
+          <div style="color: #DC2626; font-size: 0.8rem; margin-top: 0.35rem; font-weight: 600;">{{ form.sequence_or_cas.errors[0] }}</div>
+        {% endif %}
+      </div>
+
+    </div>
+
+    <div class="order-form-group" style="margin-bottom: 1.5rem;">
+      <label for="short_description">Short Summary</label>
+      {{ form.short_description(class="form-control", placeholder="Brief one-line summary for product card.") }}
+      {% if form.short_description.errors %}
+        <div style="color: #DC2626; font-size: 0.8rem; margin-top: 0.35rem; font-weight: 600;">{{ form.short_description.errors[0] }}</div>
+      {% endif %}
+    </div>
+
+    <div class="order-form-group" style="margin-bottom: 1.5rem;">
+      <label for="description">Detailed Description & Research Specifications</label>
+      {{ form.description(class="form-control", rows="5", placeholder="Detailed analytical properties, reconstitution notes, etc.") }}
+      {% if form.description.errors %}
+        <div style="color: #DC2626; font-size: 0.8rem; margin-top: 0.35rem; font-weight: 600;">{{ form.description.errors[0] }}</div>
+      {% endif %}
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: center; margin-bottom: 2rem;">
+      <div class="order-form-group">
+        <label for="image">Upload Product Image (Optional)</label>
+        {{ form.image(class="form-control") }}
+        {% if form.image.errors %}
+          <div style="color: #DC2626; font-size: 0.8rem; margin-top: 0.35rem; font-weight: 600;">{{ form.image.errors[0] }}</div>
+        {% endif %}
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 0.5rem; padding-top: 1.25rem;">
+        {{ form.is_featured(style="width: 20px; height: 20px;") }}
+        <label for="is_featured" style="font-weight: 600; color: var(--navy-deep); cursor: pointer;">
+          Feature on Homepage Banner
+        </label>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 1rem;">
+      <button type="submit" class="btn btn-primary" style="padding: 0.85rem 2.5rem;">Save Product</button>
+      <a href="{{ url_for('admin.products') }}" class="btn btn-outline">Cancel</a>
+    </div>
+
+  </form>
+</div>
+{% endblock %}

@@ -119,42 +119,35 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Modal Trigger Logic for Checkout Flow ("Proceed to Checkout" / "Proceed to Order")
-  const checkoutTriggers = document.querySelectorAll('.trigger-checkout-modal, a[href*="/checkout"], .btn-proceed-checkout');
-  const orderModalEl = document.getElementById('orderInfoModal');
-  const btnAcknowledgeAndContinue = document.getElementById('btnAcknowledgeAndContinue');
+  const triggerButtons = document.querySelectorAll('.trigger-order-info, .trigger-checkout-modal');
+  const modalElement = document.getElementById('orderInfoModal');
 
-  let orderInfoModal = null;
-  if (orderModalEl && window.bootstrap && bootstrap.Modal) {
-    orderInfoModal = new bootstrap.Modal(orderModalEl);
-  }
+  if (modalElement && window.bootstrap && bootstrap.Modal) {
+    const orderModal = new bootstrap.Modal(modalElement);
 
-  checkoutTriggers.forEach(trigger => {
-    trigger.addEventListener('click', (e) => {
-      const isAcknowledged = sessionStorage.getItem('yz_order_info_acknowledged') === 'true';
-
-      if (!isAcknowledged) {
+    triggerButtons.forEach(btn => {
+      btn.addEventListener('click', function (e) {
         e.preventDefault();
-        if (orderInfoModal) {
-          orderInfoModal.show();
-        } else if (orderModalEl) {
-          orderModalEl.classList.add('show');
-          orderModalEl.style.display = 'block';
-        }
-      }
-    });
-  });
+        const checkoutUrl = this.dataset.checkoutUrl || this.getAttribute('href') || '/checkout';
 
-  if (btnAcknowledgeAndContinue) {
-    btnAcknowledgeAndContinue.addEventListener('click', () => {
-      // Store acknowledgment in sessionStorage
-      sessionStorage.setItem('yz_order_info_acknowledged', 'true');
-      
-      if (orderInfoModal) {
-        orderInfoModal.hide();
-      }
-      
-      // Proceed to checkout page
-      window.location.href = '/checkout';
+        if (sessionStorage.getItem('yz_order_info_acknowledged') === 'true') {
+          window.location.href = checkoutUrl;
+          return;
+        }
+
+        modalElement.dataset.checkoutUrl = checkoutUrl;
+        orderModal.show();
+      });
     });
+
+    const continueBtn = document.getElementById('confirmOrderInfo') || document.getElementById('btnAcknowledgeAndContinue');
+
+    if (continueBtn) {
+      continueBtn.addEventListener('click', function () {
+        sessionStorage.setItem('yz_order_info_acknowledged', 'true');
+        const checkoutUrl = modalElement.dataset.checkoutUrl || '/checkout';
+        window.location.href = checkoutUrl;
+      });
+    }
   }
 });

@@ -17,7 +17,7 @@
       </div>
 
       <div>
-        <a href="{{ url_for('main.order') }}" class="btn btn-primary trigger-checkout-modal" style="padding: 0.85rem 1.75rem;">
+        <a href="{{ url_for('main.order') }}" class="btn btn-primary trigger-order-info" data-checkout-url="{{ url_for('main.order') }}" style="padding: 0.85rem 1.75rem;">
           📋 Review Quotation Sheet (<span class="cart-badge">{{ cart_total_count }}</span>)
         </a>
       </div>

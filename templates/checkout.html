@@ -23,11 +23,23 @@
           <!-- DHgate Threshold Status Notice Banner -->
           {% if grand_total < 350 %}
             <div class="dhgate-notice-orange">
-              ⚠️ DHgate Payment Notice: DHgate is not available for this order (Order Total: ${{ "%.2f"|format(grand_total) }} USD). DHgate is available only for orders of $350 USD and above. Please use USDT, Bank Transfer, or Western Union.
+              <div style="font-weight: 800; font-size: 0.95rem; margin-bottom: 0.25rem;">
+                ⚠️ DHgate Payment Notice
+              </div>
+              <div style="font-size: 0.88rem; font-weight: 500;">
+                DHgate is not available for this order.<br>
+                Please use USDT, Bank Transfer, Western Union, or Made-in-China Trade Assurance.
+              </div>
             </div>
           {% else %}
             <div class="dhgate-notice-green">
-              ✓ DHgate Payment Available: DHgate payment is available for this order (Order Total: ${{ "%.2f"|format(grand_total) }} USD &ge; $350).
+              <div style="font-weight: 800; font-size: 0.95rem; margin-bottom: 0.25rem;">
+                ✅ DHgate Payment Available
+              </div>
+              <div style="font-size: 0.88rem; font-weight: 500;">
+                This order qualifies for DHgate payment.<br>
+                You may also pay using USDT, Bank Transfer, Western Union, or Made-in-China Trade Assurance.
+              </div>
             </div>
           {% endif %}
 

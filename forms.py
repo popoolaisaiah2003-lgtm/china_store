@@ -76,13 +76,65 @@ class BlogPostForm(FlaskForm):
     submit = SubmitField('Save Blog Post')
 
 
+COUNTRY_CHOICES = [
+    ('', 'Select Country...'),
+    ('United States', 'United States'),
+    ('United Kingdom', 'United Kingdom'),
+    ('Canada', 'Canada'),
+    ('Australia', 'Australia'),
+    ('Germany', 'Germany'),
+    ('France', 'France'),
+    ('Italy', 'Italy'),
+    ('Spain', 'Spain'),
+    ('Netherlands', 'Netherlands'),
+    ('Switzerland', 'Switzerland'),
+    ('Sweden', 'Sweden'),
+    ('Norway', 'Norway'),
+    ('Denmark', 'Denmark'),
+    ('Finland', 'Finland'),
+    ('Belgium', 'Belgium'),
+    ('Austria', 'Austria'),
+    ('Poland', 'Poland'),
+    ('Czech Republic', 'Czech Republic'),
+    ('Ireland', 'Ireland'),
+    ('Portugal', 'Portugal'),
+    ('Greece', 'Greece'),
+    ('Japan', 'Japan'),
+    ('South Korea', 'South Korea'),
+    ('Singapore', 'Singapore'),
+    ('United Arab Emirates', 'United Arab Emirates'),
+    ('Saudi Arabia', 'Saudi Arabia'),
+    ('Qatar', 'Qatar'),
+    ('Kuwait', 'Kuwait'),
+    ('Israel', 'Israel'),
+    ('Turkey', 'Turkey'),
+    ('Brazil', 'Brazil'),
+    ('Mexico', 'Mexico'),
+    ('Argentina', 'Argentina'),
+    ('Chile', 'Chile'),
+    ('Colombia', 'Colombia'),
+    ('South Africa', 'South Africa'),
+    ('New Zealand', 'New Zealand'),
+    ('India', 'India'),
+    ('Malaysia', 'Malaysia'),
+    ('Thailand', 'Thailand'),
+    ('Vietnam', 'Vietnam'),
+    ('Indonesia', 'Indonesia'),
+    ('Philippines', 'Philippines'),
+    ('Hong Kong SAR', 'Hong Kong SAR'),
+    ('Taiwan', 'Taiwan'),
+    ('China', 'China'),
+    ('Other / International Destination', 'Other Country (Specify in Address)')
+]
+
+
 class CheckoutForm(FlaskForm):
-    full_name = StringField('Full Name *', validators=[DataRequired(), Length(max=100)])
-    phone = StringField('Phone Number *', validators=[DataRequired(), Length(max=30)])
-    email = StringField('Email Address', validators=[Optional(), Email(), Length(max=120)])
-    country = StringField('Country *', validators=[DataRequired(), Length(max=100)])
-    address = TextAreaField('Shipping Address *', validators=[DataRequired(), Length(max=300)])
-    notes = TextAreaField('Additional Notes / Specific Requests', validators=[Optional(), Length(max=500)])
+    full_name = StringField('Full Name *', validators=[DataRequired(message="Full Name is required"), Length(max=100)])
+    email = StringField('Email Address *', validators=[DataRequired(message="Email Address is required"), Email(message="Please enter a valid email address"), Length(max=120)])
+    country = SelectField('Country *', choices=COUNTRY_CHOICES, validators=[DataRequired(message="Please select your shipping country")])
+    zip_code = StringField('ZIP / Postal Code', validators=[Optional(), Length(max=30)])
+    address = TextAreaField('Shipping Address *', validators=[DataRequired(message="Shipping Address is required"), Length(max=300)])
+    phone = StringField('Phone Number *', validators=[DataRequired(message="Phone Number is required"), Length(max=30)])
     submit = SubmitField('Generate Wholesale Order on WhatsApp')
 
 

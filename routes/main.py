@@ -263,10 +263,11 @@ def checkout():
 
     if form.validate_on_submit():
         name = form.full_name.data.strip()
-        phone = form.phone.data.strip()
+        email = form.email.data.strip()
         country = form.country.data.strip()
+        zip_code = form.zip_code.data.strip() if form.zip_code.data else 'N/A'
         address = form.address.data.strip()
-        notes = form.notes.data.strip() if form.notes.data else 'None'
+        phone = form.phone.data.strip()
 
         order_lines = []
         for item in cart_items:
@@ -280,14 +281,14 @@ def checkout():
             f"Quotation Reference: {quotation_number}\n\n"
             f"Customer Information\n"
             f"Name: {name}\n"
-            f"Phone: {phone}\n"
+            f"Email: {email}\n"
             f"Country: {country}\n"
-            f"Address: {address}\n\n"
+            f"ZIP / Postal Code: {zip_code}\n"
+            f"Shipping Address: {address}\n"
+            f"Phone: {phone}\n\n"
             f"Order Summary\n"
             f"{order_summary_text}\n\n"
             f"Grand Total: ${grand_total:.2f}\n\n"
-            f"Additional Notes:\n"
-            f"{notes}\n\n"
             f"Please provide shipping cost and delivery timeline.\n\n"
             f"Thank you."
         )
@@ -296,12 +297,13 @@ def checkout():
         record = OrderRecord(
             quotation_number=quotation_number,
             customer_name=name,
-            customer_phone=phone,
+            customer_email=email,
             customer_country=country,
+            zip_code=zip_code,
             customer_address=address,
+            customer_phone=phone,
             items_json=str([item['name'] + ' x ' + str(item['quantity']) for item in cart_items]),
-            grand_total=grand_total,
-            notes=notes
+            grand_total=grand_total
         )
         db.session.add(record)
         db.session.commit()

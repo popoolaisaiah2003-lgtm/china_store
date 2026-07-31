@@ -734,3 +734,9 @@ footer {
 .footer-pharmaceutical a:hover {
   color: var(--biotech-blue);
 }
+
+@media (max-width: 768px) {
+  .checkout-shipping-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

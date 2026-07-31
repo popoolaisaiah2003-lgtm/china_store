@@ -53,29 +53,54 @@
 
             <div class="order-form-group" style="margin-bottom: 1.5rem;">
               <label for="full_name">{{ _('full_name') }}</label>
-              {{ form.full_name(class="form-control", placeholder="e.g. Dr. Alexander Wright") }}
+              {{ form.full_name(class="form-control" + (" is-invalid" if form.full_name.errors else ""), placeholder="e.g. Dr. Alexander Wright") }}
+              {% if form.full_name.errors %}
+                {% for err in form.full_name.errors %}
+                  <div style="color: #DC2626; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;">⚠️ {{ err }}</div>
+                {% endfor %}
+              {% endif %}
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
               <div class="order-form-group">
                 <label for="phone">{{ _('phone_number') }}</label>
-                {{ form.phone(class="form-control", placeholder="e.g. +1 555 019 2831") }}
+                {{ form.phone(class="form-control" + (" is-invalid" if form.phone.errors else ""), placeholder="e.g. +1 555 019 2831") }}
+                {% if form.phone.errors %}
+                  {% for err in form.phone.errors %}
+                    <div style="color: #DC2626; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;">⚠️ {{ err }}</div>
+                  {% endfor %}
+                {% endif %}
               </div>
 
               <div class="order-form-group">
                 <label for="country">{{ _('country') }}</label>
-                {{ form.country(class="form-control", placeholder="e.g. United States / Germany") }}
+                {{ form.country(class="form-control" + (" is-invalid" if form.country.errors else ""), placeholder="e.g. United States / Germany") }}
+                {% if form.country.errors %}
+                  {% for err in form.country.errors %}
+                    <div style="color: #DC2626; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;">⚠️ {{ err }}</div>
+                  {% endfor %}
+                {% endif %}
               </div>
             </div>
 
             <div class="order-form-group" style="margin-bottom: 1.5rem;">
               <label for="email">{{ _('email_address') }}</label>
-              {{ form.email(class="form-control", placeholder="e.g. research@institution.edu") }}
+              {{ form.email(class="form-control" + (" is-invalid" if form.email.errors else ""), placeholder="e.g. research@institution.edu") }}
+              {% if form.email.errors %}
+                {% for err in form.email.errors %}
+                  <div style="color: #DC2626; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;">⚠️ {{ err }}</div>
+                {% endfor %}
+              {% endif %}
             </div>
 
             <div class="order-form-group" style="margin-bottom: 1.5rem;">
               <label for="address">{{ _('shipping_address') }}</label>
-              {{ form.address(class="form-control", rows="3", placeholder="Street Address, Suite / Lab No, City, Postal Code") }}
+              {{ form.address(class="form-control" + (" is-invalid" if form.address.errors else ""), rows="3", placeholder="Street Address, Suite / Lab No, City, Postal Code") }}
+              {% if form.address.errors %}
+                {% for err in form.address.errors %}
+                  <div style="color: #DC2626; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;">⚠️ {{ err }}</div>
+                {% endfor %}
+              {% endif %}
             </div>
 
             <div class="order-form-group" style="margin-bottom: 2rem;">

@@ -13,12 +13,11 @@
 </head>
 <body>
 
-  <!-- Admin Header -->
-  <header class="navbar" style="border-bottom-color: var(--gold-primary);">
+  <header class="navbar" style="border-bottom-color: var(--biotech-blue);">
     <div class="container nav-container">
-      <a href="{{ url_for('admin.dashboard') }}" class="brand-logo">
-        <span>Yan Zhen <span class="accent-gold">Peptide</span></span>
-        <span class="brand-badge" style="background:#EF4444; color:white;">Admin Portal</span>
+      <a href="{{ url_for('admin.dashboard') }}" class="brand-logo" style="text-decoration: none;">
+        <img src="{{ url_for('static', filename='logo1.png') }}" alt="Yan Zhen Peptide" class="logo-img">
+        <span class="brand-badge" style="background:#0B5ED7; color:white; margin-left: 0.5rem;">Admin Portal</span>
       </a>
 
       <div style="display: flex; align-items: center; gap: 1rem;">

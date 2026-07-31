@@ -81,7 +81,7 @@ a:hover {
   position: sticky;
   top: 0;
   z-index: 1050;
-  border-bottom: 3px solid var(--gold-primary);
+  border-bottom: 3px solid var(--biotech-blue);
   box-shadow: var(--shadow-md);
   padding: 0.85rem 0;
 }
@@ -738,5 +738,19 @@ footer {
 @media (max-width: 768px) {
   .checkout-shipping-grid {
     grid-template-columns: 1fr !important;
+  }
+}
+
+/* Responsive Brand Logo Styling */
+.logo-img {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .logo-img {
+    height: 40px;
   }
 }

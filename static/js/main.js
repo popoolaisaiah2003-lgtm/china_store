@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Modal Trigger Logic for Checkout Flow ("Proceed to Checkout" / "Proceed to Order")
+  // Modal Trigger Logic for Checkout Flow ("Proceed to Checkout" / "Review Quotation Sheet")
   const triggerButtons = document.querySelectorAll('.trigger-order-info, .trigger-checkout-modal');
   const modalElement = document.getElementById('orderInfoModal');
 
@@ -129,12 +129,8 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.addEventListener('click', function (e) {
         e.preventDefault();
         const checkoutUrl = this.dataset.checkoutUrl || this.getAttribute('href') || '/checkout';
-
-        if (sessionStorage.getItem('yz_order_info_acknowledged') === 'true') {
-          window.location.href = checkoutUrl;
-          return;
-        }
-
+        
+        // Always open modal popup on every click (no sessionStorage restriction)
         modalElement.dataset.checkoutUrl = checkoutUrl;
         orderModal.show();
       });
@@ -144,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (continueBtn) {
       continueBtn.addEventListener('click', function () {
-        sessionStorage.setItem('yz_order_info_acknowledged', 'true');
+        // Navigate directly to checkout URL without storing any acknowledgment state
         const checkoutUrl = modalElement.dataset.checkoutUrl || '/checkout';
         window.location.href = checkoutUrl;
       });

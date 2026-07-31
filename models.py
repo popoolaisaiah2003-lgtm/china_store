@@ -233,3 +233,23 @@ class Setting(db.Model):
         else:
             item.value = str(value)
         db.session.commit()
+
+
+class ShipmentUpdate(db.Model):
+    __tablename__ = 'shipment_updates'
+
+    id = db.Column(db.Integer, primary_key=True)
+    image_filename = db.Column(db.String(255), nullable=True)
+    country = db.Column(db.String(100), nullable=False)
+    courier = db.Column(db.String(100), nullable=False)
+    product_name = db.Column(db.String(200), nullable=False)
+    quantity = db.Column(db.String(100), nullable=False)
+    status = db.Column(db.String(50), nullable=False, default='Dispatched')
+    shipped_at = db.Column(db.String(100), nullable=True)
+    eta = db.Column(db.String(100), nullable=True)
+    note = db.Column(db.Text, nullable=True)
+    is_published = db.Column(db.Boolean, default=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f'<ShipmentUpdate {self.country} - {self.product_name}>'

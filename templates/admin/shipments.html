@@ -1,0 +1,99 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Global Shipments Management | Yan Zhen Admin Portal{% endblock %}
+
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+  <div>
+    <h1 style="font-size: 1.75rem; color: var(--navy-deep); font-weight: 800; margin-bottom: 0.25rem;">Global Shipment Updates</h1>
+    <p style="color: var(--text-muted); font-size: 0.9rem;">Manage public cold-chain logistics dispatch logs and international parcel tracking updates.</p>
+  </div>
+  <a href="{{ url_for('admin.shipment_create') }}" class="btn btn-primary">
+    + Add Shipment Update
+  </a>
+</div>
+
+<div class="card" style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm);">
+  <div style="padding: 1.25rem; background: #F8FAFC; border-bottom: 1px solid var(--border-color); font-weight: 700; color: var(--navy-deep);">
+    All Global Shipments Log ({{ shipments|length }})
+  </div>
+
+  {% if shipments %}
+    <div style="overflow-x: auto;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; text-align: left;">
+        <thead>
+          <tr style="background: #F1F5F9; color: var(--navy-deep); border-bottom: 1px solid var(--border-color);">
+            <th style="padding: 0.85rem 1rem;">Photo</th>
+            <th style="padding: 0.85rem 1rem;">Destination</th>
+            <th style="padding: 0.85rem 1rem;">Courier</th>
+            <th style="padding: 0.85rem 1rem;">Products & Quantity</th>
+            <th style="padding: 0.85rem 1rem;">Status</th>
+            <th style="padding: 0.85rem 1rem;">Shipped / ETA</th>
+            <th style="padding: 0.85rem 1rem;">Visibility</th>
+            <th style="padding: 0.85rem 1rem; text-align: right;">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for s in shipments %}
+            <tr style="border-bottom: 1px solid var(--border-color);">
+              <td style="padding: 0.85rem 1rem; vertical-align: middle;">
+                {% if s.image_filename %}
+                  <img src="{{ url_for('static', filename='uploads/shipments/' + s.image_filename) }}" alt="Parcel" style="width: 48px; height: 48px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border-color);">
+                {% else %}
+                  <div style="width: 48px; height: 48px; background: #E2E8F0; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">📦</div>
+                {% endif %}
+              </td>
+              <td style="padding: 0.85rem 1rem; vertical-align: middle;">
+                <strong style="color: var(--navy-deep);">📍 {{ s.country }}</strong>
+              </td>
+              <td style="padding: 0.85rem 1rem; vertical-align: middle; color: var(--biotech-blue); font-weight: 600;">
+                {{ s.courier }}
+              </td>
+              <td style="padding: 0.85rem 1rem; vertical-align: middle;">
+                <div style="font-weight: 700; color: var(--navy-deep);">{{ s.product_name }}</div>
+                <div style="font-size: 0.78rem; color: var(--text-muted);">{{ s.quantity }}</div>
+              </td>
+              <td style="padding: 0.85rem 1rem; vertical-align: middle;">
+                {% if s.status == 'Processing' %}
+                  <span class="badge" style="background: #64748B; color: white; padding: 0.25rem 0.6rem; border-radius: 12px;">⚙️ Processing</span>
+                {% elif s.status == 'Dispatched' %}
+                  <span class="badge" style="background: #F59E0B; color: white; padding: 0.25rem 0.6rem; border-radius: 12px;">📤 Dispatched</span>
+                {% elif s.status == 'In Transit' %}
+                  <span class="badge" style="background: #0EA5E9; color: white; padding: 0.25rem 0.6rem; border-radius: 12px;">✈️ In Transit</span>
+                {% elif s.status == 'Delivered' %}
+                  <span class="badge" style="background: #10B981; color: white; padding: 0.25rem 0.6rem; border-radius: 12px;">✅ Delivered</span>
+                {% else %}
+                  <span class="badge" style="background: #EF4444; color: white; padding: 0.25rem 0.6rem; border-radius: 12px;">⚠️ {{ s.status }}</span>
+                {% endif %}
+              </td>
+              <td style="padding: 0.85rem 1rem; vertical-align: middle; font-size: 0.8rem;">
+                <div>Shipped: <strong>{{ s.shipped_at or 'N/A' }}</strong></div>
+                <div style="color: var(--biotech-blue);">ETA: <strong>{{ s.eta or 'N/A' }}</strong></div>
+              </td>
+              <td style="padding: 0.85rem 1rem; vertical-align: middle;">
+                <form method="POST" action="{{ url_for('admin.shipment_toggle', id=s.id) }}" style="display: inline;">
+                  <button type="submit" class="btn btn-sm {{ 'btn-success' if s.is_published else 'btn-secondary' }}" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;">
+                    {{ 'Published' if s.is_published else 'Draft' }}
+                  </button>
+                </form>
+              </td>
+              <td style="padding: 0.85rem 1rem; vertical-align: middle; text-align: right;">
+                <div style="display: flex; gap: 0.4rem; justify-content: flex-end;">
+                  <a href="{{ url_for('admin.shipment_edit', id=s.id) }}" class="btn btn-sm btn-outline-blue" style="padding: 0.25rem 0.6rem; font-size: 0.78rem;">Edit</a>
+                  <form method="POST" action="{{ url_for('admin.shipment_delete', id=s.id) }}" onsubmit="return confirm('Delete this shipment record permanently?');" style="display: inline;">
+                    <button type="submit" class="btn btn-sm btn-danger" style="padding: 0.25rem 0.6rem; font-size: 0.78rem; background: #EF4444; color: white; border: none;">Delete</button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div style="padding: 3rem; text-align: center; color: var(--text-muted);">
+      No shipment updates logged yet. Click "+ Add Shipment Update" above to create one.
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

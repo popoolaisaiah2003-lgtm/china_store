@@ -7,8 +7,8 @@ from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.utils import secure_filename
 
 from extensions import db
-from models import Admin, Product, Category, ProductImage, COA, BlogPost, Review, Comment, Setting, OrderRecord
-from forms import LoginForm, CategoryForm, ProductForm, COAForm, BlogPostForm, SettingForm, ChangePasswordForm
+from models import Admin, Product, Category, ProductImage, COA, BlogPost, Review, Comment, Setting, OrderRecord, ShipmentUpdate
+from forms import LoginForm, CategoryForm, ProductForm, COAForm, BlogPostForm, SettingForm, ChangePasswordForm, ShipmentUpdateForm
 
 admin = Blueprint('admin', __name__, url_prefix='/secure-panel')
 
@@ -517,3 +517,94 @@ def settings():
         return redirect(url_for('admin.settings'))
 
     return render_template('admin/settings.html', form=form)
+
+
+# --- SHIPMENT UPDATES MANAGEMENT ---
+@admin.route('/shipments')
+@admin_required
+def shipments():
+    shipment_list = ShipmentUpdate.query.order_by(ShipmentUpdate.created_at.desc()).all()
+    return render_template('admin/shipments.html', shipments=shipment_list)
+
+@admin.route('/shipments/create', methods=['GET', 'POST'])
+@admin_required
+def shipment_create():
+    form = ShipmentUpdateForm()
+    if form.validate_on_submit():
+        image_filename = None
+        if form.image.data:
+            file = form.image.data
+            ext = file.filename.rsplit('.', 1)[1].lower() if '.' in file.filename else 'jpg'
+            filename = f"shipment_{int(time.time())}.{ext}"
+            upload_folder = os.path.join(current_app.static_folder, 'uploads', 'shipments')
+            os.makedirs(upload_folder, exist_ok=True)
+            file.save(os.path.join(upload_folder, filename))
+            image_filename = filename
+
+        shipment = ShipmentUpdate(
+            country=form.country.data.strip(),
+            courier=form.courier.data.strip(),
+            product_name=form.product_name.data.strip(),
+            quantity=form.quantity.data.strip(),
+            status=form.status.data,
+            shipped_at=form.shipped_at.data.strip() if form.shipped_at.data else None,
+            eta=form.eta.data.strip() if form.eta.data else None,
+            note=form.note.data.strip() if form.note.data else None,
+            image_filename=image_filename,
+            is_published=form.is_published.data
+        )
+        db.session.add(shipment)
+        db.session.commit()
+        flash('Shipment update published successfully.', 'success')
+        return redirect(url_for('admin.shipments'))
+
+    return render_template('admin/shipment_form.html', form=form, title="Add Global Shipment Update")
+
+@admin.route('/shipments/<int:id>/edit', methods=['GET', 'POST'])
+@admin_required
+def shipment_edit(id):
+    shipment = ShipmentUpdate.query.get_or_404(id)
+    form = ShipmentUpdateForm(obj=shipment)
+    if form.validate_on_submit():
+        if form.image.data:
+            file = form.image.data
+            ext = file.filename.rsplit('.', 1)[1].lower() if '.' in file.filename else 'jpg'
+            filename = f"shipment_{int(time.time())}.{ext}"
+            upload_folder = os.path.join(current_app.static_folder, 'uploads', 'shipments')
+            os.makedirs(upload_folder, exist_ok=True)
+            file.save(os.path.join(upload_folder, filename))
+            shipment.image_filename = filename
+
+        shipment.country = form.country.data.strip()
+        shipment.courier = form.courier.data.strip()
+        shipment.product_name = form.product_name.data.strip()
+        shipment.quantity = form.quantity.data.strip()
+        shipment.status = form.status.data
+        shipment.shipped_at = form.shipped_at.data.strip() if form.shipped_at.data else None
+        shipment.eta = form.eta.data.strip() if form.eta.data else None
+        shipment.note = form.note.data.strip() if form.note.data else None
+        shipment.is_published = form.is_published.data
+
+        db.session.commit()
+        flash('Shipment update updated successfully.', 'success')
+        return redirect(url_for('admin.shipments'))
+
+    return render_template('admin/shipment_form.html', form=form, shipment=shipment, title="Edit Shipment Update")
+
+@admin.route('/shipments/<int:id>/delete', methods=['POST'])
+@admin_required
+def shipment_delete(id):
+    shipment = ShipmentUpdate.query.get_or_404(id)
+    db.session.delete(shipment)
+    db.session.commit()
+    flash('Shipment record deleted.', 'success')
+    return redirect(url_for('admin.shipments'))
+
+@admin.route('/shipments/<int:id>/toggle', methods=['POST'])
+@admin_required
+def shipment_toggle(id):
+    shipment = ShipmentUpdate.query.get_or_404(id)
+    shipment.is_published = not shipment.is_published
+    db.session.commit()
+    flash(f"Shipment published status set to {shipment.is_published}.", 'info')
+    return redirect(url_for('admin.shipments'))

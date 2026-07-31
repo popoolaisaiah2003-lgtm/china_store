@@ -154,3 +154,23 @@ class SettingForm(FlaskForm):
     seo_title = StringField('Default SEO Meta Title', validators=[Optional()])
     meta_description = TextAreaField('Default SEO Meta Description', validators=[Optional()])
     submit = SubmitField('Save System Settings')
+
+
+class ShipmentUpdateForm(FlaskForm):
+    country = StringField('Destination Country *', validators=[DataRequired(), Length(max=100)])
+    courier = StringField('Courier Service / Logistics *', validators=[DataRequired(), Length(max=100)])
+    product_name = StringField('Product(s) Included *', validators=[DataRequired(), Length(max=200)])
+    quantity = StringField('Quantity / Units *', validators=[DataRequired(), Length(max=100)])
+    status = SelectField('Shipment Status *', choices=[
+        ('Processing', 'Processing'),
+        ('Dispatched', 'Dispatched'),
+        ('In Transit', 'In Transit'),
+        ('Delivered', 'Delivered'),
+        ('Issue', 'Issue')
+    ], default='Dispatched', validators=[DataRequired()])
+    shipped_at = StringField('Shipped Date', validators=[Optional(), Length(max=100)])
+    eta = StringField('Estimated Delivery (ETA)', validators=[Optional(), Length(max=100)])
+    note = TextAreaField('Dispatch Note / Remarks', validators=[Optional(), Length(max=500)])
+    image = FileField('Upload Parcel / Tracking Photo', validators=[Optional(), FileAllowed(['jpg', 'jpeg', 'png', 'webp'], 'Images only!')])
+    is_published = BooleanField('Publish to Public Site', default=True)
+    submit = SubmitField('Save Shipment Update')

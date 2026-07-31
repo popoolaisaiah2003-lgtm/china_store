@@ -3,7 +3,7 @@ import math
 import datetime
 import urllib.parse
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session, current_app, send_from_directory, Response, jsonify
-from models import Product, Category, Review, COA, BlogPost, Comment, Setting, OrderRecord, ProductImage
+from models import Product, Category, Review, COA, BlogPost, Comment, Setting, OrderRecord, ProductImage, ShipmentUpdate
 from forms import CheckoutForm
 from translations import translate
 from extensions import db
@@ -322,3 +322,8 @@ def contact():
 @main.route('/faq')
 def faq():
     return render_template('faq.html')
+
+@main.route('/shipments')
+def shipments():
+    shipment_list = ShipmentUpdate.query.filter_by(is_published=True).order_by(ShipmentUpdate.created_at.desc()).all()
+    return render_template('shipments.html', shipments=shipment_list)

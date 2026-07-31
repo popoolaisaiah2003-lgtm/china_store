@@ -42,6 +42,7 @@
         <li><a href="{{ url_for('admin.blog_posts') }}" class="{{ 'active' if 'blog' in request.endpoint }}">📰 Blog CMS</a></li>
         <li><a href="{{ url_for('admin.reviews') }}" class="{{ 'active' if request.endpoint == 'admin.reviews' }}">⭐ Product Reviews</a></li>
         <li><a href="{{ url_for('admin.orders') }}" class="{{ 'active' if request.endpoint == 'admin.orders' }}">📦 Orders Inquiry</a></li>
+        <li><a href="{{ url_for('admin.shipments') }}" class="{{ 'active' if 'shipment' in request.endpoint }}">✈️ Global Shipments</a></li>
         <li><a href="{{ url_for('admin.languages') }}" class="{{ 'active' if request.endpoint == 'admin.languages' }}">🌐 Languages</a></li>
         <li><a href="{{ url_for('admin.settings') }}" class="{{ 'active' if request.endpoint == 'admin.settings' }}">⚙️ Settings</a></li>
         <li><a href="{{ url_for('admin.change_password') }}" class="{{ 'active' if request.endpoint == 'admin.change_password' }}">🔑 Change Password</a></li>

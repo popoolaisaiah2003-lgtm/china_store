@@ -1,0 +1,91 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}{{ title }} | Yan Zhen Admin Portal{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto;">
+  
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+    <div>
+      <h1 style="font-size: 1.65rem; color: var(--navy-deep); font-weight: 800;">{{ title }}</h1>
+      <p style="color: var(--text-muted); font-size: 0.88rem;">Publish or edit live international dispatch updates for public verification.</p>
+    </div>
+    <a href="{{ url_for('admin.shipments') }}" class="btn btn-outline" style="font-size: 0.85rem;">
+      &larr; Back to Shipments
+    </a>
+  </div>
+
+  <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2.25rem; box-shadow: var(--shadow-sm);">
+    
+    <form method="POST" enctype="multipart/form-data">
+      {{ form.csrf_token }}
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+        <div class="form-group">
+          <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Destination Country *</label>
+          {{ form.country(class="form-control", placeholder="e.g. United States / Germany / Japan") }}
+        </div>
+        <div class="form-group">
+          <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Courier Service / Method *</label>
+          {{ form.courier(class="form-control", placeholder="e.g. DHL Express Cold-Chain / FedEx Priority") }}
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+        <div class="form-group">
+          <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Product(s) Included *</label>
+          {{ form.product_name(class="form-control", placeholder="e.g. Semaglutide 5mg & Tirzepatide 10mg") }}
+        </div>
+        <div class="form-group">
+          <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Quantity / Units *</label>
+          {{ form.quantity(class="form-control", placeholder="e.g. 50 Vials / 20 Kits") }}
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+        <div class="form-group">
+          <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Status *</label>
+          {{ form.status(class="form-select", style="padding: 0.65rem 0.85rem; font-size: 0.9rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); width: 100%;") }}
+        </div>
+        <div class="form-group">
+          <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Shipped Date</label>
+          {{ form.shipped_at(class="form-control", placeholder="e.g. 2026-07-30") }}
+        </div>
+        <div class="form-group">
+          <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Estimated Delivery (ETA)</label>
+          {{ form.eta(class="form-control", placeholder="e.g. 10–14 Working Days") }}
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 1.25rem;">
+        <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Dispatch Note / Remarks</label>
+        {{ form.note(class="form-control", rows="3", placeholder="Specify temperature logging, customs hubs, or dispatch status remarks.") }}
+      </div>
+
+      <div class="form-group" style="margin-bottom: 1.5rem;">
+        <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Upload Parcel / Tracking Photo</label>
+        {{ form.image(class="form-control") }}
+        {% if shipment and shipment.image_filename %}
+          <div style="margin-top: 0.5rem; font-size: 0.82rem; color: var(--text-muted);">
+            Current Image: <strong>{{ shipment.image_filename }}</strong>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="form-group" style="margin-bottom: 2rem;">
+        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 700; color: var(--navy-deep); font-size: 0.9rem;">
+          {{ form.is_published }}
+          <span>Publish immediately to public `/shipments` page</span>
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="padding: 0.85rem 2rem; font-size: 1rem;">
+        Save Shipment Update &rarr;
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+{% endblock %}

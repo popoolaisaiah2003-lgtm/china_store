@@ -3,85 +3,96 @@
 {% block title %}Global Shipments Management | Yan Zhen Admin Portal{% endblock %}
 
 {% block content %}
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+<!-- Requirement 5: Title in White Card with Add Button Aligned Right -->
+<div class="admin-card d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
   <div>
-    <h1 style="font-size: 1.75rem; color: var(--navy-deep); font-weight: 800; margin-bottom: 0.25rem;">Global Shipment Updates</h1>
-    <p style="color: var(--text-muted); font-size: 0.9rem;">Manage public cold-chain logistics dispatch logs and international parcel tracking updates.</p>
+    <h1 class="h3 fw-bold text-dark mb-1">Global Shipment Updates</h1>
+    <p class="text-muted mb-0 small">Manage public cold-chain logistics dispatch logs and international parcel tracking updates.</p>
   </div>
-  <a href="{{ url_for('admin.shipment_create') }}" class="btn btn-primary">
-    + Add Shipment Update
+  <a href="{{ url_for('admin.shipment_create') }}" class="btn btn-primary px-4 py-2">
+    <i class="bi bi-plus-lg me-1"></i> Add Shipment Update
   </a>
 </div>
 
-<div class="card" style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm);">
-  <div style="padding: 1.25rem; background: #F8FAFC; border-bottom: 1px solid var(--border-color); font-weight: 700; color: var(--navy-deep);">
-    All Global Shipments Log ({{ shipments|length }})
+<!-- Bootstrap Table with Hover Effect -->
+<div class="admin-card p-0 overflow-hidden">
+  <div class="p-3 bg-light border-bottom d-flex justify-content-between align-items-center">
+    <h6 class="fw-bold text-dark mb-0">All Global Shipments Log ({{ shipments|length }})</h6>
+    <span class="badge bg-secondary">Total: {{ shipments|length }}</span>
   </div>
 
   {% if shipments %}
-    <div style="overflow-x: auto;">
-      <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; text-align: left;">
-        <thead>
-          <tr style="background: #F1F5F9; color: var(--navy-deep); border-bottom: 1px solid var(--border-color);">
-            <th style="padding: 0.85rem 1rem;">Photo</th>
-            <th style="padding: 0.85rem 1rem;">Destination</th>
-            <th style="padding: 0.85rem 1rem;">Courier</th>
-            <th style="padding: 0.85rem 1rem;">Products & Quantity</th>
-            <th style="padding: 0.85rem 1rem;">Status</th>
-            <th style="padding: 0.85rem 1rem;">Shipped / ETA</th>
-            <th style="padding: 0.85rem 1rem;">Visibility</th>
-            <th style="padding: 0.85rem 1rem; text-align: right;">Actions</th>
+    <div class="table-responsive">
+      <table class="table table-hover table-striped align-middle mb-0">
+        <thead class="table-light">
+          <tr>
+            <th class="ps-3">Photo</th>
+            <th>Destination</th>
+            <th>Courier</th>
+            <th>Products & Quantity</th>
+            <th>Status</th>
+            <th>Shipped / ETA</th>
+            <th>Visibility</th>
+            <th class="text-end pe-3">Actions</th>
           </tr>
         </thead>
         <tbody>
           {% for s in shipments %}
-            <tr style="border-bottom: 1px solid var(--border-color);">
-              <td style="padding: 0.85rem 1rem; vertical-align: middle;">
+            <tr>
+              <td class="ps-3">
                 {% if s.image_filename %}
-                  <img src="{{ url_for('static', filename='uploads/shipments/' + s.image_filename) }}" alt="Parcel" style="width: 48px; height: 48px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border-color);">
+                  <img src="{{ url_for('static', filename='uploads/shipments/' + s.image_filename) }}" alt="Parcel" class="rounded border" style="width: 48px; height: 48px; object-fit: cover;">
                 {% else %}
-                  <div style="width: 48px; height: 48px; background: #E2E8F0; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">📦</div>
+                  <div class="rounded bg-light border d-flex align-items-center justify-content-center" style="width: 48px; height: 48px; font-size: 1.25rem;">📦</div>
                 {% endif %}
               </td>
-              <td style="padding: 0.85rem 1rem; vertical-align: middle;">
-                <strong style="color: var(--navy-deep);">📍 {{ s.country }}</strong>
+              <td>
+                <strong class="text-dark">📍 {{ s.country }}</strong>
               </td>
-              <td style="padding: 0.85rem 1rem; vertical-align: middle; color: var(--biotech-blue); font-weight: 600;">
-                {{ s.courier }}
+              <td>
+                <span class="badge bg-primary-subtle text-primary border border-primary-subtle fw-semibold px-2 py-1">
+                  {{ s.courier }}
+                </span>
               </td>
-              <td style="padding: 0.85rem 1rem; vertical-align: middle;">
-                <div style="font-weight: 700; color: var(--navy-deep);">{{ s.product_name }}</div>
-                <div style="font-size: 0.78rem; color: var(--text-muted);">{{ s.quantity }}</div>
+              <td>
+                <div class="fw-bold text-dark">{{ s.product_name }}</div>
+                <div class="text-muted small">{{ s.quantity }}</div>
               </td>
-              <td style="padding: 0.85rem 1rem; vertical-align: middle;">
+              <td>
                 {% if s.status == 'Processing' %}
-                  <span class="badge" style="background: #64748B; color: white; padding: 0.25rem 0.6rem; border-radius: 12px;">⚙️ Processing</span>
+                  <span class="badge bg-secondary px-2 py-1">⚙️ Processing</span>
                 {% elif s.status == 'Dispatched' %}
-                  <span class="badge" style="background: #F59E0B; color: white; padding: 0.25rem 0.6rem; border-radius: 12px;">📤 Dispatched</span>
+                  <span class="badge bg-warning text-dark px-2 py-1">📤 Dispatched</span>
                 {% elif s.status == 'In Transit' %}
-                  <span class="badge" style="background: #0EA5E9; color: white; padding: 0.25rem 0.6rem; border-radius: 12px;">✈️ In Transit</span>
+                  <span class="badge bg-info text-dark px-2 py-1">✈️ In Transit</span>
                 {% elif s.status == 'Delivered' %}
-                  <span class="badge" style="background: #10B981; color: white; padding: 0.25rem 0.6rem; border-radius: 12px;">✅ Delivered</span>
+                  <span class="badge bg-success px-2 py-1">✅ Delivered</span>
+                {% elif s.status == 'Issue' %}
+                  <span class="badge bg-danger px-2 py-1">⚠️ Issue</span>
                 {% else %}
-                  <span class="badge" style="background: #EF4444; color: white; padding: 0.25rem 0.6rem; border-radius: 12px;">⚠️ {{ s.status }}</span>
+                  <span class="badge bg-secondary px-2 py-1">{{ s.status }}</span>
                 {% endif %}
               </td>
-              <td style="padding: 0.85rem 1rem; vertical-align: middle; font-size: 0.8rem;">
+              <td class="small">
                 <div>Shipped: <strong>{{ s.shipped_at or 'N/A' }}</strong></div>
-                <div style="color: var(--biotech-blue);">ETA: <strong>{{ s.eta or 'N/A' }}</strong></div>
+                <div class="text-primary">ETA: <strong>{{ s.eta or 'N/A' }}</strong></div>
               </td>
-              <td style="padding: 0.85rem 1rem; vertical-align: middle;">
-                <form method="POST" action="{{ url_for('admin.shipment_toggle', id=s.id) }}" style="display: inline;">
-                  <button type="submit" class="btn btn-sm {{ 'btn-success' if s.is_published else 'btn-secondary' }}" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;">
+              <td>
+                <form method="POST" action="{{ url_for('admin.shipment_toggle', id=s.id) }}" class="d-inline">
+                  <button type="submit" class="btn btn-sm {{ 'btn-success' if s.is_published else 'btn-outline-secondary' }} py-0 px-2 small">
                     {{ 'Published' if s.is_published else 'Draft' }}
                   </button>
                 </form>
               </td>
-              <td style="padding: 0.85rem 1rem; vertical-align: middle; text-align: right;">
-                <div style="display: flex; gap: 0.4rem; justify-content: flex-end;">
-                  <a href="{{ url_for('admin.shipment_edit', id=s.id) }}" class="btn btn-sm btn-outline-blue" style="padding: 0.25rem 0.6rem; font-size: 0.78rem;">Edit</a>
-                  <form method="POST" action="{{ url_for('admin.shipment_delete', id=s.id) }}" onsubmit="return confirm('Delete this shipment record permanently?');" style="display: inline;">
-                    <button type="submit" class="btn btn-sm btn-danger" style="padding: 0.25rem 0.6rem; font-size: 0.78rem; background: #EF4444; color: white; border: none;">Delete</button>
+              <td class="text-end pe-3">
+                <div class="btn-group btn-group-sm" role="group">
+                  <a href="{{ url_for('admin.shipment_edit', id=s.id) }}" class="btn btn-outline-primary">
+                    <i class="bi bi-pencil me-1"></i> Edit
+                  </a>
+                  <form method="POST" action="{{ url_for('admin.shipment_delete', id=s.id) }}" onsubmit="return confirm('Delete this shipment record permanently?');" class="d-inline">
+                    <button type="submit" class="btn btn-outline-danger">
+                      <i class="bi bi-trash me-1"></i> Delete
+                    </button>
                   </form>
                 </div>
               </td>
@@ -91,8 +102,11 @@
       </table>
     </div>
   {% else %}
-    <div style="padding: 3rem; text-align: center; color: var(--text-muted);">
-      No shipment updates logged yet. Click "+ Add Shipment Update" above to create one.
+    <div class="p-5 text-center text-muted">
+      <div class="fs-1 mb-2">✈️</div>
+      <h5>No Global Shipment Updates Created</h5>
+      <p class="small mb-3">Click "+ Add Shipment Update" to publish a new international tracking update.</p>
+      <a href="{{ url_for('admin.shipment_create') }}" class="btn btn-primary btn-sm">Create Shipment Record</a>
     </div>
   {% endif %}
 </div>

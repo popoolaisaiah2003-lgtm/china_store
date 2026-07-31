@@ -88,7 +88,7 @@ class CheckoutForm(FlaskForm):
 
 class SettingForm(FlaskForm):
     company_name = StringField('Company Name', validators=[DataRequired()], default='Yan Zhen Peptide')
-    whatsapp_number = StringField('WhatsApp Support Number', validators=[DataRequired()], default='2348181882418')
+    whatsapp_number = StringField('WhatsApp Support Number', validators=[DataRequired()], default='85263294280')
     email = StringField('Contact Email', validators=[Optional()])
     address = StringField('Facility Address', validators=[Optional()])
     default_language = SelectField('Default Site Language', choices=[

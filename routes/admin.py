@@ -498,8 +498,8 @@ def settings():
     form = SettingForm()
     if request.method == 'GET':
         form.company_name.data = Setting.get_val('company_name', 'Yan Zhen Peptide')
-        form.whatsapp_number.data = Setting.get_val('whatsapp_number', '2348181882418')
-        form.email.data = Setting.get_val('email', 'wholesale@yanzhenpeptide.com')
+        form.whatsapp_number.data = Setting.get_val('whatsapp_number', '85263294280')
+        form.email.data = Setting.get_val('email', 'zhenyan640@gmail.com')
         form.address.data = Setting.get_val('address', 'Yan Zhen Biotechnology Facility, Cleanroom Suite 4')
         form.default_language.data = Setting.get_val('default_language', 'en')
         form.seo_title.data = Setting.get_val('seo_title', 'Yan Zhen Peptide | HPLC Certified Wholesale Peptides')

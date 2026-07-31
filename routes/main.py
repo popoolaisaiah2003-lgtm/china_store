@@ -24,7 +24,7 @@ def inject_global_vars():
         cart_total_count=total_quantity,
         show_lang_modal=show_lang_modal,
         company_name=Setting.get_val('company_name', 'Yan Zhen Peptide'),
-        whatsapp_number=Setting.get_val('whatsapp_number', current_app.config.get('WHATSAPP_NUMBER', '2348181882418'))
+        whatsapp_number=Setting.get_val('whatsapp_number', current_app.config.get('WHATSAPP_NUMBER', '85263294280'))
     )
 
 @main.route('/set_language/<lang_code>')
@@ -127,7 +127,7 @@ def product_detail(slug):
         Product.category_id == product.category_id,
         Product.id != product.id
     ).limit(4).all()
-    whatsapp_number = Setting.get_val('whatsapp_number', current_app.config.get('WHATSAPP_NUMBER', '2348181882418'))
+    whatsapp_number = Setting.get_val('whatsapp_number', current_app.config.get('WHATSAPP_NUMBER', '85263294280'))
     return render_template('product_detail.html', product=product, related_products=related_products, whatsapp_number=whatsapp_number)
 
 # --- PUBLIC COA SYSTEM (/coa) ---
@@ -307,14 +307,14 @@ def checkout():
         db.session.commit()
 
         encoded_message = urllib.parse.quote(raw_message)
-        wa_number = Setting.get_val('whatsapp_number', current_app.config.get('WHATSAPP_NUMBER', '2348181882418'))
+        wa_number = Setting.get_val('whatsapp_number', current_app.config.get('WHATSAPP_NUMBER', '85263294280'))
         whatsapp_url = f"https://wa.me/{wa_number}?text={encoded_message}"
 
     return render_template('checkout.html', form=form, cart_items=cart_items, grand_total=grand_total, total_quantity=total_quantity, whatsapp_url=whatsapp_url, quotation_number=quotation_number)
 
 @main.route('/contact')
 def contact():
-    whatsapp_number = Setting.get_val('whatsapp_number', current_app.config.get('WHATSAPP_NUMBER', '2348181882418'))
+    whatsapp_number = Setting.get_val('whatsapp_number', current_app.config.get('WHATSAPP_NUMBER', '85263294280'))
     return render_template('contact.html', whatsapp_number=whatsapp_number)
 
 @main.route('/faq')

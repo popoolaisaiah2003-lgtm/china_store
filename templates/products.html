@@ -8,7 +8,7 @@
     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
       <div>
         <div style="font-size: 0.8rem; font-weight: 800; color: var(--gold-primary); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.35rem;">
-          🇨🇳 High-Purity Lyophilized Peptide Catalog
+          🇨🇳 High-Purity Analytical Research Peptide Catalog
         </div>
         <h1 style="color: white; margin-bottom: 0.35rem; font-size: 2.25rem;">{{ _('b2b_catalog_title') }}</h1>
         <p style="color: #94A3B8; max-width: 650px; font-size: 0.95rem;">
@@ -17,10 +17,32 @@
       </div>
 
       <div>
-        <a href="{{ url_for('main.order') }}" class="btn btn-primary trigger-order-info" data-checkout-url="{{ url_for('main.order') }}" style="padding: 0.85rem 1.75rem;">
+        <button type="button" class="btn btn-primary trigger-order-info" data-checkout-url="{{ url_for('main.order') }}" style="padding: 0.85rem 1.75rem;">
           📋 Review Quotation Sheet (<span class="cart-badge">{{ cart_total_count }}</span>)
-        </a>
+        </button>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- Category Icons Pills Bar -->
+<section class="category-bar">
+  <div class="container">
+    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+      <a href="{{ url_for('main.products') }}" class="cat-pill {{ 'active' if not selected_category }}">
+        <i class="bi bi-grid-fill"></i> All Peptides
+      </a>
+      {% for cat in categories %}
+        {% set icon_class = 'bi-beaker' %}
+        {% if 'glp' in cat.name.lower() %}{% set icon_class = 'bi-capsule' %}
+        {% elif 'recovery' in cat.name.lower() or 'tissue' in cat.name.lower() %}{% set icon_class = 'bi-heart-pulse' %}
+        {% elif 'growth' in cat.name.lower() or 'secretagogue' in cat.name.lower() %}{% set icon_class = 'bi-activity' %}
+        {% elif 'wellness' in cat.name.lower() or 'pigmentation' in cat.name.lower() %}{% set icon_class = 'bi-stars' %}
+        {% endif %}
+        <a href="{{ url_for('main.products', category=cat.slug) }}" class="cat-pill {{ 'active' if selected_category and selected_category.id == cat.id }}">
+          <i class="bi {{ icon_class }}"></i> {{ cat.name }}
+        </a>
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -31,7 +53,7 @@
     <!-- Filter, Search, and Sort Bar -->
     <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 2.5rem; box-shadow: var(--shadow-sm);">
       
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
         <form method="GET" action="{{ url_for('main.products') }}" style="display: flex; gap: 0.75rem; flex: 1; min-width: 280px; max-width: 520px;">
           <input type="text" name="q" value="{{ search_query }}" placeholder="{{ _('search_placeholder') }}" class="form-control">
           {% if selected_category %}
@@ -64,45 +86,29 @@
         </div>
       </div>
 
-      <!-- Category Filter Pills -->
-      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; border-top: 1px solid var(--border-color); padding-top: 1rem;">
-        <a href="{{ url_for('main.products', sort=sort_by, q=search_query) }}" 
-           class="btn btn-sm {{ 'btn-primary' if not selected_category else 'btn-outline' }}">
-          All Peptides
-        </a>
-        {% for cat in categories %}
-          <a href="{{ url_for('main.products', category=cat.slug, sort=sort_by, q=search_query) }}" 
-             class="btn btn-sm {{ 'btn-primary' if selected_category and selected_category.id == cat.id else 'btn-outline' }}">
-            {{ cat.name }}
-          </a>
-        {% endfor %}
-      </div>
-
     </div>
 
-    <!-- Glass-Style Product Cards Grid (All 169 Items Displayed) -->
+    <!-- Product Cards Grid (All 169 Products Displayed) -->
     <div class="product-grid" style="margin-bottom: 3rem;">
       {% for product in products %}
         <div class="product-card">
           <div class="product-thumb">
             <span class="purity-tag">{{ product.purity }}</span>
-            <img src="{{ url_for('static', filename=product.catalog_image) }}" alt="{{ product.name }}">
+            <img src="{{ url_for('static', filename=product.catalog_image) }}" alt="{{ product.name }}" loading="lazy">
           </div>
           <div class="product-body">
             <div class="product-category">{{ product.category.name if product.category else 'General Peptides' }}</div>
             <h3 class="product-title">
               <a href="{{ url_for('main.product_detail', slug=product.slug) }}">{{ product.name }}</a>
             </h3>
-            {% if product.sequence_or_cas %}
-              <div style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.75rem;">
-                Code: <code>{{ product.sequence_or_cas }}</code>
-              </div>
-            {% endif %}
+            <div class="product-strength">
+              {{ product.sequence_or_cas or 'Standard 5mg / 10mg Lyophilized Vial' }}
+            </div>
 
             <div class="product-price-row">
               <div class="product-price">${{ "%.2f"|format(product.price) }}</div>
               
-              <form method="POST" action="{{ url_for('main.cart_add', product_id=product.id) }}" style="display: flex; gap: 0.4rem; align-items: center;">
+              <form method="POST" action="{{ url_for('main.cart_add', product_id=product.id) }}" style="display: flex; gap: 0.4rem; align-items: center; margin: 0;">
                 <input type="number" name="quantity" min="1" max="1000" value="1" style="width: 55px; padding: 0.3rem; border-radius: 4px; border: 1px solid var(--border-color); text-align: center; font-size: 0.85rem;" title="Select quantity">
                 <button type="submit" class="btn btn-sm btn-primary">
                   + Add to Order
@@ -116,7 +122,7 @@
           <div style="font-size: 3.5rem; margin-bottom: 1rem;">🔍</div>
           <h3>{{ _('no_peptides_found') }}</h3>
           <p>{{ _('no_peptides_desc') }}</p>
-          <a href="{{ url_for('main.products') }}" class="btn btn-sm btn-outline" style="margin-top: 1rem;">{{ _('reset_search') }}</a>
+          <a href="{{ url_for('main.products') }}" class="btn btn-sm btn-outline-blue" style="margin-top: 1rem;">{{ _('reset_search') }}</a>
         </div>
       {% endfor %}
     </div>

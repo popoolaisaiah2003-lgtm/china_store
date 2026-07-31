@@ -74,18 +74,40 @@ class Product(db.Model):
             return f"uploads/products/{self.primary_image.image_filename}"
         
         name_lower = self.name.lower() if self.name else ''
-        if 'semaglutide' in name_lower:
-            return 'images/products/semaglutide.jpg'
-        elif 'tirzepatide' in name_lower:
-            return 'images/products/tirzepatide.jpg'
-        elif 'retatrutide' in name_lower:
-            return 'images/products/retatrutide.jpg'
-        elif 'bpc' in name_lower:
-            return 'images/products/bpc157.jpg'
-        elif 'hgh' in name_lower or 'somatropin' in name_lower:
-            return 'images/products/hgh.jpg'
+        cat_name = self.category.name.lower() if (self.category and self.category.name) else ''
+
+        # 1. GLP-1 Products (Blue-cap vial renders)
+        if any(k in name_lower for k in ['semaglutide', 'tirzepatide', 'retatrutide', 'cagrilintide', 'mazdutide']) or 'glp' in cat_name:
+            if 'semaglutide' in name_lower:
+                return 'images/products/glp1/semaglutide.jpg'
+            elif 'tirzepatide' in name_lower:
+                return 'images/products/glp1/tirzepatide.jpg'
+            elif 'retatrutide' in name_lower:
+                return 'images/products/glp1/retatrutide.jpg'
+            else:
+                return 'images/products/glp1/glp1-blue.jpg'
+
+        # 2. Healing & Recovery (Silver-cap vial renders)
+        elif any(k in name_lower for k in ['bpc', 'tb-500', 'tb500', 'kpv', 'ghk']) or 'recovery' in cat_name or 'healing' in cat_name:
+            if 'bpc' in name_lower:
+                return 'images/products/healing/bpc157.jpg'
+            else:
+                return 'images/products/healing/healing-silver.jpg'
+
+        # 3. Growth Hormone & Secretagogues (Dark-blue cap vial renders)
+        elif any(k in name_lower for k in ['cjc', 'ipamorelin', 'tesamorelin', 'hgh', 'somatropin']) or 'growth' in cat_name:
+            if 'hgh' in name_lower or 'somatropin' in name_lower:
+                return 'images/products/gh/hgh.jpg'
+            else:
+                return 'images/products/gh/gh-darkblue.jpg'
+
+        # 4. Wellness & Nootropic Peptides (White-cap vial renders)
+        elif any(k in name_lower for k in ['nad', 'glutathione', 'selank', 'semax', 'epithalon']) or 'wellness' in cat_name or 'pigmentation' in cat_name:
+            return 'images/products/wellness/wellness-white.jpg'
+
+        # 5. Other / Fallback
         else:
-            return 'images/products/peptide-generic.jpg'
+            return 'images/products/other/peptide-generic.jpg'
 
     @property
     def latest_coa(self):

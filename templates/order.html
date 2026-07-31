@@ -12,106 +12,132 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section" style="padding: 3rem 0;">
   <div class="container">
 
     {% if cart_items %}
-      <div style="background: white; border-radius: var(--radius-lg); border: 1px solid var(--border-color); overflow: hidden; box-shadow: var(--shadow-sm); margin-bottom: 2.5rem;">
-        <div style="padding: 1.5rem; background: var(--bg-secondary); border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
-          <div>
-            <h3 style="margin-bottom: 0.25rem;">{{ _('quotation_items_summary') }}</h3>
-            <span style="font-size: 0.85rem; color: var(--text-muted);">Ref: {{ quotation_number }}</span>
+      <div style="display: grid; grid-template-columns: 1fr 380px; gap: 2.5rem; align-items: start;">
+        
+        <!-- Left: Quotation Table -->
+        <div style="background: white; border-radius: 18px; border: 1px solid var(--border-color); overflow: hidden; box-shadow: var(--shadow-sm);">
+          <div style="padding: 1.5rem; background: var(--bg-secondary); border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <h3 style="margin-bottom: 0.25rem; font-size: 1.2rem; color: var(--navy-deep);">{{ _('quotation_items_summary') }}</h3>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">Ref: {{ quotation_number }}</span>
+            </div>
+            <div>
+              <a href="{{ url_for('main.order_print') }}" class="btn btn-sm btn-outline-blue" target="_blank">
+                {{ _('print_save_pdf') }}
+              </a>
+            </div>
           </div>
-          <div>
-            <a href="{{ url_for('main.order_print') }}" class="btn btn-sm btn-outline" target="_blank">
-              {{ _('print_save_pdf') }}
+
+          <div style="overflow-x: auto;">
+            <table class="order-table">
+              <thead>
+                <tr>
+                  <th style="width: 42%;">{{ _('product_spec_col') }}</th>
+                  <th style="width: 16%;">{{ _('unit_price') }}</th>
+                  <th style="width: 18%;">{{ _('quantity') }}</th>
+                  <th style="width: 14%;">{{ _('line_total') }}</th>
+                  <th style="width: 10%; text-align: right;">{{ _('action') }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in cart_items %}
+                  <tr>
+                    <td>
+                      <div style="font-weight: 700; color: var(--navy-deep); font-size: 0.95rem;">
+                        <a href="{{ url_for('main.product_detail', slug=item.product.slug) }}">{{ item.name }}</a>
+                      </div>
+                      <div style="font-size: 0.78rem; color: var(--text-muted);">
+                        {{ item.product.category.name if item.product.category else 'General' }} ({{ item.product.purity }})
+                      </div>
+                    </td>
+
+                    <td style="font-weight: 600; color: var(--biotech-blue);">
+                      ${{ "%.2f"|format(item.price) }}
+                    </td>
+
+                    <td>
+                      <form method="POST" action="{{ url_for('main.cart_update', product_id=item.product_id) }}" style="display: flex; gap: 0.4rem; align-items: center;">
+                        <input type="number" name="quantity" min="1" max="1000" value="{{ item.quantity }}" style="width: 55px; padding: 0.25rem; border-radius: 4px; border: 1px solid var(--border-color); text-align: center; font-size: 0.85rem;">
+                        <button type="submit" class="btn btn-sm btn-outline-blue" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+                          {{ _('update') }}
+                        </button>
+                      </form>
+                    </td>
+
+                    <td>
+                      <strong style="color: var(--navy-deep); font-size: 1rem;">
+                        ${{ "%.2f"|format(item.line_total) }}
+                      </strong>
+                    </td>
+
+                    <td style="text-align: right;">
+                      <form method="POST" action="{{ url_for('main.cart_remove', product_id=item.product_id) }}">
+                        <button type="submit" class="btn btn-sm" style="background: #FEE2E2; color: #991B1B; border: 1px solid #FCA5A5; padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+                          ✕
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          <div style="padding: 1.25rem 1.5rem; background: var(--bg-primary); border-top: 1px solid var(--border-color);">
+            <a href="{{ url_for('main.products') }}" class="btn btn-sm btn-outline-blue">
+              &larr; {{ _('continue_shopping') }}
             </a>
           </div>
         </div>
 
-        <div style="overflow-x: auto;">
-          <table class="order-table">
-            <thead>
-              <tr>
-                <th style="width: 40%;">{{ _('product_spec_col') }}</th>
-                <th style="width: 15%;">{{ _('unit_price') }}</th>
-                <th style="width: 18%;">{{ _('quantity') }}</th>
-                <th style="width: 15%;">{{ _('line_total') }}</th>
-                <th style="width: 12%; text-align: right;">{{ _('action') }}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for item in cart_items %}
-                <tr>
-                  <td>
-                    <div style="font-weight: 700; color: var(--navy-deep); font-size: 1rem;">
-                      <a href="{{ url_for('main.product_detail', slug=item.product.slug) }}">{{ item.name }}</a>
-                    </div>
-                    <div style="font-size: 0.8rem; color: var(--text-muted);">
-                      {{ item.product.category.name if item.product.category else 'General' }} ({{ item.product.purity }})
-                    </div>
-                  </td>
+        <!-- Right: Sticky Quotation Summary Card -->
+        <div class="quotation-card-sticky">
+          <h3 style="font-size: 1.2rem; color: var(--navy-deep); font-weight: 800; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-color);">
+            Quotation Summary
+          </h3>
 
-                  <td style="font-weight: 600;">
-                    ${{ "%.2f"|format(item.price) }}
-                  </td>
-
-                  <td>
-                    <form method="POST" action="{{ url_for('main.cart_update', product_id=item.product_id) }}" style="display: flex; gap: 0.5rem; align-items: center;">
-                      <input type="number" name="quantity" min="1" max="1000" value="{{ item.quantity }}" class="qty-input-sm">
-                      <button type="submit" class="btn btn-sm btn-outline" style="padding: 0.35rem 0.6rem; font-size: 0.75rem;">
-                        {{ _('update') }}
-                      </button>
-                    </form>
-                  </td>
-
-                  <td>
-                    <strong style="color: var(--navy-deep); font-size: 1.05rem;">
-                      ${{ "%.2f"|format(item.line_total) }}
-                    </strong>
-                  </td>
-
-                  <td style="text-align: right;">
-                    <form method="POST" action="{{ url_for('main.cart_remove', product_id=item.product_id) }}">
-                      <button type="submit" class="btn btn-sm" style="background: #FEE2E2; color: #991B1B; border: 1px solid #FCA5A5; padding: 0.35rem 0.65rem; font-size: 0.75rem;">
-                        ✕ {{ _('remove') }}
-                      </button>
-                    </form>
-                  </td>
-                </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-
-        <div style="padding: 2rem; background: var(--gold-light); border-top: 2px solid var(--gold-primary); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
-          <div>
-            <div style="font-size: 0.9rem; color: var(--text-muted);">{{ _('total_items') }} <strong>{{ total_quantity }}</strong></div>
-            <div style="font-size: 0.8rem; color: #92400E; margin-top: 0.25rem;">{{ _('excl_shipping') }}</div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; font-size: 0.9rem;">
+            <span style="color: var(--text-muted);">Total Line Items:</span>
+            <span style="font-weight: 700; color: var(--navy-deep);">{{ cart_items|length }}</span>
           </div>
 
-          <div style="text-align: right;">
-            <div style="font-size: 0.9rem; font-weight: 700; color: var(--navy-deep); text-transform: uppercase;">{{ _('grand_total_usd') }}</div>
-            <div style="font-size: 2.5rem; font-weight: 800; color: var(--navy-deep); line-height: 1;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; font-size: 0.9rem;">
+            <span style="color: var(--text-muted);">Total Units / Vials:</span>
+            <span style="font-weight: 700; color: var(--navy-deep);">{{ total_quantity }}</span>
+          </div>
+
+          <div style="background: var(--cyan-light); border: 1px solid #BAE6FD; padding: 1.25rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
+            <div style="font-size: 0.8rem; font-weight: 800; color: var(--biotech-blue); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.35rem;">
+              {{ _('grand_total_usd') }}
+            </div>
+            <div class="quotation-total-amount">
               ${{ "%.2f"|format(grand_total) }}
             </div>
+            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.35rem;">
+              * Excludes customs & air courier shipping options
+            </div>
+          </div>
+
+          <button type="button"
+                  class="btn btn-primary btn-lg trigger-order-info"
+                  data-checkout-url="{{ url_for('main.checkout') }}"
+                  style="width: 100%; padding: 0.95rem; font-size: 1.05rem; margin-bottom: 1rem;">
+            Proceed to Checkout &rarr;
+          </button>
+
+          <div style="text-align: center; font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; justify-content: center; gap: 0.35rem;">
+            <span>🔒</span> Secure & Confidential Quotation Processing
           </div>
         </div>
-      </div>
 
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-        <a href="{{ url_for('main.products') }}" class="btn btn-outline">
-          {{ _('continue_shopping') }}
-        </a>
-        <button type="button"
-                class="btn btn-primary btn-lg trigger-order-info"
-                data-checkout-url="{{ url_for('main.checkout') }}">
-            {{ _('proceed_checkout') }} &rarr;
-        </button>
       </div>
 
     {% else %}
-      <div style="text-align: center; padding: 5rem 2rem; background: white; border-radius: var(--radius-lg); border: 1px dashed var(--border-color);">
+      <div style="text-align: center; padding: 5rem 2rem; background: white; border-radius: 18px; border: 1px dashed var(--border-color);">
         <div style="font-size: 4rem; margin-bottom: 1rem;">📋</div>
         <h2>{{ _('empty_quotation_title') }}</h2>
         <p style="color: var(--text-muted); max-width: 500px; margin: 0.5rem auto 2rem auto;">

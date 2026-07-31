@@ -43,7 +43,8 @@ def create_app():
             cart_total_count=total_quantity,
             show_lang_modal=show_lang_modal,
             company_name=Setting.get_val('company_name', 'Yan Zhen Peptide'),
-            whatsapp_number=Setting.get_val('whatsapp_number', app.config.get('WHATSAPP_NUMBER', '2348181882418'))
+            whatsapp_number=Setting.get_val('whatsapp_number', app.config.get('WHATSAPP_NUMBER', '85263294280')),
+            business_email=Setting.get_val('business_email', app.config.get('BUSINESS_EMAIL', 'zhenyan640@gmail.com'))
         )
 
     # Register Blueprints

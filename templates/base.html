@@ -3,7 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}Yan Zhen Peptide | Precision Research Peptides & HPLC Analytical Standards{% endblock %}</title>
+  <title>{% block title %}Yan Zhen Peptide | Premium Research Peptides{% endblock %}</title>
+
+  <!-- Primary SEO Meta Tags -->
+  <meta name="description" content="High-purity research peptides with COA documentation, strict quality control, and worldwide shipping support.">
+  <meta name="keywords" content="Yan Zhen Peptide, research peptides, semaglutide, tirzepatide, retatrutide, BPC-157, HGH, HPLC certified, COA peptides, custom peptide synthesis">
+
+  <!-- Open Graph / Facebook / WhatsApp Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Yan Zhen Peptide">
+  <meta property="og:title" content="Yan Zhen Peptide | Premium Research Peptides">
+  <meta property="og:description" content="High-purity research peptides with COA documentation, strict quality control, and worldwide shipping support.">
+  <meta property="og:image" content="{{ url_for('static', filename='images/logo/logo.png', _external=True) }}">
 
   <!-- Local Bootstrap 5 & Icons CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
@@ -84,78 +95,80 @@
     <div class="container">
       <div class="feature-band-grid">
         <div class="feature-band-item">
-          <div class="feature-band-icon"><i class="bi bi-patch-check"></i> 🔬</div>
+          <div class="feature-band-icon">🔬</div>
           <div class="feature-band-label">High Purity</div>
         </div>
         <div class="feature-band-item">
-          <div class="feature-band-icon"><i class="bi bi-cpu"></i> ⚗️</div>
+          <div class="feature-band-icon">⚗️</div>
           <div class="feature-band-label">Advanced Technology</div>
         </div>
         <div class="feature-band-item">
-          <div class="feature-band-icon"><i class="bi bi-shield-check"></i> 🛡️</div>
+          <div class="feature-band-icon">🛡️</div>
           <div class="feature-band-label">Quality Assurance</div>
         </div>
         <div class="feature-band-item">
-          <div class="feature-band-icon"><i class="bi bi-box-seam"></i> 📦</div>
+          <div class="feature-band-icon">📦</div>
           <div class="feature-band-label">Discreet Packaging</div>
         </div>
         <div class="feature-band-item">
-          <div class="feature-band-icon"><i class="bi bi-globe"></i> ✈️</div>
+          <div class="feature-band-icon">✈️</div>
           <div class="feature-band-label">Worldwide Delivery</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Biotech Footer -->
-  <footer>
+  <!-- Main White Pharmaceutical Footer -->
+  <footer class="footer-pharmaceutical">
     <div class="container">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2.5rem; margin-bottom: 3rem;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2.5rem; margin-bottom: 3rem;">
+        
+        <!-- Column 1: Company Info -->
         <div>
-          <div style="font-weight: 800; font-size: 1.25rem; color: white; margin-bottom: 0.75rem;">
-            Yan Zhen <span style="color: var(--gold-primary);">Peptide</span>
+          <div style="display: flex; align-items: center; gap: 0.65rem; font-weight: 800; font-size: 1.35rem; color: var(--navy-deep); margin-bottom: 0.75rem;">
+            <img src="{{ url_for('static', filename='images/logo/logo.png') }}" alt="Yan Zhen Logo" style="height: 32px; width: auto;" onerror="this.style.display='none'">
+            <span>Yan Zhen <span style="color: var(--biotech-blue);">Peptide</span></span>
           </div>
-          <p style="font-size: 0.88rem; line-height: 1.6; color: #94A3B8;">
-            High-purity lyophilized research peptides, HPLC certified analytical standards, and custom synthesis services for global research laboratories.
+          <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 1rem;">
+            International Research Peptide Supplier specializing in HPLC certified analytical standards and custom synthesis.
           </p>
+          <div style="font-size: 0.82rem; font-weight: 700; color: var(--navy-deep);">
+            🇨🇳 Pharmaceutical Export Facility (China)
+          </div>
         </div>
 
+        <!-- Column 2: Quick Links -->
         <div>
-          <h4 style="color: white; font-size: 1rem; margin-bottom: 1rem;">Quick Navigation</h4>
-          <ul style="list-style: none; padding: 0; line-height: 2;">
-            <li><a href="{{ url_for('main.products') }}" style="color: #94A3B8;">Wholesale Catalog</a></li>
-            <li><a href="{{ url_for('main.coa_list') }}" style="color: #94A3B8;">COA Certificate Search</a></li>
-            <li><a href="{{ url_for('blog.index') }}" style="color: #94A3B8;">Research Journal</a></li>
-            <li><a href="{{ url_for('main.contact') }}" style="color: #94A3B8;">Global Inquiries</a></li>
+          <h4>Quick Links</h4>
+          <ul style="list-style: none; padding: 0; line-height: 2.2;">
+            <li><a href="{{ url_for('main.index') }}"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> Home</a></li>
+            <li><a href="{{ url_for('main.products') }}"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> Products</a></li>
+            <li><a href="{{ url_for('main.coa_list') }}"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> COA Center</a></li>
+            <li><a href="{{ url_for('blog.index') }}"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> Research Journal</a></li>
+            <li><a href="{{ url_for('main.contact') }}"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> Contact Us</a></li>
           </ul>
         </div>
 
+        <!-- Column 3: Global Customer Support -->
         <div>
-          <h4 style="color: white; font-size: 1rem; margin-bottom: 1rem;">Quality Assurance</h4>
-          <ul style="list-style: none; padding: 0; line-height: 2; color: #94A3B8; font-size: 0.88rem;">
-            <li>✓ HPLC Purity Verified (&ge; 99.8%)</li>
-            <li>✓ Mass Spectrometry Confirmed</li>
-            <li>✓ ISO 9001 Cleanroom Facility</li>
-            <li>✓ Temperature-Controlled Cold Chain</li>
+          <h4>Support & Direct Orders</h4>
+          <ul style="list-style: none; padding: 0; line-height: 2.2; font-size: 0.9rem; color: var(--text-main);">
+            <li><i class="bi bi-envelope-at-fill" style="color: var(--biotech-blue);"></i> <strong>Email:</strong> zhenyan640@gmail.com</li>
+            <li><i class="bi bi-whatsapp" style="color: #25D366;"></i> <strong>WhatsApp:</strong> +852 6329 4280</li>
+            <li><i class="bi bi-globe-americas" style="color: var(--biotech-blue);"></i> <strong>Coverage:</strong> Worldwide Shipping Available</li>
+            <li><i class="bi bi-clock-history" style="color: var(--biotech-blue);"></i> <strong>Response Time:</strong> Within 24 hours</li>
           </ul>
         </div>
 
-        <div>
-          <h4 style="color: white; font-size: 1rem; margin-bottom: 1rem;">Wholesale Support Desk</h4>
-          <p style="font-size: 0.88rem; color: #94A3B8; margin-bottom: 1rem;">Direct inquiries and bulk quotation dispatch via WhatsApp:</p>
-          <a href="https://wa.me/{{ whatsapp_number }}?text=Hello%20Yan%20Zhen%20Peptide%2C%20I%20would%20like%20to%20inquire%20about%20wholesale%20peptides." target="_blank" class="btn btn-whatsapp" style="width: 100%;">
-            💬 WhatsApp: +{{ whatsapp_number }}
-          </a>
-        </div>
       </div>
 
-      <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.82rem;">
+      <!-- Bottom Line -->
+      <div style="border-top: 1px solid var(--border-color); padding-top: 1.75rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.85rem; color: var(--text-muted);">
         <div>
-          &copy; {{ 2026 }} Yan Zhen Biotechnology Co., Ltd. All rights reserved. For research laboratory use only.
+          &copy; {{ 2026 }} Yan Zhen Peptide. All rights reserved.
         </div>
-        <div style="display: flex; gap: 1.5rem;">
-          <a href="{{ url_for('main.faq') }}" style="color: #94A3B8;">FAQ</a>
-          <a href="{{ url_for('main.contact') }}" style="color: #94A3B8;">Terms of Quotation</a>
+        <div style="font-weight: 700; color: var(--navy-deep);">
+          Research Use Only • COA Available • Global Customer Support
         </div>
       </div>
     </div>
@@ -223,6 +236,11 @@
             </div>
           </div>
 
+          <!-- Support Assistance Line -->
+          <div style="font-size: 0.88rem; color: var(--biotech-blue); font-weight: 700; text-align: center; margin-top: 1rem;">
+            💬 Need assistance? Contact us on WhatsApp: <strong>+852 6329 4280</strong>
+          </div>
+
         </div>
 
         <!-- Modal Footer -->
@@ -241,6 +259,15 @@
       </div>
     </div>
   </div>
+
+  <!-- Floating WhatsApp Widget -->
+  <a href="https://wa.me/85263294280?text=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20research%20peptides%20and%20request%20a%20quotation." 
+     class="whatsapp-float-widget" 
+     target="_blank" 
+     title="Chat with Yan Zhen Peptide" 
+     aria-label="Chat with Yan Zhen Peptide">
+    <i class="bi bi-whatsapp"></i>
+  </a>
 
   <!-- Toast Container for Stackable Cart Notifications -->
   <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toastContainer" style="z-index: 1090;"></div>

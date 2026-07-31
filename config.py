@@ -24,7 +24,8 @@ class Config:
     COA_UPLOAD_FOLDER = os.path.join(UPLOAD_FOLDER, 'coa')
     
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024
-    WHATSAPP_NUMBER = '2348181882418'
+    WHATSAPP_NUMBER = '85263294280'
+    BUSINESS_EMAIL = 'zhenyan640@gmail.com'
     BRAND_NAME = 'Yan Zhen Peptide'
 
     # Session & Security Settings

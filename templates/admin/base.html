@@ -24,11 +24,13 @@
     
     <!-- Sidebar Header with Logo & White Text -->
     <div class="admin-sidebar-header">
-      <a href="{{ url_for('admin.dashboard') }}" class="admin-brand-link">
+      <a href="{{ url_for('admin.dashboard') }}" class="admin-brand-link d-flex align-items-center">
         <img src="{{ url_for('static', filename='logo1.png') }}" alt="Yan Zhen Peptide Logo" class="logo-img">
-        <div class="brand-text-block">
-          <div class="brand-title">YAN ZHEN PEPTIDE</div>
-          <div class="brand-subtitle">Premium Research Peptides</div>
+        <div class="brand-text-block d-flex flex-column justify-content-center">
+          <div class="brand-title" style="font-weight: 800; font-size: 1.05rem; letter-spacing: 0.04em;">
+            <span style="color: #FFFFFF;">YAN ZHEN</span> <span style="color: #0284C7;">PEPTIDE</span>
+          </div>
+          <div class="brand-subtitle" style="color: #CBD5E1; font-size: 0.72rem; font-weight: 500;">Premium Research Peptides</div>
         </div>
       </a>
       <span class="admin-badge">ADMIN PORTAL</span>

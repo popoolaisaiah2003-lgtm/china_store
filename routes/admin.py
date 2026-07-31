@@ -129,13 +129,14 @@ def change_password():
 @admin.route('/products')
 @admin_required
 def products():
-    page = request.args.get('page', 1, type=int)
     search_q = request.args.get('q', '').strip()
     query = Product.query
     if search_q:
         query = query.filter(Product.name.ilike(f'%{search_q}%') | Product.sequence_or_cas.ilike(f'%{search_q}%'))
-    pagination = query.order_by(Product.name.asc()).paginate(page=page, per_page=20, error_out=False)
-    return render_template('admin/products.html', products=pagination.items, pagination=pagination, search_q=search_q)
+        all_products = query.order_by(Product.id.desc()).all()
+    else:
+        all_products = Product.query.order_by(Product.id.desc()).all()
+    return render_template('admin/products.html', products=all_products, search_q=search_q)
 
 @admin.route('/products/new', methods=['GET', 'POST'])
 @admin_required

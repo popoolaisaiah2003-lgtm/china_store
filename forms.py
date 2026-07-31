@@ -78,6 +78,8 @@ class BlogPostForm(FlaskForm):
 
 COUNTRY_CHOICES = [
     ('', 'Select Country...'),
+    ('Nigeria', 'Nigeria'),
+    ('Ireland', 'Ireland'),
     ('United States', 'United States'),
     ('United Kingdom', 'United Kingdom'),
     ('Canada', 'Canada'),
@@ -96,7 +98,6 @@ COUNTRY_CHOICES = [
     ('Austria', 'Austria'),
     ('Poland', 'Poland'),
     ('Czech Republic', 'Czech Republic'),
-    ('Ireland', 'Ireland'),
     ('Portugal', 'Portugal'),
     ('Greece', 'Greece'),
     ('Japan', 'Japan'),

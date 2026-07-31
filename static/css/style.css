@@ -745,15 +745,27 @@ footer {
 }
 
 /* Responsive Brand Logo Styling */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    min-width: 280px;
+    overflow: visible;
+}
+
 .logo-img {
     height: 72px;
     width: auto;
+    max-width: 260px;
     object-fit: contain;
     display: block;
 }
 
 @media (max-width: 768px) {
+    .navbar-brand {
+        min-width: 220px;
+    }
     .logo-img {
         height: 56px;
+        max-width: 200px;
     }
 }

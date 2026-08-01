@@ -62,15 +62,24 @@ def create_app():
 
 app = create_app()
 
-if __name__ == '__main__':
-    with app.app_context():
+# Auto-initialize database tables & admin user on Railway startup
+with app.app_context():
+    try:
         db.create_all()
-        # Seed default Admin 'isaiah' if no admin account exists in 'admins' table
-        if not Admin.query.filter_by(username='isaiah').first():
+        admin_user = Admin.query.filter_by(username='isaiah').first()
+        if not admin_user:
             admin_user = Admin(username='isaiah', email='admin@yanzhen.com')
             admin_user.set_password('ChangeMe123!')
             db.session.add(admin_user)
             db.session.commit()
-            print("[AntiGravity Init] Created Admin 'isaiah' (admin@yanzhen.com) with password 'ChangeMe123!'")
+            print("[Railway Init] Created Admin 'isaiah' (admin@yanzhen.com) with password 'ChangeMe123!'")
+        else:
+            admin_user.email = 'admin@yanzhen.com'
+            admin_user.set_password('ChangeMe123!')
+            db.session.commit()
+            print("[Railway Init] Verified Admin 'isaiah' (admin@yanzhen.com)")
+    except Exception as e:
+        print(f"[Railway Init Warning] Database init deferred: {e}")
 
+if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)

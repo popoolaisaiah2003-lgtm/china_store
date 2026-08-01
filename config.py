@@ -6,8 +6,15 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'yan-zhen-peptide-production-secret-2026'
     
-    # Database Connection (Handles Railway DATABASE_URL / MYSQL_URL or local fallback)
-    db_url = os.environ.get('DATABASE_URL') or os.environ.get('MYSQL_URL') or os.environ.get('MYSQLURL')
+    # Database Connection (Handles Railway DATABASE_URL / MYSQL_URL or fallback)
+    db_url = (
+        os.environ.get('DATABASE_URL') or 
+        os.environ.get('MYSQL_URL') or 
+        os.environ.get('MYSQLURL') or
+        os.environ.get('DATABASE_PRIVATE_URL') or
+        os.environ.get('MYSQL_PRIVATE_URL')
+    )
+    
     if db_url:
         if db_url.startswith('postgres://'):
             db_url = db_url.replace('postgres://', 'postgresql://', 1)
@@ -15,7 +22,15 @@ class Config:
             db_url = db_url.replace('mysql://', 'mysql+pymysql://', 1)
         SQLALCHEMY_DATABASE_URI = db_url
     else:
-        SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:@127.0.0.1/yan_zhen_peptide?charset=utf8mb4'
+        # Check if running on Railway container environment
+        is_railway = os.environ.get('RAILWAY_ENVIRONMENT') or os.environ.get('RAILWAY_STATIC_URL') or os.environ.get('PORT')
+        if is_railway:
+            instance_dir = os.path.join(basedir, 'instance')
+            os.makedirs(instance_dir, exist_ok=True)
+            SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(instance_dir, 'yan_zhen_peptide.db')
+        else:
+            SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:@127.0.0.1/yan_zhen_peptide?charset=utf8mb4'
+
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
     # Unicode & Emoji Connection Options

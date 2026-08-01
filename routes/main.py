@@ -327,3 +327,8 @@ def faq():
 def shipments():
     shipment_list = ShipmentUpdate.query.filter_by(is_published=True).order_by(ShipmentUpdate.created_at.desc()).all()
     return render_template('shipments.html', shipments=shipment_list)
+
+@main.route('/about')
+def about():
+    whatsapp_number = Setting.get_val('whatsapp_number', current_app.config.get('WHATSAPP_NUMBER', '85263294280'))
+    return render_template('about.html', whatsapp_number=whatsapp_number)

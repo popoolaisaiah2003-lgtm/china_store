@@ -6,14 +6,14 @@
   <title>{% block title %}Yan Zhen Peptide | Premium Research Peptides{% endblock %}</title>
 
   <!-- Primary SEO Meta Tags -->
-  <meta name="description" content="High-purity research peptides with COA documentation, strict quality control, and worldwide shipping support.">
+  <meta name="description" content="{% block meta_description %}High-purity research peptides with COA documentation, strict quality control, and worldwide shipping support.{% endblock %}">
   <meta name="keywords" content="Yan Zhen Peptide, research peptides, semaglutide, tirzepatide, retatrutide, BPC-157, HGH, HPLC certified, COA peptides, custom peptide synthesis">
 
   <!-- Open Graph / Facebook / WhatsApp Meta Tags -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Yan Zhen Peptide">
-  <meta property="og:title" content="Yan Zhen Peptide | Premium Research Peptides">
-  <meta property="og:description" content="High-purity research peptides with COA documentation, strict quality control, and worldwide shipping support.">
+  <meta property="og:title" content="{% block og_title %}{{ self.title() }}{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}{{ self.meta_description() }}{% endblock %}">
   <meta property="og:image" content="{{ url_for('static', filename='logo1.png', _external=True) }}">
 
   <!-- Local Bootstrap 5 & Icons CSS -->
@@ -42,6 +42,7 @@
       <ul class="nav-links" id="navLinks">
         <li><a href="{{ url_for('main.index') }}" class="{{ 'active' if request.endpoint == 'main.index' }}">{{ _('home') }}</a></li>
         <li><a href="{{ url_for('main.products') }}" class="{{ 'active' if request.endpoint == 'main.products' }}">{{ _('catalog') }}</a></li>
+        <li><a href="{{ url_for('main.about') }}" class="{{ 'active' if request.endpoint == 'main.about' }}">About Us</a></li>
         <li><a href="{{ url_for('main.coa_list') }}" class="{{ 'active' if request.endpoint == 'main.coa_list' }}">{{ _('coa_certificates') }}</a></li>
         <li><a href="{{ url_for('main.shipments') }}" class="{{ 'active' if request.endpoint == 'main.shipments' }}">Shipment Updates</a></li>
         <li><a href="{{ url_for('blog.index') }}" class="{{ 'active' if request.endpoint == 'blog.index' }}">{{ _('journal') }}</a></li>

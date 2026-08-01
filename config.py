@@ -6,37 +6,29 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'yan-zhen-peptide-production-secret-2026'
     
-    # Database Connection (Handles Railway DATABASE_URL / MYSQL_URL or fallback)
     db_url = (
-        os.environ.get('DATABASE_URL') or 
-        os.environ.get('MYSQL_URL') or 
-        os.environ.get('MYSQLURL') or
-        os.environ.get('DATABASE_PRIVATE_URL') or
-        os.environ.get('MYSQL_PRIVATE_URL')
+        os.environ.get('DATABASE_URL')
+        or os.environ.get('MYSQL_URL')
+        or os.environ.get('MYSQLURL')
     )
-    
+
     if db_url:
         if db_url.startswith('postgres://'):
             db_url = db_url.replace('postgres://', 'postgresql://', 1)
         elif db_url.startswith('mysql://'):
             db_url = db_url.replace('mysql://', 'mysql+pymysql://', 1)
+
         SQLALCHEMY_DATABASE_URI = db_url
     else:
-        # Check if running on Railway container environment
-        is_railway = os.environ.get('RAILWAY_ENVIRONMENT') or os.environ.get('RAILWAY_STATIC_URL') or os.environ.get('PORT')
-        if is_railway:
-            instance_dir = os.path.join(basedir, 'instance')
-            os.makedirs(instance_dir, exist_ok=True)
-            SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(instance_dir, 'yan_zhen_peptide.db')
-        else:
-            SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:@127.0.0.1/yan_zhen_peptide?charset=utf8mb4'
+        instance_dir = os.path.join(basedir, 'instance')
+        os.makedirs(instance_dir, exist_ok=True)
+        SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(instance_dir, 'yan_zhen_peptide.db')
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    
-    # Unicode & Emoji Connection Options
+
+    # Engine options without charset connect_args to support PostgreSQL & MySQL seamlessly
     SQLALCHEMY_ENGINE_OPTIONS = {
-        'pool_pre_ping': True,
-        'connect_args': {'charset': 'utf8mb4'}
+        'pool_pre_ping': True
     }
 
     # Upload Directories

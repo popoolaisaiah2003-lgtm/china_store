@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Client Reviews & Laboratory Feedback | Yan Zhen Peptide{% endblock %}
+
+{% block meta_description %}Read verified laboratory feedback and research client reviews for Yan Zhen Peptide high-purity research compounds and international cold-chain export service.{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section style="background: var(--navy-deep); color: white; padding: 3.5rem 0; border-bottom: 3px solid var(--biotech-blue);">
+  <div class="container">
+    <div style="font-size: 0.8rem; font-weight: 800; color: var(--biotech-blue); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.35rem;">
+      ⭐ Laboratory Client Feedback
+    </div>
+    <h1 style="color: white; margin-bottom: 0.5rem; font-size: 2.25rem;">Verified Client Reviews</h1>
+    <p style="color: #94A3B8; max-width: 680px; font-size: 0.95rem;">
+      Independent feedback from research laboratories, academic institutions, and wholesale distributors worldwide.
+    </p>
+  </div>
+</section>
+
+<!-- Reviews Cards Grid -->
+<section class="section" style="padding: 3.5rem 0; background: #F8FAFC;">
+  <div class="container">
+    
+    {% if reviews %}
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.75rem;">
+        {% for r in reviews %}
+          <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.75rem; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                <div style="color: #F59E0B; font-size: 1.1rem;">
+                  {% for i in range(r.rating or 5) %}★{% endfor %}
+                </div>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">Verified Research Buyer</span>
+              </div>
+              <p style="color: var(--text-main); font-size: 0.95rem; line-height: 1.6; font-style: italic; margin-bottom: 1.25rem;">
+                "{{ r.comment }}"
+              </p>
+            </div>
+            <div style="padding-top: 1rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <strong style="color: var(--navy-deep); font-size: 0.9rem;">{{ r.reviewer_name }}</strong>
+                {% if r.product %}
+                  <div style="font-size: 0.78rem; color: var(--biotech-blue); font-weight: 600;">Product: {{ r.product.name }}</div>
+                {% endif %}
+              </div>
+              <span style="font-size: 0.75rem; color: var(--text-muted);">{{ r.created_at.strftime('%Y-%m-%d') if r.created_at else '' }}</span>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div style="text-align: center; padding: 4rem 1rem; background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg);">
+        <div style="font-size: 3rem; margin-bottom: 1rem;">⭐</div>
+        <h3 style="color: var(--navy-deep); font-weight: 800; margin-bottom: 0.5rem;">No Public Reviews Published Yet</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Check back soon for verified client feedback and research testimonials.</p>
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+{% endblock %}

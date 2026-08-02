@@ -1,7 +1,7 @@
 import os
 import re
 from extensions import db
-from sqlalchemy import text
+from sqlalchemy import text, inspect
 
 
 def _split_sql_statements(sql_content):
@@ -133,62 +133,123 @@ def _ensure_mots_c_blog_image(app):
 def _ensure_seed_reviews():
     from models import Review
 
-    if Review.query.count() > 0:
-        return
-
     seed_reviews = [
         {
-            'reviewer_name': 'Dr. Anna Becker',
+            'customer_name': 'Dr. Anna Becker',
+            'country': 'Germany',
             'rating': 5,
-            'comment': 'Batch consistency has been excellent across three consecutive wholesale orders. Purity paperwork and communication were clear from start to delivery.'
+            'review_text': 'Batch consistency has been excellent across three consecutive wholesale orders. Purity paperwork and communication were clear from start to delivery.',
+            'featured': True
         },
         {
-            'reviewer_name': 'Sofia Martinez',
+            'customer_name': 'Sofia Martinez',
+            'country': 'Spain',
             'rating': 5,
-            'comment': 'Our clinic purchasing team received a fast quote and precise logistics updates. Packaging quality and cold-chain handling were impressive.'
+            'review_text': 'Our clinic purchasing team received a fast quote and precise logistics updates. Packaging quality and cold-chain handling were impressive.',
+            'featured': True
         },
         {
-            'reviewer_name': 'Dr. James Caldwell',
+            'customer_name': 'Dr. James Caldwell',
+            'country': 'United States',
             'rating': 5,
-            'comment': 'Reliable partner for research-grade peptides. Every shipment arrived with the expected documentation and matched our internal QC checks.'
+            'review_text': 'Reliable partner for research-grade peptides. Every shipment arrived with the expected documentation and matched our internal QC checks.',
+            'featured': False
         },
         {
-            'reviewer_name': 'Luca Romano',
+            'customer_name': 'Luca Romano',
+            'country': 'Italy',
             'rating': 5,
-            'comment': 'Professional service, responsive support, and stable product quality. We appreciate the transparent order workflow and technical detail.'
+            'review_text': 'Professional service, responsive support, and stable product quality. We appreciate the transparent order workflow and technical detail.',
+            'featured': True
         },
         {
-            'reviewer_name': 'Dr. Priya Nair',
+            'customer_name': 'Dr. Priya Nair',
+            'country': 'India',
             'rating': 5,
-            'comment': 'International shipping was smooth and delivery timing aligned with what was promised. Product labeling and traceability were very good.'
+            'review_text': 'International shipping was smooth and delivery timing aligned with what was promised. Product labeling and traceability were very good.',
+            'featured': False
         },
         {
-            'reviewer_name': 'Noah Williams',
+            'customer_name': 'Noah Williams',
+            'country': 'Canada',
             'rating': 5,
-            'comment': 'Great wholesale experience for a mid-size lab buyer. Fast confirmations, organized invoices, and consistently high confidence in product handling.'
-        },
-        {
-            'reviewer_name': 'Yuki Tanaka',
-            'rating': 4,
-            'comment': 'Strong technical support and quick responses on order details. We will continue sourcing for projects requiring dependable quality and export service.'
-        },
-        {
-            'reviewer_name': 'Omar Hassan',
-            'rating': 5,
-            'comment': 'Excellent turnaround and professional communication throughout procurement. The team handled our bulk order requirements very efficiently.'
+            'review_text': 'Great wholesale experience for a mid-size lab buyer. Fast confirmations, organized invoices, and consistently high confidence in product handling.',
+            'featured': False
         }
     ]
 
+    legacy_seed_names = {
+        'Dr. Anna Becker',
+        'Sofia Martinez',
+        'Dr. James Caldwell',
+        'Luca Romano',
+        'Dr. Priya Nair',
+        'Noah Williams',
+        'Yuki Tanaka',
+        'Omar Hassan',
+    }
+
+    existing_reviews = Review.query.order_by(Review.id.asc()).all()
+    existing_names = {
+        (review.customer_name or review.reviewer_name or '').strip()
+        for review in existing_reviews
+    }
+
+    should_normalize = bool(existing_reviews) and existing_names.issubset(legacy_seed_names)
+
+    if existing_reviews and not should_normalize:
+        return
+
+    if should_normalize:
+        Review.query.delete()
+        db.session.commit()
+
     for item in seed_reviews:
         db.session.add(Review(
-            reviewer_name=item['reviewer_name'],
+            customer_name=item['customer_name'],
+            country=item['country'],
             rating=item['rating'],
-            comment=item['comment'],
+            review_text=item['review_text'],
+            featured=item['featured'],
+            reviewer_name=item['customer_name'],
+            comment=item['review_text'],
             is_approved=True
         ))
 
     db.session.commit()
-    print('[Database Seed] Added 8 sample reviews.')
+    print('[Database Seed] Added 6 sample reviews.')
+
+
+def _ensure_review_schema():
+    from models import Review
+
+    inspector = inspect(db.engine)
+    existing_columns = {column['name'] for column in inspector.get_columns('reviews')}
+    statements = []
+
+    column_definitions = {
+        'customer_name': 'ALTER TABLE reviews ADD COLUMN customer_name VARCHAR(100) NULL',
+        'country': "ALTER TABLE reviews ADD COLUMN country VARCHAR(100) NULL DEFAULT 'International'",
+        'review_text': 'ALTER TABLE reviews ADD COLUMN review_text TEXT NULL',
+        'featured': 'ALTER TABLE reviews ADD COLUMN featured BOOLEAN NULL DEFAULT 0',
+    }
+
+    for column_name, statement in column_definitions.items():
+        if column_name not in existing_columns:
+            statements.append(statement)
+
+    if statements:
+        for statement in statements:
+            db.session.execute(text(statement))
+        db.session.commit()
+
+    inspector = inspect(db.engine)
+    existing_columns = {column['name'] for column in inspector.get_columns('reviews')}
+    if 'customer_name' in existing_columns and 'reviewer_name' in existing_columns:
+        db.session.execute(text(
+            "UPDATE reviews SET customer_name = COALESCE(NULLIF(customer_name, ''), reviewer_name), review_text = COALESCE(NULLIF(review_text, ''), comment), country = COALESCE(NULLIF(country, ''), 'International'), featured = COALESCE(featured, is_approved, 0)"
+        ))
+        db.session.commit()
 
 def import_sql_file_if_empty(app):
     with app.app_context():
@@ -248,7 +309,8 @@ def import_sql_file_if_empty(app):
                 db.session.commit()
                 print("[Database Import] Admin 'isaiah' password/email updated.")
 
-            _ensure_mots_c_blog_image(app)
+            _ensure_review_schema()
             _ensure_seed_reviews()
+            _ensure_mots_c_blog_image(app)
         except Exception as verif_err:
             print(f"[Database Import Verification Notice]: {verif_err}")

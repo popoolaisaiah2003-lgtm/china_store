@@ -45,7 +45,7 @@
         <li><a href="{{ url_for('main.about') }}" class="{{ 'active' if request.endpoint == 'main.about' }}">About Us</a></li>
         <li><a href="{{ url_for('main.coa_list') }}" class="{{ 'active' if request.endpoint == 'main.coa_list' }}">{{ _('coa_certificates') }}</a></li>
         <li><a href="{{ url_for('main.shipments') }}" class="{{ 'active' if request.endpoint == 'main.shipments' }}">Shipment Updates</a></li>
-        <li><a href="{{ url_for('reviews.index') }}" class="{{ 'active' if request.endpoint == 'reviews.index' }}">Reviews</a></li>
+        <li><a href="{{ url_for('main.reviews') }}" class="{{ 'active' if request.endpoint == 'main.reviews' }}">Reviews</a></li>
         <li><a href="{{ url_for('blog.index') }}" class="{{ 'active' if request.endpoint == 'blog.index' }}">{{ _('journal') }}</a></li>
         <li><a href="{{ url_for('main.contact') }}" class="{{ 'active' if request.endpoint == 'main.contact' }}">{{ _('contact') }}</a></li>
 
@@ -144,7 +144,7 @@
             <li><a href="{{ url_for('main.index') }}"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> Home</a></li>
             <li><a href="{{ url_for('main.products') }}"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> Products</a></li>
             <li><a href="{{ url_for('main.coa_list') }}"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> COA Center</a></li>
-            <li><a href="{{ url_for('reviews.index') }}"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> Reviews</a></li>
+            <li><a href="{{ url_for('main.reviews') }}"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> Reviews</a></li>
             <li><a href="{{ url_for('blog.index') }}"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> Research Journal</a></li>
             <li><a href="{{ url_for('main.contact') }}"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> Contact Us</a></li>
           </ul>

@@ -51,12 +51,10 @@ def create_app():
     from routes.main import main as main_bp
     from routes.admin import admin as admin_bp
     from routes.blog import blog as blog_bp
-    from routes.reviews import reviews as reviews_bp
 
     app.register_blueprint(main_bp)
     app.register_blueprint(admin_bp)
     app.register_blueprint(blog_bp)
-    app.register_blueprint(reviews_bp)
 
     @app.route('/secure-panel', defaults={'path': ''})
     @app.route('/secure-panel/<path:path>')

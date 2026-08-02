@@ -183,13 +183,27 @@ class Review(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=True)
-    reviewer_name = db.Column(db.String(100), nullable=False)
+    customer_name = db.Column(db.String(100), nullable=False)
+    country = db.Column(db.String(100), nullable=False, default='International')
     rating = db.Column(db.Integer, default=5)
-    comment = db.Column(db.Text, nullable=False)
-    is_approved = db.Column(db.Boolean, default=True)
+    review_text = db.Column(db.Text, nullable=False)
+    featured = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+    # Legacy columns retained so the app can migrate safely without downtime.
+    reviewer_name = db.Column(db.String(100), nullable=True)
+    comment = db.Column(db.Text, nullable=True)
+    is_approved = db.Column(db.Boolean, default=True)
+
     product = db.relationship('Product', backref='reviews')
+
+    @property
+    def display_name(self):
+        return self.customer_name or self.reviewer_name or 'Anonymous'
+
+    @property
+    def display_text(self):
+        return self.review_text or self.comment or ''
 
 
 class Comment(db.Model):

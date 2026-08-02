@@ -23,7 +23,20 @@ REVIEW_COUNTRY_MAP = {
 
 
 def _country_for_review(review):
-    return REVIEW_COUNTRY_MAP.get(review.reviewer_name, 'International Client')
+    reviewer_name = (getattr(review, 'customer_name', None) or getattr(review, 'reviewer_name', None) or '').strip()
+    return getattr(review, 'country', None) or REVIEW_COUNTRY_MAP.get(reviewer_name, 'International Client')
+
+
+def _review_card_data(review):
+    return {
+        'name': getattr(review, 'customer_name', None) or getattr(review, 'reviewer_name', None) or 'Anonymous',
+        'country': _country_for_review(review),
+        'rating': review.rating or 5,
+        'comment': getattr(review, 'review_text', None) or getattr(review, 'comment', None) or '',
+        'featured': bool(getattr(review, 'featured', False) or getattr(review, 'is_approved', False)),
+        'created_at': review.created_at,
+        'verified': True,
+    }
 
 def get_current_lang():
     return session.get('lang', 'en')
@@ -87,17 +100,12 @@ def index():
     if not featured_products:
         featured_products = Product.query.order_by(Product.created_at.desc()).limit(8).all()
     categories = Category.query.all()
-    reviews = Review.query.filter_by(is_approved=True).limit(4).all()
-    featured_reviews = Review.query.filter_by(is_approved=True).order_by(Review.rating.desc(), Review.created_at.desc()).limit(3).all()
-    featured_reviews_data = [
-        {
-            'name': r.reviewer_name,
-            'country': _country_for_review(r),
-            'rating': r.rating or 5,
-            'comment': r.comment
-        }
-        for r in featured_reviews
-    ]
+    reviews = Review.query.order_by(Review.featured.desc(), Review.created_at.desc()).limit(4).all()
+    featured_reviews = Review.query.order_by(Review.featured.desc(), Review.created_at.desc()).limit(3).all()
+    featured_reviews_data = []
+    for review in featured_reviews:
+        card = _review_card_data(review)
+        featured_reviews_data.append(card)
     latest_coas = COA.query.filter_by(active=True).order_by(COA.issue_date.desc()).limit(4).all()
     total_product_count = Product.query.count()
     return render_template(
@@ -108,6 +116,23 @@ def index():
         featured_reviews=featured_reviews_data,
         latest_coas=latest_coas,
         total_product_count=total_product_count
+    )
+
+
+@main.route('/reviews')
+def reviews():
+    reviews_query = Review.query.order_by(Review.featured.desc(), Review.created_at.desc()).all()
+    reviews_data = [_review_card_data(review) for review in reviews_query]
+    total_reviews = len(reviews_data)
+    average_rating = round(sum(item['rating'] for item in reviews_data) / total_reviews, 1) if total_reviews else 0
+    featured_reviews = [item for item in reviews_data if item['featured']][:3]
+
+    return render_template(
+        'reviews.html',
+        reviews=reviews_data,
+        total_reviews=total_reviews,
+        average_rating=average_rating,
+        featured_reviews=featured_reviews,
     )
 
 @main.route('/products')

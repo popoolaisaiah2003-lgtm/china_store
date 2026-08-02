@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 
 from extensions import db
 from models import Admin, Product, Category, ProductImage, COA, BlogPost, Review, Comment, Setting, OrderRecord, ShipmentUpdate
-from forms import LoginForm, CategoryForm, ProductForm, COAForm, BlogPostForm, SettingForm, ChangePasswordForm, ShipmentUpdateForm
+from forms import LoginForm, CategoryForm, ProductForm, COAForm, BlogPostForm, SettingForm, ChangePasswordForm, ShipmentUpdateForm, ReviewForm
 
 admin = Blueprint('admin', __name__, url_prefix='/admin')
 
@@ -298,6 +298,74 @@ def coa_delete(id):
     return redirect(url_for('admin.coa_index'))
 
 
+# ---------------- REVIEWS CRUD ----------------
+@admin.route('/reviews')
+@admin_required
+def reviews():
+    reviews_list = Review.query.order_by(Review.featured.desc(), Review.created_at.desc()).all()
+    return render_template('admin/reviews.html', reviews=reviews_list)
+
+
+@admin.route('/reviews/new', methods=['GET', 'POST'])
+@admin_required
+def review_new():
+    form = ReviewForm()
+    if form.validate_on_submit():
+        review = Review(
+            customer_name=form.customer_name.data.strip(),
+            country=form.country.data.strip(),
+            rating=int(form.rating.data),
+            review_text=form.review_text.data.strip(),
+            featured=form.featured.data,
+            reviewer_name=form.customer_name.data.strip(),
+            comment=form.review_text.data.strip(),
+            is_approved=True,
+        )
+        db.session.add(review)
+        db.session.commit()
+        flash('Review created successfully.', 'success')
+        return redirect(url_for('admin.reviews'))
+
+    return render_template('admin/review_form.html', form=form, review=None, is_edit=False)
+
+
+@admin.route('/reviews/edit/<int:id>', methods=['GET', 'POST'])
+@admin_required
+def review_edit(id):
+    review = Review.query.get_or_404(id)
+    if request.method == 'GET':
+        form = ReviewForm(obj=review)
+        form.rating.data = str(review.rating or 5)
+        form.review_text.data = review.review_text or review.comment or ''
+    else:
+        form = ReviewForm()
+
+    if form.validate_on_submit():
+        review.customer_name = form.customer_name.data.strip()
+        review.country = form.country.data.strip()
+        review.rating = int(form.rating.data)
+        review.review_text = form.review_text.data.strip()
+        review.featured = form.featured.data
+        review.reviewer_name = review.customer_name
+        review.comment = review.review_text
+        review.is_approved = True
+        db.session.commit()
+        flash('Review updated successfully.', 'success')
+        return redirect(url_for('admin.reviews'))
+
+    return render_template('admin/review_form.html', form=form, review=review, is_edit=True)
+
+
+@admin.route('/reviews/delete/<int:id>', methods=['POST'])
+@admin_required
+def review_delete(id):
+    review = Review.query.get_or_404(id)
+    db.session.delete(review)
+    db.session.commit()
+    flash('Review deleted successfully.', 'info')
+    return redirect(url_for('admin.reviews'))
+
+
 # ---------------- CATEGORIES CRUD ----------------
 @admin.route('/categories', methods=['GET', 'POST'])
 @admin_required
@@ -473,12 +541,6 @@ def blog_toggle_featured(id):
 def orders():
     orders_list = OrderRecord.query.order_by(OrderRecord.created_at.desc()).all()
     return render_template('admin/orders.html', orders=orders_list)
-
-@admin.route('/reviews')
-@admin_required
-def reviews():
-    reviews_list = Review.query.order_by(Review.created_at.desc()).all()
-    return render_template('admin/reviews.html', reviews=reviews_list)
 
 @admin.route('/comments')
 @admin_required

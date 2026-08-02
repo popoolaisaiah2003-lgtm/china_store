@@ -255,7 +255,7 @@ def checkout():
     cart_items, grand_total, total_quantity = get_cart_details()
     if not cart_items:
         flash('Your quotation cart is currently empty. Please add products first.', 'warning')
-        return redirect(url_for('main.products'))
+        return redirect(url_for('main.order'))
 
     form = CheckoutForm()
     whatsapp_url = None

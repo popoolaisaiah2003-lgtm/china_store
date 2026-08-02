@@ -68,7 +68,7 @@
           </div>
 
           <div style="padding: 1rem 1.5rem; border-top: 1px solid var(--border-color); background: var(--bg-secondary); display: flex; gap: 0.75rem;">
-            <a href="{{ url_for('main.coa_download', id=coa.id) }}" class="btn btn-sm btn-primary" style="flex: 1;">
+            <a href="{{ url_for('main.download_coa', coa_id=coa.id) }}" class="btn btn-sm btn-primary" style="flex: 1;">
               {{ _('download_pdf') }}
             </a>
             <a href="{{ url_for('main.product_detail', slug=coa.product.slug) }}" class="btn btn-sm btn-outline">

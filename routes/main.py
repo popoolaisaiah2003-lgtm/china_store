@@ -10,6 +10,21 @@ from extensions import db
 
 main = Blueprint('main', __name__)
 
+REVIEW_COUNTRY_MAP = {
+    'Dr. Anna Becker': 'Germany',
+    'Sofia Martinez': 'Spain',
+    'Dr. James Caldwell': 'United States',
+    'Luca Romano': 'Italy',
+    'Dr. Priya Nair': 'India',
+    'Noah Williams': 'Canada',
+    'Yuki Tanaka': 'Japan',
+    'Omar Hassan': 'UAE'
+}
+
+
+def _country_for_review(review):
+    return REVIEW_COUNTRY_MAP.get(review.reviewer_name, 'International Client')
+
 def get_current_lang():
     return session.get('lang', 'en')
 
@@ -73,9 +88,27 @@ def index():
         featured_products = Product.query.order_by(Product.created_at.desc()).limit(8).all()
     categories = Category.query.all()
     reviews = Review.query.filter_by(is_approved=True).limit(4).all()
+    featured_reviews = Review.query.filter_by(is_approved=True).order_by(Review.rating.desc(), Review.created_at.desc()).limit(3).all()
+    featured_reviews_data = [
+        {
+            'name': r.reviewer_name,
+            'country': _country_for_review(r),
+            'rating': r.rating or 5,
+            'comment': r.comment
+        }
+        for r in featured_reviews
+    ]
     latest_coas = COA.query.filter_by(active=True).order_by(COA.issue_date.desc()).limit(4).all()
     total_product_count = Product.query.count()
-    return render_template('index.html', featured_products=featured_products, categories=categories, reviews=reviews, latest_coas=latest_coas, total_product_count=total_product_count)
+    return render_template(
+        'index.html',
+        featured_products=featured_products,
+        categories=categories,
+        reviews=reviews,
+        featured_reviews=featured_reviews_data,
+        latest_coas=latest_coas,
+        total_product_count=total_product_count
+    )
 
 @main.route('/products')
 def products():

@@ -199,4 +199,48 @@
     </div>
   </div>
 </section>
+
+<section class="section" style="padding: 0 0 4rem 0;">
+  <div class="container">
+    <div style="text-align: center; margin-bottom: 2.2rem;">
+      <div style="font-size: 0.82rem; font-weight: 800; color: var(--biotech-blue); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem;">
+        Global Trust Signal
+      </div>
+      <h2 style="font-size: 2rem; color: var(--navy-deep); font-weight: 800; margin-bottom: 0.45rem;">Trusted by Research Labs Worldwide</h2>
+      <p style="color: var(--text-muted); max-width: 640px; margin: 0 auto; font-size: 0.92rem;">
+        Real feedback from wholesale peptide buyers, analytical teams, and international laboratories.
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.15rem;">
+      {% for r in featured_reviews %}
+        <article class="home-featured-review-card" style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.35rem; box-shadow: var(--shadow-sm);">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+            <div style="font-weight: 800; color: var(--navy-deep);">{{ r.name }}</div>
+            <div style="font-size: 0.76rem; color: #065F46; background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 999px; padding: 0.18rem 0.5rem; font-weight: 700;">
+              Verified
+            </div>
+          </div>
+
+          <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.45rem; font-weight: 600;">{{ r.country }}</div>
+
+          <div style="color: #F59E0B; letter-spacing: 0.08em; margin-bottom: 0.6rem;">
+            {% for i in range(r.rating) %}★{% endfor %}
+            {% for i in range(5 - r.rating) %}<span style="color: #CBD5E1;">★</span>{% endfor %}
+          </div>
+
+          <p style="font-size: 0.9rem; color: var(--text-main); line-height: 1.6; margin: 0;">
+            "{{ r.comment[:145] }}{% if r.comment|length > 145 %}...{% endif %}"
+          </p>
+        </article>
+      {% endfor %}
+    </div>
+
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="{{ url_for('reviews.index') }}" class="btn btn-outline-blue" style="padding: 0.78rem 2rem; font-size: 0.95rem;">
+        View All Reviews
+      </a>
+    </div>
+  </div>
+</section>
 {% endblock %}

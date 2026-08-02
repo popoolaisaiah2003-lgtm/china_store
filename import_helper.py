@@ -129,6 +129,67 @@ def _ensure_mots_c_blog_image(app):
         post.image_filename = expected_filename
         db.session.commit()
 
+
+def _ensure_seed_reviews():
+    from models import Review
+
+    if Review.query.count() > 0:
+        return
+
+    seed_reviews = [
+        {
+            'reviewer_name': 'Dr. Anna Becker',
+            'rating': 5,
+            'comment': 'Batch consistency has been excellent across three consecutive wholesale orders. Purity paperwork and communication were clear from start to delivery.'
+        },
+        {
+            'reviewer_name': 'Sofia Martinez',
+            'rating': 5,
+            'comment': 'Our clinic purchasing team received a fast quote and precise logistics updates. Packaging quality and cold-chain handling were impressive.'
+        },
+        {
+            'reviewer_name': 'Dr. James Caldwell',
+            'rating': 5,
+            'comment': 'Reliable partner for research-grade peptides. Every shipment arrived with the expected documentation and matched our internal QC checks.'
+        },
+        {
+            'reviewer_name': 'Luca Romano',
+            'rating': 5,
+            'comment': 'Professional service, responsive support, and stable product quality. We appreciate the transparent order workflow and technical detail.'
+        },
+        {
+            'reviewer_name': 'Dr. Priya Nair',
+            'rating': 5,
+            'comment': 'International shipping was smooth and delivery timing aligned with what was promised. Product labeling and traceability were very good.'
+        },
+        {
+            'reviewer_name': 'Noah Williams',
+            'rating': 5,
+            'comment': 'Great wholesale experience for a mid-size lab buyer. Fast confirmations, organized invoices, and consistently high confidence in product handling.'
+        },
+        {
+            'reviewer_name': 'Yuki Tanaka',
+            'rating': 4,
+            'comment': 'Strong technical support and quick responses on order details. We will continue sourcing for projects requiring dependable quality and export service.'
+        },
+        {
+            'reviewer_name': 'Omar Hassan',
+            'rating': 5,
+            'comment': 'Excellent turnaround and professional communication throughout procurement. The team handled our bulk order requirements very efficiently.'
+        }
+    ]
+
+    for item in seed_reviews:
+        db.session.add(Review(
+            reviewer_name=item['reviewer_name'],
+            rating=item['rating'],
+            comment=item['comment'],
+            is_approved=True
+        ))
+
+    db.session.commit()
+    print('[Database Seed] Added 8 sample reviews.')
+
 def import_sql_file_if_empty(app):
     with app.app_context():
         try:
@@ -188,5 +249,6 @@ def import_sql_file_if_empty(app):
                 print("[Database Import] Admin 'isaiah' password/email updated.")
 
             _ensure_mots_c_blog_image(app)
+            _ensure_seed_reviews()
         except Exception as verif_err:
             print(f"[Database Import Verification Notice]: {verif_err}")

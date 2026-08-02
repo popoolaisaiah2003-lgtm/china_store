@@ -259,7 +259,12 @@ def checkout():
 
     form = CheckoutForm()
     whatsapp_url = None
-    quotation_number = f"YZ-{datetime.datetime.now().year}-{OrderRecord.query.count() + 1001:04d}"
+    import uuid
+    from datetime import datetime
+
+    quotation_number = f"YZ-{datetime.utcnow().strftime('%Y%m%d')}-{uuid.uuid4().hex[:6].upper()}"
+    while OrderRecord.query.filter_by(quotation_number=quotation_number).first():
+        quotation_number = f"YZ-{datetime.utcnow().strftime('%Y%m%d')}-{uuid.uuid4().hex[:6].upper()}"
 
     if form.validate_on_submit():
         name = form.full_name.data.strip()
@@ -306,7 +311,11 @@ def checkout():
             grand_total=grand_total
         )
         db.session.add(record)
-        db.session.commit()
+        try:
+            db.session.commit()
+        except Exception:
+            db.session.rollback()
+            raise
 
         encoded_message = urllib.parse.quote(raw_message)
         wa_number = Setting.get_val('whatsapp_number', current_app.config.get('WHATSAPP_NUMBER', '85263294280'))

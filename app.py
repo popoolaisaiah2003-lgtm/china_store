@@ -62,24 +62,13 @@ def create_app():
 
 app = create_app()
 
-# Auto-initialize database tables & admin user on Railway startup
+# Auto-initialize database tables, import real yan_zhen_peptide.sql data & seed admin user on Railway startup
 with app.app_context():
     try:
-        db.create_all()
-        admin_user = Admin.query.filter_by(username='isaiah').first()
-        if not admin_user:
-            admin_user = Admin(username='isaiah', email='admin@yanzhen.com')
-            admin_user.set_password('ChangeMe123!')
-            db.session.add(admin_user)
-            db.session.commit()
-            print("[Railway Init] Created Admin 'isaiah' (admin@yanzhen.com) with password 'ChangeMe123!'")
-        else:
-            admin_user.email = 'admin@yanzhen.com'
-            admin_user.set_password('ChangeMe123!')
-            db.session.commit()
-            print("[Railway Init] Verified Admin 'isaiah' (admin@yanzhen.com)")
+        from import_helper import import_sql_file_if_empty
+        import_sql_file_if_empty(app)
     except Exception as e:
-        print(f"[Railway Init Warning] Database init deferred: {e}")
+        print(f"[Railway Init Warning] Auto-import notice: {e}")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)

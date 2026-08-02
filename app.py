@@ -1,5 +1,5 @@
 import os
-from flask import Flask, session
+from flask import Flask, session, redirect, request
 from config import Config
 from extensions import db, login_manager, migrate
 from models import Admin, Setting, Product
@@ -57,6 +57,19 @@ def create_app():
     app.register_blueprint(admin_bp)
     app.register_blueprint(blog_bp)
     app.register_blueprint(reviews_bp)
+
+    @app.route('/secure-panel', defaults={'path': ''})
+    @app.route('/secure-panel/<path:path>')
+    def secure_panel_legacy_redirect(path):
+        target = '/admin'
+        if path:
+            target = f"{target}/{path}"
+
+        query_string = request.query_string.decode('utf-8')
+        if query_string:
+            target = f"{target}?{query_string}"
+
+        return redirect(target, code=302)
 
     return app
 

@@ -276,9 +276,12 @@ def order_print():
 @main.route('/checkout', methods=['GET', 'POST'])
 def checkout():
     cart_items, grand_total, total_quantity = get_cart_details()
-    if not cart_items:
+    if not cart_items and request.method == 'POST':
         flash('Your quotation cart is currently empty. Please add products first.', 'warning')
         return redirect(url_for('main.order'))
+
+    if not cart_items and request.method == 'GET':
+        flash('Your quotation cart is currently empty. You can still complete customer details, then add products anytime.', 'info')
 
     form = CheckoutForm()
     whatsapp_url = None

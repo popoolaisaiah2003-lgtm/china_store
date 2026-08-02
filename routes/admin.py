@@ -10,7 +10,7 @@ from extensions import db
 from models import Admin, Product, Category, ProductImage, COA, BlogPost, Review, Comment, Setting, OrderRecord, ShipmentUpdate
 from forms import LoginForm, CategoryForm, ProductForm, COAForm, BlogPostForm, SettingForm, ChangePasswordForm, ShipmentUpdateForm
 
-admin = Blueprint('admin', __name__, url_prefix='/secure-panel')
+admin = Blueprint('admin', __name__, url_prefix='/admin')
 
 # In-memory Failed Login Tracking (Rate limiting: max 5 failed attempts per 15 minutes)
 FAILED_ATTEMPTS = {}

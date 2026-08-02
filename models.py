@@ -166,6 +166,14 @@ class BlogPost(db.Model):
     
     comments = db.relationship('Comment', backref='post', lazy='dynamic', cascade='all, delete-orphan')
 
+    @property
+    def image_url(self):
+        if self.image_filename:
+            if self.image_filename.startswith('uploads/') or self.image_filename.startswith('images/'):
+                return self.image_filename
+            return f"uploads/blog/{self.image_filename}"
+        return "images/blog-placeholder.jpg"
+
     def __repr__(self):
         return f'<BlogPost {self.title}>'
 

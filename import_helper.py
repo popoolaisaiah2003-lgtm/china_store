@@ -1,4 +1,5 @@
 import os
+import re
 from extensions import db
 from sqlalchemy import text
 
@@ -59,6 +60,52 @@ def _execute_insert_statements(statements):
     return inserted_statements
 
 
+def _extract_product_id_from_insert(stmt):
+    match = re.search(r"VALUES\s*\((\d+)\s*,", stmt, flags=re.IGNORECASE | re.DOTALL)
+    return int(match.group(1)) if match else None
+
+
+def _sync_missing_products_from_sql(statements):
+    from models import Product
+
+    product_inserts = []
+    for stmt in statements:
+        normalized = stmt.strip()
+        upper_stmt = normalized.upper()
+        if upper_stmt.startswith('INSERT INTO `PRODUCTS`') or upper_stmt.startswith('INSERT INTO PRODUCTS'):
+            pid = _extract_product_id_from_insert(normalized)
+            if pid is not None:
+                product_inserts.append((pid, normalized))
+
+    if not product_inserts:
+        return 0
+
+    existing_ids = {p.id for p in Product.query.with_entities(Product.id).all()}
+    missing_product_inserts = [(pid, stmt) for pid, stmt in product_inserts if pid not in existing_ids]
+
+    if not missing_product_inserts:
+        return 0
+
+    # Remove placeholder batch items first so the canonical SQL products can be restored while keeping count stable.
+    placeholders = Product.query.filter(Product.name.ilike('Research Peptide Standard Batch %')).order_by(Product.id.desc()).all()
+    to_remove = min(len(placeholders), len(missing_product_inserts))
+    for idx in range(to_remove):
+        db.session.delete(placeholders[idx])
+    if to_remove:
+        db.session.commit()
+
+    inserted = 0
+    for _, stmt in missing_product_inserts:
+        try:
+            db.session.execute(text(stmt))
+            db.session.commit()
+            inserted += 1
+        except Exception:
+            db.session.rollback()
+
+    return inserted
+
+
 def _ensure_mots_c_blog_image(app):
     from models import BlogPost
 
@@ -112,6 +159,14 @@ def import_sql_file_if_empty(app):
             statements = _split_sql_statements(sql_content)
             inserted_statements = _execute_insert_statements(statements)
             print(f"[Database Import Success] Executed {inserted_statements} INSERT statements!")
+        else:
+            with open(sql_file_path, 'r', encoding='utf-8') as f:
+                sql_content = f.read()
+            statements = _split_sql_statements(sql_content)
+
+        synced_products = _sync_missing_products_from_sql(statements)
+        if synced_products:
+            print(f"[Database Import Sync] Restored {synced_products} missing canonical product rows from SQL dump.")
 
         # Re-verify product count and seed admin user
         try:

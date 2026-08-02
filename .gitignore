@@ -24,8 +24,10 @@ instance/
 static/uploads/*
 !static/uploads/.gitkeep
 !static/uploads/products/.gitkeep
+static/uploads/blog/*
 !static/uploads/blog/.gitkeep
 !static/uploads/coa/.gitkeep
+!static/uploads/blog/mots-c.jpg
 
 # Migrations Cache
 migrations/__pycache__/

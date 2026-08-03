@@ -8,7 +8,7 @@
     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
       <div>
         <div style="font-size: 0.8rem; font-weight: 800; color: var(--gold-primary); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.35rem;">
-          🇨🇳 High-Purity Analytical Research Peptide Catalog
+          🇨🇳 {{ _('analytical_catalog_tag') }}
         </div>
         <h1 style="color: white; margin-bottom: 0.35rem; font-size: 2.25rem;">{{ _('b2b_catalog_title') }}</h1>
         <p style="color: #94A3B8; max-width: 650px; font-size: 0.95rem;">
@@ -18,7 +18,7 @@
 
       <div>
         <button type="button" class="btn btn-primary trigger-order-info" data-checkout-url="{{ url_for('main.order') }}" style="padding: 0.85rem 1.75rem;">
-          📋 Review Quotation Sheet (<span class="cart-badge">{{ cart_total_count }}</span>)
+          📋 {{ _('review_quotation_sheet') }} (<span class="cart-badge">{{ cart_total_count }}</span>)
         </button>
       </div>
     </div>
@@ -30,7 +30,7 @@
   <div class="container">
     <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
       <a href="{{ url_for('main.products') }}" class="cat-pill {{ 'active' if not selected_category }}">
-        <i class="bi bi-grid-fill"></i> All Peptides
+        <i class="bi bi-grid-fill"></i> {{ _('all_peptides') }}
       </a>
       {% for cat in categories %}
         {% set icon_class = 'bi-beaker' %}
@@ -65,7 +65,7 @@
 
         <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
           <span style="font-weight: 800; color: var(--navy-deep); font-size: 0.95rem;">
-            Showing all {{ products|length }} Products
+            {{ _('showing_all_prefix') }} {{ products|length }} {{ _('showing_all_suffix') }}
           </span>
 
           <form method="GET" action="{{ url_for('main.products') }}" style="display: flex; align-items: center; gap: 0.5rem;">
@@ -88,7 +88,7 @@
 
     </div>
 
-    <!-- Product Cards Grid (All matched products displayed) -->
+    <!-- Product Cards Grid -->
     <div class="product-grid" style="margin-bottom: 3rem;">
       {% for product in products %}
         <div class="product-card">
@@ -97,7 +97,7 @@
             <img src="{{ url_for('static', filename=product.catalog_image) }}" alt="{{ product.name }}" loading="lazy">
           </div>
           <div class="product-body">
-            <div class="product-category">{{ product.category.name if product.category else 'General Peptides' }}</div>
+            <div class="product-category">{{ product.category.name if product.category else _('general_peptides') }}</div>
             <h3 class="product-title">
               <a href="{{ url_for('main.product_detail', slug=product.slug) }}">{{ product.name }}</a>
             </h3>
@@ -109,9 +109,9 @@
               <div class="product-price">${{ "%.2f"|format(product.price) }}</div>
               
               <form method="POST" action="{{ url_for('main.cart_add', product_id=product.id) }}" style="display: flex; gap: 0.4rem; align-items: center; margin: 0;">
-                <input type="number" name="quantity" min="1" max="1000" value="1" style="width: 55px; padding: 0.3rem; border-radius: 4px; border: 1px solid var(--border-color); text-align: center; font-size: 0.85rem;" title="Select quantity">
+                <input type="number" name="quantity" min="1" max="1000" value="1" style="width: 55px; padding: 0.3rem; border-radius: 4px; border: 1px solid var(--border-color); text-align: center; font-size: 0.85rem;" title="{{ _('select_quantity_title') }}">
                 <button type="submit" class="btn btn-sm btn-primary">
-                  + Add to Order
+                  {{ _('add_to_order') }}
                 </button>
               </form>
             </div>

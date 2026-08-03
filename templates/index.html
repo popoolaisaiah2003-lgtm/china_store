@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Yan Zhen Peptide | Precision Research Peptides & HPLC Analytical Standards{% endblock %}
+{% block title %}{{ company_name }} | {{ _('hero_main_heading') }}{% endblock %}
 
 {% block content %}
 <!-- Cinematic Pharmaceutical Hero Section -->
@@ -19,28 +19,28 @@
       <div>
         <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(2, 132, 199, 0.1); border: 1px solid var(--biotech-blue); padding: 0.35rem 0.85rem; border-radius: 50px; margin-bottom: 1.25rem;">
           <span style="font-size: 0.78rem; font-weight: 800; color: var(--biotech-blue); text-transform: uppercase; letter-spacing: 0.06em;">
-            🇨🇳 Official Chinese Pharmaceutical Manufacturer & Exporter
+            {{ _('official_exporter_tag') }}
           </span>
         </div>
 
         <h1 class="hero-title">
-          Premium Research Peptides for Global Laboratories
+          {{ _('hero_main_heading') }}
         </h1>
 
         <div class="hero-subtitle">
-          High Purity • Reliable Quality • Worldwide Shipping
+          {{ _('hero_sub_strip') }}
         </div>
 
         <p class="hero-desc">
-          Yan Zhen Peptide is a professional manufacturer from China specializing in analytical-grade research peptides with strict quality control and global shipping support.
+          {{ _('hero_company_desc') }}
         </p>
 
         <div class="hero-cta-group">
           <a href="{{ url_for('main.products') }}" class="btn btn-primary" style="padding: 0.85rem 2.25rem; font-size: 1rem;">
-            View Products &rarr;
+            {{ _('view_products_btn') }} &rarr;
           </a>
           <a href="https://wa.me/85263294280?text=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20research%20peptides%20and%20request%20a%20quotation." target="_blank" class="btn btn-outline-blue" style="padding: 0.85rem 2.25rem; font-size: 1rem;">
-            Request a Quote
+            {{ _('request_a_quote_btn') }}
           </a>
         </div>
       </div>
@@ -49,15 +49,15 @@
       <div>
         <div class="hero-card">
           <div style="background: var(--bg-primary); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.25rem; display: inline-block; border: 1px solid var(--border-color);">
-            <img src="{{ url_for('static', filename='images/products/glp1/semaglutide.jpg') }}" alt="Yan Zhen Lyophilized Vial" style="height: 180px; width: auto; object-fit: contain;">
+            <img src="{{ url_for('static', filename='images/products/glp1/semaglutide.jpg') }}" alt="{{ company_name }} Lyophilized Vial" style="height: 180px; width: auto; object-fit: contain;">
           </div>
-          <h3 style="color: var(--navy-deep); font-size: 1.3rem; margin-bottom: 0.35rem; font-weight: 800;">Analytical Standard Vials</h3>
+          <h3 style="color: var(--navy-deep); font-size: 1.3rem; margin-bottom: 0.35rem; font-weight: 800;">{{ _('analytical_standard_vials') }}</h3>
           <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5;">
-            High-Performance Liquid Chromatography (HPLC) & Mass Spectrometry (MS) Certified &ge;99.8% Purity.
+            {{ _('hero_vial_desc') }}
           </p>
           <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
             <a href="{{ url_for('main.coa_list') }}" style="color: var(--biotech-blue); font-size: 0.88rem; font-weight: 700;">
-              Browse Batch COA Reports &rarr;
+              {{ _('browse_batch_coa') }} &rarr;
             </a>
           </div>
         </div>
@@ -74,40 +74,40 @@
       <div class="trust-item">
         <div class="trust-circle-icon"><i class="bi bi-patch-check"></i></div>
         <div>
-          <div class="trust-label">HPLC Tested</div>
-          <div class="trust-sublabel">Analytical Verification</div>
+          <div class="trust-label">{{ _('hplc_tested_label') }}</div>
+          <div class="trust-sublabel">{{ _('analytical_verification_label') }}</div>
         </div>
       </div>
 
       <div class="trust-item">
         <div class="trust-circle-icon"><i class="bi bi-shield-fill-check"></i></div>
         <div>
-          <div class="trust-label">&ge;99.8% Purity</div>
-          <div class="trust-sublabel">Highest Standard Grade</div>
+          <div class="trust-label">&ge;99.8% {{ _('purity_col') }}</div>
+          <div class="trust-sublabel">{{ _('highest_standard_grade') }}</div>
         </div>
       </div>
 
       <div class="trust-item">
         <div class="trust-circle-icon"><i class="bi bi-file-earmark-medical"></i></div>
         <div>
-          <div class="trust-label">COA Verified</div>
-          <div class="trust-sublabel">Batch Specific Reports</div>
+          <div class="trust-label">{{ _('coa_verified_label') }}</div>
+          <div class="trust-sublabel">{{ _('batch_specific_reports') }}</div>
         </div>
       </div>
 
       <div class="trust-item">
         <div class="trust-circle-icon"><i class="bi bi-gear-wide-connected"></i></div>
         <div>
-          <div class="trust-label">GMP Process</div>
-          <div class="trust-sublabel">Cleanroom Manufacturing</div>
+          <div class="trust-label">{{ _('gmp_process_label') }}</div>
+          <div class="trust-sublabel">{{ _('cleanroom_mfg_label') }}</div>
         </div>
       </div>
 
       <div class="trust-item">
         <div class="trust-circle-icon"><i class="bi bi-globe-americas"></i></div>
         <div>
-          <div class="trust-label">Global Export</div>
-          <div class="trust-sublabel">Worldwide Cold-Chain</div>
+          <div class="trust-label">{{ _('global_export_label') }}</div>
+          <div class="trust-sublabel">{{ _('worldwide_cold_chain_label') }}</div>
         </div>
       </div>
 
@@ -120,22 +120,22 @@
   <div class="container">
     <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
       <a href="{{ url_for('main.products') }}" class="cat-pill active">
-        <i class="bi bi-grid-fill"></i> All Peptides
+        <i class="bi bi-grid-fill"></i> {{ _('all_peptides') }}
       </a>
       <a href="{{ url_for('main.products', category='metabolic-glp-1') }}" class="cat-pill">
-        <i class="bi bi-capsule"></i> Metabolic & GLP-1
+        <i class="bi bi-capsule"></i> {{ _('cat_metabolic') }}
       </a>
       <a href="{{ url_for('main.products', category='tissue-recovery') }}" class="cat-pill">
-        <i class="bi bi-heart-pulse"></i> Tissue Recovery
+        <i class="bi bi-heart-pulse"></i> {{ _('cat_recovery') }}
       </a>
       <a href="{{ url_for('main.products', category='gh-secretagogues') }}" class="cat-pill">
-        <i class="bi bi-activity"></i> GH Secretagogues
+        <i class="bi bi-activity"></i> {{ _('cat_gh') }}
       </a>
       <a href="{{ url_for('main.products', category='pigmentation-wellness') }}" class="cat-pill">
-        <i class="bi bi-stars"></i> Pigmentation & Wellness
+        <i class="bi bi-stars"></i> {{ _('cat_wellness') }}
       </a>
       <a href="{{ url_for('main.products', category='other-peptides') }}" class="cat-pill">
-        <i class="bi bi-beaker"></i> Other Peptides
+        <i class="bi bi-beaker"></i> {{ _('cat_other') }}
       </a>
     </div>
   </div>
@@ -146,15 +146,15 @@
   <div class="container">
     <div style="text-align: center; margin-bottom: 3.5rem;">
       <div style="font-size: 0.85rem; font-weight: 800; color: var(--biotech-blue); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.35rem;">
-        Analytical Precision Standards
+        {{ _('precision_standards_tag') }}
       </div>
-      <h2 style="font-size: 2.25rem; color: var(--navy-deep); font-weight: 800;">Featured Research Compounds</h2>
+      <h2 style="font-size: 2.25rem; color: var(--navy-deep); font-weight: 800;">{{ _('featured_compounds') }}</h2>
       <p style="color: var(--text-muted); max-width: 620px; margin: 0.5rem auto 0 auto;">
-        Explore our primary GLP-1 analogues, tissue regeneration peptides, and somatropin research compounds.
+        {{ _('featured_compounds_desc') }}
       </p>
     </div>
 
-    <!-- 4 Featured Cards: BPC-157, TB-500, Ipamorelin, CJC-1295 (No DAC) -->
+    <!-- 4 Featured Cards -->
     <div class="product-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
       {% for product in featured_products[:4] %}
         <div class="product-card">
@@ -163,7 +163,7 @@
             <img src="{{ url_for('static', filename=product.catalog_image) }}" alt="{{ product.name }}" loading="lazy">
           </div>
           <div class="product-body">
-            <div class="product-category">{{ product.category.name if product.category else 'General Peptides' }}</div>
+            <div class="product-category">{{ product.category.name if product.category else _('general_peptides') }}</div>
             <h3 class="product-title">
               <a href="{{ url_for('main.product_detail', slug=product.slug) }}">{{ product.name }}</a>
             </h3>
@@ -176,12 +176,12 @@
               
               <div style="display: flex; gap: 0.4rem; align-items: center;">
                 <a href="{{ url_for('main.product_detail', slug=product.slug) }}" class="btn btn-sm btn-outline-blue" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">
-                  View Details
+                  {{ _('view_details') }}
                 </a>
                 
                 <form method="POST" action="{{ url_for('main.cart_add', product_id=product.id) }}" style="margin: 0;">
                   <input type="hidden" name="quantity" value="1">
-                  <button type="submit" class="btn btn-sm btn-primary" style="padding: 0.35rem 0.65rem;" title="Add 1 to Quotation Cart">
+                  <button type="submit" class="btn btn-sm btn-primary" style="padding: 0.35rem 0.65rem;" title="{{ _('add_to_cart_tooltip') }}">
                     <i class="bi bi-cart-plus"></i> +
                   </button>
                 </form>
@@ -194,7 +194,7 @@
 
     <div style="text-align: center; margin-top: 3.5rem;">
       <a href="{{ url_for('main.products') }}" class="btn btn-navy" style="padding: 0.85rem 2.5rem; font-size: 1rem;">
-        View All {{ total_product_count }} Wholesale Products &rarr;
+        {{ _('view_all_wholesale_prefix') }} {{ total_product_count }} {{ _('view_all_wholesale_suffix') }} &rarr;
       </a>
     </div>
   </div>

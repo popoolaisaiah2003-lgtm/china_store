@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}Yan Zhen Peptide | Premium Research Peptides{% endblock %}</title>
+  <title>{% block title %}{{ company_name }} | {{ _('hero_title') }}{% endblock %}</title>
 
   <!-- Primary SEO Meta Tags -->
-  <meta name="description" content="{% block meta_description %}High-purity research peptides with COA documentation, strict quality control, and worldwide shipping support.{% endblock %}">
+  <meta name="description" content="{% block meta_description %}{{ _('hero_subtitle') }}{% endblock %}">
   <meta name="keywords" content="Yan Zhen Peptide, research peptides, semaglutide, tirzepatide, retatrutide, BPC-157, HGH, HPLC certified, COA peptides, custom peptide synthesis">
 
   <!-- Open Graph / Facebook / WhatsApp Meta Tags -->
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Yan Zhen Peptide">
+  <meta property="og:site_name" content="{{ company_name }}">
   <meta property="og:title" content="{% block og_title %}{{ self.title() }}{% endblock %}">
   <meta property="og:description" content="{% block og_description %}{{ self.meta_description() }}{% endblock %}">
   <meta property="og:image" content="{{ url_for('static', filename='logo1.png', _external=True) }}">
@@ -34,7 +34,7 @@
   <nav class="navbar">
     <div class="container nav-container">
       <a class="navbar-brand d-flex align-items-center" href="{{ url_for('main.index') }}">
-        <img src="{{ url_for('static', filename='logo1.png') }}" alt="Yan Zhen Peptide" class="logo-img">
+        <img src="{{ url_for('static', filename='logo1.png') }}" alt="{{ company_name }}" class="logo-img">
       </a>
 
       <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation">☰</button>
@@ -42,10 +42,10 @@
       <ul class="nav-links" id="navLinks">
         <li><a href="{{ url_for('main.index') }}" class="{{ 'active' if request.endpoint == 'main.index' }}">{{ _('home') }}</a></li>
         <li><a href="{{ url_for('main.products') }}" class="{{ 'active' if request.endpoint == 'main.products' }}">{{ _('catalog') }}</a></li>
-        <li><a href="{{ url_for('main.about') }}" class="{{ 'active' if request.endpoint == 'main.about' }}">About Us</a></li>
+        <li><a href="{{ url_for('main.about') }}" class="{{ 'active' if request.endpoint == 'main.about' }}">{{ _('about_us') }}</a></li>
         <li><a href="{{ url_for('main.coa_list') }}" class="{{ 'active' if request.endpoint == 'main.coa_list' }}">{{ _('coa_certificates') }}</a></li>
-        <li><a href="{{ url_for('main.shipments') }}" class="{{ 'active' if request.endpoint == 'main.shipments' }}">Shipment Updates</a></li>
-        <li><a href="{{ url_for('main.reviews') }}" class="{{ 'active' if request.endpoint == 'main.reviews' }}">Reviews</a></li>
+        <li><a href="{{ url_for('main.shipments') }}" class="{{ 'active' if request.endpoint == 'main.shipments' }}">{{ _('shipment_updates_title') }}</a></li>
+        <li><a href="{{ url_for('main.reviews') }}" class="{{ 'active' if request.endpoint == 'main.reviews' }}">{{ _('reviews_link') }}</a></li>
         <li><a href="{{ url_for('blog.index') }}" class="{{ 'active' if request.endpoint == 'blog.index' }}">{{ _('journal') }}</a></li>
         <li><a href="{{ url_for('main.contact') }}" class="{{ 'active' if request.endpoint == 'main.contact' }}">{{ _('contact') }}</a></li>
 
@@ -97,23 +97,23 @@
       <div class="feature-band-grid">
         <div class="feature-band-item">
           <div class="feature-band-icon">🔬</div>
-          <div class="feature-band-label">High Purity</div>
+          <div class="feature-band-label">{{ _('high_purity_band') }}</div>
         </div>
         <div class="feature-band-item">
           <div class="feature-band-icon">⚗️</div>
-          <div class="feature-band-label">Advanced Technology</div>
+          <div class="feature-band-label">{{ _('advanced_tech_band') }}</div>
         </div>
         <div class="feature-band-item">
           <div class="feature-band-icon">🛡️</div>
-          <div class="feature-band-label">Quality Assurance</div>
+          <div class="feature-band-label">{{ _('quality_assurance_band') }}</div>
         </div>
         <div class="feature-band-item">
           <div class="feature-band-icon">📦</div>
-          <div class="feature-band-label">Discreet Packaging</div>
+          <div class="feature-band-label">{{ _('discreet_packaging_band') }}</div>
         </div>
         <div class="feature-band-item">
           <div class="feature-band-icon">✈️</div>
-          <div class="feature-band-label">Worldwide Delivery</div>
+          <div class="feature-band-label">{{ _('worldwide_delivery_band') }}</div>
         </div>
       </div>
     </div>
@@ -183,7 +183,7 @@
         <!-- Modal Header -->
         <div class="modal-header modal-header-biotech">
           <h5 class="modal-title font-weight-bold" id="orderInfoModalLabel" style="color: white; font-size: 1.25rem;">
-            📋 Important Order Information
+            📋 {{ _('modal_important_info') }}
           </h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -192,13 +192,13 @@
         <div class="modal-body" style="padding: 1.75rem; background: var(--bg-primary);">
           
           <p style="font-size: 0.95rem; color: var(--navy-deep); font-weight: 600; margin-bottom: 1.25rem;">
-            Please review our official payment methods, shipping procedures, and minimum transaction thresholds before proceeding to checkout:
+            {{ _('modal_intro_text') }}
           </p>
 
           <!-- Payment Methods Box -->
           <div class="payment-method-box">
             <h6 style="font-weight: 800; color: var(--navy-deep); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
-              <span>💳</span> Accepted Payment Methods
+              <span>💳</span> {{ _('accepted_payment_methods') }}
             </h6>
             <ul style="margin: 0; padding-left: 1.25rem; font-size: 0.88rem; color: var(--text-main); line-height: 1.8; list-style-type: disc;">
               <li><strong>USDT</strong> (TRC20 / ERC20)</li>
@@ -207,39 +207,38 @@
               <li>
                 <strong>Made-in-China Trade Assurance</strong> 
                 <span style="background: var(--biotech-blue); color: white; font-weight: 700; font-size: 0.72rem; padding: 0.15rem 0.5rem; border-radius: 4px; margin-left: 0.35rem; display: inline-flex; align-items: center; gap: 0.2rem;">
-                  🛡️ Buyer Protection
+                  🛡️ {{ _('buyer_protection') }}
                 </span>
               </li>
-              <li><strong>DHgate</strong> (orders from $350 USD and above only)</li>
+              <li><strong>DHgate</strong> {{ _('dhgate_threshold_note') }}</li>
             </ul>
           </div>
 
           <!-- Shipping & Delivery Box -->
           <div class="payment-method-box">
             <h6 style="font-weight: 800; color: var(--navy-deep); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
-              <span>✈️</span> Shipping & Delivery Information
+              <span>✈️</span> {{ _('shipping_delivery_info') }}
             </h6>
             <ul style="margin: 0; padding-left: 1.25rem; font-size: 0.88rem; color: var(--text-main); line-height: 1.8; list-style-type: disc;">
-              <li><strong>Estimated Delivery Time:</strong> 10–14 Working Days</li>
-              <li><strong>Coverage:</strong> Worldwide Shipping</li>
-              <li><strong>Dispatch:</strong> Dispatched after payment confirmation and quality inspection</li>
+              <li><strong>{{ _('estimated_delivery_time_label') }}:</strong> {{ _('working_days_10_14') }}</li>
+              <li><strong>{{ _('coverage_label') }}:</strong> {{ _('worldwide_shipping') }}</li>
+              <li><strong>{{ _('dispatch_label') }}:</strong> {{ _('dispatched_after_payment') }}</li>
             </ul>
           </div>
 
-          <!-- DHgate Warning Box (Red Highlighted) -->
+          <!-- DHgate Warning Box -->
           <div class="dhgate-warning-box">
             <div style="font-weight: 800; font-size: 0.95rem; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.5rem;">
-              <span>⚠️</span> Important Notice About DHgate
+              <span>⚠️</span> {{ _('dhgate_notice_title') }}
             </div>
             <div style="font-size: 0.86rem; line-height: 1.5;">
-              “DHgate payment is available only for orders of <strong>$350 USD and above</strong> due to the 15% deduction charged on every transaction.<br><br>
-              For orders below $350 USD, please use USDT, Bank Transfer, Western Union, or Made-in-China Trade Assurance.”
+              {{ _('dhgate_notice_body') | safe }}
             </div>
           </div>
 
           <!-- Support Assistance Line -->
           <div style="font-size: 0.88rem; color: var(--biotech-blue); font-weight: 700; text-align: center; margin-top: 1rem;">
-            💬 Need assistance? Contact us on WhatsApp: <strong>+852 6329 4280</strong>
+            💬 {{ _('need_assistance') }} <strong>+852 6329 4280</strong>
           </div>
 
         </div>
@@ -247,13 +246,13 @@
         <!-- Modal Footer -->
         <div class="modal-footer" style="background: white; border-top: 1px solid var(--border-color); padding: 1rem 1.5rem; justify-content: space-between;">
           <button type="button" class="btn btn-outline" data-bs-dismiss="modal">
-            Go Back
+            {{ _('go_back') }}
           </button>
           <button type="button"
                   class="btn btn-primary"
                   id="confirmOrderInfo"
                   style="padding: 0.75rem 1.75rem;">
-            I Understand & Continue &rarr;
+            {{ _('i_understand_continue') }} &rarr;
           </button>
         </div>
 
@@ -265,13 +264,13 @@
   <a href="https://wa.me/85263294280?text=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20research%20peptides%20and%20request%20a%20quotation." 
      class="whatsapp-float-widget" 
      target="_blank" 
-     title="Chat with Yan Zhen Peptide" 
-     aria-label="Chat with Yan Zhen Peptide">
+     title="{{ _('chat_with_us') }}" 
+     aria-label="{{ _('chat_with_us') }}">
     <i class="bi bi-whatsapp"></i>
   </a>
 
   <!-- Global Back-to-Top Button -->
-  <button type="button" id="backToTopBtn" class="back-to-top-btn" aria-label="Back to top" title="Back to top">
+  <button type="button" id="backToTopBtn" class="back-to-top-btn" aria-label="{{ _('back_to_top') }}" title="{{ _('back_to_top') }}">
     <i class="bi bi-arrow-up"></i>
   </button>
 

@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
-{% block title %}About Yan Zhen Peptide | Peptide Warehouse & Wholesale Supplier{% endblock %}
+{% block title %}{{ _('about_hero_title') }} | {{ company_name }}{% endblock %}
 
-{% block meta_description %}Learn about Yan Zhen Peptide, a China-based peptide warehouse specializing in bulk and normal quantity peptide supply with COA verification and worldwide shipping.{% endblock %}
+{% block meta_description %}{{ _('who_we_are_text') }}{% endblock %}
 
 {% block content %}
 <!-- Hero Section -->
@@ -14,20 +14,20 @@
     <div class="row align-items-center g-4">
       <div class="col-lg-7">
         <div style="display: inline-block; background: rgba(2, 132, 199, 0.2); border: 1px solid var(--biotech-blue); color: #38BDF8; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.35rem 0.85rem; border-radius: 20px; margin-bottom: 1rem;">
-          📦 Specialized Peptide Warehouse & Supply Facility
+          {{ _('about_warehouse_tag') }}
         </div>
         <h1 style="color: white; font-size: 2.6rem; font-weight: 800; line-height: 1.2; margin-bottom: 1rem;">
-          About Yan Zhen Peptide
+          {{ _('about_hero_title') }}
         </h1>
         <p style="color: #94A3B8; font-size: 1.15rem; max-width: 620px; line-height: 1.6; margin-bottom: 1.75rem;">
-          Professional Peptide Warehouse & Global Supply Partner
+          {{ _('about_hero_subtitle') }}
         </p>
         <div class="d-flex flex-wrap gap-3">
           <a href="{{ url_for('main.products') }}" class="btn btn-primary px-4 py-2" style="font-weight: 700;">
-            View Peptide Catalog &rarr;
+            {{ _('view_catalog_btn') }} &rarr;
           </a>
           <a href="{{ url_for('main.contact') }}" class="btn btn-outline-light px-4 py-2" style="font-weight: 600;">
-            Contact Export Desk
+            {{ _('contact_export_desk') }}
           </a>
         </div>
       </div>
@@ -36,8 +36,8 @@
       <div class="col-lg-5 text-center">
         <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: var(--radius-lg); padding: 1.75rem; backdrop-filter: blur(8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);">
           <div style="font-size: 3rem; margin-bottom: 0.5rem;">🏬🧪</div>
-          <div style="color: white; font-size: 1.1rem; font-weight: 700;">Peptide Warehouse Storage</div>
-          <div style="color: #94A3B8; font-size: 0.85rem; margin-top: 0.25rem;">Bulk Stocks & Lyophilized Vial Inventory</div>
+          <div style="color: white; font-size: 1.1rem; font-weight: 700;">{{ _('warehouse_storage_label') }}</div>
+          <div style="color: #94A3B8; font-size: 0.85rem; margin-top: 0.25rem;">{{ _('bulk_stocks_sublabel') }}</div>
         </div>
       </div>
     </div>
@@ -52,13 +52,13 @@
       <!-- Who We Are -->
       <div class="col-md-6">
         <div style="font-size: 0.8rem; font-weight: 800; color: var(--biotech-blue); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem;">
-          EXCLUSIVE SPECIALIZATION
+          {{ _('exclusive_specialization') }}
         </div>
         <h2 style="color: var(--navy-deep); font-weight: 800; font-size: 2rem; margin-bottom: 1.25rem;">
-          Who We Are
+          {{ _('who_we_are_title') }}
         </h2>
         <p style="color: var(--text-main); font-size: 1rem; line-height: 1.7; margin-bottom: 1.25rem;">
-          <strong>Yan Zhen Peptide</strong> is a China-based peptide warehouse and supply company focused exclusively on research peptide products. We provide high-purity peptide compounds for laboratories, distributors, resellers, and research buyers worldwide. Our operation is built around quality verification, secure packaging, and reliable international shipping.
+          {{ _('who_we_are_text') }}
         </p>
       </div>
 
@@ -66,29 +66,29 @@
       <div class="col-md-6">
         <div style="background: #F8FAFC; border: 1.5px solid var(--border-color); border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-sm);">
           <div style="font-size: 0.8rem; font-weight: 800; color: var(--biotech-blue); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem;">
-            PRODUCT SCOPE
+            {{ _('product_scope') }}
           </div>
           <h3 style="color: var(--navy-deep); font-weight: 800; font-size: 1.5rem; margin-bottom: 1rem;">
-            What We Sell
+            {{ _('what_we_sell_title') }}
           </h3>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.95rem; font-weight: 700; color: var(--navy-deep);">
             <div style="display: flex; align-items: center; gap: 0.5rem;">
-              <span style="color: var(--biotech-blue);">✔</span> Research peptides only
+              <span style="color: var(--biotech-blue);">✔</span> {{ _('research_peptides_only') }}
             </div>
             <div style="display: flex; align-items: center; gap: 0.5rem;">
-              <span style="color: var(--biotech-blue);">✔</span> Lyophilized peptide vials
+              <span style="color: var(--biotech-blue);">✔</span> {{ _('lyophilized_peptide_vials') }}
             </div>
             <div style="display: flex; align-items: center; gap: 0.5rem;">
-              <span style="color: var(--biotech-blue);">✔</span> Bulk peptide supply
+              <span style="color: var(--biotech-blue);">✔</span> {{ _('bulk_peptide_supply') }}
             </div>
             <div style="display: flex; align-items: center; gap: 0.5rem;">
-              <span style="color: var(--biotech-blue);">✔</span> Wholesale peptide orders
+              <span style="color: var(--biotech-blue);">✔</span> {{ _('wholesale_peptide_orders') }}
             </div>
             <div style="display: flex; align-items: center; gap: 0.5rem;">
-              <span style="color: var(--biotech-blue);">✔</span> Normal quantity orders
+              <span style="color: var(--biotech-blue);">✔</span> {{ _('normal_quantity_orders') }}
             </div>
             <div style="display: flex; align-items: center; gap: 0.5rem;">
-              <span style="color: var(--biotech-blue);">✔</span> COA-supported products
+              <span style="color: var(--biotech-blue);">✔</span> {{ _('coa_supported_products') }}
             </div>
           </div>
         </div>
@@ -98,16 +98,16 @@
   </div>
 </section>
 
-<!-- Flexible Supply Options (2 Cards: Bulk & Wholesale vs Normal Quantity) -->
+<!-- Flexible Supply Options -->
 <section style="background: #F1F5F9; padding: 4rem 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
   <div class="container">
     
     <div style="text-align: center; max-width: 650px; margin: 0 auto 3rem;">
       <div style="font-size: 0.8rem; font-weight: 800; color: var(--biotech-blue); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem;">
-        ORDER FLEXIBILITY
+        {{ _('order_flexibility') }}
       </div>
-      <h2 style="color: var(--navy-deep); font-weight: 800; font-size: 1.85rem; margin-bottom: 0.5rem;">Supply Options</h2>
-      <p style="color: var(--text-muted); font-size: 0.95rem;">We support both large distributor shipments and small individual research orders.</p>
+      <h2 style="color: var(--navy-deep); font-weight: 800; font-size: 1.85rem; margin-bottom: 0.5rem;">{{ _('supply_options_title') }}</h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">{{ _('supply_options_desc') }}</p>
     </div>
 
     <div class="row g-4">
@@ -117,22 +117,22 @@
         <div style="background: white; border: 2px solid var(--biotech-blue); border-radius: var(--radius-lg); padding: 2.25rem; box-shadow: var(--shadow-sm); height: 100%;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
             <h3 style="color: var(--navy-deep); font-weight: 800; font-size: 1.4rem; margin: 0;">
-              📦 Bulk & Wholesale
+              📦 {{ _('bulk_and_wholesale') }}
             </h3>
-            <span style="background: #E0F2FE; color: #0369A1; font-weight: 800; font-size: 0.75rem; padding: 0.25rem 0.65rem; border-radius: 12px;">DISTRIBUTOR TIER</span>
+            <span style="background: #E0F2FE; color: #0369A1; font-weight: 800; font-size: 0.75rem; padding: 0.25rem 0.65rem; border-radius: 12px;">{{ _('distributor_tier') }}</span>
           </div>
           <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.85rem;">
             <li style="display: flex; align-items: center; gap: 0.75rem; font-weight: 700; color: var(--navy-deep);">
-              <span style="color: var(--biotech-blue); font-size: 1.1rem;">✔</span> Large quantity supply
+              <span style="color: var(--biotech-blue); font-size: 1.1rem;">✔</span> {{ _('large_quantity_supply') }}
             </li>
             <li style="display: flex; align-items: center; gap: 0.75rem; font-weight: 700; color: var(--navy-deep);">
-              <span style="color: var(--biotech-blue); font-size: 1.1rem;">✔</span> Distributor support
+              <span style="color: var(--biotech-blue); font-size: 1.1rem;">✔</span> {{ _('distributor_support') }}
             </li>
             <li style="display: flex; align-items: center; gap: 0.75rem; font-weight: 700; color: var(--navy-deep);">
-              <span style="color: var(--biotech-blue); font-size: 1.1rem;">✔</span> Warehouse stock
+              <span style="color: var(--biotech-blue); font-size: 1.1rem;">✔</span> {{ _('warehouse_stock') }}
             </li>
             <li style="display: flex; align-items: center; gap: 0.75rem; font-weight: 700; color: var(--navy-deep);">
-              <span style="color: var(--biotech-blue); font-size: 1.1rem;">✔</span> Export packaging
+              <span style="color: var(--biotech-blue); font-size: 1.1rem;">✔</span> {{ _('export_packaging') }}
             </li>
           </ul>
         </div>
@@ -143,22 +143,22 @@
         <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2.25rem; box-shadow: var(--shadow-sm); height: 100%;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
             <h3 style="color: var(--navy-deep); font-weight: 800; font-size: 1.4rem; margin: 0;">
-              🧪 Normal Quantity
+              🧪 {{ _('normal_quantity') }}
             </h3>
-            <span style="background: #F1F5F9; color: var(--text-muted); font-weight: 800; font-size: 0.75rem; padding: 0.25rem 0.65rem; border-radius: 12px;">FLEXIBLE TIER</span>
+            <span style="background: #F1F5F9; color: var(--text-muted); font-weight: 800; font-size: 0.75rem; padding: 0.25rem 0.65rem; border-radius: 12px;">{{ _('flexible_tier') }}</span>
           </div>
           <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.85rem;">
             <li style="display: flex; align-items: center; gap: 0.75rem; font-weight: 700; color: var(--navy-deep);">
-              <span style="color: var(--biotech-blue); font-size: 1.1rem;">✔</span> Small quantity orders
+              <span style="color: var(--biotech-blue); font-size: 1.1rem;">✔</span> {{ _('small_quantity_orders') }}
             </li>
             <li style="display: flex; align-items: center; gap: 0.75rem; font-weight: 700; color: var(--navy-deep);">
-              <span style="color: var(--biotech-blue); font-size: 1.1rem;">✔</span> Individual research needs
+              <span style="color: var(--biotech-blue); font-size: 1.1rem;">✔</span> {{ _('individual_research_needs') }}
             </li>
             <li style="display: flex; align-items: center; gap: 0.75rem; font-weight: 700; color: var(--navy-deep);">
-              <span style="color: var(--biotech-blue); font-size: 1.1rem;">✔</span> Flexible ordering
+              <span style="color: var(--biotech-blue); font-size: 1.1rem;">✔</span> {{ _('flexible_ordering') }}
             </li>
             <li style="display: flex; align-items: center; gap: 0.75rem; font-weight: 700; color: var(--navy-deep);">
-              <span style="color: var(--biotech-blue); font-size: 1.1rem;">✔</span> Worldwide shipping
+              <span style="color: var(--biotech-blue); font-size: 1.1rem;">✔</span> {{ _('worldwide_shipping_available') }}
             </li>
           </ul>
         </div>
@@ -177,26 +177,26 @@
       <!-- Quality & Documentation -->
       <div class="col-md-6">
         <div style="font-size: 0.8rem; font-weight: 800; color: var(--biotech-blue); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem;">
-          ANALYTICAL INTEGRITY
+          {{ _('analytical_integrity') }}
         </div>
         <h3 style="color: var(--navy-deep); font-weight: 800; font-size: 1.75rem; margin-bottom: 1.25rem;">
-          Quality & Documentation
+          {{ _('quality_documentation') }}
         </h3>
         <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.85rem;">
           <li style="display: flex; align-items: center; gap: 0.75rem; font-size: 0.95rem; color: var(--navy-deep); font-weight: 600;">
-            <span style="color: var(--biotech-blue); font-size: 1.15rem;">✔</span> HPLC-tested peptides
+            <span style="color: var(--biotech-blue); font-size: 1.15rem;">✔</span> {{ _('hplc_tested_peptides_list') }}
           </li>
           <li style="display: flex; align-items: center; gap: 0.75rem; font-size: 0.95rem; color: var(--navy-deep); font-weight: 600;">
-            <span style="color: var(--biotech-blue); font-size: 1.15rem;">✔</span> Batch-specific COA reports
+            <span style="color: var(--biotech-blue); font-size: 1.15rem;">✔</span> {{ _('batch_specific_coa_reports') }}
           </li>
           <li style="display: flex; align-items: center; gap: 0.75rem; font-size: 0.95rem; color: var(--navy-deep); font-weight: 600;">
-            <span style="color: var(--biotech-blue); font-size: 1.15rem;">✔</span> Secure sealed packaging
+            <span style="color: var(--biotech-blue); font-size: 1.15rem;">✔</span> {{ _('secure_sealed_packaging') }}
           </li>
           <li style="display: flex; align-items: center; gap: 0.75rem; font-size: 0.95rem; color: var(--navy-deep); font-weight: 600;">
-            <span style="color: var(--biotech-blue); font-size: 1.15rem;">✔</span> Consistent warehouse inventory
+            <span style="color: var(--biotech-blue); font-size: 1.15rem;">✔</span> {{ _('consistent_inventory') }}
           </li>
           <li style="display: flex; align-items: center; gap: 0.75rem; font-size: 0.95rem; color: var(--navy-deep); font-weight: 600;">
-            <span style="color: var(--biotech-blue); font-size: 1.15rem;">✔</span> Export-oriented handling
+            <span style="color: var(--biotech-blue); font-size: 1.15rem;">✔</span> {{ _('export_handling') }}
           </li>
         </ul>
       </div>
@@ -204,18 +204,18 @@
       <!-- Worldwide Peptide Supply -->
       <div class="col-md-6">
         <div style="font-size: 0.8rem; font-weight: 800; color: var(--biotech-blue); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem;">
-          GLOBAL LOGISTICS
+          {{ _('global_logistics') }}
         </div>
         <h3 style="color: var(--navy-deep); font-weight: 800; font-size: 1.75rem; margin-bottom: 1.25rem;">
-          Worldwide Peptide Supply
+          {{ _('worldwide_supply_title') }}
         </h3>
         <p style="color: var(--text-main); font-size: 1rem; line-height: 1.7; margin-bottom: 1.5rem;">
-          We support customers across Europe, North America, Asia-Pacific, the Middle East, and other international destinations through secure export and shipping procedures.
+          {{ _('worldwide_supply_text') }}
         </p>
         <div style="background: #F8FAFC; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.5rem; text-align: center;">
           <div style="font-size: 3rem; margin-bottom: 0.5rem;">✈️🌐</div>
-          <div style="font-weight: 700; color: var(--navy-deep); font-size: 1rem;">International Dispatch & Tracking Support</div>
-          <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.25rem;">Discreet Packaging • Express Courier • Cold-Chain Monitoring</div>
+          <div style="font-weight: 700; color: var(--navy-deep); font-size: 1rem;">{{ _('dispatch_tracking_support') }}</div>
+          <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.25rem;">{{ _('discreet_packaging_sub') }}</div>
         </div>
       </div>
 
@@ -229,42 +229,42 @@
     
     <div style="text-align: center; max-width: 650px; margin: 0 auto 3rem;">
       <div style="font-size: 0.8rem; font-weight: 800; color: var(--biotech-blue); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem;">
-        WHY CHOOSE US
+        {{ _('why_choose_us_tag') }}
       </div>
-      <h2 style="color: var(--navy-deep); font-weight: 800; font-size: 1.85rem; margin-bottom: 0.5rem;">Why Choose Yan Zhen Peptide?</h2>
-      <p style="color: var(--text-muted); font-size: 0.95rem;">Specialized warehouse operations built for reliable peptide supply.</p>
+      <h2 style="color: var(--navy-deep); font-weight: 800; font-size: 1.85rem; margin-bottom: 0.5rem;">{{ _('why_choose_title') }}</h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">{{ _('why_choose_subtitle') }}</p>
     </div>
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem;">
       
       <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem; text-align: center;">
         <span style="font-size: 1.5rem; display: block; margin-bottom: 0.5rem;">🔬</span>
-        <strong style="color: var(--navy-deep); font-size: 0.95rem; display: block;">Peptide-only specialization</strong>
+        <strong style="color: var(--navy-deep); font-size: 0.95rem; display: block;">{{ _('pep_only_spec') }}</strong>
       </div>
 
       <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem; text-align: center;">
         <span style="font-size: 1.5rem; display: block; margin-bottom: 0.5rem;">📦</span>
-        <strong style="color: var(--navy-deep); font-size: 0.95rem; display: block;">Bulk and small-quantity supply</strong>
+        <strong style="color: var(--navy-deep); font-size: 0.95rem; display: block;">{{ _('bulk_small_supply') }}</strong>
       </div>
 
       <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem; text-align: center;">
         <span style="font-size: 1.5rem; display: block; margin-bottom: 0.5rem;">📑</span>
-        <strong style="color: var(--navy-deep); font-size: 0.95rem; display: block;">Verified product documentation</strong>
+        <strong style="color: var(--navy-deep); font-size: 0.95rem; display: block;">{{ _('verified_doc') }}</strong>
       </div>
 
       <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem; text-align: center;">
         <span style="font-size: 1.5rem; display: block; margin-bottom: 0.5rem;">💬</span>
-        <strong style="color: var(--navy-deep); font-size: 0.95rem; display: block;">Responsive communication</strong>
+        <strong style="color: var(--navy-deep); font-size: 0.95rem; display: block;">{{ _('responsive_comm') }}</strong>
       </div>
 
       <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem; text-align: center;">
         <span style="font-size: 1.5rem; display: block; margin-bottom: 0.5rem;">🔒</span>
-        <strong style="color: var(--navy-deep); font-size: 0.95rem; display: block;">Confidential order handling</strong>
+        <strong style="color: var(--navy-deep); font-size: 0.95rem; display: block;">{{ _('confidential_handling') }}</strong>
       </div>
 
       <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem; text-align: center;">
         <span style="font-size: 1.5rem; display: block; margin-bottom: 0.5rem;">🚚</span>
-        <strong style="color: var(--navy-deep); font-size: 0.95rem; display: block;">Reliable dispatch process</strong>
+        <strong style="color: var(--navy-deep); font-size: 0.95rem; display: block;">{{ _('reliable_dispatch') }}</strong>
       </div>
 
     </div>
@@ -277,23 +277,23 @@
   <div class="container">
     <div style="background: linear-gradient(135deg, var(--navy-deep) 0%, #0369A1 100%); color: white; border-radius: var(--radius-lg); padding: 3rem 2rem; text-align: center; box-shadow: var(--shadow-lg);">
       <h2 style="color: white; font-weight: 800; font-size: 2rem; margin-bottom: 0.75rem;">
-        Partner with Yan Zhen Peptide
+        {{ _('partner_with_title') }}
       </h2>
       <p style="color: #CBD5E1; font-size: 1.05rem; max-width: 600px; margin: 0 auto 2rem;">
-        Contact our export desk to request pricing, warehouse stock availability, or direct wholesale quotations.
+        {{ _('partner_with_desc') }}
       </p>
 
       <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem; font-size: 1rem;">
         <div>
-          <span style="color: #38BDF8;">📧 Email:</span> <strong>zhenyan640@gmail.com</strong>
+          <span style="color: #38BDF8;">📧 {{ _('email_label') }}:</span> <strong>{{ business_email }}</strong>
         </div>
         <div>
-          <span style="color: #38BDF8;">💬 WhatsApp:</span> <strong>+852 6329 4280</strong>
+          <span style="color: #38BDF8;">💬 {{ _('whatsapp_label') }}:</span> <strong>+852 6329 4280</strong>
         </div>
       </div>
 
       <a href="{{ url_for('main.order') }}" class="btn btn-primary px-5 py-3" style="font-size: 1.1rem; font-weight: 700;">
-        Request a Peptide Quote &rarr;
+        {{ _('request_peptide_quote_btn') }} &rarr;
       </a>
     </div>
   </div>

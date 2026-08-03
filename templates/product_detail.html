@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ product.name }} | {{ product.purity }} | Yan Zhen Peptide{% endblock %}
+{% block title %}{{ product.name }} | {{ product.purity }} | {{ company_name }}{% endblock %}
 
 {% block content %}
 <div class="container" style="padding: 3rem 1.25rem;">
@@ -17,7 +17,7 @@
       <div class="product-detail-gallery">
         <div style="text-align: center;">
           <span class="purity-tag" style="position: relative; top: 0; right: 0; display: inline-block; margin-bottom: 1rem;">
-            HPLC Certified {{ product.purity }}
+            HPLC {{ _('hplc_certified_tag') }} {{ product.purity }}
           </span>
           <img src="{{ url_for('static', filename=product.catalog_image) }}" alt="{{ product.name }}" style="max-height: 280px; width: 100%; margin: 0 auto; border-radius: var(--radius-md); object-fit: contain;">
           <div style="font-weight: 700; color: var(--navy-deep); margin-top: 1rem;">
@@ -30,7 +30,7 @@
     <!-- Right: Product Info & COA Badge & Quotation Action -->
     <div>
       <div style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700; color: var(--gold-primary); letter-spacing: 0.05em; margin-bottom: 0.35rem;">
-        {{ product.category.name if product.category else 'Research Compound' }}
+        {{ product.category.name if product.category else _('research_compound') }}
       </div>
       <h1 style="font-size: 2.25rem; margin-bottom: 0.5rem;">{{ product.name }}</h1>
       
@@ -82,7 +82,7 @@
         {% endif %}
         <tr>
           <th>{{ _('storage') }}</th>
-          <td>{{ product.storage_info or '-20°C Desiccated / Climate Controlled' }}</td>
+          <td>{{ product.storage_info or _('climate_controlled_storage') }}</td>
         </tr>
       </table>
 
@@ -119,7 +119,7 @@
   {% if related_products %}
   <div style="margin-top: 4rem; border-top: 1px solid var(--border-color); padding-top: 3rem;">
     <h3 style="margin-bottom: 1.5rem; font-size: 1.35rem; color: var(--navy-deep);">
-      Related {{ product.category.name if product.category else 'Research' }} Peptides
+      {{ _('related_peptides_title') }}
     </h3>
 
     <div class="product-grid">

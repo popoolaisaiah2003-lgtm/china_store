@@ -193,8 +193,10 @@ TRANSLATIONS = {
         'review_text_label': 'Your Review & Laboratory Experience *',
         'review_text_placeholder': 'Share details about purity verification, delivery speed, packaging, or customer service...',
         'review_submitted_success': 'Thank you! Your review has been submitted successfully and will be published following quality moderation.',
+        'please_fill_required_review_fields': 'Please fill in all required review fields (Name and Review text).',
         'review_moderation_note': 'Your submission will be reviewed before publication.',
         'submit_review_btn': 'Submit Review for Approval',
+
 
         'overall_satisfaction': 'Overall Satisfaction',
         'based_on_approved': 'Based on approved client feedback',
@@ -530,8 +532,10 @@ TRANSLATIONS = {
         'review_text_label': '您的评价与实验室合作体验 *',
         'review_text_placeholder': '分享关于纯度验证、物流速度、包装隐密性或客服响应的详细体验...',
         'review_submitted_success': '感谢您的反馈！您的评价已成功提交，经质量审核后将被公开发布。',
+        'please_fill_required_review_fields': '请填写所有必填的评价字段（姓名和评价内容）。',
         'review_moderation_note': '您的评价提交后将经审核后公开发布。',
         'submit_review_btn': '提交评价等待审核',
+
 
         'overall_satisfaction': '总体满意度',
         'based_on_approved': '基于已审核客户反馈',

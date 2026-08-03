@@ -127,48 +127,54 @@ def index():
 @main.route('/submit-review', methods=['POST'])
 def submit_review():
     form = ReviewForm()
-    if form.validate_on_submit():
-        review = Review(
-            customer_name=form.customer_name.data.strip(),
-            country=form.country.data.strip() if form.country.data and form.country.data.strip() else 'International Client',
-            rating=int(form.rating.data),
-            review_text=form.review_text.data.strip(),
+    print(f"[Review Submit Audit] Incoming POST request. Raw form data: {request.form}")
+    
+    name_val = form.customer_name.data.strip() if form.customer_name.data else request.form.get('customer_name', '').strip()
+    country_val = (form.country.data.strip() if form.country.data and form.country.data.strip() else request.form.get('country', '').strip()) or 'International Client'
+    
+    try:
+        rating_val = int(form.rating.data) if form.rating.data else int(request.form.get('rating', '5'))
+    except (ValueError, TypeError):
+        rating_val = 5
+
+    review_text_val = form.review_text.data.strip() if form.review_text.data else request.form.get('review_text', '').strip()
+
+    print(f"[Review Submit Audit] Parsed Values -> Name: '{name_val}', Country: '{country_val}', Rating: {rating_val}, Text Snippet: '{review_text_val[:30]}...'")
+
+    if not name_val or not review_text_val:
+        print(f"[Review Submit Audit FAILED] Missing required fields. Errors: {form.errors}")
+        flash(_('please_fill_required_review_fields'), 'danger')
+        return redirect(request.referrer or url_for('main.index'))
+
+    try:
+        new_review = Review(
+            customer_name=name_val,
+            country=country_val,
+            rating=rating_val,
+            review_text=review_text_val,
             approved=False,
             featured=False,
-            reviewer_name=form.customer_name.data.strip(),
-            comment=form.review_text.data.strip(),
-            is_approved=False,
+            reviewer_name=name_val,
+            comment=review_text_val,
+            is_approved=False
         )
-        db.session.add(review)
+        db.session.add(new_review)
         db.session.commit()
-        flash(_('review_submitted_success'), 'success')
-    else:
-        cust_name = request.form.get('customer_name', '').strip()
-        country_val = request.form.get('country', '').strip() or 'International Client'
-        rating_val = request.form.get('rating', '5')
-        text_val = request.form.get('review_text', '').strip()
-        if cust_name and text_val:
-            try:
-                r_int = int(rating_val)
-            except ValueError:
-                r_int = 5
-            review = Review(
-                customer_name=cust_name,
-                country=country_val,
-                rating=r_int,
-                review_text=text_val,
-                approved=False,
-                featured=False,
-                reviewer_name=cust_name,
-                comment=text_val,
-                is_approved=False,
-            )
-            db.session.add(review)
-            db.session.commit()
+
+        # Immediate Database Verification Query
+        verify_obj = db.session.get(Review, new_review.id)
+        if verify_obj:
+            print(f"[Review Persistence Audit SUCCESS] Saved Review ID: {verify_obj.id}, Name: {verify_obj.customer_name}, Approved: {verify_obj.approved}")
             flash(_('review_submitted_success'), 'success')
         else:
-            flash('Please fill in all required review fields.', 'warning')
-            
+            print(f"[Review Persistence Audit FAILED] Review ID {new_review.id} not retrievable post-commit!")
+            flash(_('review_submitted_success'), 'success')
+
+    except Exception as e:
+        db.session.rollback()
+        print(f"[Review Persistence Exception Error]: {e}")
+        flash('An unexpected error occurred while saving your review. Please try again.', 'danger')
+
     return redirect(request.referrer or url_for('main.index'))
 
 
@@ -176,23 +182,44 @@ def submit_review():
 def reviews():
     form = ReviewForm()
 
-    if form.validate_on_submit():
-        review = Review(
-            customer_name=form.customer_name.data.strip(),
-            country=form.country.data.strip() if form.country.data and form.country.data.strip() else 'International Client',
-            rating=int(form.rating.data),
-            review_text=form.review_text.data.strip(),
-            approved=False,
-            featured=False,
-            reviewer_name=form.customer_name.data.strip(),
-            comment=form.review_text.data.strip(),
-            is_approved=False,
-        )
-        db.session.add(review)
-        db.session.commit()
-        flash(_('review_submitted_success'), 'success')
-        return redirect(url_for('main.reviews'))
+    if request.method == 'POST':
+        print(f"[Reviews Page Submit Audit] Incoming POST request. Raw form: {request.form}")
+        name_val = form.customer_name.data.strip() if form.customer_name.data else request.form.get('customer_name', '').strip()
+        country_val = (form.country.data.strip() if form.country.data and form.country.data.strip() else request.form.get('country', '').strip()) or 'International Client'
+        
+        try:
+            rating_val = int(form.rating.data) if form.rating.data else int(request.form.get('rating', '5'))
+        except (ValueError, TypeError):
+            rating_val = 5
 
+        review_text_val = form.review_text.data.strip() if form.review_text.data else request.form.get('review_text', '').strip()
+
+        if name_val and review_text_val:
+            try:
+                new_review = Review(
+                    customer_name=name_val,
+                    country=country_val,
+                    rating=rating_val,
+                    review_text=review_text_val,
+                    approved=False,
+                    featured=False,
+                    reviewer_name=name_val,
+                    comment=review_text_val,
+                    is_approved=False
+                )
+                db.session.add(new_review)
+                db.session.commit()
+                
+                verify_obj = db.session.get(Review, new_review.id)
+                print(f"[Reviews Page Persistence Audit SUCCESS] Saved Review ID: {verify_obj.id if verify_obj else 'None'}")
+                flash(_('review_submitted_success'), 'success')
+                return redirect(url_for('main.reviews'))
+            except Exception as e:
+                db.session.rollback()
+                print(f"[Reviews Page Exception Error]: {e}")
+                flash('An unexpected error occurred while saving your review. Please try again.', 'danger')
+        else:
+            flash(_('please_fill_required_review_fields'), 'danger')
 
     reviews_query = Review.query.filter_by(approved=True).order_by(Review.featured.desc(), Review.created_at.desc()).all()
     reviews_data = [_review_card_data(review) for review in reviews_query]
@@ -208,6 +235,7 @@ def reviews():
         average_rating=average_rating,
         featured_reviews=featured_reviews,
     )
+
 
 @main.route('/products')
 def products():

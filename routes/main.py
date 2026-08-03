@@ -10,6 +10,11 @@ from extensions import db
 
 main = Blueprint('main', __name__)
 
+def _(key):
+    lang = session.get('lang', 'en')
+    return translate(key, lang)
+
+
 REVIEW_COUNTRY_MAP = {
     'Dr. Anna Becker': 'Germany',
     'Sofia Martinez': 'Spain',
@@ -100,32 +105,33 @@ def index():
     if not featured_products:
         featured_products = Product.query.order_by(Product.created_at.desc()).limit(8).all()
     categories = Category.query.all()
-    featured_reviews = Review.query.filter_by(approved=True, featured=True).order_by(Review.created_at.desc()).limit(3).all()
+    featured_reviews = Review.query.filter_by(approved=True).order_by(Review.featured.desc(), Review.created_at.desc()).limit(3).all()
     featured_reviews_data = []
     for review in featured_reviews:
         card = _review_card_data(review)
         featured_reviews_data.append(card)
     latest_coas = COA.query.filter_by(active=True).order_by(COA.issue_date.desc()).limit(4).all()
     total_product_count = Product.query.count()
+    review_form = ReviewForm()
     return render_template(
         'index.html',
         featured_products=featured_products,
         categories=categories,
         featured_reviews=featured_reviews_data,
         latest_coas=latest_coas,
-        total_product_count=total_product_count
+        total_product_count=total_product_count,
+        review_form=review_form
     )
 
 
-@main.route('/reviews', methods=['GET', 'POST'])
-def reviews():
+@main.route('/submit-review', methods=['POST'])
+def submit_review():
     form = ReviewForm()
-
     if form.validate_on_submit():
         review = Review(
             customer_name=form.customer_name.data.strip(),
-            country=form.country.data.strip(),
-            rating=form.rating.data,
+            country=form.country.data.strip() if form.country.data and form.country.data.strip() else 'International Client',
+            rating=int(form.rating.data),
             review_text=form.review_text.data.strip(),
             approved=False,
             featured=False,
@@ -135,8 +141,58 @@ def reviews():
         )
         db.session.add(review)
         db.session.commit()
-        flash('Thank you. Your review has been submitted for approval.', 'success')
+        flash(_('review_submitted_success'), 'success')
+    else:
+        cust_name = request.form.get('customer_name', '').strip()
+        country_val = request.form.get('country', '').strip() or 'International Client'
+        rating_val = request.form.get('rating', '5')
+        text_val = request.form.get('review_text', '').strip()
+        if cust_name and text_val:
+            try:
+                r_int = int(rating_val)
+            except ValueError:
+                r_int = 5
+            review = Review(
+                customer_name=cust_name,
+                country=country_val,
+                rating=r_int,
+                review_text=text_val,
+                approved=False,
+                featured=False,
+                reviewer_name=cust_name,
+                comment=text_val,
+                is_approved=False,
+            )
+            db.session.add(review)
+            db.session.commit()
+            flash(_('review_submitted_success'), 'success')
+        else:
+            flash('Please fill in all required review fields.', 'warning')
+            
+    return redirect(request.referrer or url_for('main.index'))
+
+
+@main.route('/reviews', methods=['GET', 'POST'])
+def reviews():
+    form = ReviewForm()
+
+    if form.validate_on_submit():
+        review = Review(
+            customer_name=form.customer_name.data.strip(),
+            country=form.country.data.strip() if form.country.data and form.country.data.strip() else 'International Client',
+            rating=int(form.rating.data),
+            review_text=form.review_text.data.strip(),
+            approved=False,
+            featured=False,
+            reviewer_name=form.customer_name.data.strip(),
+            comment=form.review_text.data.strip(),
+            is_approved=False,
+        )
+        db.session.add(review)
+        db.session.commit()
+        flash(_('review_submitted_success'), 'success')
         return redirect(url_for('main.reviews'))
+
 
     reviews_query = Review.query.filter_by(approved=True).order_by(Review.featured.desc(), Review.created_at.desc()).all()
     reviews_data = [_review_card_data(review) for review in reviews_query]

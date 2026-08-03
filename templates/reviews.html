@@ -1,96 +1,129 @@
 {% extends 'base.html' %}
 
-{% block title %}Client Reviews & Laboratory Feedback | Yan Zhen Peptide{% endblock %}
+{% block title %}{{ _('client_reviews_title') }} | Yan Zhen Peptide{% endblock %}
 
-{% block meta_description %}Read verified laboratory feedback and research client reviews for Yan Zhen Peptide high-purity research compounds and international cold-chain export service.{% endblock %}
+{% block meta_description %}{{ _('client_reviews_desc') }}{% endblock %}
 
 {% block content %}
 <section style="background: var(--navy-deep); color: white; padding: 3.5rem 0; border-bottom: 3px solid var(--biotech-blue);">
   <div class="container">
     <div style="font-size: 0.8rem; font-weight: 800; color: var(--biotech-blue); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.45rem;">
-      Verified Global Testimonials
+      {{ _('verified_testimonials') }}
     </div>
-    <h1 style="color: white; margin-bottom: 0.5rem; font-size: 2.25rem;">Client Reviews & Laboratory Feedback</h1>
+    <h1 style="color: white; margin-bottom: 0.5rem; font-size: 2.25rem;">{{ _('client_reviews_title') }}</h1>
     <p style="color: #94A3B8; max-width: 760px; font-size: 0.95rem;">
-      Trusted by wholesale peptide customers, research labs, aesthetic clinics, and international scientific buyers seeking consistent quality, transparent communication, and reliable global delivery.
+      {{ _('client_reviews_desc') }}
     </p>
   </div>
 </section>
 
 <section class="section" style="padding: 3.5rem 0; background: #F8FAFC;">
   <div class="container">
-    <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; box-shadow: var(--shadow-sm); margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-      <div>
-        <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.25rem;">
-          Overall Satisfaction
+    <div class="row g-4 mb-4">
+      <div class="col-lg-5">
+        <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 1.5rem; position: sticky; top: 1.25rem;">
+          <div style="font-size: 0.82rem; font-weight: 800; color: var(--biotech-blue); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.45rem;">{{ _('submit_review_tag') }}</div>
+          <h2 style="font-size: 1.5rem; color: var(--navy-deep); font-weight: 800; margin-bottom: 0.35rem;">{{ _('share_experience_title') }}</h2>
+          <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 1.25rem;">{{ _('review_moderation_note') }}</p>
+
+          <form method="POST" action="{{ url_for('main.reviews') }}">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+              <label class="form-label fw-semibold">{{ form.customer_name.label.text }}</label>
+              {{ form.customer_name(class='form-control', placeholder='Your name or lab name') }}
+              {% for error in form.customer_name.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">{{ form.country.label.text }}</label>
+              {{ form.country(class='form-control', placeholder='Country') }}
+              {% for error in form.country.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">{{ form.rating.label.text }}</label>
+              {{ form.rating(class='form-select') }}
+              <div class="small text-muted mt-1">Choose one to five stars.</div>
+              {% for error in form.rating.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">{{ form.review_text.label.text }}</label>
+              {{ form.review_text(class='form-control', rows='5', placeholder='Write your review message here.') }}
+              {% for error in form.review_text.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold">{{ _('submit_review_btn') }}</button>
+          </form>
         </div>
-        <div style="font-size: 1.7rem; font-weight: 800; color: var(--navy-deep); line-height: 1.2;">{{ average_rating }}/5.0</div>
-        <div style="font-size: 0.88rem; color: var(--text-muted);">Based on verified global buyer feedback</div>
       </div>
-      <div style="text-align: right;">
-        <div style="font-size: 1rem; font-weight: 800; color: var(--biotech-blue); margin-bottom: 0.15rem;">{{ total_reviews }} global reviews</div>
-        <div style="font-size: 0.85rem; color: var(--text-muted);">Labs, clinics, distributors, and research partners</div>
+
+      <div class="col-lg-7">
+        <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; box-shadow: var(--shadow-sm); margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.25rem;">{{ _('overall_satisfaction') }}</div>
+            <div style="font-size: 1.7rem; font-weight: 800; color: var(--navy-deep); line-height: 1.2;">{{ average_rating }}/5.0</div>
+            <div style="font-size: 0.88rem; color: var(--text-muted);">{{ _('based_on_approved') }}</div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 1rem; font-weight: 800; color: var(--biotech-blue); margin-bottom: 0.15rem;">{{ total_reviews }} {{ _('approved_reviews_count') }}</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted);">{{ _('partners_subtitle') }}</div>
+          </div>
+        </div>
+
+        {% if featured_reviews %}
+          <div style="margin-bottom: 1.25rem;">
+            <div style="font-size: 0.8rem; font-weight: 800; color: var(--biotech-blue); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.65rem;">{{ _('featured_reviews_header') }}</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+              {% for review in featured_reviews %}
+                <div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: var(--radius-md); padding: 1rem;">
+                  <div style="display: flex; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.35rem; align-items: center;">
+                    <strong style="color: var(--navy-deep);">{{ review.name }}</strong>
+                    <span style="font-size: 0.72rem; color: #1D4ED8; background: #DBEAFE; border-radius: 999px; padding: 0.15rem 0.45rem; font-weight: 700;">{{ _('featured_badge') }}</span>
+                  </div>
+                  <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.45rem;">{{ review.country }}</div>
+                  <div style="color: #F59E0B; font-size: 0.95rem;">{% for i in range(review.rating) %}★{% endfor %}</div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+
+        {% if reviews %}
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+            {% for r in reviews %}
+              <article style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.35rem; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 0.9rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+                  <div style="font-weight: 800; color: var(--navy-deep); font-size: 0.98rem;">{{ r.name }}</div>
+                  <span style="font-size: 0.75rem; color: #065F46; background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 999px; padding: 0.2rem 0.55rem; font-weight: 700;">{{ _('approved_badge') }}</span>
+                </div>
+
+                <div style="font-size: 0.82rem; color: var(--text-muted); font-weight: 600;">{{ r.country }}</div>
+
+                {% if r.featured %}
+                  <div style="font-size: 0.72rem; color: #1D4ED8; background: #DBEAFE; border: 1px solid #BFDBFE; border-radius: 999px; padding: 0.18rem 0.5rem; font-weight: 700; align-self: flex-start;">{{ _('featured_badge') }}</div>
+                {% endif %}
+
+                <div style="color: #F59E0B; letter-spacing: 0.08em; font-size: 1rem;">
+                  {% for i in range(r.rating) %}★{% endfor %}
+                  {% for i in range(5 - r.rating) %}<span style="color: #CBD5E1;">★</span>{% endfor %}
+                </div>
+
+                <p style="color: var(--text-main); font-size: 0.92rem; line-height: 1.65; margin: 0; flex: 1;">
+                  "{{ r.comment }}"
+                </p>
+
+                <div style="font-size: 0.78rem; color: var(--text-muted); border-top: 1px solid var(--border-color); padding-top: 0.75rem;">
+                  {{ r.created_at.strftime('%b %d, %Y') if r.created_at else '' }}
+                </div>
+              </article>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div style="text-align: center; padding: 4rem 1rem; background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg);">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">⭐</div>
+            <h3 style="color: var(--navy-deep); font-weight: 800; margin-bottom: 0.5rem;">{{ _('no_reviews_title') }}</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0;">{{ _('no_reviews_desc') }}</p>
+          </div>
+        {% endif %}
       </div>
     </div>
-
-    {% if featured_reviews %}
-      <div style="margin-bottom: 1.5rem;">
-        <div style="font-size: 0.8rem; font-weight: 800; color: var(--biotech-blue); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.65rem;">Featured Reviews</div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
-          {% for review in featured_reviews %}
-            <div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: var(--radius-md); padding: 0.9rem 1rem;">
-              <div style="display: flex; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.35rem;">
-                <strong style="color: var(--navy-deep);">{{ review.name }}</strong>
-                <span style="font-size: 0.72rem; color: #1D4ED8; background: #DBEAFE; border-radius: 999px; padding: 0.15rem 0.45rem; font-weight: 700;">Featured</span>
-              </div>
-              <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.45rem;">{{ review.country }}</div>
-              <div style="color: #F59E0B; font-size: 0.9rem;">{{ '★' * review.rating }}</div>
-            </div>
-          {% endfor %}
-        </div>
-      </div>
-    {% endif %}
-
-    {% if reviews %}
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
-        {% for r in reviews %}
-          <article style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.4rem; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 1rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.75rem;">
-              <div style="font-weight: 800; color: var(--navy-deep); font-size: 0.98rem;">{{ r.name }}</div>
-              {% if r.verified %}
-                <span style="font-size: 0.75rem; color: #065F46; background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 999px; padding: 0.2rem 0.55rem; font-weight: 700;">Verified</span>
-              {% endif %}
-            </div>
-
-            <div style="font-size: 0.82rem; color: var(--text-muted); font-weight: 600;">{{ r.country }}</div>
-
-            {% if r.featured %}
-              <div style="font-size: 0.72rem; color: #1D4ED8; background: #DBEAFE; border: 1px solid #BFDBFE; border-radius: 999px; padding: 0.18rem 0.5rem; font-weight: 700; align-self: flex-start;">Featured</div>
-            {% endif %}
-
-            <div style="color: #F59E0B; letter-spacing: 0.08em; font-size: 1rem;">
-              {% for i in range(r.rating) %}★{% endfor %}
-              {% for i in range(5 - r.rating) %}<span style="color: #CBD5E1;">★</span>{% endfor %}
-            </div>
-
-            <p style="color: var(--text-main); font-size: 0.92rem; line-height: 1.65; margin: 0; flex: 1;">
-              "{{ r.comment }}"
-            </p>
-
-            <div style="font-size: 0.78rem; color: var(--text-muted); border-top: 1px solid var(--border-color); padding-top: 0.75rem;">
-              {{ r.created_at.strftime('%b %d, %Y') if r.created_at else '' }}
-            </div>
-          </article>
-        {% endfor %}
-      </div>
-    {% else %}
-      <div style="text-align: center; padding: 4rem 1rem; background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg);">
-        <div style="font-size: 3rem; margin-bottom: 1rem;">⭐</div>
-        <h3 style="color: var(--navy-deep); font-weight: 800; margin-bottom: 0.5rem;">No Public Reviews Published Yet</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">Check back soon for verified client feedback and research testimonials.</p>
-      </div>
-    {% endif %}
-
   </div>
 </section>
 {% endblock %}

@@ -301,8 +301,8 @@ def coa_delete(id):
 # ---------------- REVIEWS CRUD ----------------
 @admin.route('/reviews')
 @admin_required
-def reviews():
-    reviews_list = Review.query.order_by(Review.featured.desc(), Review.created_at.desc()).all()
+def reviews_index():
+    reviews_list = Review.query.order_by(Review.approved.asc(), Review.featured.desc(), Review.created_at.desc()).all()
     return render_template('admin/reviews.html', reviews=reviews_list)
 
 
@@ -314,17 +314,18 @@ def review_new():
         review = Review(
             customer_name=form.customer_name.data.strip(),
             country=form.country.data.strip(),
-            rating=int(form.rating.data),
+            rating=form.rating.data,
             review_text=form.review_text.data.strip(),
+            approved=False,
             featured=form.featured.data,
             reviewer_name=form.customer_name.data.strip(),
             comment=form.review_text.data.strip(),
-            is_approved=True,
+            is_approved=False,
         )
         db.session.add(review)
         db.session.commit()
         flash('Review created successfully.', 'success')
-        return redirect(url_for('admin.reviews'))
+        return redirect(url_for('admin.reviews_index'))
 
     return render_template('admin/review_form.html', form=form, review=None, is_edit=False)
 
@@ -335,7 +336,7 @@ def review_edit(id):
     review = Review.query.get_or_404(id)
     if request.method == 'GET':
         form = ReviewForm(obj=review)
-        form.rating.data = str(review.rating or 5)
+        form.rating.data = review.rating or 5
         form.review_text.data = review.review_text or review.comment or ''
     else:
         form = ReviewForm()
@@ -343,27 +344,64 @@ def review_edit(id):
     if form.validate_on_submit():
         review.customer_name = form.customer_name.data.strip()
         review.country = form.country.data.strip()
-        review.rating = int(form.rating.data)
+        review.rating = form.rating.data
         review.review_text = form.review_text.data.strip()
         review.featured = form.featured.data
         review.reviewer_name = review.customer_name
         review.comment = review.review_text
-        review.is_approved = True
+        review.approved = review.approved if review.approved is not None else False
+        review.is_approved = review.approved
         db.session.commit()
         flash('Review updated successfully.', 'success')
-        return redirect(url_for('admin.reviews'))
+        return redirect(url_for('admin.reviews_index'))
 
     return render_template('admin/review_form.html', form=form, review=review, is_edit=True)
 
 
-@admin.route('/reviews/delete/<int:id>', methods=['POST'])
+@admin.route('/reviews/<int:id>/approve', methods=['POST'])
+@admin_required
+def review_approve(id):
+    review = Review.query.get_or_404(id)
+    review.approved = True
+    review.is_approved = True
+    db.session.commit()
+    flash('Review approved successfully.', 'success')
+    return redirect(url_for('admin.reviews_index'))
+
+
+@admin.route('/reviews/<int:id>/reject', methods=['POST'])
+@admin_required
+def review_reject(id):
+    review = Review.query.get_or_404(id)
+    review.approved = False
+    review.is_approved = False
+    review.featured = False
+    db.session.commit()
+    flash('Review rejected successfully.', 'info')
+    return redirect(url_for('admin.reviews_index'))
+
+
+@admin.route('/reviews/<int:id>/feature', methods=['POST'])
+@admin_required
+def review_feature(id):
+    review = Review.query.get_or_404(id)
+    review.featured = not bool(review.featured)
+    if review.featured:
+        review.approved = True
+        review.is_approved = True
+    db.session.commit()
+    flash('Review feature status updated.', 'success')
+    return redirect(url_for('admin.reviews_index'))
+
+
+@admin.route('/reviews/<int:id>/delete', methods=['POST'])
 @admin_required
 def review_delete(id):
     review = Review.query.get_or_404(id)
     db.session.delete(review)
     db.session.commit()
     flash('Review deleted successfully.', 'info')
-    return redirect(url_for('admin.reviews'))
+    return redirect(url_for('admin.reviews_index'))
 
 
 # ---------------- CATEGORIES CRUD ----------------

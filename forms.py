@@ -79,8 +79,8 @@ class BlogPostForm(FlaskForm):
 class ReviewForm(FlaskForm):
     customer_name = StringField('Customer Name *', validators=[DataRequired(), Length(max=100)])
     country = StringField('Country *', validators=[DataRequired(), Length(max=100)])
-    rating = SelectField('Rating *', choices=[('5', '5 - Excellent'), ('4', '4 - Very Good'), ('3', '3 - Good'), ('2', '2 - Fair'), ('1', '1 - Poor')], validators=[DataRequired()])
-    review_text = TextAreaField('Review Text *', validators=[DataRequired(), Length(max=2000)])
+    rating = SelectField('Rating *', coerce=int, choices=[(5, '5 Stars - Excellent'), (4, '4 Stars - Very Good'), (3, '3 Stars - Good'), (2, '2 Stars - Fair'), (1, '1 Star - Poor')], validators=[DataRequired()])
+    review_text = TextAreaField('Review Message *', validators=[DataRequired(), Length(max=2000)])
     featured = BooleanField('Feature on Homepage', default=False)
     submit = SubmitField('Save Review')
 

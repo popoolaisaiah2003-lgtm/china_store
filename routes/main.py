@@ -4,7 +4,7 @@ import datetime
 import urllib.parse
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session, current_app, send_from_directory, Response, jsonify
 from models import Product, Category, Review, COA, BlogPost, Comment, Setting, OrderRecord, ProductImage, ShipmentUpdate
-from forms import CheckoutForm
+from forms import CheckoutForm, ReviewForm
 from translations import translate
 from extensions import db
 
@@ -100,8 +100,7 @@ def index():
     if not featured_products:
         featured_products = Product.query.order_by(Product.created_at.desc()).limit(8).all()
     categories = Category.query.all()
-    reviews = Review.query.order_by(Review.featured.desc(), Review.created_at.desc()).limit(4).all()
-    featured_reviews = Review.query.order_by(Review.featured.desc(), Review.created_at.desc()).limit(3).all()
+    featured_reviews = Review.query.filter_by(approved=True, featured=True).order_by(Review.created_at.desc()).limit(3).all()
     featured_reviews_data = []
     for review in featured_reviews:
         card = _review_card_data(review)
@@ -112,16 +111,34 @@ def index():
         'index.html',
         featured_products=featured_products,
         categories=categories,
-        reviews=reviews,
         featured_reviews=featured_reviews_data,
         latest_coas=latest_coas,
         total_product_count=total_product_count
     )
 
 
-@main.route('/reviews')
+@main.route('/reviews', methods=['GET', 'POST'])
 def reviews():
-    reviews_query = Review.query.order_by(Review.featured.desc(), Review.created_at.desc()).all()
+    form = ReviewForm()
+
+    if form.validate_on_submit():
+        review = Review(
+            customer_name=form.customer_name.data.strip(),
+            country=form.country.data.strip(),
+            rating=form.rating.data,
+            review_text=form.review_text.data.strip(),
+            approved=False,
+            featured=False,
+            reviewer_name=form.customer_name.data.strip(),
+            comment=form.review_text.data.strip(),
+            is_approved=False,
+        )
+        db.session.add(review)
+        db.session.commit()
+        flash('Thank you. Your review has been submitted for approval.', 'success')
+        return redirect(url_for('main.reviews'))
+
+    reviews_query = Review.query.filter_by(approved=True).order_by(Review.featured.desc(), Review.created_at.desc()).all()
     reviews_data = [_review_card_data(review) for review in reviews_query]
     total_reviews = len(reviews_data)
     average_rating = round(sum(item['rating'] for item in reviews_data) / total_reviews, 1) if total_reviews else 0
@@ -129,6 +146,7 @@ def reviews():
 
     return render_template(
         'reviews.html',
+        form=form,
         reviews=reviews_data,
         total_reviews=total_reviews,
         average_rating=average_rating,

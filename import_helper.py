@@ -210,6 +210,7 @@ def _ensure_seed_reviews():
             country=item['country'],
             rating=item['rating'],
             review_text=item['review_text'],
+            approved=True,
             featured=item['featured'],
             reviewer_name=item['customer_name'],
             comment=item['review_text'],
@@ -231,6 +232,7 @@ def _ensure_review_schema():
         'customer_name': 'ALTER TABLE reviews ADD COLUMN customer_name VARCHAR(100) NULL',
         'country': "ALTER TABLE reviews ADD COLUMN country VARCHAR(100) NULL DEFAULT 'International'",
         'review_text': 'ALTER TABLE reviews ADD COLUMN review_text TEXT NULL',
+        'approved': 'ALTER TABLE reviews ADD COLUMN approved BOOLEAN NULL DEFAULT 0',
         'featured': 'ALTER TABLE reviews ADD COLUMN featured BOOLEAN NULL DEFAULT 0',
     }
 
@@ -247,7 +249,7 @@ def _ensure_review_schema():
     existing_columns = {column['name'] for column in inspector.get_columns('reviews')}
     if 'customer_name' in existing_columns and 'reviewer_name' in existing_columns:
         db.session.execute(text(
-            "UPDATE reviews SET customer_name = COALESCE(NULLIF(customer_name, ''), reviewer_name), review_text = COALESCE(NULLIF(review_text, ''), comment), country = COALESCE(NULLIF(country, ''), 'International'), featured = COALESCE(featured, is_approved, 0)"
+            "UPDATE reviews SET customer_name = COALESCE(NULLIF(customer_name, ''), reviewer_name), review_text = COALESCE(NULLIF(review_text, ''), comment), country = COALESCE(NULLIF(country, ''), 'International'), approved = COALESCE(approved, is_approved, 0), featured = COALESCE(featured, 0)"
         ))
         db.session.commit()
 

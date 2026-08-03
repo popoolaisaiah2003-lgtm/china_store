@@ -127,37 +127,37 @@
         <!-- Column 1: Company Info -->
         <div>
           <div style="margin-bottom: 0.75rem;">
-            <img src="{{ url_for('static', filename='logo_dark.png') }}" alt="Yan Zhen Peptide" class="logo-img">
+            <img src="{{ url_for('static', filename='logo_dark.png') }}" alt="{{ company_name }}" class="logo-img">
           </div>
           <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 1rem;">
-            International Research Peptide Supplier specializing in HPLC certified analytical standards and custom synthesis.
+            {{ _('footer_company_desc') }}
           </p>
           <div style="font-size: 0.82rem; font-weight: 700; color: var(--navy-deep);">
-            🇨🇳 Pharmaceutical Export Facility (China)
+            {{ _('chinese_export_facility') }}
           </div>
         </div>
 
         <!-- Column 2: Quick Links -->
         <div>
-          <h4>Quick Links</h4>
+          <h4>{{ _('quick_links') }}</h4>
           <ul style="list-style: none; padding: 0; line-height: 2.2;">
-            <li><a href="{{ url_for('main.index') }}"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> Home</a></li>
-            <li><a href="{{ url_for('main.products') }}"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> Products</a></li>
-            <li><a href="{{ url_for('main.coa_list') }}"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> COA Center</a></li>
-            <li><a href="{{ url_for('main.reviews') }}"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> Reviews</a></li>
-            <li><a href="{{ url_for('blog.index') }}"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> Research Journal</a></li>
-            <li><a href="{{ url_for('main.contact') }}"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> Contact Us</a></li>
+            <li><a href="{{ url_for('main.index') }}"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> {{ _('home') }}</a></li>
+            <li><a href="{{ url_for('main.products') }}"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> {{ _('catalog') }}</a></li>
+            <li><a href="{{ url_for('main.coa_list') }}"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> {{ _('coa_certificates') }}</a></li>
+            <li><a href="{{ url_for('main.reviews') }}"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> {{ _('reviews_link') }}</a></li>
+            <li><a href="{{ url_for('blog.index') }}"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> {{ _('journal') }}</a></li>
+            <li><a href="{{ url_for('main.contact') }}"><i class="bi bi-chevron-right" style="font-size: 0.75rem;"></i> {{ _('contact') }}</a></li>
           </ul>
         </div>
 
         <!-- Column 3: Global Customer Support -->
         <div>
-          <h4>Support & Direct Orders</h4>
+          <h4>{{ _('support_direct_orders') }}</h4>
           <ul style="list-style: none; padding: 0; line-height: 2.2; font-size: 0.9rem; color: var(--text-main);">
-            <li><i class="bi bi-envelope-at-fill" style="color: var(--biotech-blue);"></i> <strong>Email:</strong> zhenyan640@gmail.com</li>
-            <li><i class="bi bi-whatsapp" style="color: #25D366;"></i> <strong>WhatsApp:</strong> +852 6329 4280</li>
-            <li><i class="bi bi-globe-americas" style="color: var(--biotech-blue);"></i> <strong>Coverage:</strong> Worldwide Shipping Available</li>
-            <li><i class="bi bi-clock-history" style="color: var(--biotech-blue);"></i> <strong>Response Time:</strong> Within 24 hours</li>
+            <li><i class="bi bi-envelope-at-fill" style="color: var(--biotech-blue);"></i> <strong>{{ _('email_label') }}:</strong> {{ business_email }}</li>
+            <li><i class="bi bi-whatsapp" style="color: #25D366;"></i> <strong>{{ _('whatsapp_label') }}:</strong> +852 6329 4280</li>
+            <li><i class="bi bi-globe-americas" style="color: var(--biotech-blue);"></i> <strong>{{ _('coverage_label') }}:</strong> {{ _('worldwide_shipping_available') }}</li>
+            <li><i class="bi bi-clock-history" style="color: var(--biotech-blue);"></i> <strong>{{ _('response_time_label') }}:</strong> {{ _('within_24_hours') }}</li>
           </ul>
         </div>
 
@@ -166,10 +166,10 @@
       <!-- Bottom Line -->
       <div style="border-top: 1px solid var(--border-color); padding-top: 1.75rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.85rem; color: var(--text-muted);">
         <div>
-          &copy; {{ 2026 }} Yan Zhen Peptide. All rights reserved.
+          &copy; {{ 2026 }} {{ company_name }}. {{ _('all_rights_reserved') }}
         </div>
         <div style="font-weight: 700; color: var(--navy-deep);">
-          Research Use Only • COA Available • Global Customer Support
+          {{ _('footer_bottom_tagline') }}
         </div>
       </div>
     </div>

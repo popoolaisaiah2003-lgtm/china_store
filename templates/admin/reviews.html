@@ -6,11 +6,8 @@
 <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
   <div>
     <h1 class="h3 fw-bold text-dark mb-1">Review Management</h1>
-    <p class="text-muted mb-0 small">Manage public testimonials, featured review cards, and client country labels.</p>
+    <p class="text-muted mb-0 small">Approve, reject, feature, and remove client reviews before they appear publicly.</p>
   </div>
-  <a href="{{ url_for('admin.review_new') }}" class="btn btn-primary">
-    <i class="bi bi-plus-lg me-1"></i> Add Review
-  </a>
 </div>
 
 <div class="admin-card p-0 overflow-hidden">
@@ -21,9 +18,10 @@
           <th class="ps-3">Customer</th>
           <th>Country</th>
           <th>Rating</th>
-          <th>Featured</th>
           <th>Review</th>
           <th>Date</th>
+          <th>Status</th>
+          <th>Featured</th>
           <th class="text-end pe-3">Actions</th>
         </tr>
       </thead>
@@ -33,6 +31,15 @@
             <td class="ps-3 fw-bold text-dark">{{ review.customer_name or review.reviewer_name }}</td>
             <td>{{ review.country or 'International Client' }}</td>
             <td><span class="badge bg-warning-subtle text-warning border border-warning-subtle">{{ review.rating }} ★</span></td>
+            <td style="max-width: 420px;">{{ (review.review_text or review.comment or '')[:140] }}{% if (review.review_text or review.comment or '')|length > 140 %}...{% endif %}</td>
+            <td class="text-muted small">{{ review.created_at.strftime('%Y-%m-%d') if review.created_at else '' }}</td>
+            <td>
+              {% if review.approved %}
+                <span class="badge bg-success-subtle text-success border border-success-subtle">Approved</span>
+              {% else %}
+                <span class="badge bg-warning-subtle text-warning border border-warning-subtle">Pending</span>
+              {% endif %}
+            </td>
             <td>
               {% if review.featured %}
                 <span class="badge bg-primary-subtle text-primary border border-primary-subtle">Featured</span>
@@ -40,12 +47,23 @@
                 <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle">Standard</span>
               {% endif %}
             </td>
-            <td style="max-width: 420px;">{{ (review.review_text or review.comment or '')[:140] }}{% if (review.review_text or review.comment or '')|length > 140 %}...{% endif %}</td>
-            <td class="text-muted small">{{ review.created_at.strftime('%Y-%m-%d') if review.created_at else '' }}</td>
             <td class="text-end pe-3">
-              <div class="d-flex justify-content-end gap-2">
-                <a href="{{ url_for('admin.review_edit', id=review.id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
-                <form method="POST" action="{{ url_for('admin.review_delete', id=review.id) }}" onsubmit="return confirm('Delete this review?');" style="display: inline;">
+              <div class="d-flex justify-content-end gap-2 flex-wrap">
+                {% if not review.approved %}
+                  <form method="POST" action="{{ url_for('admin.review_approve', id=review.id) }}" style="display: inline;">
+                    <button type="submit" class="btn btn-sm btn-success">Approve</button>
+                  </form>
+                {% else %}
+                  <form method="POST" action="{{ url_for('admin.review_reject', id=review.id) }}" style="display: inline;">
+                    <button type="submit" class="btn btn-sm btn-warning">Reject</button>
+                  </form>
+                {% endif %}
+
+                <form method="POST" action="{{ url_for('admin.review_feature', id=review.id) }}" style="display: inline;">
+                  <button type="submit" class="btn btn-sm btn-outline-primary">{{ 'Unfeature' if review.featured else 'Feature' }}</button>
+                </form>
+
+                <form method="POST" action="{{ url_for('admin.review_delete', id=review.id) }}" onsubmit="return confirm('Delete this review permanently?');" style="display: inline;">
                   <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
                 </form>
               </div>
@@ -53,7 +71,7 @@
           </tr>
         {% else %}
           <tr>
-            <td colspan="7" class="text-center text-muted py-4">
+            <td colspan="8" class="text-center text-muted py-4">
               No reviews have been added yet.
             </td>
           </tr>

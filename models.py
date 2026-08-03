@@ -187,13 +187,14 @@ class Review(db.Model):
     country = db.Column(db.String(100), nullable=False, default='International')
     rating = db.Column(db.Integer, default=5)
     review_text = db.Column(db.Text, nullable=False)
+    approved = db.Column(db.Boolean, default=False)
     featured = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     # Legacy columns retained so the app can migrate safely without downtime.
     reviewer_name = db.Column(db.String(100), nullable=True)
     comment = db.Column(db.Text, nullable=True)
-    is_approved = db.Column(db.Boolean, default=True)
+    is_approved = db.Column(db.Boolean, default=False)
 
     product = db.relationship('Product', backref='reviews')
 

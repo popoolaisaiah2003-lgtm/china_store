@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 
-{% block title %}Global Shipment Updates | Yan Zhen Peptide — International Dispatch Log{% endblock %}
+{% block title %}{{ _('shipment_updates_title') }} | Yan Zhen Peptide{% endblock %}
 
 {% block content %}
 <section style="background: var(--navy-deep); color: white; padding: 3rem 0; border-bottom: 3px solid var(--biotech-blue);">
   <div class="container">
     <div style="font-size: 0.8rem; font-weight: 800; color: var(--biotech-blue); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.35rem;">
-      ✈️ Real-Time Cold-Chain Logistics
+      {{ _('shipment_updates_tag') }}
     </div>
-    <h1 style="color: white; margin-bottom: 0.5rem; font-size: 2.25rem;">Global Shipment Updates</h1>
+    <h1 style="color: white; margin-bottom: 0.5rem; font-size: 2.25rem;">{{ _('shipment_updates_title') }}</h1>
     <p style="color: #94A3B8; max-width: 680px; font-size: 0.95rem;">
-      Live dispatch and delivery updates for analytical-grade research peptide orders shipped to international research laboratories worldwide.
+      {{ _('shipment_updates_desc') }}
     </p>
   </div>
 </section>
@@ -18,11 +18,11 @@
 <section class="section" style="padding: 3rem 0;">
   <div class="container">
     
-    <!-- Requirement 7: Privacy Notice Banner -->
+    <!-- Privacy Notice Banner -->
     <div style="background: #F0F9FF; border: 1.5px solid var(--biotech-blue); border-radius: var(--radius-md); padding: 1rem 1.25rem; margin-bottom: 2.5rem; display: flex; align-items: center; gap: 0.85rem; color: var(--navy-deep); font-size: 0.9rem;">
       <span style="font-size: 1.35rem; color: var(--biotech-blue);">🛡️</span>
       <div>
-        <strong>Privacy Notice:</strong> Tracking numbers and customer addresses are partially hidden for privacy and security.
+        <strong>{{ _('privacy_notice_label') }}</strong> {{ _('privacy_notice_text') }}
       </div>
     </div>
 
@@ -39,31 +39,31 @@
               {% else %}
                 <div style="text-align: center; color: var(--text-muted); padding: 1.5rem;">
                   <div style="font-size: 2.5rem; margin-bottom: 0.35rem;">📦</div>
-                  <div style="font-size: 0.82rem; font-weight: 700; color: var(--navy-deep);">HPLC Sealed Export Parcel</div>
-                  <div style="font-size: 0.75rem;">Cold-Chain Temperature Logger Active</div>
+                  <div style="font-size: 0.82rem; font-weight: 700; color: var(--navy-deep);">{{ _('sealed_export_parcel') }}</div>
+                  <div style="font-size: 0.75rem;">{{ _('cold_chain_active') }}</div>
                 </div>
               {% endif %}
 
-              <!-- Requirement 6: Status Badges -->
+              <!-- Status Badges -->
               {% if s.status == 'Processing' %}
                 <span style="position: absolute; top: 12px; right: 12px; background: #64748B; color: white; font-weight: 800; font-size: 0.75rem; padding: 0.3rem 0.75rem; border-radius: 20px; letter-spacing: 0.03em;">
-                  ⚙️ Processing
+                  ⚙️ {{ _('status_processing') }}
                 </span>
               {% elif s.status == 'Dispatched' %}
                 <span style="position: absolute; top: 12px; right: 12px; background: #F59E0B; color: white; font-weight: 800; font-size: 0.75rem; padding: 0.3rem 0.75rem; border-radius: 20px; letter-spacing: 0.03em;">
-                  📤 Dispatched
+                  📤 {{ _('status_dispatched') }}
                 </span>
               {% elif s.status == 'In Transit' %}
                 <span style="position: absolute; top: 12px; right: 12px; background: #0EA5E9; color: white; font-weight: 800; font-size: 0.75rem; padding: 0.3rem 0.75rem; border-radius: 20px; letter-spacing: 0.03em;">
-                  ✈️ In Transit
+                  ✈️ {{ _('status_in_transit') }}
                 </span>
               {% elif s.status == 'Delivered' %}
                 <span style="position: absolute; top: 12px; right: 12px; background: #10B981; color: white; font-weight: 800; font-size: 0.75rem; padding: 0.3rem 0.75rem; border-radius: 20px; letter-spacing: 0.03em;">
-                  ✅ Delivered
+                  ✅ {{ _('status_delivered') }}
                 </span>
               {% elif s.status == 'Issue' %}
                 <span style="position: absolute; top: 12px; right: 12px; background: #EF4444; color: white; font-weight: 800; font-size: 0.75rem; padding: 0.3rem 0.75rem; border-radius: 20px; letter-spacing: 0.03em;">
-                  ⚠️ Issue
+                  ⚠️ {{ _('status_issue') }}
                 </span>
               {% else %}
                 <span style="position: absolute; top: 12px; right: 12px; background: var(--biotech-blue); color: white; font-weight: 800; font-size: 0.75rem; padding: 0.3rem 0.75rem; border-radius: 20px;">
@@ -92,18 +92,18 @@
                     🧪 {{ s.product_name }}
                   </div>
                   <div style="font-size: 0.84rem; color: var(--text-muted); font-weight: 600;">
-                    Quantity: <span style="color: var(--navy-deep);">{{ s.quantity }}</span>
+                    {{ _('quantity') }}: <span style="color: var(--navy-deep);">{{ s.quantity }}</span>
                   </div>
                 </div>
 
                 <!-- Shipped Date & ETA -->
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.84rem; margin-bottom: 1rem;">
                   <div>
-                    <span style="color: var(--text-muted); display: block; font-size: 0.75rem;">Shipped Date</span>
+                    <span style="color: var(--text-muted); display: block; font-size: 0.75rem;">{{ _('shipped_date') }}</span>
                     <strong style="color: var(--navy-deep);">{{ s.shipped_at or 'N/A' }}</strong>
                   </div>
                   <div>
-                    <span style="color: var(--text-muted); display: block; font-size: 0.75rem;">Estimated Delivery</span>
+                    <span style="color: var(--text-muted); display: block; font-size: 0.75rem;">{{ _('estimated_delivery') }}</span>
                     <strong style="color: var(--biotech-blue);">{{ s.eta or 'N/A' }}</strong>
                   </div>
                 </div>
@@ -124,8 +124,8 @@
     {% else %}
       <div style="text-align: center; padding: 4rem 1rem; background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg);">
         <div style="font-size: 3rem; margin-bottom: 1rem;">✈️</div>
-        <h3 style="color: var(--navy-deep); font-weight: 800; margin-bottom: 0.5rem;">No Global Shipments Published Yet</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">Check back soon for live international dispatch and tracking logs.</p>
+        <h3 style="color: var(--navy-deep); font-weight: 800; margin-bottom: 0.5rem;">{{ _('no_shipments_title') }}</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">{{ _('no_shipments_desc') }}</p>
       </div>
     {% endif %}
 

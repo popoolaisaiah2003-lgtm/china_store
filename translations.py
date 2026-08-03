@@ -141,13 +141,68 @@ TRANSLATIONS = {
         'item_description': 'Item Description',
         'facility_footnote': 'Yan Zhen Peptide Facility • Direct WhatsApp Desk: +234 818 188 2418 • For Research Purposes Only',
 
-        # Footer
+        # Footer & General
         'footer_desc': 'Pioneering analytical purity and synthesis standard in research peptides. Guaranteed ≥ 99.8% mass spectrometry & HPLC verified laboratory compounds.',
         'navigation': 'Navigation',
         'wholesale_support': 'Wholesale Support',
         'direct_ordering': 'Direct Ordering',
         'wholesale_desk_wa': 'Wholesale Desk WhatsApp:',
-        'copyright': 'All Rights Reserved. For Laboratory & Scientific Research Purposes Only.'
+        'copyright': 'All Rights Reserved. For Laboratory & Scientific Research Purposes Only.',
+
+        # Shipment Updates Section
+        'shipment_updates_tag': '✈️ Real-Time Cold-Chain Logistics',
+        'shipment_updates_title': 'Global Shipment Updates',
+        'shipment_updates_desc': 'Live dispatch and delivery updates for analytical-grade research peptide orders shipped to international research laboratories worldwide.',
+        'privacy_notice_label': 'Privacy Notice:',
+        'privacy_notice_text': 'Tracking numbers and customer addresses are partially hidden for privacy and security.',
+        'sealed_export_parcel': 'HPLC Sealed Export Parcel',
+        'cold_chain_active': 'Cold-Chain Temperature Logger Active',
+        'status_processing': 'Processing',
+        'status_dispatched': 'Dispatched',
+        'status_in_transit': 'In Transit',
+        'status_delivered': 'Delivered',
+        'status_issue': 'Issue',
+        'shipped_date': 'Shipped Date',
+        'estimated_delivery': 'Estimated Delivery',
+        'no_shipments_title': 'No Global Shipments Published Yet',
+        'no_shipments_desc': 'Check back soon for live international dispatch and tracking logs.',
+
+        # Customer Reviews Section
+        'global_trust_signal': 'Global Trust Signal',
+        'trusted_by_clients': 'Trusted by Clients Worldwide',
+        'trusted_by_clients_desc': 'Real feedback from approved wholesale peptide buyers, analytical teams, and international clients who depend on consistent quality and responsive export support.',
+        'approved_badge': 'Approved',
+        'view_all_reviews': 'View All Reviews',
+        'verified_testimonials': 'Verified Global Testimonials',
+        'client_reviews_title': 'Client Reviews & Laboratory Feedback',
+        'client_reviews_desc': 'Trusted by wholesale peptide customers, research labs, aesthetic clinics, and international scientific buyers seeking consistent quality, transparent communication, and reliable global delivery.',
+        'submit_review_tag': 'Submit a Review',
+        'share_experience_title': 'Share your client experience',
+        'review_moderation_note': 'Your submission will be reviewed before publication.',
+        'submit_review_btn': 'Submit Review',
+        'overall_satisfaction': 'Overall Satisfaction',
+        'based_on_approved': 'Based on approved client feedback',
+        'approved_reviews_count': 'approved reviews',
+        'partners_subtitle': 'Labs, clinics, distributors, and research partners',
+        'featured_reviews_header': 'Featured Reviews',
+        'featured_badge': 'Featured',
+        'no_reviews_title': 'No Reviews Published Yet',
+        'no_reviews_desc': 'Be the first to share your laboratory client experience with Yan Zhen Peptide.',
+        'reviews_link': 'Reviews',
+
+        # Footer Section
+        'footer_company_desc': 'International Research Peptide Supplier specializing in HPLC certified analytical standards and custom synthesis.',
+        'chinese_export_facility': '🇨🇳 Pharmaceutical Export Facility (China)',
+        'quick_links': 'Quick Links',
+        'support_direct_orders': 'Support & Direct Orders',
+        'email_label': 'Email',
+        'whatsapp_label': 'WhatsApp',
+        'coverage_label': 'Coverage',
+        'worldwide_shipping_available': 'Worldwide Shipping Available',
+        'response_time_label': 'Response Time',
+        'within_24_hours': 'Within 24 hours',
+        'all_rights_reserved': 'All rights reserved.',
+        'footer_bottom_tagline': 'Research Use Only • COA Available • Global Customer Support'
     },
 
     'zh': {
@@ -289,13 +344,68 @@ TRANSLATIONS = {
         'item_description': '商品描述',
         'facility_footnote': '颜真多肽实验室 • WhatsApp 直连服务: +234 818 188 2418 • 仅供科研用途',
 
-        # Footer
+        # Footer & General
         'footer_desc': '引领科研多肽的分析纯度与合成标准。保证 ≥ 99.8% 质谱及 HPLC 认证实验室化合物。',
         'navigation': '网站导航',
         'wholesale_support': '批发支持',
         'direct_ordering': '直接订购',
         'wholesale_desk_wa': '批发专线 WhatsApp:',
-        'copyright': '版权所有。仅供实验室及科学研究用途。'
+        'copyright': '版权所有。仅供实验室及科学研究用途。',
+
+        # Shipment Updates Section
+        'shipment_updates_tag': '✈️ 实时冷链物流动态',
+        'shipment_updates_title': '全球发货动态',
+        'shipment_updates_desc': '实时更新发往全球科研实验室的高纯度多肽订单物流及妥投动态。',
+        'privacy_notice_label': '隐私声明:',
+        'privacy_notice_text': '出于隐私和安全保护，运单号及客户地址已部分遮挡。',
+        'sealed_export_parcel': 'HPLC 无菌密封出口包裹',
+        'cold_chain_active': '全程冷链温度记录仪运行中',
+        'status_processing': '处理中',
+        'status_dispatched': '已发货',
+        'status_in_transit': '运输中',
+        'status_delivered': '已妥投',
+        'status_issue': '异常提醒',
+        'shipped_date': '发货日期',
+        'estimated_delivery': '预计送达',
+        'no_shipments_title': '暂无发布的全球发货记录',
+        'no_shipments_desc': '请稍后查看最新的国际发货和物流追踪日志。',
+
+        # Customer Reviews Section
+        'global_trust_signal': '全球信任保障',
+        'trusted_by_clients': '深受全球科研客户信赖',
+        'trusted_by_clients_desc': '来自经认证的多肽批发买家、分析团队和国际客户的真实评价。',
+        'approved_badge': '已审核',
+        'view_all_reviews': '查看全部评价',
+        'verified_testimonials': '真实全球客户感言',
+        'client_reviews_title': '客户评价与实验室反馈',
+        'client_reviews_desc': '深受多肽批发客户、科研实验室、诊所以及寻求稳定质量与可靠发货的国际科研买家信赖。',
+        'submit_review_tag': '提交评价',
+        'share_experience_title': '分享您的合作体验',
+        'review_moderation_note': '您的评价提交后将经审核后公开发布。',
+        'submit_review_btn': '提交评价',
+        'overall_satisfaction': '总体满意度',
+        'based_on_approved': '基于已审核客户反馈',
+        'approved_reviews_count': '条已审核评价',
+        'partners_subtitle': '实验室、诊所、分销商及科研合作伙伴',
+        'featured_reviews_header': '精选评价',
+        'featured_badge': '精选',
+        'no_reviews_title': '暂无发布的评价',
+        'no_reviews_desc': '成为首位分享您与颜真多肽合作体验的科研客户。',
+        'reviews_link': '客户评价',
+
+        # Footer Section
+        'footer_company_desc': '国际科研多肽供应商，专注于HPLC认证分析标准品与定制合成。',
+        'chinese_export_facility': '🇨🇳 中国医药出口生产基地',
+        'quick_links': '快速链接',
+        'support_direct_orders': '支持与直连订购',
+        'email_label': '电子邮箱',
+        'whatsapp_label': 'WhatsApp',
+        'coverage_label': '服务范围',
+        'worldwide_shipping_available': '支持全球冷链发货',
+        'response_time_label': '响应时间',
+        'within_24_hours': '24小时内响应',
+        'all_rights_reserved': '保留所有权利。',
+        'footer_bottom_tagline': '仅供科研使用 • 提供COA质检报告 • 全球客户支持'
     },
 
     'es': {

@@ -6,7 +6,7 @@ from sqlalchemy import inspect, text
 from flask_migrate import stamp, upgrade
 from config import Config
 from extensions import db, login_manager, migrate, csrf
-from models import Admin, Setting, Product
+from models import Admin, Setting, Product, ContactInquiry, OrderRecord
 from translations import translate
 
 
@@ -85,6 +85,7 @@ def create_app():
     @app.context_processor
     def inject_global_vars():
         lang = session.get('lang', 'en')
+        is_admin_request = request.blueprint == 'admin' or (request.endpoint or '').startswith('admin.')
         
         # Calculate cart total count
         cart = session.get('cart', {})
@@ -96,12 +97,26 @@ def create_app():
                 pass
 
         show_lang_modal = session.get('lang_modal_shown') is not True
+        unread_inquiries_count = 0
+        pending_orders_count = 0
+        orders_badge_uses_all = False
+
+        if is_admin_request:
+            unread_inquiries_count = ContactInquiry.query.filter_by(is_read=False).count()
+            if hasattr(OrderRecord, 'status'):
+                pending_orders_count = OrderRecord.query.filter_by(status='Pending').count()
+            else:
+                pending_orders_count = OrderRecord.query.count()
+                orders_badge_uses_all = True
         
         return dict(
             lang=lang,
             _ = lambda key: translate(key, lang),
             cart_total_count=total_quantity,
             show_lang_modal=show_lang_modal,
+            unread_inquiries_count=unread_inquiries_count,
+            pending_orders_count=pending_orders_count,
+            orders_badge_uses_all=orders_badge_uses_all,
             company_name=Setting.get_val('company_name', 'Yan Zhen Peptide'),
             whatsapp_number=Setting.get_val('whatsapp_number', app.config.get('WHATSAPP_NUMBER', '85263294280')),
             business_email=Setting.get_val('business_email', app.config.get('BUSINESS_EMAIL', 'zhenyan640@gmail.com'))

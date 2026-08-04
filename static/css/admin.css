@@ -174,6 +174,55 @@ body.admin-layout {
   overflow: hidden;
 }
 
+.admin-nav-badge {
+  margin-left: auto;
+  min-width: 1.55rem;
+  height: 1.55rem;
+  padding: 0 0.42rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+  transition: opacity var(--admin-transition-speed) ease, transform var(--admin-transition-speed) ease, min-width var(--admin-transition-speed) ease, background-color var(--admin-transition-speed) ease;
+}
+
+.admin-nav-badge-text {
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1;
+  transition: opacity var(--admin-transition-speed) ease, transform var(--admin-transition-speed) ease;
+}
+
+.admin-nav-badge-dot {
+  position: absolute;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  opacity: 0;
+  transform: scale(0.7);
+  transition: opacity var(--admin-transition-speed) ease, transform var(--admin-transition-speed) ease;
+}
+
+.admin-nav-badge-danger {
+  background: #DC2626;
+  color: #FFFFFF;
+}
+
+.admin-nav-badge-danger .admin-nav-badge-dot {
+  background: #FCA5A5;
+}
+
+.admin-nav-badge-warning {
+  background: #F59E0B;
+  color: #1F2937;
+}
+
+.admin-nav-badge-warning .admin-nav-badge-dot {
+  background: #FDE68A;
+}
+
 .admin-nav .nav-link i {
   font-size: 1rem;
   min-width: 1.2rem;
@@ -266,6 +315,29 @@ body.admin-sidebar-collapsed .admin-nav .nav-link {
   padding-right: 0.75rem;
 }
 
+body.admin-sidebar-collapsed .admin-nav-badge {
+  min-width: 0.6rem;
+  width: 0.6rem;
+  height: 0.6rem;
+  padding: 0;
+  margin-left: 0;
+  position: absolute;
+  top: 0.6rem;
+  right: 0.7rem;
+  background: transparent;
+}
+
+body.admin-sidebar-collapsed .admin-nav-badge-text {
+  opacity: 0;
+  transform: scale(0.7);
+  pointer-events: none;
+}
+
+body.admin-sidebar-collapsed .admin-nav-badge-dot {
+  opacity: 1;
+  transform: scale(1);
+}
+
 body.admin-sidebar-collapsed .admin-nav .nav-link i {
   margin: 0;
 }
@@ -351,5 +423,26 @@ body.admin-sidebar-collapsed .admin-nav .nav-link i {
   body.admin-sidebar-collapsed .admin-nav .nav-link {
     justify-content: flex-start;
     gap: 0.75rem;
+  }
+
+  body.admin-sidebar-collapsed .admin-nav-badge {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin-left: auto;
+    width: 1.55rem;
+    min-width: 1.55rem;
+    height: 1.55rem;
+  }
+
+  body.admin-sidebar-collapsed .admin-nav-badge-text {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  body.admin-sidebar-collapsed .admin-nav-badge-dot {
+    opacity: 0;
+    transform: scale(0.7);
   }
 }

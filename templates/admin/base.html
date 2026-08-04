@@ -82,12 +82,26 @@
       </li>
       <li class="nav-item">
         <a class="nav-link {{ 'active' if request.endpoint == 'admin.orders' }}" href="{{ url_for('admin.orders') }}">
-          <i class="bi bi-box-seam"></i><span class="nav-label">Orders Inquiry</span>
+          <i class="bi bi-box-seam"></i>
+          <span class="nav-label">Orders Inquiry</span>
+          {% if pending_orders_count %}
+            <span class="admin-nav-badge admin-nav-badge-warning" aria-label="{{ pending_orders_count }} order notifications">
+              <span class="admin-nav-badge-text">{{ pending_orders_count }}</span>
+              <span class="admin-nav-badge-dot" aria-hidden="true"></span>
+            </span>
+          {% endif %}
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ 'active' if 'inquiry' in request.endpoint or request.endpoint == 'admin.inquiries' }}" href="{{ url_for('admin.inquiries') }}">
-          <i class="bi bi-envelope-paper"></i><span class="nav-label">Inquiries</span>
+          <i class="bi bi-envelope-paper"></i>
+          <span class="nav-label">Inquiries</span>
+          {% if unread_inquiries_count %}
+            <span class="admin-nav-badge admin-nav-badge-danger" aria-label="{{ unread_inquiries_count }} unread inquiries">
+              <span class="admin-nav-badge-text">{{ unread_inquiries_count }}</span>
+              <span class="admin-nav-badge-dot" aria-hidden="true"></span>
+            </span>
+          {% endif %}
         </a>
       </li>
       <li class="nav-item">

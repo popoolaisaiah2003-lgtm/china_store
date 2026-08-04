@@ -160,6 +160,13 @@
         <div class="product-card">
           <div class="product-thumb">
             <span class="purity-tag">{{ product.purity }}</span>
+            <form method="POST" action="{{ url_for('main.wishlist_toggle', product_id=product.id) }}" class="wishlist-form" data-ajax-wishlist>
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <input type="hidden" name="next" value="{{ request.full_path if request.query_string else request.path }}">
+              <button type="submit" class="wishlist-toggle{{ ' is-active' if product.id in wishlist_product_ids else '' }}" aria-label="Toggle favorite" aria-pressed="{{ 'true' if product.id in wishlist_product_ids else 'false' }}" data-wishlist-button>
+                <i class="bi {{ 'bi-heart-fill' if product.id in wishlist_product_ids else 'bi-heart' }}"></i>
+              </button>
+            </form>
             <img src="{{ url_for('static', filename=product.catalog_image) }}" alt="{{ product.name }}" loading="lazy">
           </div>
           <div class="product-body">
@@ -179,10 +186,11 @@
                   {{ _('view_details') }}
                 </a>
                 
-                <form method="POST" action="{{ url_for('main.cart_add', product_id=product.id) }}" style="margin: 0;">
+                <form method="POST" action="{{ url_for('main.cart_add', product_id=product.id) }}" style="margin: 0;" data-ajax-cart-add>
                   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <input type="hidden" name="next" value="{{ request.full_path if request.query_string else request.path }}">
                   <input type="hidden" name="quantity" value="1">
-                  <button type="submit" class="btn btn-sm btn-primary" style="padding: 0.35rem 0.65rem;" title="{{ _('add_to_cart_tooltip') }}">
+                  <button type="submit" class="btn btn-sm btn-primary" style="padding: 0.35rem 0.65rem;" title="{{ _('add_to_cart_tooltip') }}" data-loading-text="Adding...">
                     <i class="bi bi-cart-plus"></i> +
                   </button>
                 </form>

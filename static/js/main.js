@@ -1,147 +1,218 @@
-// Yan Zhen Peptide - Chinese Biotech Interactivity & Modal Checkout Workflow
+document.addEventListener('DOMContentLoaded', function () {
+  var mobileToggle = document.getElementById('mobileNavToggle');
+  var navLinks = document.getElementById('navLinks');
+  var modalElement = document.getElementById('orderInfoModal');
+  var productsGrid = document.getElementById('productsGrid');
+  var productsSummaryText = document.getElementById('productsSummaryText');
+  var productsLoadMoreWrap = document.getElementById('productsLoadMoreWrap');
+  var orderPanel = document.getElementById('orderPanel');
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Mobile Navigation Toggle
-  const mobileToggle = document.getElementById('mobileNavToggle');
-  const navLinks = document.getElementById('navLinks');
+  function updateCartBadges(count) {
+    document.querySelectorAll('.cart-badge').forEach(function (badge) {
+      badge.textContent = count;
+    });
+  }
+
+  function updateWishlistButtonState(button, isFavorited) {
+    if (!button) return;
+    button.classList.toggle('is-active', isFavorited);
+    button.setAttribute('aria-pressed', isFavorited ? 'true' : 'false');
+    var icon = button.querySelector('i');
+    if (icon) {
+      icon.className = 'bi ' + (isFavorited ? 'bi-heart-fill' : 'bi-heart');
+    }
+  }
+
+  function updateProductsPayload(payload, append) {
+    if (!productsGrid) return;
+    if (append) {
+      productsGrid.insertAdjacentHTML('beforeend', payload.products_html);
+    } else {
+      productsGrid.innerHTML = payload.products_html;
+    }
+
+    productsGrid.dataset.currentPage = String(payload.page || 1);
+    productsGrid.dataset.hasNext = payload.has_next ? 'true' : 'false';
+    productsGrid.dataset.nextPage = payload.next_page || '';
+
+    if (productsSummaryText) {
+      productsSummaryText.textContent = 'Showing ' + payload.loaded_count + ' Products';
+    }
+
+    if (productsLoadMoreWrap) {
+      if (payload.has_next) {
+        var url = new URL(window.location.href);
+        url.searchParams.set('page', payload.next_page);
+        productsLoadMoreWrap.innerHTML = '<a href="' + url.toString() + '" class="btn btn-outline-blue" data-ajax-load-more data-loading-text="Loading more...">Load more products</a>';
+      } else {
+        productsLoadMoreWrap.innerHTML = '';
+      }
+    }
+  }
+
+  function syncProductFilterState(urlString) {
+    var activeUrl = new URL(urlString, window.location.origin);
+    var activeCategory = activeUrl.searchParams.get('category') || '';
+
+    document.querySelectorAll('[data-ajax-product-filter-link]').forEach(function (link) {
+      var linkUrl = new URL(link.href, window.location.origin);
+      var linkCategory = linkUrl.searchParams.get('category') || '';
+      link.classList.toggle('active', linkCategory === activeCategory);
+    });
+
+    document.querySelectorAll('[data-ajax-products-form]').forEach(function (form) {
+      var hiddenCategory = form.querySelector('input[name="category"]');
+      if (activeCategory) {
+        if (!hiddenCategory) {
+          hiddenCategory = document.createElement('input');
+          hiddenCategory.type = 'hidden';
+          hiddenCategory.name = 'category';
+          form.appendChild(hiddenCategory);
+        }
+        hiddenCategory.value = activeCategory;
+      } else if (hiddenCategory) {
+        hiddenCategory.remove();
+      }
+    });
+  }
+
+  async function submitAjaxForm(form, successTitle) {
+    var button = form.querySelector('button[type="submit"]');
+    AppAjax.setLoading(button, true);
+    try {
+      var payload = await AppAjax.request(form.action, { method: 'POST', form: form });
+      AppAjax.showToast(successTitle, payload.message || '', false);
+      return payload;
+    } catch (error) {
+      AppAjax.showToast('Request failed', error.message, true);
+      throw error;
+    } finally {
+      AppAjax.setLoading(button, false);
+    }
+  }
 
   if (mobileToggle && navLinks) {
-    mobileToggle.addEventListener('click', () => {
+    mobileToggle.addEventListener('click', function () {
       navLinks.classList.toggle('active');
     });
   }
 
-  // Language Persistence
-  const currentLangMatch = window.location.pathname.match(/\/set_language\/([a-z]{2})/);
+  var currentLangMatch = window.location.pathname.match(/\/set_language\/([a-z]{2})/);
   if (currentLangMatch && currentLangMatch[1]) {
     localStorage.setItem('yz_language', currentLangMatch[1]);
   }
 
-  // Stackable Toast Notification Helper
-  const toastContainer = document.getElementById('toastContainer');
+  document.body.addEventListener('submit', async function (event) {
+    var form = event.target;
+    if (!form) return;
 
-  function showToast(title, message = '', isError = false) {
-    if (!toastContainer) return;
-
-    const toastId = 'toast-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6);
-    const bgStyle = isError 
-      ? 'background: #991B1B; color: #FFFFFF; border: 1px solid #FCA5A5;' 
-      : 'background: #0B1F3A; color: #FFFFFF; border: 1.5px solid #C8A96B;';
-
-    const toastHTML = `
-      <div id="${toastId}" class="toast align-items-center border-0 shadow-lg mb-2" role="alert" aria-live="assertive" aria-atomic="true" style="${bgStyle} border-radius: 8px; font-family: inherit;">
-        <div class="d-flex" style="padding: 0.75rem 1rem; align-items: center;">
-          <div class="toast-body d-flex align-items-center gap-3" style="padding: 0; flex-grow: 1;">
-            <span style="font-size: 1.35rem; line-height: 1;">${isError ? '❌' : '📋'}</span>
-            <div>
-              <div style="font-weight: 700; font-size: 0.9rem; color: #FFFFFF;">${title}</div>
-              ${message ? `<div style="font-size: 0.78rem; color: #CBD5E1; margin-top: 0.15rem;">${message}</div>` : ''}
-            </div>
-          </div>
-          <button type="button" class="btn-close btn-close-white ms-3" data-bs-dismiss="toast" aria-label="Close" style="opacity: 0.8;"></button>
-        </div>
-      </div>
-    `;
-
-    toastContainer.insertAdjacentHTML('beforeend', toastHTML);
-    const toastEl = document.getElementById(toastId);
-
-    if (window.bootstrap && bootstrap.Toast) {
-      const bsToast = new bootstrap.Toast(toastEl, { delay: 3500 });
-      bsToast.show();
-    } else {
-      toastEl.classList.add('show');
-      setTimeout(() => {
-        toastEl.classList.remove('show');
-        setTimeout(() => toastEl.remove(), 400);
-      }, 3500);
-    }
-  }
-
-  // Intercept all cart add forms for AJAX submission (No page reload, zero scroll jump)
-  document.body.addEventListener('submit', async (e) => {
-    const form = e.target;
-    if (!form || !form.action || !form.action.includes('/cart/add/')) return;
-
-    e.preventDefault();
-
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const originalText = submitBtn ? submitBtn.innerHTML : '';
-
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<span style="display:inline-block; animation: spin 1s linear infinite;">⏳</span> Adding...';
+    if (form.matches('[data-ajax-cart-add]')) {
+      event.preventDefault();
+      try {
+        var cartAddPayload = await submitAjaxForm(form, 'Added to quotation cart');
+        updateCartBadges(cartAddPayload.cart_total_count || 0);
+      } catch (error) {}
+      return;
     }
 
-    const ajaxUrl = form.action.replace('/cart/add/', '/cart/add-ajax/');
-    const formData = new FormData(form);
+    if (form.matches('[data-ajax-cart-update], [data-ajax-cart-remove]')) {
+      event.preventDefault();
+      try {
+        var cartPayload = await submitAjaxForm(form, 'Quotation updated');
+        updateCartBadges(cartPayload.cart_total_count || 0);
+        if (orderPanel && cartPayload.order_panel_html) {
+          orderPanel.innerHTML = cartPayload.order_panel_html;
+        }
+      } catch (error) {}
+      return;
+    }
 
-    try {
-      const response = await fetch(ajaxUrl, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest'
+    if (form.matches('[data-ajax-wishlist]')) {
+      event.preventDefault();
+      try {
+        var wishlistPayload = await submitAjaxForm(form, 'Favorites updated');
+        updateWishlistButtonState(form.querySelector('[data-wishlist-button]'), wishlistPayload.is_favorited);
+      } catch (error) {}
+      return;
+    }
+
+    if (form.matches('[data-ajax-products-form]')) {
+      event.preventDefault();
+      var queryUrl = new URL(form.action, window.location.origin);
+      new FormData(form).forEach(function (value, key) {
+        if (value) {
+          queryUrl.searchParams.set(key, value);
+        } else {
+          queryUrl.searchParams.delete(key);
         }
       });
-
-      if (!response.ok) {
-        throw new Error(`Server returned HTTP ${response.status}`);
-      }
-
-      const data = await response.json();
-
-      if (data.success) {
-        // Update all navbar cart badges
-        const cartBadges = document.querySelectorAll('.cart-badge');
-        cartBadges.forEach(badge => {
-          badge.textContent = data.cart_total_count;
-        });
-
-        // Trigger stackable toast notification
-        showToast(
-          'Added to quotation cart', 
-          `${data.quantity} × ${data.product_name}`, 
-          false
-        );
-      } else {
-        showToast('Failed to add item', data.message || 'Error updating quotation', true);
-      }
-    } catch (err) {
-      console.error('AJAX Cart Request Failed:', err);
-      showToast('Error', 'Unable to add item to quotation cart. Please try again.', true);
-    } finally {
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalText;
+      queryUrl.searchParams.delete('page');
+      try {
+        var productsPayload = await AppAjax.request(queryUrl.toString(), { method: 'GET' });
+        updateProductsPayload(productsPayload, false);
+        syncProductFilterState(queryUrl.toString());
+        window.history.replaceState({}, '', queryUrl.toString());
+      } catch (error) {
+        AppAjax.showToast('Search failed', error.message, true);
       }
     }
   });
 
-  // Modal Trigger Logic for Checkout Flow ("Proceed to Checkout" / "Review Quotation Sheet")
-  const triggerButtons = document.querySelectorAll('.trigger-order-info, .trigger-checkout-modal');
-  const modalElement = document.getElementById('orderInfoModal');
+  document.body.addEventListener('change', function (event) {
+    var select = event.target;
+    if (select && select.matches('[data-ajax-products-sort]')) {
+      var form = select.closest('form');
+      if (form) {
+        form.requestSubmit();
+      }
+    }
+  });
 
-  if (modalElement && window.bootstrap && bootstrap.Modal) {
-    const orderModal = new bootstrap.Modal(modalElement);
+  document.body.addEventListener('click', async function (event) {
+    var filterLink = event.target.closest('[data-ajax-product-filter-link]');
+    if (filterLink) {
+      event.preventDefault();
+      try {
+        var filterPayload = await AppAjax.request(filterLink.href, { method: 'GET' });
+        updateProductsPayload(filterPayload, false);
+        syncProductFilterState(filterLink.href);
+        window.history.replaceState({}, '', filterLink.href);
+      } catch (error) {
+        AppAjax.showToast('Filter failed', error.message, true);
+      }
+      return;
+    }
 
-    triggerButtons.forEach(btn => {
-      btn.addEventListener('click', function (e) {
-        e.preventDefault();
-        const checkoutUrl = this.dataset.checkoutUrl || this.getAttribute('href') || '/checkout';
-        
-        // Always open modal popup on every click (no sessionStorage restriction)
-        modalElement.dataset.checkoutUrl = checkoutUrl;
-        orderModal.show();
-      });
-    });
+    var loadMoreButton = event.target.closest('[data-ajax-load-more]');
+    if (loadMoreButton) {
+      event.preventDefault();
+      AppAjax.setLoading(loadMoreButton, true, loadMoreButton.dataset.loadingText);
+      try {
+        var loadMorePayload = await AppAjax.request(loadMoreButton.href, { method: 'GET' });
+        updateProductsPayload(loadMorePayload, true);
+        window.history.replaceState({}, '', loadMoreButton.href);
+      } catch (error) {
+        AppAjax.showToast('Load failed', error.message, true);
+      } finally {
+        AppAjax.setLoading(loadMoreButton, false);
+      }
+      return;
+    }
 
-    const continueBtn = document.getElementById('confirmOrderInfo') || document.getElementById('btnAcknowledgeAndContinue');
+    var triggerButton = event.target.closest('.trigger-order-info, .trigger-checkout-modal');
+    if (triggerButton && modalElement && window.bootstrap && window.bootstrap.Modal) {
+      event.preventDefault();
+      var orderModal = window.bootstrap.Modal.getOrCreateInstance(modalElement);
+      modalElement.dataset.checkoutUrl = triggerButton.dataset.checkoutUrl || triggerButton.getAttribute('href') || '/checkout';
+      orderModal.show();
+    }
+  });
 
+  if (modalElement) {
+    var continueBtn = document.getElementById('confirmOrderInfo') || document.getElementById('btnAcknowledgeAndContinue');
     if (continueBtn) {
       continueBtn.addEventListener('click', function () {
-        // Navigate directly to checkout URL without storing any acknowledgment state
-        const checkoutUrl = modalElement.dataset.checkoutUrl || '/checkout';
+        var checkoutUrl = modalElement.dataset.checkoutUrl || '/checkout';
         window.location.href = checkoutUrl;
       });
     }

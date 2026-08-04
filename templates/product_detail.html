@@ -39,6 +39,13 @@
         <span style="background: #E0F2FE; color: #0369A1; font-weight: 600; font-size: 0.8rem; padding: 0.25rem 0.75rem; border-radius: var(--radius-sm);">
           {{ product.stock_status }}
         </span>
+        <form method="POST" action="{{ url_for('main.wishlist_toggle', product_id=product.id) }}" data-ajax-wishlist>
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="next" value="{{ request.full_path if request.query_string else request.path }}">
+          <button type="submit" class="wishlist-toggle wishlist-toggle-inline{{ ' is-active' if product.id in wishlist_product_ids else '' }}" aria-label="Toggle favorite" aria-pressed="{{ 'true' if product.id in wishlist_product_ids else 'false' }}" data-wishlist-button>
+            <i class="bi {{ 'bi-heart-fill' if product.id in wishlist_product_ids else 'bi-heart' }}"></i>
+          </button>
+        </form>
       </div>
 
       <!-- COA Available Badge Box -->
@@ -95,15 +102,16 @@
           {{ _('select_quantity_note') }}
         </p>
 
-        <form method="POST" action="{{ url_for('main.cart_add', product_id=product.id) }}">
+        <form method="POST" action="{{ url_for('main.cart_add', product_id=product.id) }}" data-ajax-cart-add>
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="next" value="{{ request.full_path if request.query_string else request.path }}">
           <div class="order-form-group" style="margin-bottom: 1.25rem;">
             <label for="quantity">{{ _('quantity_label') }}</label>
             <input type="number" id="quantity" name="quantity" min="1" max="1000" value="1" class="form-control" style="width: 140px;">
           </div>
 
           <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-            <button type="submit" class="btn btn-primary" style="flex: 1; padding: 0.85rem;">
+            <button type="submit" class="btn btn-primary" style="flex: 1; padding: 0.85rem;" data-loading-text="Adding...">
               {{ _('add_to_order') }}
             </button>
             <a href="{{ url_for('main.order') }}" class="btn btn-navy" style="padding: 0.85rem;">
@@ -128,6 +136,13 @@
         <div class="product-card">
           <div class="product-thumb">
             <span class="purity-tag">{{ rel.purity }}</span>
+            <form method="POST" action="{{ url_for('main.wishlist_toggle', product_id=rel.id) }}" class="wishlist-form" data-ajax-wishlist>
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <input type="hidden" name="next" value="{{ request.full_path if request.query_string else request.path }}">
+              <button type="submit" class="wishlist-toggle{{ ' is-active' if rel.id in wishlist_product_ids else '' }}" aria-label="Toggle favorite" aria-pressed="{{ 'true' if rel.id in wishlist_product_ids else 'false' }}" data-wishlist-button>
+                <i class="bi {{ 'bi-heart-fill' if rel.id in wishlist_product_ids else 'bi-heart' }}"></i>
+              </button>
+            </form>
             <img src="{{ url_for('static', filename=rel.catalog_image) }}" alt="{{ rel.name }}" style="max-height: 140px; width: 100%; object-fit: contain; padding: 0.5rem;">
           </div>
           <div class="product-body">
@@ -136,6 +151,12 @@
             </h3>
             <div class="product-price">
               <span>${{ "%.2f"|format(rel.price) }}</span>
+              <form method="POST" action="{{ url_for('main.cart_add', product_id=rel.id) }}" data-ajax-cart-add style="display: inline-flex; gap: 0.35rem; align-items: center;">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="next" value="{{ request.full_path if request.query_string else request.path }}">
+                <input type="hidden" name="quantity" value="1">
+                <button type="submit" class="btn btn-sm btn-outline-blue" data-loading-text="Adding...">{{ _('add_to_order') }}</button>
+              </form>
               <a href="{{ url_for('main.product_detail', slug=rel.slug) }}" class="btn btn-sm btn-primary">{{ _('view_specs') }}</a>
             </div>
           </div>

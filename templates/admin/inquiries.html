@@ -29,13 +29,13 @@
     </thead>
     <tbody>
       {% for inquiry in inquiries %}
-        <tr>
+        <tr data-inquiry-row data-inquiry-id="{{ inquiry.id }}">
           <td>#{{ inquiry.id }}</td>
           <td style="font-weight: 600; color: var(--navy-deep);">{{ inquiry.name }}</td>
           <td>{{ inquiry.email }}</td>
           <td>{{ inquiry.company or '-' }}</td>
           <td>{{ inquiry.subject }}</td>
-          <td>
+          <td data-inquiry-status-cell>
             {% if inquiry.is_read %}
               <span class="badge bg-secondary">Read</span>
             {% else %}
@@ -47,14 +47,14 @@
             <div class="d-inline-flex gap-2 flex-wrap justify-content-end">
               <a href="{{ url_for('admin.inquiry_detail', id=inquiry.id) }}" class="btn btn-sm btn-outline-primary">View</a>
               {% if not inquiry.is_read %}
-                <form method="POST" action="{{ url_for('admin.inquiry_mark_read', id=inquiry.id) }}" class="d-inline">
+                <form method="POST" action="{{ url_for('admin.inquiry_mark_read', id=inquiry.id) }}" class="d-inline" data-ajax-inquiry-action data-inquiry-action-type="mark-read">
                   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                  <button type="submit" class="btn btn-sm btn-success">Mark Read</button>
+                  <button type="submit" class="btn btn-sm btn-success" data-loading-text="Saving...">Mark Read</button>
                 </form>
               {% endif %}
-              <form method="POST" action="{{ url_for('admin.inquiry_delete', id=inquiry.id) }}" class="d-inline" onsubmit="return confirm('Delete this inquiry permanently?');">
+              <form method="POST" action="{{ url_for('admin.inquiry_delete', id=inquiry.id) }}" class="d-inline" onsubmit="return confirm('Delete this inquiry permanently?');" data-ajax-inquiry-action data-inquiry-action-type="delete">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                <button type="submit" class="btn btn-sm btn-outline-danger" data-loading-text="Deleting...">Delete</button>
               </form>
             </div>
           </td>

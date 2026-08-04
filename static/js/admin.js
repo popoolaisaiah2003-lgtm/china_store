@@ -61,12 +61,104 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  function updateSidebarBadge(selector, count) {
+    var badge = document.querySelector(selector);
+    if (!badge) {
+      return;
+    }
+
+    badge.hidden = !count;
+    var text = badge.querySelector('.admin-nav-badge-text');
+    if (text) {
+      text.textContent = count;
+    }
+  }
+
+  function updateSidebarMeta(count) {
+    var meta = document.querySelector('[data-sidebar-inprogress-meta]');
+    if (!meta) {
+      return;
+    }
+
+    meta.hidden = !count;
+    meta.textContent = count;
+  }
+
+  function updateOrderRow(row, status) {
+    var statusCell = row.querySelector('[data-order-status-cell]');
+    var actions = row.querySelector('[data-order-actions]');
+    if (statusCell) {
+      statusCell.innerHTML = '<span class="admin-status-badge admin-status-' + status.toLowerCase().replace(/\s+/g, '-') + '">' + status + '</span>';
+    }
+    if (actions) {
+      actions.querySelectorAll('[data-ajax-order-action]').forEach(function (form) {
+        if ((status === 'In Progress' && form.dataset.orderActionType === 'in-progress') ||
+            (status === 'Completed' && (form.dataset.orderActionType === 'in-progress' || form.dataset.orderActionType === 'completed'))) {
+          form.remove();
+        }
+      });
+    }
+  }
+
+  function updateInquiryRow(row, isRead, deleted) {
+    if (deleted) {
+      row.remove();
+      return;
+    }
+
+    var statusCell = row.querySelector('[data-inquiry-status-cell]');
+    if (statusCell && isRead) {
+      statusCell.innerHTML = '<span class="badge bg-secondary">Read</span>';
+    }
+
+    row.querySelectorAll('[data-inquiry-action-type="mark-read"]').forEach(function (form) {
+      form.remove();
+    });
+  }
+
   toggleButton.addEventListener('click', toggleSidebar);
   overlay.addEventListener('click', closeMobileSidebar);
 
   document.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
       closeMobileSidebar();
+    }
+  });
+
+  document.body.addEventListener('submit', async function (event) {
+    var form = event.target;
+    if (!form) {
+      return;
+    }
+
+    if (form.matches('[data-ajax-order-action], [data-ajax-inquiry-action]')) {
+      event.preventDefault();
+
+      var button = form.querySelector('button[type="submit"]');
+      AppAjax.setLoading(button, true);
+
+      try {
+        var payload = await AppAjax.request(form.action, { method: 'POST', form: form });
+        updateSidebarBadge('[data-sidebar-pending-badge]', payload.pending_orders_count || 0);
+        updateSidebarBadge('[data-sidebar-unread-badge]', payload.unread_inquiries_count || 0);
+        updateSidebarMeta(payload.in_progress_orders_count || 0);
+
+        var orderRow = form.closest('[data-order-row]');
+        if (orderRow && payload.status) {
+          updateOrderRow(orderRow, payload.status);
+        }
+
+        var inquiryRow = form.closest('[data-inquiry-row]');
+        if (inquiryRow) {
+          updateInquiryRow(inquiryRow, payload.is_read, payload.deleted);
+        }
+
+        AppAjax.showToast('Saved', payload.message || '', false);
+      } catch (error) {
+        AppAjax.showToast('Request failed', error.message, true);
+      } finally {
+        AppAjax.setLoading(button, false);
+      }
     }
   });
 

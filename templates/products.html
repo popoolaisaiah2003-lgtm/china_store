@@ -29,7 +29,7 @@
 <section class="category-bar">
   <div class="container">
     <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
-      <a href="{{ url_for('main.products') }}" class="cat-pill {{ 'active' if not selected_category }}">
+      <a href="{{ url_for('main.products') }}" class="cat-pill {{ 'active' if not selected_category }}" data-ajax-product-filter-link>
         <i class="bi bi-grid-fill"></i> {{ _('all_peptides') }}
       </a>
       {% for cat in categories %}
@@ -39,7 +39,7 @@
         {% elif 'growth' in cat.name.lower() or 'secretagogue' in cat.name.lower() %}{% set icon_class = 'bi-activity' %}
         {% elif 'wellness' in cat.name.lower() or 'pigmentation' in cat.name.lower() %}{% set icon_class = 'bi-stars' %}
         {% endif %}
-        <a href="{{ url_for('main.products', category=cat.slug) }}" class="cat-pill {{ 'active' if selected_category and selected_category.id == cat.id }}">
+        <a href="{{ url_for('main.products', category=cat.slug) }}" class="cat-pill {{ 'active' if selected_category and selected_category.id == cat.id }}" data-ajax-product-filter-link>
           <i class="bi {{ icon_class }}"></i> {{ cat.name }}
         </a>
       {% endfor %}
@@ -54,7 +54,7 @@
     <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 2.5rem; box-shadow: var(--shadow-sm);">
       
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-        <form method="GET" action="{{ url_for('main.products') }}" style="display: flex; gap: 0.75rem; flex: 1; min-width: 280px; max-width: 520px;">
+        <form method="GET" action="{{ url_for('main.products') }}" style="display: flex; gap: 0.75rem; flex: 1; min-width: 280px; max-width: 520px;" data-ajax-products-form>
           <input type="text" name="q" value="{{ search_query }}" placeholder="{{ _('search_placeholder') }}" class="form-control">
           {% if selected_category %}
             <input type="hidden" name="category" value="{{ selected_category.slug }}">
@@ -64,11 +64,11 @@
         </form>
 
         <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-          <span style="font-weight: 800; color: var(--navy-deep); font-size: 0.95rem;">
-            {{ _('showing_all_prefix') }} {{ products|length }} {{ _('showing_all_suffix') }}
+          <span style="font-weight: 800; color: var(--navy-deep); font-size: 0.95rem;" id="productsSummaryText">
+            {{ _('showing_all_prefix') }} {{ products|length if current_page == 1 else (current_page - 1) * 12 + products|length }} {{ _('showing_all_suffix') }}
           </span>
 
-          <form method="GET" action="{{ url_for('main.products') }}" style="display: flex; align-items: center; gap: 0.5rem;">
+          <form method="GET" action="{{ url_for('main.products') }}" style="display: flex; align-items: center; gap: 0.5rem;" data-ajax-products-form>
             {% if search_query %}
               <input type="hidden" name="q" value="{{ search_query }}">
             {% endif %}
@@ -76,7 +76,7 @@
               <input type="hidden" name="category" value="{{ selected_category.slug }}">
             {% endif %}
             <label for="sort" style="font-size: 0.85rem; font-weight: 700; color: var(--navy-deep);">{{ _('sort_by') }}</label>
-            <select name="sort" id="sort" class="form-control" style="width: auto; padding: 0.4rem 0.85rem;" onchange="this.form.submit()">
+            <select name="sort" id="sort" class="form-control" style="width: auto; padding: 0.4rem 0.85rem;" data-ajax-products-sort>
               <option value="name_asc" {{ 'selected' if sort_by == 'name_asc' }}>{{ _('sort_name_asc') }}</option>
               <option value="name_desc" {{ 'selected' if sort_by == 'name_desc' }}>{{ _('sort_name_desc') }}</option>
               <option value="price_asc" {{ 'selected' if sort_by == 'price_asc' }}>{{ _('sort_price_asc') }}</option>
@@ -89,43 +89,14 @@
     </div>
 
     <!-- Product Cards Grid -->
-    <div class="product-grid" style="margin-bottom: 3rem;">
-      {% for product in products %}
-        <div class="product-card">
-          <div class="product-thumb">
-            <span class="purity-tag">{{ product.purity }}</span>
-            <img src="{{ url_for('static', filename=product.catalog_image) }}" alt="{{ product.name }}" loading="lazy">
-          </div>
-          <div class="product-body">
-            <div class="product-category">{{ product.category.name if product.category else _('general_peptides') }}</div>
-            <h3 class="product-title">
-              <a href="{{ url_for('main.product_detail', slug=product.slug) }}">{{ product.name }}</a>
-            </h3>
-            <div class="product-strength">
-              {{ product.sequence_or_cas or 'Standard 5mg / 10mg Lyophilized Vial' }}
-            </div>
+    <div class="product-grid" style="margin-bottom: 3rem;" id="productsGrid" data-current-page="{{ current_page }}" data-has-next="{{ 'true' if has_next else 'false' }}" data-next-page="{{ next_page or '' }}">
+      {% include 'partials/product_cards.html' %}
+    </div>
 
-            <div class="product-price-row">
-              <div class="product-price">${{ "%.2f"|format(product.price) }}</div>
-              
-              <form method="POST" action="{{ url_for('main.cart_add', product_id=product.id) }}" style="display: flex; gap: 0.4rem; align-items: center; margin: 0;">
-                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                <input type="number" name="quantity" min="1" max="1000" value="1" style="width: 55px; padding: 0.3rem; border-radius: 4px; border: 1px solid var(--border-color); text-align: center; font-size: 0.85rem;" title="{{ _('select_quantity_title') }}">
-                <button type="submit" class="btn btn-sm btn-primary">
-                  {{ _('add_to_order') }}
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      {% else %}
-        <div style="grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: 5rem 2rem; background: white; border-radius: var(--radius-lg); border: 1px dashed var(--border-color);">
-          <div style="font-size: 3.5rem; margin-bottom: 1rem;">🔍</div>
-          <h3>{{ _('no_peptides_found') }}</h3>
-          <p>{{ _('no_peptides_desc') }}</p>
-          <a href="{{ url_for('main.products') }}" class="btn btn-sm btn-outline-blue" style="margin-top: 1rem;">{{ _('reset_search') }}</a>
-        </div>
-      {% endfor %}
+    <div id="productsLoadMoreWrap" style="text-align: center; margin-top: -1rem; margin-bottom: 3rem;">
+      {% if has_next %}
+        <a href="{{ url_for('main.products', q=search_query, category=selected_category.slug if selected_category else None, sort=sort_by, page=next_page) }}" class="btn btn-outline-blue" data-ajax-load-more data-loading-text="Loading more...">Load more products</a>
+      {% endif %}
     </div>
 
   </div>

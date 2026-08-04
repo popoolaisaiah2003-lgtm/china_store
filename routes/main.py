@@ -10,6 +10,8 @@ from extensions import db
 
 main = Blueprint('main', __name__)
 
+PRODUCTS_PER_PAGE = 12
+
 def _(key):
     lang = session.get('lang', 'en')
     return translate(key, lang)
@@ -46,15 +48,72 @@ def _review_card_data(review):
 def get_current_lang():
     return session.get('lang', 'en')
 
+
+def wants_json_response():
+    return request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+
+
+def get_wishlist_ids():
+    wishlist = session.get('wishlist', [])
+    normalized = []
+    for product_id in wishlist:
+        try:
+            normalized.append(int(product_id))
+        except (TypeError, ValueError):
+            continue
+    return normalized
+
+
+def save_wishlist_ids(product_ids):
+    session['wishlist'] = [str(product_id) for product_id in sorted(set(product_ids))]
+    session.modified = True
+
+
+def build_order_context():
+    cart_items, grand_total, total_quantity = get_cart_details()
+    quotation_number = f"YZ-{datetime.datetime.now().year}-{session.get('quotation_id', '0001')}"
+    return {
+        'cart_items': cart_items,
+        'grand_total': grand_total,
+        'total_quantity': total_quantity,
+        'quotation_number': quotation_number,
+    }
+
+
+def build_order_ajax_payload(message):
+    context = build_order_context()
+    return {
+        'success': True,
+        'message': message,
+        'cart_total_count': context['total_quantity'],
+        'cart_items_count': len(context['cart_items']),
+        'grand_total': context['grand_total'],
+        'order_panel_html': render_template('partials/order_panel.html', **context),
+        'is_empty': not context['cart_items'],
+    }
+
+
+def apply_cart_addition(product, quantity):
+    cart = session.get('cart', {})
+    pid_str = str(product.id)
+    cart[pid_str] = cart.get(pid_str, 0) + quantity
+    session['cart'] = cart
+    session.modified = True
+    _, _, total_quantity = get_cart_details()
+    return total_quantity
+
 @main.context_processor
 def inject_global_vars():
     lang = get_current_lang()
     _, _, total_quantity = get_cart_details()
     show_lang_modal = session.get('lang_modal_shown') is not True
+    wishlist_product_ids = get_wishlist_ids()
     return dict(
         lang=lang,
         _ = lambda key: translate(key, lang),
         cart_total_count=total_quantity,
+        wishlist_product_ids=wishlist_product_ids,
+        wishlist_count=len(wishlist_product_ids),
         show_lang_modal=show_lang_modal,
         company_name=Setting.get_val('company_name', 'Yan Zhen Peptide'),
         whatsapp_number=Setting.get_val('whatsapp_number', current_app.config.get('WHATSAPP_NUMBER', '85263294280'))
@@ -228,6 +287,7 @@ def products():
     category_slug = request.args.get('category')
     search_query = request.args.get('q', '').strip()
     sort_by = request.args.get('sort', 'name_asc')
+    page = max(request.args.get('page', 1, type=int), 1)
     
     query = Product.query
     selected_category = None
@@ -253,8 +313,20 @@ def products():
     else:
         query = query.order_by(Product.name.asc())
         
-    all_products = query.all()
+    pagination = query.paginate(page=page, per_page=PRODUCTS_PER_PAGE, error_out=False)
+    all_products = pagination.items
     categories = Category.query.all()
+
+    if wants_json_response():
+        return jsonify({
+            'success': True,
+            'products_html': render_template('partials/product_cards.html', products=all_products),
+            'loaded_count': min(pagination.page * pagination.per_page, pagination.total),
+            'total_count': pagination.total,
+            'has_next': pagination.has_next,
+            'next_page': pagination.next_num if pagination.has_next else None,
+            'page': pagination.page,
+        })
     
     return render_template(
         'products.html', 
@@ -262,7 +334,11 @@ def products():
         categories=categories, 
         selected_category=selected_category,
         search_query=search_query,
-        sort_by=sort_by
+        sort_by=sort_by,
+        current_page=pagination.page,
+        total_matching_products=pagination.total,
+        has_next=pagination.has_next,
+        next_page=pagination.next_num if pagination.has_next else None,
     )
 
 
@@ -338,11 +414,16 @@ def cart_add(product_id):
     except ValueError:
         qty = 1
 
-    cart = session.get('cart', {})
-    pid_str = str(product_id)
-    cart[pid_str] = cart.get(pid_str, 0) + qty
-    session['cart'] = cart
-    session.modified = True
+    total_quantity = apply_cart_addition(product, qty)
+
+    if wants_json_response():
+        return jsonify({
+            'success': True,
+            'cart_total_count': total_quantity,
+            'message': f'Added {qty} × {product.name} to your quotation.',
+            'product_name': product.name,
+            'quantity': qty,
+        })
 
     flash(f'Added {qty} × "{product.name}" to your quotation.', 'success')
     next_page = request.form.get('next') or request.referrer
@@ -359,13 +440,7 @@ def cart_add_ajax(product_id):
     except (ValueError, TypeError):
         qty = 1
 
-    cart = session.get('cart', {})
-    pid_str = str(product_id)
-    cart[pid_str] = cart.get(pid_str, 0) + qty
-    session['cart'] = cart
-    session.modified = True
-
-    _, _, total_quantity = get_cart_details()
+    total_quantity = apply_cart_addition(product, qty)
 
     return jsonify({
         'success': True,
@@ -384,33 +459,41 @@ def cart_update(product_id):
 
     cart = session.get('cart', {})
     pid_str = str(product_id)
+    message = 'Quotation quantity updated.'
     if qty <= 0:
         cart.pop(pid_str, None)
-        flash('Item removed from quotation.', 'info')
+        message = 'Item removed from quotation.'
+        flash(message, 'info')
     else:
         cart[pid_str] = qty
-        flash('Quotation quantity updated.', 'success')
+        flash(message, 'success')
 
     session['cart'] = cart
     session.modified = True
+
+    if wants_json_response():
+        return jsonify(build_order_ajax_payload(message))
+
     return redirect(url_for('main.order'))
 
 @main.route('/cart/remove/<int:product_id>', methods=['POST'])
 def cart_remove(product_id):
     cart = session.get('cart', {})
     pid_str = str(product_id)
+    message = 'Item removed from wholesale quotation.'
     if pid_str in cart:
         cart.pop(pid_str)
         session['cart'] = cart
         session.modified = True
-        flash('Item removed from wholesale quotation.', 'info')
+        flash(message, 'info')
+
+    if wants_json_response():
+        return jsonify(build_order_ajax_payload(message))
     return redirect(url_for('main.order'))
 
 @main.route('/order')
 def order():
-    cart_items, grand_total, total_quantity = get_cart_details()
-    quotation_number = f"YZ-{datetime.datetime.now().year}-{session.get('quotation_id', '0001')}"
-    return render_template('order.html', cart_items=cart_items, grand_total=grand_total, total_quantity=total_quantity, quotation_number=quotation_number)
+    return render_template('order.html', **build_order_context())
 
 @main.route('/order/print')
 def order_print():
@@ -480,7 +563,8 @@ def checkout():
             customer_address=address,
             customer_phone=phone,
             items_json=str([item['name'] + ' x ' + str(item['quantity']) for item in cart_items]),
-            grand_total=grand_total
+            grand_total=grand_total,
+            status='Pending'
         )
         db.session.add(record)
         try:
@@ -522,6 +606,35 @@ def contact():
         flash(_('contact_inquiry_validation_error'), 'danger')
 
     return render_template('contact.html', whatsapp_number=whatsapp_number, form=form)
+
+
+@main.route('/wishlist/toggle/<int:product_id>', methods=['POST'])
+def wishlist_toggle(product_id):
+    product = Product.query.get_or_404(product_id)
+    wishlist_ids = set(get_wishlist_ids())
+    is_favorited = product_id not in wishlist_ids
+
+    if is_favorited:
+        wishlist_ids.add(product_id)
+        message = f'{product.name} added to favorites.'
+    else:
+        wishlist_ids.discard(product_id)
+        message = f'{product.name} removed from favorites.'
+
+    save_wishlist_ids(wishlist_ids)
+
+    if wants_json_response():
+        return jsonify({
+            'success': True,
+            'message': message,
+            'product_id': product_id,
+            'is_favorited': is_favorited,
+            'wishlist_count': len(wishlist_ids),
+        })
+
+    flash(message, 'success' if is_favorited else 'info')
+    next_page = request.form.get('next') or request.referrer
+    return redirect(next_page or url_for('main.product_detail', slug=product.slug))
 
 @main.route('/faq')
 def faq():

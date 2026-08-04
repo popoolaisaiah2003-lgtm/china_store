@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>{% block title %}Yan Zhen Admin Portal{% endblock %}</title>
 
   <!-- Local Bootstrap 5 CSS, Bootstrap Icons & Admin CSS -->
@@ -85,13 +86,20 @@
           <i class="bi bi-box-seam"></i>
           <span class="nav-label">Orders Inquiry</span>
           {% if pending_orders_count %}
-            <span class="admin-nav-badge admin-nav-badge-warning" aria-label="{{ pending_orders_count }} order notifications">
+            <span class="admin-nav-badge admin-nav-badge-warning" aria-label="{{ pending_orders_count }} order notifications" data-sidebar-pending-badge>
               <span class="admin-nav-badge-text">{{ pending_orders_count }}</span>
+              <span class="admin-nav-badge-dot" aria-hidden="true"></span>
+            </span>
+          {% else %}
+            <span class="admin-nav-badge admin-nav-badge-warning" aria-label="0 order notifications" data-sidebar-pending-badge hidden>
+              <span class="admin-nav-badge-text">0</span>
               <span class="admin-nav-badge-dot" aria-hidden="true"></span>
             </span>
           {% endif %}
           {% if in_progress_orders_count %}
-            <span class="admin-nav-meta-count" aria-label="{{ in_progress_orders_count }} orders in progress">{{ in_progress_orders_count }}</span>
+            <span class="admin-nav-meta-count" aria-label="{{ in_progress_orders_count }} orders in progress" data-sidebar-inprogress-meta>{{ in_progress_orders_count }}</span>
+          {% else %}
+            <span class="admin-nav-meta-count" aria-label="0 orders in progress" data-sidebar-inprogress-meta hidden>0</span>
           {% endif %}
         </a>
       </li>
@@ -100,8 +108,13 @@
           <i class="bi bi-envelope-paper"></i>
           <span class="nav-label">Inquiries</span>
           {% if unread_inquiries_count %}
-            <span class="admin-nav-badge admin-nav-badge-danger" aria-label="{{ unread_inquiries_count }} unread inquiries">
+            <span class="admin-nav-badge admin-nav-badge-danger" aria-label="{{ unread_inquiries_count }} unread inquiries" data-sidebar-unread-badge>
               <span class="admin-nav-badge-text">{{ unread_inquiries_count }}</span>
+              <span class="admin-nav-badge-dot" aria-hidden="true"></span>
+            </span>
+          {% else %}
+            <span class="admin-nav-badge admin-nav-badge-danger" aria-label="0 unread inquiries" data-sidebar-unread-badge hidden>
+              <span class="admin-nav-badge-text">0</span>
               <span class="admin-nav-badge-dot" aria-hidden="true"></span>
             </span>
           {% endif %}
@@ -167,8 +180,11 @@
 
   </main>
 
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toastContainer" style="z-index: 1090;"></div>
+
   <!-- Local Bootstrap 5 Bundle JS -->
   <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/ajax.js') }}"></script>
   <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
   {% block extra_js %}{% endblock %}
 </body>

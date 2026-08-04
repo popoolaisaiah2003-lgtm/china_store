@@ -2,7 +2,7 @@ import os
 import time
 import re
 from datetime import datetime
-from flask import Blueprint, render_template, redirect, url_for, flash, request, current_app, abort
+from flask import Blueprint, render_template, redirect, url_for, flash, request, current_app, abort, jsonify
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.utils import secure_filename
 
@@ -58,6 +58,21 @@ def commit_with_rollback(success_message=None, success_category='success', error
         current_app.logger.exception('Admin DB write failed')
         flash(error_message, 'danger')
         return False
+
+
+def wants_json_response():
+    return request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+
+
+def get_admin_ajax_counts():
+    pending_orders_count = OrderRecord.query.filter_by(status='Pending').count() if hasattr(OrderRecord, 'status') else 0
+    in_progress_orders_count = OrderRecord.query.filter_by(status='In Progress').count() if hasattr(OrderRecord, 'status') else 0
+    unread_inquiries_count = ContactInquiry.query.filter_by(is_read=False).count()
+    return {
+        'pending_orders_count': pending_orders_count,
+        'in_progress_orders_count': in_progress_orders_count,
+        'unread_inquiries_count': unread_inquiries_count,
+    }
 
 
 @admin.route('/login', methods=['GET', 'POST'])
@@ -589,7 +604,17 @@ def order_mark_in_progress(id):
     order = OrderRecord.query.get_or_404(id)
     order.status = 'In Progress'
     if commit_with_rollback('Order marked as In Progress.', 'success'):
+        if wants_json_response():
+            return jsonify({
+                'success': True,
+                'message': 'Order marked as In Progress.',
+                'order_id': order.id,
+                'status': order.status,
+                **get_admin_ajax_counts(),
+            })
         return redirect(url_for('admin.orders'))
+    if wants_json_response():
+        return jsonify({'success': False, 'message': 'Could not update order status.'}), 500
     return redirect(url_for('admin.orders'))
 
 
@@ -599,7 +624,17 @@ def order_mark_completed(id):
     order = OrderRecord.query.get_or_404(id)
     order.status = 'Completed'
     if commit_with_rollback('Order marked as Completed.', 'success'):
+        if wants_json_response():
+            return jsonify({
+                'success': True,
+                'message': 'Order marked as Completed.',
+                'order_id': order.id,
+                'status': order.status,
+                **get_admin_ajax_counts(),
+            })
         return redirect(url_for('admin.orders'))
+    if wants_json_response():
+        return jsonify({'success': False, 'message': 'Could not update order status.'}), 500
     return redirect(url_for('admin.orders'))
 
 @admin.route('/comments')
@@ -631,7 +666,17 @@ def inquiry_mark_read(id):
     inquiry = ContactInquiry.query.get_or_404(id)
     inquiry.is_read = True
     if commit_with_rollback('Inquiry marked as read.', 'success'):
+        if wants_json_response():
+            return jsonify({
+                'success': True,
+                'message': 'Inquiry marked as read.',
+                'inquiry_id': inquiry.id,
+                'is_read': True,
+                **get_admin_ajax_counts(),
+            })
         return redirect(url_for('admin.inquiries'))
+    if wants_json_response():
+        return jsonify({'success': False, 'message': 'Could not mark inquiry as read.'}), 500
     return redirect(url_for('admin.inquiries'))
 
 
@@ -639,9 +684,20 @@ def inquiry_mark_read(id):
 @admin_required
 def inquiry_delete(id):
     inquiry = ContactInquiry.query.get_or_404(id)
+    inquiry_id = inquiry.id
     db.session.delete(inquiry)
     if commit_with_rollback('Inquiry deleted.', 'info'):
+        if wants_json_response():
+            return jsonify({
+                'success': True,
+                'message': 'Inquiry deleted.',
+                'inquiry_id': inquiry_id,
+                'deleted': True,
+                **get_admin_ajax_counts(),
+            })
         return redirect(url_for('admin.inquiries'))
+    if wants_json_response():
+        return jsonify({'success': False, 'message': 'Could not delete inquiry.'}), 500
     return redirect(url_for('admin.inquiries'))
 
 

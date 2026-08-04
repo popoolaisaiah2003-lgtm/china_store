@@ -2,6 +2,8 @@ import os
 from flask import Flask, session, redirect, request
 import pymysql
 from sqlalchemy.engine.url import make_url
+from sqlalchemy import inspect, text
+from flask_migrate import stamp, upgrade
 from config import Config
 from extensions import db, login_manager, migrate, csrf
 from models import Admin, Setting, Product
@@ -25,6 +27,39 @@ def _ensure_mysql_database_exists(database_uri):
             cursor.execute(f"CREATE DATABASE IF NOT EXISTS `{url.database}` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
     finally:
         connection.close()
+
+
+def repair_and_upgrade_migrations(app):
+    """Repair Alembic revision drift safely, then apply forward migrations.
+
+    Scenario handled: DB already has legacy tables (e.g. admins) but alembic_version
+    is behind and tries to re-run older migrations.
+    """
+    with app.app_context():
+        inspector = inspect(db.engine)
+        admins_exists = inspector.has_table('admins')
+        alembic_exists = inspector.has_table('alembic_version')
+
+        current_revision = None
+        if alembic_exists:
+            row = db.session.execute(text("SELECT version_num FROM alembic_version LIMIT 1")).fetchone()
+            current_revision = row[0] if row else None
+
+        # If schema already includes legacy objects but Alembic head is behind,
+        # stamp to the last known safe pre-contact-inquiries revision.
+        if admins_exists and current_revision in (None, 'e59a90072f49', '7c5d3c8e2f41'):
+            app.logger.warning(
+                "Alembic drift detected (revision=%s). Stamping to c3d9ab4f6d21 before upgrade.",
+                current_revision,
+            )
+            stamp(directory='migrations', revision='c3d9ab4f6d21')
+
+        # Apply any newer migrations only.
+        upgrade(directory='migrations')
+
+        # Final safety check.
+        if not inspect(db.engine).has_table('contact_inquiries'):
+            raise RuntimeError('Migration repair finished but contact_inquiries table is missing.')
 
 def create_app():
     app = Flask(__name__)
@@ -81,6 +116,12 @@ def create_app():
     app.register_blueprint(admin_bp)
     app.register_blueprint(blog_bp)
 
+    @app.cli.command('db-repair-upgrade')
+    def db_repair_upgrade_command():
+        """Repair Alembic drift and apply forward migrations safely."""
+        repair_and_upgrade_migrations(app)
+        print('Migration repair+upgrade complete.')
+
     @app.route('/secure-panel', defaults={'path': ''})
     @app.route('/secure-panel/<path:path>')
     def secure_panel_legacy_redirect(path):
@@ -97,6 +138,10 @@ def create_app():
     return app
 
 app = create_app()
+
+# Optional production-safe migration repair/upgrade on startup (Railway or explicit opt-in).
+if os.environ.get('RAILWAY_ENVIRONMENT') or os.environ.get('AUTO_MIGRATE_ON_STARTUP') == '1':
+    repair_and_upgrade_migrations(app)
 
 # Minimal startup verification only (no schema/data writes at startup).
 with app.app_context():

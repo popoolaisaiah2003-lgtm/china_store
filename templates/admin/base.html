@@ -17,10 +17,22 @@
   
   {% block extra_css %}{% endblock %}
 </head>
-<body>
+<body class="admin-layout">
+
+  <button type="button"
+          class="admin-sidebar-toggle"
+          id="adminSidebarToggle"
+          aria-controls="adminSidebar"
+          aria-expanded="true"
+          aria-label="Toggle admin sidebar">
+    <i class="bi bi-list" aria-hidden="true"></i>
+    <span class="visually-hidden">Toggle admin sidebar</span>
+  </button>
+
+  <div class="admin-sidebar-overlay" id="adminSidebarOverlay" hidden></div>
 
   <!-- Fixed 260px Dark-Blue Admin Sidebar -->
-  <aside class="admin-sidebar">
+  <aside class="admin-sidebar" id="adminSidebar">
     
     <!-- Sidebar Header with Logo & White Text -->
     <div class="admin-sidebar-header">
@@ -40,62 +52,62 @@
     <ul class="nav flex-column admin-nav">
       <li class="nav-item">
         <a class="nav-link {{ 'active' if request.endpoint == 'admin.dashboard' }}" href="{{ url_for('admin.dashboard') }}">
-          <i class="bi bi-speedometer2"></i> Dashboard
+          <i class="bi bi-speedometer2"></i><span class="nav-label">Dashboard</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ 'active' if 'product' in request.endpoint }}" href="{{ url_for('admin.products') }}">
-          <i class="bi bi-beaker"></i> Catalog
+          <i class="bi bi-beaker"></i><span class="nav-label">Catalog</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ 'active' if request.endpoint == 'admin.categories' }}" href="{{ url_for('admin.categories') }}">
-          <i class="bi bi-folder2-open"></i> Categories
+          <i class="bi bi-folder2-open"></i><span class="nav-label">Categories</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ 'active' if 'coa' in request.endpoint }}" href="{{ url_for('admin.coa_index') }}">
-          <i class="bi bi-patch-check"></i> COA Certificates
+          <i class="bi bi-patch-check"></i><span class="nav-label">COA Certificates</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ 'active' if 'blog' in request.endpoint }}" href="{{ url_for('admin.blog_posts') }}">
-          <i class="bi bi-journal-text"></i> Blog CMS
+          <i class="bi bi-journal-text"></i><span class="nav-label">Blog CMS</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ 'active' if request.endpoint == 'admin.reviews_index' }}" href="{{ url_for('admin.reviews_index') }}">
-          <i class="bi bi-star"></i> Product Reviews
+          <i class="bi bi-star"></i><span class="nav-label">Product Reviews</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ 'active' if request.endpoint == 'admin.orders' }}" href="{{ url_for('admin.orders') }}">
-          <i class="bi bi-box-seam"></i> Orders Inquiry
+          <i class="bi bi-box-seam"></i><span class="nav-label">Orders Inquiry</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ 'active' if 'inquiry' in request.endpoint or request.endpoint == 'admin.inquiries' }}" href="{{ url_for('admin.inquiries') }}">
-          <i class="bi bi-envelope-paper"></i> Inquiries
+          <i class="bi bi-envelope-paper"></i><span class="nav-label">Inquiries</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ 'active' if 'shipment' in request.endpoint }}" href="{{ url_for('admin.shipments') }}">
-          <i class="bi bi-airplane"></i> Global Shipments
+          <i class="bi bi-airplane"></i><span class="nav-label">Global Shipments</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ 'active' if request.endpoint == 'admin.languages' }}" href="{{ url_for('admin.languages') }}">
-          <i class="bi bi-translate"></i> Languages
+          <i class="bi bi-translate"></i><span class="nav-label">Languages</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ 'active' if request.endpoint == 'admin.settings' }}" href="{{ url_for('admin.settings') }}">
-          <i class="bi bi-gear"></i> Settings
+          <i class="bi bi-gear"></i><span class="nav-label">Settings</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ 'active' if request.endpoint == 'admin.change_password' }}" href="{{ url_for('admin.change_password') }}">
-          <i class="bi bi-key"></i> Change Password
+          <i class="bi bi-key"></i><span class="nav-label">Change Password</span>
         </a>
       </li>
     </ul>
@@ -107,7 +119,7 @@
     
     <!-- Top Header Bar -->
     <div class="admin-top-bar">
-      <div class="d-flex align-items-center gap-2">
+      <div class="d-flex align-items-center gap-2 flex-wrap">
         <span class="badge bg-light text-dark border fw-semibold">Yan Zhen Biotechnology Co., Ltd.</span>
         <span class="text-muted" style="font-size: 0.82rem;">HPLC Cleanroom Console</span>
       </div>
@@ -140,6 +152,7 @@
 
   <!-- Local Bootstrap 5 Bundle JS -->
   <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
   {% block extra_js %}{% endblock %}
 </body>
 </html>

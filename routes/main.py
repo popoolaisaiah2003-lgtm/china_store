@@ -10,8 +10,6 @@ from extensions import db
 
 main = Blueprint('main', __name__)
 
-PRODUCTS_PER_PAGE = 12
-
 def _(key):
     lang = session.get('lang', 'en')
     return translate(key, lang)
@@ -287,7 +285,6 @@ def products():
     category_slug = request.args.get('category')
     search_query = request.args.get('q', '').strip()
     sort_by = request.args.get('sort', 'name_asc')
-    page = max(request.args.get('page', 1, type=int), 1)
     
     query = Product.query
     selected_category = None
@@ -312,20 +309,17 @@ def products():
         query = query.order_by(Product.price.desc())
     else:
         query = query.order_by(Product.name.asc())
-        
-    pagination = query.paginate(page=page, per_page=PRODUCTS_PER_PAGE, error_out=False)
-    all_products = pagination.items
+
+    all_products = query.all()
+    total_matching_products = len(all_products)
     categories = Category.query.all()
 
     if wants_json_response():
         return jsonify({
             'success': True,
             'products_html': render_template('partials/product_cards.html', products=all_products),
-            'loaded_count': min(pagination.page * pagination.per_page, pagination.total),
-            'total_count': pagination.total,
-            'has_next': pagination.has_next,
-            'next_page': pagination.next_num if pagination.has_next else None,
-            'page': pagination.page,
+            'loaded_count': total_matching_products,
+            'total_count': total_matching_products,
         })
     
     return render_template(
@@ -335,10 +329,7 @@ def products():
         selected_category=selected_category,
         search_query=search_query,
         sort_by=sort_by,
-        current_page=pagination.page,
-        total_matching_products=pagination.total,
-        has_next=pagination.has_next,
-        next_page=pagination.next_num if pagination.has_next else None,
+        total_matching_products=total_matching_products,
     )
 
 

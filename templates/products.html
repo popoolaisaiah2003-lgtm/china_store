@@ -65,7 +65,7 @@
 
         <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
           <span style="font-weight: 800; color: var(--navy-deep); font-size: 0.95rem;" id="productsSummaryText">
-            {{ _('showing_all_prefix') }} {{ products|length if current_page == 1 else (current_page - 1) * 12 + products|length }} {{ _('showing_all_suffix') }}
+            {{ _('showing_all_prefix') }} {{ total_matching_products }} {{ _('showing_all_suffix') }}
           </span>
 
           <form method="GET" action="{{ url_for('main.products') }}" style="display: flex; align-items: center; gap: 0.5rem;" data-ajax-products-form>
@@ -89,14 +89,8 @@
     </div>
 
     <!-- Product Cards Grid -->
-    <div class="product-grid" style="margin-bottom: 3rem;" id="productsGrid" data-current-page="{{ current_page }}" data-has-next="{{ 'true' if has_next else 'false' }}" data-next-page="{{ next_page or '' }}">
+    <div class="product-grid" style="margin-bottom: 3rem;" id="productsGrid">
       {% include 'partials/product_cards.html' %}
-    </div>
-
-    <div id="productsLoadMoreWrap" style="text-align: center; margin-top: -1rem; margin-bottom: 3rem;">
-      {% if has_next %}
-        <a href="{{ url_for('main.products', q=search_query, category=selected_category.slug if selected_category else None, sort=sort_by, page=next_page) }}" class="btn btn-outline-blue" data-ajax-load-more data-loading-text="Loading more...">Load more products</a>
-      {% endif %}
     </div>
 
   </div>

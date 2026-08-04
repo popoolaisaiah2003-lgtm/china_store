@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
   var modalElement = document.getElementById('orderInfoModal');
   var productsGrid = document.getElementById('productsGrid');
   var productsSummaryText = document.getElementById('productsSummaryText');
-  var productsLoadMoreWrap = document.getElementById('productsLoadMoreWrap');
   var orderPanel = document.getElementById('orderPanel');
 
   function updateCartBadges(count) {
@@ -23,30 +22,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  function updateProductsPayload(payload, append) {
+  function updateProductsPayload(payload) {
     if (!productsGrid) return;
-    if (append) {
-      productsGrid.insertAdjacentHTML('beforeend', payload.products_html);
-    } else {
-      productsGrid.innerHTML = payload.products_html;
-    }
-
-    productsGrid.dataset.currentPage = String(payload.page || 1);
-    productsGrid.dataset.hasNext = payload.has_next ? 'true' : 'false';
-    productsGrid.dataset.nextPage = payload.next_page || '';
+    productsGrid.innerHTML = payload.products_html;
 
     if (productsSummaryText) {
-      productsSummaryText.textContent = 'Showing ' + payload.loaded_count + ' Products';
-    }
-
-    if (productsLoadMoreWrap) {
-      if (payload.has_next) {
-        var url = new URL(window.location.href);
-        url.searchParams.set('page', payload.next_page);
-        productsLoadMoreWrap.innerHTML = '<a href="' + url.toString() + '" class="btn btn-outline-blue" data-ajax-load-more data-loading-text="Loading more...">Load more products</a>';
-      } else {
-        productsLoadMoreWrap.innerHTML = '';
-      }
+      productsSummaryText.textContent = 'Showing ' + (payload.total_count || payload.loaded_count || 0) + ' Products';
     }
   }
 
@@ -149,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
       queryUrl.searchParams.delete('page');
       try {
         var productsPayload = await AppAjax.request(queryUrl.toString(), { method: 'GET' });
-        updateProductsPayload(productsPayload, false);
+        updateProductsPayload(productsPayload);
         syncProductFilterState(queryUrl.toString());
         window.history.replaceState({}, '', queryUrl.toString());
       } catch (error) {
@@ -174,27 +155,11 @@ document.addEventListener('DOMContentLoaded', function () {
       event.preventDefault();
       try {
         var filterPayload = await AppAjax.request(filterLink.href, { method: 'GET' });
-        updateProductsPayload(filterPayload, false);
+        updateProductsPayload(filterPayload);
         syncProductFilterState(filterLink.href);
         window.history.replaceState({}, '', filterLink.href);
       } catch (error) {
         AppAjax.showToast('Filter failed', error.message, true);
-      }
-      return;
-    }
-
-    var loadMoreButton = event.target.closest('[data-ajax-load-more]');
-    if (loadMoreButton) {
-      event.preventDefault();
-      AppAjax.setLoading(loadMoreButton, true, loadMoreButton.dataset.loadingText);
-      try {
-        var loadMorePayload = await AppAjax.request(loadMoreButton.href, { method: 'GET' });
-        updateProductsPayload(loadMorePayload, true);
-        window.history.replaceState({}, '', loadMoreButton.href);
-      } catch (error) {
-        AppAjax.showToast('Load failed', error.message, true);
-      } finally {
-        AppAjax.setLoading(loadMoreButton, false);
       }
       return;
     }

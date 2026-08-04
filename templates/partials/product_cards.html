@@ -9,7 +9,7 @@
           <i class="bi {{ 'bi-heart-fill' if product.id in wishlist_product_ids else 'bi-heart' }}"></i>
         </button>
       </form>
-      <img src="{{ url_for('static', filename=product.catalog_image) }}" alt="{{ product.name }}" loading="lazy">
+      <img src="{{ url_for('static', filename=product.catalog_image) }}" alt="{{ product.name }}" loading="lazy" width="220" height="220">
     </div>
     <div class="product-body">
       <div class="product-category">{{ product.category.name if product.category else _('general_peptides') }}</div>

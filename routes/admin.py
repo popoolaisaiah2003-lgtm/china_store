@@ -582,6 +582,26 @@ def orders():
     orders_list = OrderRecord.query.order_by(OrderRecord.created_at.desc()).all()
     return render_template('admin/orders.html', orders=orders_list)
 
+
+@admin.route('/orders/<int:id>/mark-in-progress', methods=['POST'])
+@admin_required
+def order_mark_in_progress(id):
+    order = OrderRecord.query.get_or_404(id)
+    order.status = 'In Progress'
+    if commit_with_rollback('Order marked as In Progress.', 'success'):
+        return redirect(url_for('admin.orders'))
+    return redirect(url_for('admin.orders'))
+
+
+@admin.route('/orders/<int:id>/mark-completed', methods=['POST'])
+@admin_required
+def order_mark_completed(id):
+    order = OrderRecord.query.get_or_404(id)
+    order.status = 'Completed'
+    if commit_with_rollback('Order marked as Completed.', 'success'):
+        return redirect(url_for('admin.orders'))
+    return redirect(url_for('admin.orders'))
+
 @admin.route('/comments')
 @admin_required
 def comments():

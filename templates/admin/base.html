@@ -90,6 +90,9 @@
               <span class="admin-nav-badge-dot" aria-hidden="true"></span>
             </span>
           {% endif %}
+          {% if in_progress_orders_count %}
+            <span class="admin-nav-meta-count" aria-label="{{ in_progress_orders_count }} orders in progress">{{ in_progress_orders_count }}</span>
+          {% endif %}
         </a>
       </li>
       <li class="nav-item">

@@ -2,7 +2,7 @@ import os
 from flask import Flask, session, redirect, request
 import pymysql
 from sqlalchemy.engine.url import make_url
-from sqlalchemy import inspect, text
+from sqlalchemy import inspect, text, func
 from flask_migrate import stamp, upgrade
 from config import Config
 from extensions import db, login_manager, migrate, csrf
@@ -57,9 +57,12 @@ def repair_and_upgrade_migrations(app):
         # Apply any newer migrations only.
         upgrade(directory='migrations')
 
-        # Final safety check.
+        # Final safety checks.
         if not inspect(db.engine).has_table('contact_inquiries'):
             raise RuntimeError('Migration repair finished but contact_inquiries table is missing.')
+        order_columns = {column['name'] for column in inspect(db.engine).get_columns('order_records')}
+        if 'status' not in order_columns:
+            raise RuntimeError('Migration repair finished but order_records.status is missing.')
 
 def create_app():
     app = Flask(__name__)
@@ -99,15 +102,17 @@ def create_app():
         show_lang_modal = session.get('lang_modal_shown') is not True
         unread_inquiries_count = 0
         pending_orders_count = 0
-        orders_badge_uses_all = False
+        in_progress_orders_count = 0
 
         if is_admin_request:
             unread_inquiries_count = ContactInquiry.query.filter_by(is_read=False).count()
-            if hasattr(OrderRecord, 'status'):
-                pending_orders_count = OrderRecord.query.filter_by(status='Pending').count()
-            else:
-                pending_orders_count = OrderRecord.query.count()
-                orders_badge_uses_all = True
+            order_status_counts = dict(
+                db.session.query(OrderRecord.status, func.count(OrderRecord.id))
+                .group_by(OrderRecord.status)
+                .all()
+            )
+            pending_orders_count = order_status_counts.get('Pending', 0)
+            in_progress_orders_count = order_status_counts.get('In Progress', 0)
         
         return dict(
             lang=lang,
@@ -116,7 +121,7 @@ def create_app():
             show_lang_modal=show_lang_modal,
             unread_inquiries_count=unread_inquiries_count,
             pending_orders_count=pending_orders_count,
-            orders_badge_uses_all=orders_badge_uses_all,
+            in_progress_orders_count=in_progress_orders_count,
             company_name=Setting.get_val('company_name', 'Yan Zhen Peptide'),
             whatsapp_number=Setting.get_val('whatsapp_number', app.config.get('WHATSAPP_NUMBER', '85263294280')),
             business_email=Setting.get_val('business_email', app.config.get('BUSINESS_EMAIL', 'zhenyan640@gmail.com'))

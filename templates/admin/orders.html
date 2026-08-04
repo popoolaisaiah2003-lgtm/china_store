@@ -17,7 +17,9 @@
         <th>Phone / Country</th>
         <th>Order Summary</th>
         <th>Grand Total</th>
+        <th>Status</th>
         <th>Date</th>
+        <th style="text-align: right;">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -28,11 +30,30 @@
           <td>{{ order.customer_phone }}<br><span style="font-size: 0.8rem; color: var(--text-muted);">{{ order.customer_country }}</span></td>
           <td style="font-size: 0.85rem; max-width: 300px;">{{ order.items_json }}</td>
           <td><strong style="color: var(--navy-deep); font-size: 1.1rem;">${{ "%.2f"|format(order.grand_total) }}</strong></td>
+          <td>
+            <span class="admin-status-badge admin-status-{{ order.status|lower|replace(' ', '-') }}">{{ order.status }}</span>
+          </td>
           <td style="font-size: 0.85rem; color: var(--text-muted);">{{ order.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+          <td style="text-align: right;">
+            <div class="d-inline-flex gap-2 flex-wrap justify-content-end">
+              {% if order.status != 'In Progress' %}
+                <form method="POST" action="{{ url_for('admin.order_mark_in_progress', id=order.id) }}" class="d-inline">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <button type="submit" class="btn btn-sm btn-outline-primary">Mark In Progress</button>
+                </form>
+              {% endif %}
+              {% if order.status != 'Completed' %}
+                <form method="POST" action="{{ url_for('admin.order_mark_completed', id=order.id) }}" class="d-inline">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <button type="submit" class="btn btn-sm btn-success">Mark Completed</button>
+                </form>
+              {% endif %}
+            </div>
+          </td>
         </tr>
       {% else %}
         <tr>
-          <td colspan="6" style="text-align: center; color: var(--text-muted); padding: 3rem;">
+          <td colspan="8" style="text-align: center; color: var(--text-muted); padding: 3rem;">
             No wholesale order submissions logged yet.
           </td>
         </tr>

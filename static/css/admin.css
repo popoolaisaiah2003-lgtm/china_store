@@ -223,6 +223,15 @@ body.admin-layout {
   background: #FDE68A;
 }
 
+.admin-nav-meta-count {
+  margin-left: 0.35rem;
+  color: #CBD5E1;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
+  transition: opacity var(--admin-transition-speed) ease, transform var(--admin-transition-speed) ease;
+}
+
 .admin-nav .nav-link i {
   font-size: 1rem;
   min-width: 1.2rem;
@@ -338,6 +347,39 @@ body.admin-sidebar-collapsed .admin-nav-badge-dot {
   transform: scale(1);
 }
 
+body.admin-sidebar-collapsed .admin-nav-meta-count {
+  opacity: 0;
+  transform: scale(0.7);
+  pointer-events: none;
+}
+
+.admin-status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 108px;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.admin-status-pending {
+  background: #FEF3C7;
+  color: #92400E;
+}
+
+.admin-status-in-progress {
+  background: #DBEAFE;
+  color: #1D4ED8;
+}
+
+.admin-status-completed {
+  background: #DCFCE7;
+  color: #166534;
+}
+
 body.admin-sidebar-collapsed .admin-nav .nav-link i {
   margin: 0;
 }
@@ -444,5 +486,11 @@ body.admin-sidebar-collapsed .admin-nav .nav-link i {
   body.admin-sidebar-collapsed .admin-nav-badge-dot {
     opacity: 0;
     transform: scale(0.7);
+  }
+
+  body.admin-sidebar-collapsed .admin-nav-meta-count {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
   }
 }

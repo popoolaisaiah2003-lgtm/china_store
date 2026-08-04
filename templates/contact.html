@@ -71,7 +71,7 @@
               Worldwide Shipping Available
             </div>
             <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.15rem;">
-              Cold-Chain Courier Logistics
+             FedEx, DHL, UPS, and other international couriers supported.
             </div>
           </div>
         </div>
@@ -106,41 +106,47 @@
         </p>
 
         <form method="POST">
+          {{ form.hidden_tag() }}
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
             <div class="form-group">
               <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Full Name</label>
-              <input type="text" name="full_name" required placeholder="e.g. Dr. Alexander Wright" class="form-control">
+              {{ form.name(class="form-control" + (" is-invalid" if form.name.errors else ""), placeholder="e.g. Dr. Alexander Wright") }}
+              {% for err in form.name.errors %}
+                <div style="color: #DC2626; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;">{{ err }}</div>
+              {% endfor %}
             </div>
             <div class="form-group">
               <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Email Address</label>
-              <input type="email" name="email" required placeholder="e.g. research@lab.com" class="form-control">
+              {{ form.email(class="form-control" + (" is-invalid" if form.email.errors else ""), placeholder="e.g. research@lab.com") }}
+              {% for err in form.email.errors %}
+                <div style="color: #DC2626; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;">{{ err }}</div>
+              {% endfor %}
             </div>
           </div>
 
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
             <div class="form-group">
-              <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Country</label>
-              <input type="text" name="country" required placeholder="e.g. United States / Germany" class="form-control">
+              <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Company / Organization</label>
+              {{ form.company(class="form-control" + (" is-invalid" if form.company.errors else ""), placeholder="e.g. Apex Biotech Labs") }}
+              {% for err in form.company.errors %}
+                <div style="color: #DC2626; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;">{{ err }}</div>
+              {% endfor %}
             </div>
             <div class="form-group">
-              <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">WhatsApp Number</label>
-              <input type="text" name="whatsapp_number" placeholder="e.g. +1 555 019 2831" class="form-control">
+              <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Inquiry Subject</label>
+              {{ form.subject(class="form-control" + (" is-invalid" if form.subject.errors else ""), placeholder="e.g. Bulk Wholesale Quotation") }}
+              {% for err in form.subject.errors %}
+                <div style="color: #DC2626; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;">{{ err }}</div>
+              {% endfor %}
             </div>
-          </div>
-
-          <div class="form-group" style="margin-bottom: 1.25rem;">
-            <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Inquiry Type</label>
-            <select name="inquiry_type" class="form-control">
-              <option value="Bulk Wholesale Order">Bulk Wholesale Quotation</option>
-              <option value="Custom Synthesis">Custom Peptide Synthesis</option>
-              <option value="COA Request">Batch COA Verification Request</option>
-              <option value="General Inquiry">General Laboratory Inquiry</option>
-            </select>
           </div>
 
           <div class="form-group" style="margin-bottom: 1.75rem;">
             <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Message / Product Specifications</label>
-            <textarea name="message" rows="4" required placeholder="Specify target peptide codes, desired quantity (vials/grams), and purity requirements." class="form-control"></textarea>
+            {{ form.message(class="form-control" + (" is-invalid" if form.message.errors else ""), rows="4", placeholder="Specify target peptide codes, desired quantity (vials/grams), and purity requirements.") }}
+            {% for err in form.message.errors %}
+              <div style="color: #DC2626; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;">{{ err }}</div>
+            {% endfor %}
           </div>
 
           <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.95rem; font-size: 1.05rem;">

@@ -196,6 +196,9 @@ TRANSLATIONS = {
         'please_fill_required_review_fields': 'Please fill in all required review fields (Name and Review text).',
         'review_moderation_note': 'Your submission will be reviewed before publication.',
         'submit_review_btn': 'Submit Review for Approval',
+        'contact_inquiry_submitted_success': 'Thank you. Your inquiry has been submitted successfully. Our team will contact you shortly.',
+        'contact_inquiry_submit_error': 'We could not submit your inquiry at the moment. Please try again.',
+        'contact_inquiry_validation_error': 'Please review the form and correct the highlighted fields.',
 
 
         'overall_satisfaction': 'Overall Satisfaction',
@@ -535,6 +538,9 @@ TRANSLATIONS = {
         'please_fill_required_review_fields': '请填写所有必填的评价字段（姓名和评价内容）。',
         'review_moderation_note': '您的评价提交后将经审核后公开发布。',
         'submit_review_btn': '提交评价等待审核',
+        'contact_inquiry_submitted_success': '感谢您的咨询！您的信息已成功提交，我们将尽快与您联系。',
+        'contact_inquiry_submit_error': '当前无法提交您的咨询，请稍后重试。',
+        'contact_inquiry_validation_error': '请检查表单并修正高亮字段后重试。',
 
 
         'overall_satisfaction': '总体满意度',

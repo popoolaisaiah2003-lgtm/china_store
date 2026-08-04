@@ -74,6 +74,11 @@
         </a>
       </li>
       <li class="nav-item">
+        <a class="nav-link {{ 'active' if 'inquiry' in request.endpoint or request.endpoint == 'admin.inquiries' }}" href="{{ url_for('admin.inquiries') }}">
+          <i class="bi bi-envelope-paper"></i> Inquiries
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link {{ 'active' if 'shipment' in request.endpoint }}" href="{{ url_for('admin.shipments') }}">
           <i class="bi bi-airplane"></i> Global Shipments
         </a>

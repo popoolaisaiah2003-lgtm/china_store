@@ -15,7 +15,7 @@
 
 <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2.5rem; max-width: 960px; box-shadow: var(--shadow-sm);">
   <form method="POST" enctype="multipart/form-data" id="blogArticleForm">
-    {{ form.csrf_token }}
+    {{ form.hidden_tag() }}
 
     <!-- Title & Slug Row -->
     <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">

@@ -18,7 +18,7 @@
   <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2.25rem; box-shadow: var(--shadow-sm);">
     
     <form method="POST" enctype="multipart/form-data">
-      {{ form.csrf_token }}
+      {{ form.hidden_tag() }}
 
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
         <div class="form-group">

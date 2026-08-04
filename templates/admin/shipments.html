@@ -79,6 +79,7 @@
               </td>
               <td>
                 <form method="POST" action="{{ url_for('admin.shipment_toggle', id=s.id) }}" class="d-inline">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                   <button type="submit" class="btn btn-sm {{ 'btn-success' if s.is_published else 'btn-outline-secondary' }} py-0 px-2 small">
                     {{ 'Published' if s.is_published else 'Draft' }}
                   </button>
@@ -90,6 +91,7 @@
                     <i class="bi bi-pencil me-1"></i> Edit
                   </a>
                   <form method="POST" action="{{ url_for('admin.shipment_delete', id=s.id) }}" onsubmit="return confirm('Delete this shipment record permanently?');" class="d-inline">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     <button type="submit" class="btn btn-outline-danger">
                       <i class="bi bi-trash me-1"></i> Delete
                     </button>

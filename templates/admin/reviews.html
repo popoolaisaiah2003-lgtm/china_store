@@ -51,19 +51,23 @@
               <div class="d-flex justify-content-end gap-2 flex-wrap">
                 {% if not review.approved %}
                   <form method="POST" action="{{ url_for('admin.review_approve', id=review.id) }}" style="display: inline;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     <button type="submit" class="btn btn-sm btn-success">Approve</button>
                   </form>
                 {% else %}
                   <form method="POST" action="{{ url_for('admin.review_reject', id=review.id) }}" style="display: inline;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     <button type="submit" class="btn btn-sm btn-warning">Reject</button>
                   </form>
                 {% endif %}
 
                 <form method="POST" action="{{ url_for('admin.review_feature', id=review.id) }}" style="display: inline;">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                   <button type="submit" class="btn btn-sm btn-outline-primary">{{ 'Unfeature' if review.featured else 'Feature' }}</button>
                 </form>
 
                 <form method="POST" action="{{ url_for('admin.review_delete', id=review.id) }}" onsubmit="return confirm('Delete this review permanently?');" style="display: inline;">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                   <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
                 </form>
               </div>

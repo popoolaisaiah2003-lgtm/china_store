@@ -49,7 +49,7 @@
           </p>
 
           <form method="POST">
-            {{ form.csrf_token }}
+            {{ form.hidden_tag() }}
 
             <div class="checkout-shipping-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.75rem;">
               

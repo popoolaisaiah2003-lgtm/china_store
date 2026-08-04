@@ -15,7 +15,7 @@
     <h3 style="font-size: 1.15rem; margin-bottom: 1rem;">Add New Category</h3>
     
     <form method="POST" action="{{ url_for('admin.categories') }}">
-      {{ form.csrf_token }}
+      {{ form.hidden_tag() }}
 
       <div class="order-form-group" style="margin-bottom: 1rem;">
         <label for="name">Category Name *</label>
@@ -52,6 +52,7 @@
             <td><span style="font-weight: 700; color: var(--gold-primary);">{{ cat.products.count() }}</span> items</td>
             <td>
               <form method="POST" action="{{ url_for('admin.category_delete', id=cat.id) }}" onsubmit="return confirm('Deleting this category will remove associated product links. Continue?');">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <button type="submit" class="btn btn-sm" style="background:#FEE2E2; color:#991B1B; border:1px solid #FCA5A5;">Delete</button>
               </form>
             </td>

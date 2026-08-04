@@ -149,6 +149,15 @@ class CheckoutForm(FlaskForm):
     submit = SubmitField('Generate Wholesale Order on WhatsApp')
 
 
+class ContactForm(FlaskForm):
+    name = StringField('Full Name *', validators=[DataRequired(), Length(min=2, max=120)])
+    email = StringField('Email Address *', validators=[DataRequired(), Email(), Length(max=150)])
+    company = StringField('Company / Organization', validators=[Optional(), Length(max=150)])
+    subject = StringField('Subject *', validators=[DataRequired(), Length(min=3, max=200)])
+    message = TextAreaField('Message / Product Specifications *', validators=[DataRequired(), Length(min=10, max=5000)])
+    submit = SubmitField('Send Inquiry →')
+
+
 class SettingForm(FlaskForm):
     company_name = StringField('Company Name', validators=[DataRequired()], default='Yan Zhen Peptide')
     whatsapp_number = StringField('WhatsApp Support Number', validators=[DataRequired()], default='85263294280')

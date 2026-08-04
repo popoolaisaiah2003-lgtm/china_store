@@ -1,0 +1,70 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Contact Inquiries | Yan Zhen Admin Portal{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h1 style="font-size: 1.75rem; margin-bottom: 0.25rem;">Contact Inquiries</h1>
+    <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">Newest inquiries are shown first.</p>
+  </div>
+  <span class="badge {{ 'bg-danger' if unread_count else 'bg-secondary' }}" style="font-size: 0.82rem; padding: 0.5rem 0.7rem;">
+    Unread: {{ unread_count }}
+  </span>
+</div>
+
+<div class="table-responsive" style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
+  <table class="table align-middle mb-0">
+    <thead class="table-light">
+      <tr>
+        <th style="min-width: 70px;">ID</th>
+        <th style="min-width: 180px;">Name</th>
+        <th style="min-width: 220px;">Email</th>
+        <th style="min-width: 170px;">Company</th>
+        <th style="min-width: 220px;">Subject</th>
+        <th style="min-width: 140px;">Status</th>
+        <th style="min-width: 170px;">Received</th>
+        <th class="text-end" style="min-width: 260px;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for inquiry in inquiries %}
+        <tr>
+          <td>#{{ inquiry.id }}</td>
+          <td style="font-weight: 600; color: var(--navy-deep);">{{ inquiry.name }}</td>
+          <td>{{ inquiry.email }}</td>
+          <td>{{ inquiry.company or '-' }}</td>
+          <td>{{ inquiry.subject }}</td>
+          <td>
+            {% if inquiry.is_read %}
+              <span class="badge bg-secondary">Read</span>
+            {% else %}
+              <span class="badge bg-danger">Unread</span>
+            {% endif %}
+          </td>
+          <td>{{ inquiry.created_at.strftime('%Y-%m-%d %H:%M') if inquiry.created_at else '-' }}</td>
+          <td class="text-end">
+            <div class="d-inline-flex gap-2 flex-wrap justify-content-end">
+              <a href="{{ url_for('admin.inquiry_detail', id=inquiry.id) }}" class="btn btn-sm btn-outline-primary">View</a>
+              {% if not inquiry.is_read %}
+                <form method="POST" action="{{ url_for('admin.inquiry_mark_read', id=inquiry.id) }}" class="d-inline">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                  <button type="submit" class="btn btn-sm btn-success">Mark Read</button>
+                </form>
+              {% endif %}
+              <form method="POST" action="{{ url_for('admin.inquiry_delete', id=inquiry.id) }}" class="d-inline" onsubmit="return confirm('Delete this inquiry permanently?');">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      {% else %}
+        <tr>
+          <td colspan="8" class="text-center text-muted py-5">No contact inquiries yet.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -7,7 +7,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.utils import secure_filename
 
 from extensions import db
-from models import Admin, Product, Category, ProductImage, COA, BlogPost, Review, Comment, Setting, OrderRecord, ShipmentUpdate
+from models import Admin, Product, Category, ProductImage, COA, BlogPost, Review, Comment, Setting, OrderRecord, ShipmentUpdate, ContactInquiry
 from forms import LoginForm, CategoryForm, ProductForm, COAForm, BlogPostForm, SettingForm, ChangePasswordForm, ShipmentUpdateForm, ReviewForm
 
 admin = Blueprint('admin', __name__, url_prefix='/admin')
@@ -47,6 +47,19 @@ def admin_required(func):
     return wrapper
 
 
+def commit_with_rollback(success_message=None, success_category='success', error_message='Database operation failed. Please try again.'):
+    try:
+        db.session.commit()
+        if success_message:
+            flash(success_message, success_category)
+        return True
+    except Exception:
+        db.session.rollback()
+        current_app.logger.exception('Admin DB write failed')
+        flash(error_message, 'danger')
+        return False
+
+
 @admin.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -64,7 +77,8 @@ def login():
         if admin_account and admin_account.check_password(form.password.data):
             clear_failed_attempts(client_ip)
             admin_account.last_login = datetime.utcnow()
-            db.session.commit()
+            if not commit_with_rollback(error_message='Could not complete login write. Please try again.'):
+                return render_template('admin/login.html', form=form)
             
             login_user(admin_account, remember=False)
             flash('Welcome to Yan Zhen Secure Management Console.', 'success')
@@ -118,9 +132,8 @@ def change_password():
             flash('Current password is incorrect.', 'danger')
         else:
             current_user.set_password(form.new_password.data)
-            db.session.commit()
-            flash('Password updated successfully! Please use your new credentials for future logins.', 'success')
-            return redirect(url_for('admin.dashboard'))
+            if commit_with_rollback('Password updated successfully! Please use your new credentials for future logins.', 'success'):
+                return redirect(url_for('admin.dashboard'))
 
     return render_template('admin/change_password.html', form=form)
 
@@ -183,11 +196,9 @@ def product_new():
                 img = ProductImage(product_id=product.id, image_filename=new_filename, is_primary=True)
                 db.session.add(img)
 
-        db.session.commit()
-        flash('Product created successfully.', 'success')
-        return redirect(url_for('admin.products'))
+        if commit_with_rollback('Product created successfully.', 'success'):
+            return redirect(url_for('admin.products'))
     elif request.method == 'POST':
-        print(f"[Admin Product Form Validation Failed] Errors: {form.errors}")
         for field, errors in form.errors.items():
             for error in errors:
                 flash(f"Validation Error ({field}): {error}", 'danger')
@@ -227,9 +238,8 @@ def product_edit(id):
                 img = ProductImage(product_id=product.id, image_filename=new_filename, is_primary=True)
                 db.session.add(img)
 
-        db.session.commit()
-        flash(f'Product "{product.name}" updated successfully.', 'success')
-        return redirect(url_for('admin.products'))
+        if commit_with_rollback(f'Product "{product.name}" updated successfully.', 'success'):
+            return redirect(url_for('admin.products'))
 
     return render_template('admin/product_form.html', form=form, product=product, title=f"Edit {product.name}", is_edit=True)
 
@@ -239,8 +249,8 @@ def product_delete(id):
     product = Product.query.get_or_404(id)
     name = product.name
     db.session.delete(product)
-    db.session.commit()
-    flash(f'Product "{name}" deleted.', 'info')
+    if commit_with_rollback(f'Product "{name}" deleted.', 'info'):
+        return redirect(url_for('admin.products'))
     return redirect(url_for('admin.products'))
 
 
@@ -282,9 +292,8 @@ def coa_new():
             active=form.active.data
         )
         db.session.add(coa)
-        db.session.commit()
-        flash('COA Certificate uploaded successfully.', 'success')
-        return redirect(url_for('admin.coa_index'))
+        if commit_with_rollback('COA Certificate uploaded successfully.', 'success'):
+            return redirect(url_for('admin.coa_index'))
 
     return render_template('admin/coa_form.html', form=form)
 
@@ -293,8 +302,8 @@ def coa_new():
 def coa_delete(id):
     coa = COA.query.get_or_404(id)
     db.session.delete(coa)
-    db.session.commit()
-    flash('COA deleted successfully.', 'info')
+    if commit_with_rollback('COA deleted successfully.', 'info'):
+        return redirect(url_for('admin.coa_index'))
     return redirect(url_for('admin.coa_index'))
 
 
@@ -323,9 +332,8 @@ def review_new():
             is_approved=False,
         )
         db.session.add(review)
-        db.session.commit()
-        flash('Review created successfully.', 'success')
-        return redirect(url_for('admin.reviews_index'))
+        if commit_with_rollback('Review created successfully.', 'success'):
+            return redirect(url_for('admin.reviews_index'))
 
     return render_template('admin/review_form.html', form=form, review=None, is_edit=False)
 
@@ -351,9 +359,8 @@ def review_edit(id):
         review.comment = review.review_text
         review.approved = review.approved if review.approved is not None else False
         review.is_approved = review.approved
-        db.session.commit()
-        flash('Review updated successfully.', 'success')
-        return redirect(url_for('admin.reviews_index'))
+        if commit_with_rollback('Review updated successfully.', 'success'):
+            return redirect(url_for('admin.reviews_index'))
 
     return render_template('admin/review_form.html', form=form, review=review, is_edit=True)
 
@@ -364,8 +371,8 @@ def review_approve(id):
     review = Review.query.get_or_404(id)
     review.approved = True
     review.is_approved = True
-    db.session.commit()
-    flash('Review approved successfully.', 'success')
+    if commit_with_rollback('Review approved successfully.', 'success'):
+        return redirect(url_for('admin.reviews_index'))
     return redirect(url_for('admin.reviews_index'))
 
 
@@ -376,8 +383,8 @@ def review_reject(id):
     review.approved = False
     review.is_approved = False
     review.featured = False
-    db.session.commit()
-    flash('Review rejected successfully.', 'info')
+    if commit_with_rollback('Review rejected successfully.', 'info'):
+        return redirect(url_for('admin.reviews_index'))
     return redirect(url_for('admin.reviews_index'))
 
 
@@ -389,8 +396,8 @@ def review_feature(id):
     if review.featured:
         review.approved = True
         review.is_approved = True
-    db.session.commit()
-    flash('Review feature status updated.', 'success')
+    if commit_with_rollback('Review feature status updated.', 'success'):
+        return redirect(url_for('admin.reviews_index'))
     return redirect(url_for('admin.reviews_index'))
 
 
@@ -399,8 +406,8 @@ def review_feature(id):
 def review_delete(id):
     review = Review.query.get_or_404(id)
     db.session.delete(review)
-    db.session.commit()
-    flash('Review deleted successfully.', 'info')
+    if commit_with_rollback('Review deleted successfully.', 'info'):
+        return redirect(url_for('admin.reviews_index'))
     return redirect(url_for('admin.reviews_index'))
 
 
@@ -417,9 +424,8 @@ def categories():
         else:
             cat = Category(name=form.name.data, slug=slug, description=form.description.data)
             db.session.add(cat)
-            db.session.commit()
-            flash(f'Category "{cat.name}" added successfully.', 'success')
-            return redirect(url_for('admin.categories'))
+            if commit_with_rollback(f'Category "{cat.name}" added successfully.', 'success'):
+                return redirect(url_for('admin.categories'))
 
     categories_list = Category.query.order_by(Category.name).all()
     return render_template('admin/categories.html', form=form, categories=categories_list)
@@ -430,8 +436,8 @@ def category_delete(id):
     cat = Category.query.get_or_404(id)
     name = cat.name
     db.session.delete(cat)
-    db.session.commit()
-    flash(f'Category "{name}" deleted.', 'info')
+    if commit_with_rollback(f'Category "{name}" deleted.', 'info'):
+        return redirect(url_for('admin.categories'))
     return redirect(url_for('admin.categories'))
 
 
@@ -475,11 +481,9 @@ def blog_new():
             is_featured=form.is_featured.data
         )
         db.session.add(post)
-        db.session.commit()
-        flash('Blog article created successfully.', 'success')
-        return redirect(url_for('admin.blog_posts'))
+        if commit_with_rollback('Blog article created successfully.', 'success'):
+            return redirect(url_for('admin.blog_posts'))
     elif request.method == 'POST':
-        print(f"[Blog New Form Errors]: {form.errors}")
         for field, errors in form.errors.items():
             for err in errors:
                 flash(f"Error in {field}: {err}", 'danger')
@@ -519,11 +523,9 @@ def blog_edit(id):
                 bfile.save(os.path.join(current_app.config['BLOG_UPLOAD_FOLDER'], new_image_filename))
                 post.image_filename = new_image_filename
 
-        db.session.commit()
-        flash('Blog article updated successfully.', 'success')
-        return redirect(url_for('admin.blog_posts'))
+        if commit_with_rollback('Blog article updated successfully.', 'success'):
+            return redirect(url_for('admin.blog_posts'))
     elif request.method == 'POST':
-        print(f"[Blog Edit Form Errors]: {form.errors}")
         for field, errors in form.errors.items():
             for err in errors:
                 flash(f"Error in {field}: {err}", 'danger')
@@ -542,12 +544,12 @@ def blog_delete(id):
         if other_uses == 0 and os.path.exists(file_path):
             try:
                 os.remove(file_path)
-            except OSError as e:
-                print(f"Error deleting blog image {file_path}: {e}")
+            except OSError:
+                current_app.logger.warning('Could not delete blog image: %s', file_path)
 
     db.session.delete(post)
-    db.session.commit()
-    flash(f'Article "{title}" deleted successfully.', 'info')
+    if commit_with_rollback(f'Article "{title}" deleted successfully.', 'info'):
+        return redirect(url_for('admin.blog_posts'))
     return redirect(url_for('admin.blog_posts'))
 
 @admin.route('/blog/toggle-publish/<int:id>', methods=['POST'])
@@ -556,9 +558,9 @@ def blog_toggle_publish(id):
     post = BlogPost.query.get_or_404(id)
     post.is_published = not post.is_published
     post.updated_at = datetime.utcnow()
-    db.session.commit()
     status_str = "published" if post.is_published else "unpublished"
-    flash(f'Article "{post.title}" is now {status_str}.', 'success')
+    if commit_with_rollback(f'Article "{post.title}" is now {status_str}.', 'success'):
+        return redirect(url_for('admin.blog_posts'))
     return redirect(url_for('admin.blog_posts'))
 
 @admin.route('/blog/toggle-featured/<int:id>', methods=['POST'])
@@ -567,9 +569,9 @@ def blog_toggle_featured(id):
     post = BlogPost.query.get_or_404(id)
     post.is_featured = not post.is_featured
     post.updated_at = datetime.utcnow()
-    db.session.commit()
     status_str = "featured at top" if post.is_featured else "unfeatured"
-    flash(f'Article "{post.title}" is now {status_str}.', 'success')
+    if commit_with_rollback(f'Article "{post.title}" is now {status_str}.', 'success'):
+        return redirect(url_for('admin.blog_posts'))
     return redirect(url_for('admin.blog_posts'))
 
 
@@ -585,6 +587,42 @@ def orders():
 def comments():
     comments_list = Comment.query.order_by(Comment.created_at.desc()).all()
     return render_template('admin/comments.html', comments=comments_list)
+
+
+# ---------------- CONTACT INQUIRIES ----------------
+@admin.route('/inquiries')
+@admin_required
+def inquiries():
+    inquiries_list = ContactInquiry.query.order_by(ContactInquiry.created_at.desc()).all()
+    unread_count = ContactInquiry.query.filter_by(is_read=False).count()
+    return render_template('admin/inquiries.html', inquiries=inquiries_list, unread_count=unread_count)
+
+
+@admin.route('/inquiries/<int:id>')
+@admin_required
+def inquiry_detail(id):
+    inquiry = ContactInquiry.query.get_or_404(id)
+    return render_template('admin/inquiry_detail.html', inquiry=inquiry)
+
+
+@admin.route('/inquiries/<int:id>/mark-read', methods=['POST'])
+@admin_required
+def inquiry_mark_read(id):
+    inquiry = ContactInquiry.query.get_or_404(id)
+    inquiry.is_read = True
+    if commit_with_rollback('Inquiry marked as read.', 'success'):
+        return redirect(url_for('admin.inquiries'))
+    return redirect(url_for('admin.inquiries'))
+
+
+@admin.route('/inquiries/<int:id>/delete', methods=['POST'])
+@admin_required
+def inquiry_delete(id):
+    inquiry = ContactInquiry.query.get_or_404(id)
+    db.session.delete(inquiry)
+    if commit_with_rollback('Inquiry deleted.', 'info'):
+        return redirect(url_for('admin.inquiries'))
+    return redirect(url_for('admin.inquiries'))
 
 
 # ---------------- LANGUAGES & SETTINGS ----------------
@@ -607,15 +645,24 @@ def settings():
         form.meta_description.data = Setting.get_val('meta_description', 'High-purity laboratory research peptides with guaranteed >=99.8% purity.')
 
     if form.validate_on_submit():
-        Setting.set_val('company_name', form.company_name.data)
-        Setting.set_val('whatsapp_number', form.whatsapp_number.data)
-        Setting.set_val('email', form.email.data)
-        Setting.set_val('address', form.address.data)
-        Setting.set_val('default_language', form.default_language.data)
-        Setting.set_val('seo_title', form.seo_title.data)
-        Setting.set_val('meta_description', form.meta_description.data)
-        flash('System settings updated successfully.', 'success')
-        return redirect(url_for('admin.settings'))
+        kv_pairs = {
+            'company_name': form.company_name.data,
+            'whatsapp_number': form.whatsapp_number.data,
+            'email': form.email.data,
+            'address': form.address.data,
+            'default_language': form.default_language.data,
+            'seo_title': form.seo_title.data,
+            'meta_description': form.meta_description.data,
+        }
+        for key, value in kv_pairs.items():
+            item = Setting.query.filter_by(key=key).first()
+            if not item:
+                item = Setting(key=key, value=str(value))
+                db.session.add(item)
+            else:
+                item.value = str(value)
+        if commit_with_rollback('System settings updated successfully.', 'success'):
+            return redirect(url_for('admin.settings'))
 
     return render_template('admin/settings.html', form=form)
 
@@ -655,9 +702,8 @@ def shipment_create():
             is_published=form.is_published.data
         )
         db.session.add(shipment)
-        db.session.commit()
-        flash('Shipment update published successfully.', 'success')
-        return redirect(url_for('admin.shipments'))
+        if commit_with_rollback('Shipment update published successfully.', 'success'):
+            return redirect(url_for('admin.shipments'))
 
     return render_template('admin/shipment_form.html', form=form, title="Add Global Shipment Update")
 
@@ -686,9 +732,8 @@ def shipment_edit(id):
         shipment.note = form.note.data.strip() if form.note.data else None
         shipment.is_published = form.is_published.data
 
-        db.session.commit()
-        flash('Shipment update updated successfully.', 'success')
-        return redirect(url_for('admin.shipments'))
+        if commit_with_rollback('Shipment update updated successfully.', 'success'):
+            return redirect(url_for('admin.shipments'))
 
     return render_template('admin/shipment_form.html', form=form, shipment=shipment, title="Edit Shipment Update")
 
@@ -697,8 +742,8 @@ def shipment_edit(id):
 def shipment_delete(id):
     shipment = ShipmentUpdate.query.get_or_404(id)
     db.session.delete(shipment)
-    db.session.commit()
-    flash('Shipment record deleted.', 'success')
+    if commit_with_rollback('Shipment record deleted.', 'success'):
+        return redirect(url_for('admin.shipments'))
     return redirect(url_for('admin.shipments'))
 
 @admin.route('/shipments/<int:id>/toggle', methods=['POST'])
@@ -706,6 +751,6 @@ def shipment_delete(id):
 def shipment_toggle(id):
     shipment = ShipmentUpdate.query.get_or_404(id)
     shipment.is_published = not shipment.is_published
-    db.session.commit()
-    flash(f"Shipment published status set to {shipment.is_published}.", 'info')
+    if commit_with_rollback(f"Shipment published status set to {shipment.is_published}.", 'info'):
+        return redirect(url_for('admin.shipments'))
     return redirect(url_for('admin.shipments'))

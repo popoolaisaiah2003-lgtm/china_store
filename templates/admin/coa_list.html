@@ -41,6 +41,7 @@
           </td>
           <td>
             <form method="POST" action="{{ url_for('admin.coa_delete', id=coa.id) }}" onsubmit="return confirm('Are you sure you want to delete this COA record?');">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
               <button type="submit" class="btn btn-sm" style="background:#FEE2E2; color:#991B1B; border:1px solid #FCA5A5;">Delete</button>
             </form>
           </td>

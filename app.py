@@ -1,13 +1,37 @@
 import os
 from flask import Flask, session, redirect, request
+import pymysql
+from sqlalchemy.engine.url import make_url
 from config import Config
-from extensions import db, login_manager, migrate
+from extensions import db, login_manager, migrate, csrf
 from models import Admin, Setting, Product
 from translations import translate
+
+
+def _ensure_mysql_database_exists(database_uri):
+    url = make_url(database_uri)
+    if not url.drivername.startswith('mysql'):
+        raise RuntimeError(f"Unsupported database driver for this deployment: {url.drivername}")
+
+    connection = pymysql.connect(
+        host=url.host or 'localhost',
+        user=url.username or 'root',
+        password=url.password or '',
+        port=url.port or 3306,
+        autocommit=True,
+    )
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(f"CREATE DATABASE IF NOT EXISTS `{url.database}` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
+    finally:
+        connection.close()
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
+
+    # Ensure target MySQL database exists before SQLAlchemy initialization.
+    _ensure_mysql_database_exists(app.config['SQLALCHEMY_DATABASE_URI'])
 
     # Ensure upload subdirectories exist
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
@@ -17,6 +41,7 @@ def create_app():
 
     # Initialize extensions
     db.init_app(app)
+    csrf.init_app(app)
     login_manager.init_app(app)
     migrate.init_app(app, db)
     login_manager.login_view = 'admin.login'
@@ -73,13 +98,10 @@ def create_app():
 
 app = create_app()
 
-# Auto-initialize database tables, import real yan_zhen_peptide.sql data & seed admin user on Railway startup
+# Minimal startup verification only (no schema/data writes at startup).
 with app.app_context():
-    try:
-        from import_helper import import_sql_file_if_empty
-        import_sql_file_if_empty(app)
-    except Exception as e:
-        print(f"[Railway Init Warning] Auto-import notice: {e}")
+    active_url = db.engine.url
+    print(f"DB: {active_url.drivername}://{active_url.host}/{active_url.database}")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)

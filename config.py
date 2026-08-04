@@ -5,24 +5,11 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'yan-zhen-peptide-production-secret-2026'
-    
-    db_url = (
-        os.environ.get('DATABASE_URL')
-        or os.environ.get('MYSQL_URL')
-        or os.environ.get('MYSQLURL')
-    )
 
-    if db_url:
-        if db_url.startswith('postgres://'):
-            db_url = db_url.replace('postgres://', 'postgresql://', 1)
-        elif db_url.startswith('mysql://'):
-            db_url = db_url.replace('mysql://', 'mysql+pymysql://', 1)
-
-        SQLALCHEMY_DATABASE_URI = db_url
-    else:
-        instance_dir = os.path.join(basedir, 'instance')
-        os.makedirs(instance_dir, exist_ok=True)
-        SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(instance_dir, 'yan_zhen_peptide.db')
+    # MySQL-only database configuration (local XAMPP default, Railway override via DATABASE_URL).
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'mysql+pymysql://root:@localhost/yan_zhen_peptide')
+    if SQLALCHEMY_DATABASE_URI.startswith('mysql://'):
+        SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace('mysql://', 'mysql+pymysql://', 1)
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 

@@ -1,0 +1,63 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}Inquiry #{{ inquiry.id }} | Yan Zhen Admin Portal{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h1 style="font-size: 1.65rem; margin-bottom: 0.2rem;">Inquiry #{{ inquiry.id }}</h1>
+    <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">
+      Received {{ inquiry.created_at.strftime('%Y-%m-%d %H:%M') if inquiry.created_at else '-' }}
+    </p>
+  </div>
+  <a href="{{ url_for('admin.inquiries') }}" class="btn btn-outline">&larr; Back to Inquiries</a>
+</div>
+
+<div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 2rem;">
+  <div class="row g-3 mb-4">
+    <div class="col-md-6">
+      <div style="font-weight: 700; color: var(--navy-deep); margin-bottom: 0.2rem;">Name</div>
+      <div>{{ inquiry.name }}</div>
+    </div>
+    <div class="col-md-6">
+      <div style="font-weight: 700; color: var(--navy-deep); margin-bottom: 0.2rem;">Email</div>
+      <div>{{ inquiry.email }}</div>
+    </div>
+    <div class="col-md-6">
+      <div style="font-weight: 700; color: var(--navy-deep); margin-bottom: 0.2rem;">Company</div>
+      <div>{{ inquiry.company or '-' }}</div>
+    </div>
+    <div class="col-md-6">
+      <div style="font-weight: 700; color: var(--navy-deep); margin-bottom: 0.2rem;">Status</div>
+      <div>
+        {% if inquiry.is_read %}
+          <span class="badge bg-secondary">Read</span>
+        {% else %}
+          <span class="badge bg-danger">Unread</span>
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-12">
+      <div style="font-weight: 700; color: var(--navy-deep); margin-bottom: 0.2rem;">Subject</div>
+      <div>{{ inquiry.subject }}</div>
+    </div>
+    <div class="col-12">
+      <div style="font-weight: 700; color: var(--navy-deep); margin-bottom: 0.2rem;">Message</div>
+      <div style="white-space: pre-wrap; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: #F8FAFC; padding: 1rem;">{{ inquiry.message }}</div>
+    </div>
+  </div>
+
+  <div class="d-flex gap-2">
+    {% if not inquiry.is_read %}
+      <form method="POST" action="{{ url_for('admin.inquiry_mark_read', id=inquiry.id) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="btn btn-success">Mark as Read</button>
+      </form>
+    {% endif %}
+    <form method="POST" action="{{ url_for('admin.inquiry_delete', id=inquiry.id) }}" onsubmit="return confirm('Delete this inquiry permanently?');">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <button type="submit" class="btn btn-outline-danger">Delete Inquiry</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

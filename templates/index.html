@@ -180,6 +180,7 @@
                 </a>
                 
                 <form method="POST" action="{{ url_for('main.cart_add', product_id=product.id) }}" style="margin: 0;">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                   <input type="hidden" name="quantity" value="1">
                   <button type="submit" class="btn btn-sm btn-primary" style="padding: 0.35rem 0.65rem;" title="{{ _('add_to_cart_tooltip') }}">
                     <i class="bi bi-cart-plus"></i> +

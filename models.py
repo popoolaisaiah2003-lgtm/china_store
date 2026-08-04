@@ -235,6 +235,22 @@ class OrderRecord(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 
+class ContactInquiry(db.Model):
+    __tablename__ = 'contact_inquiries'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), nullable=False)
+    email = db.Column(db.String(150), nullable=False)
+    company = db.Column(db.String(150), nullable=True)
+    subject = db.Column(db.String(200), nullable=False)
+    message = db.Column(db.Text, nullable=False)
+    is_read = db.Column(db.Boolean, default=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f'<ContactInquiry {self.email}>'
+
+
 class Setting(db.Model):
     __tablename__ = 'settings'
     

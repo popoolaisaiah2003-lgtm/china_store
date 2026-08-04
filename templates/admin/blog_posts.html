@@ -56,6 +56,7 @@
 
             <td>
               <form method="POST" action="{{ url_for('admin.blog_toggle_publish', id=post.id) }}" style="display: inline;">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <button type="submit" class="btn btn-sm {{ 'btn-success' if post.is_published else 'btn-outline' }}" style="padding: 0.25rem 0.65rem; font-size: 0.78rem;" title="Click to toggle publication status">
                   {{ 'Published' if post.is_published else 'Draft / Hidden' }}
                 </button>
@@ -64,6 +65,7 @@
 
             <td>
               <form method="POST" action="{{ url_for('admin.blog_toggle_featured', id=post.id) }}" style="display: inline;">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <button type="submit" class="btn btn-sm {{ 'btn-whatsapp' if post.is_featured else 'btn-outline' }}" style="padding: 0.25rem 0.65rem; font-size: 0.78rem;" title="Click to toggle featured placement at top of blog">
                   {{ '⭐ Featured' if post.is_featured else 'Standard' }}
                 </button>
@@ -85,6 +87,7 @@
                 </a>
 
                 <form method="POST" action="{{ url_for('admin.blog_delete', id=post.id) }}" onsubmit="return confirm('Are you sure you want to delete article \'{{ post.title }}\'? This cannot be undone.');" style="display: inline;">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                   <button type="submit" class="btn btn-sm btn-danger" style="padding: 0.3rem 0.6rem; font-size: 0.8rem;">
                     Delete
                   </button>

@@ -3,8 +3,8 @@ import math
 import datetime
 import urllib.parse
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session, current_app, send_from_directory, Response, jsonify
-from models import Product, Category, Review, COA, BlogPost, Comment, Setting, OrderRecord, ProductImage, ShipmentUpdate
-from forms import CheckoutForm, ReviewForm
+from models import Product, Category, Review, COA, BlogPost, Comment, Setting, OrderRecord, ProductImage, ShipmentUpdate, ContactInquiry
+from forms import CheckoutForm, ReviewForm, ContactForm
 from translations import translate
 from extensions import db
 
@@ -127,7 +127,6 @@ def index():
 @main.route('/submit-review', methods=['POST'])
 def submit_review():
     form = ReviewForm()
-    print(f"[Review Submit Audit] Incoming POST request. Raw form data: {request.form}")
     
     name_val = form.customer_name.data.strip() if form.customer_name.data else request.form.get('customer_name', '').strip()
     country_val = (form.country.data.strip() if form.country.data and form.country.data.strip() else request.form.get('country', '').strip()) or 'International Client'
@@ -139,10 +138,7 @@ def submit_review():
 
     review_text_val = form.review_text.data.strip() if form.review_text.data else request.form.get('review_text', '').strip()
 
-    print(f"[Review Submit Audit] Parsed Values -> Name: '{name_val}', Country: '{country_val}', Rating: {rating_val}, Text Snippet: '{review_text_val[:30]}...'")
-
     if not name_val or not review_text_val:
-        print(f"[Review Submit Audit FAILED] Missing required fields. Errors: {form.errors}")
         flash(_('please_fill_required_review_fields'), 'danger')
         return redirect(request.referrer or url_for('main.index'))
 
@@ -161,18 +157,11 @@ def submit_review():
         db.session.add(new_review)
         db.session.commit()
 
-        # Immediate Database Verification Query
-        verify_obj = db.session.get(Review, new_review.id)
-        if verify_obj:
-            print(f"[Review Persistence Audit SUCCESS] Saved Review ID: {verify_obj.id}, Name: {verify_obj.customer_name}, Approved: {verify_obj.approved}")
-            flash(_('review_submitted_success'), 'success')
-        else:
-            print(f"[Review Persistence Audit FAILED] Review ID {new_review.id} not retrievable post-commit!")
-            flash(_('review_submitted_success'), 'success')
+        flash(_('review_submitted_success'), 'success')
 
-    except Exception as e:
+    except Exception:
         db.session.rollback()
-        print(f"[Review Persistence Exception Error]: {e}")
+        current_app.logger.exception('Public review submission failed')
         flash('An unexpected error occurred while saving your review. Please try again.', 'danger')
 
     return redirect(request.referrer or url_for('main.index'))
@@ -183,7 +172,6 @@ def reviews():
     form = ReviewForm()
 
     if request.method == 'POST':
-        print(f"[Reviews Page Submit Audit] Incoming POST request. Raw form: {request.form}")
         name_val = form.customer_name.data.strip() if form.customer_name.data else request.form.get('customer_name', '').strip()
         country_val = (form.country.data.strip() if form.country.data and form.country.data.strip() else request.form.get('country', '').strip()) or 'International Client'
         
@@ -209,14 +197,12 @@ def reviews():
                 )
                 db.session.add(new_review)
                 db.session.commit()
-                
-                verify_obj = db.session.get(Review, new_review.id)
-                print(f"[Reviews Page Persistence Audit SUCCESS] Saved Review ID: {verify_obj.id if verify_obj else 'None'}")
+
                 flash(_('review_submitted_success'), 'success')
                 return redirect(url_for('main.reviews'))
-            except Exception as e:
+            except Exception:
                 db.session.rollback()
-                print(f"[Reviews Page Exception Error]: {e}")
+                current_app.logger.exception('Reviews page submission failed')
                 flash('An unexpected error occurred while saving your review. Please try again.', 'danger')
         else:
             flash(_('please_fill_required_review_fields'), 'danger')
@@ -509,10 +495,33 @@ def checkout():
 
     return render_template('checkout.html', form=form, cart_items=cart_items, grand_total=grand_total, total_quantity=total_quantity, whatsapp_url=whatsapp_url, quotation_number=quotation_number)
 
-@main.route('/contact')
+@main.route('/contact', methods=['GET', 'POST'])
 def contact():
+    form = ContactForm()
     whatsapp_number = Setting.get_val('whatsapp_number', current_app.config.get('WHATSAPP_NUMBER', '85263294280'))
-    return render_template('contact.html', whatsapp_number=whatsapp_number)
+
+    if form.validate_on_submit():
+        inquiry = ContactInquiry(
+            name=form.name.data.strip(),
+            email=form.email.data.strip(),
+            company=form.company.data.strip() if form.company.data else None,
+            subject=form.subject.data.strip(),
+            message=form.message.data.strip(),
+            is_read=False,
+        )
+        db.session.add(inquiry)
+        try:
+            db.session.commit()
+            flash(_('contact_inquiry_submitted_success'), 'success')
+            return redirect(url_for('main.contact'))
+        except Exception:
+            db.session.rollback()
+            current_app.logger.exception('Contact inquiry save failed')
+            flash(_('contact_inquiry_submit_error'), 'danger')
+    elif request.method == 'POST':
+        flash(_('contact_inquiry_validation_error'), 'danger')
+
+    return render_template('contact.html', whatsapp_number=whatsapp_number, form=form)
 
 @main.route('/faq')
 def faq():

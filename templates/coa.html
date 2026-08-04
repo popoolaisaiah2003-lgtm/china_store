@@ -2,6 +2,102 @@
 
 {% block title %}{{ _('coa_repo_title') }} | Yan Zhen Peptide{% endblock %}
 
+{% block extra_css %}
+<style>
+  #coaNoticeModal .modal-content {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(2, 6, 23, 0.45);
+  }
+
+  #coaNoticeModal .modal-header {
+    background: var(--navy-deep);
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  #coaNoticeModal .modal-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+  }
+
+  #coaNoticeModal .modal-body {
+    max-height: min(65vh, 540px);
+    overflow-y: auto;
+    line-height: 1.68;
+    color: var(--text-main);
+    background: #fff;
+  }
+
+  #coaNoticeModal .modal-footer {
+    border-top: 1px solid var(--border-color);
+    background: #fff;
+  }
+
+  body.coa-notice-open .modal-backdrop.show {
+    opacity: 0.72;
+    background-color: #020617;
+  }
+
+  .coa-fallback-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 6, 23, 0.72);
+    z-index: 1050;
+  }
+
+  #coaNoticeModal.coa-fallback-open {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 1055;
+    overflow-y: auto;
+    padding: 1rem;
+    background: transparent;
+  }
+
+  #coaNoticeModal.coa-fallback-open .modal-dialog {
+    margin: 2rem auto;
+  }
+
+  .coa-fallback-backdrop.is-open {
+    display: block;
+  }
+
+  @media (max-width: 767.98px) {
+    #coaNoticeModal .modal-dialog {
+      margin: 0.75rem;
+    }
+
+    #coaNoticeModal .modal-content {
+      border-radius: 12px;
+    }
+
+    #coaNoticeModal .modal-title {
+      font-size: 1rem;
+    }
+
+    #coaNoticeModal .modal-body {
+      max-height: 68vh;
+      font-size: 0.95rem;
+      padding: 1rem;
+    }
+
+    #coaNoticeModal .modal-footer {
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: stretch;
+    }
+
+    #coaNoticeModal .modal-footer .btn {
+      width: 100%;
+    }
+  }
+</style>
+{% endblock %}
+
 {% block content %}
 <section style="background: var(--navy-deep); color: white; padding: 2.75rem 0; border-bottom: 3px solid var(--gold-primary);">
   <div class="container">
@@ -87,4 +183,115 @@
 
   </div>
 </section>
+
+<div id="coaNoticeFallbackBackdrop" class="coa-fallback-backdrop" aria-hidden="true"></div>
+
+<div class="modal fade" id="coaNoticeModal" tabindex="-1" aria-labelledby="coaNoticeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="coaNoticeModalLabel">Important COA Information</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" data-coa-notice-close></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Hello! Please note that we do not provide official Certificates of Analysis (COAs) directly. If you require product verification, we strongly encourage you to have the product independently tested by a reputable laboratory of your choice. This ensures that the results are issued directly to you by the testing facility. Any COAs that may be shared on this page are reports that were originally obtained by previous customers who chose to have their products tested independently. To protect customer privacy and confidential information, certain details on these reports may be covered, removed, or redacted before being shared. We are committed to respecting the confidentiality of all our customers, and no identifying information is disclosed in any document made available for reference purposes. If you decide to have your order independently tested after receiving it, you are welcome to do so with any qualified and reputable laboratory.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="coaNoticeAcknowledgeBtn">I Understand</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  (function () {
+    var storageKey = 'coa_notice_seen';
+    var modalEl = document.getElementById('coaNoticeModal');
+    var acknowledgeBtn = document.getElementById('coaNoticeAcknowledgeBtn');
+    var fallbackBackdrop = document.getElementById('coaNoticeFallbackBackdrop');
+
+    if (!modalEl || !acknowledgeBtn) {
+      return;
+    }
+
+    if (sessionStorage.getItem(storageKey) === 'true') {
+      return;
+    }
+
+    function markSeen() {
+      sessionStorage.setItem(storageKey, 'true');
+    }
+
+    function openFallbackModal() {
+      if (fallbackBackdrop) {
+        fallbackBackdrop.classList.add('is-open');
+      }
+      modalEl.classList.add('coa-fallback-open');
+      modalEl.setAttribute('aria-modal', 'true');
+      modalEl.removeAttribute('aria-hidden');
+      document.body.classList.add('coa-notice-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeFallbackModal() {
+      markSeen();
+      modalEl.classList.remove('coa-fallback-open');
+      modalEl.setAttribute('aria-hidden', 'true');
+      modalEl.removeAttribute('aria-modal');
+      if (fallbackBackdrop) {
+        fallbackBackdrop.classList.remove('is-open');
+      }
+      document.body.classList.remove('coa-notice-open');
+      document.body.style.overflow = '';
+    }
+
+    var hasBootstrapModal = !!(window.bootstrap && typeof window.bootstrap.Modal === 'function');
+
+    if (hasBootstrapModal) {
+      var instance = window.bootstrap.Modal.getOrCreateInstance(modalEl, {
+        backdrop: true,
+        keyboard: true
+      });
+
+      modalEl.addEventListener('shown.bs.modal', function () {
+        document.body.classList.add('coa-notice-open');
+      }, { once: true });
+
+      modalEl.addEventListener('hidden.bs.modal', function () {
+        markSeen();
+        document.body.classList.remove('coa-notice-open');
+      }, { once: true });
+
+      acknowledgeBtn.addEventListener('click', function () {
+        markSeen();
+        instance.hide();
+      });
+
+      instance.show();
+      return;
+    }
+
+    var fallbackCloseButtons = modalEl.querySelectorAll('[data-coa-notice-close]');
+    fallbackCloseButtons.forEach(function (button) {
+      button.addEventListener('click', closeFallbackModal);
+    });
+    acknowledgeBtn.addEventListener('click', closeFallbackModal);
+
+    if (fallbackBackdrop) {
+      fallbackBackdrop.addEventListener('click', closeFallbackModal);
+    }
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && modalEl.classList.contains('coa-fallback-open')) {
+        closeFallbackModal();
+      }
+    });
+
+    openFallbackModal();
+  })();
+</script>
 {% endblock %}

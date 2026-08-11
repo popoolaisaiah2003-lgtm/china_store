@@ -19,26 +19,26 @@
 
     <div class="row g-3">
       <div class="col-md-6">
-        <label class="form-label fw-semibold">{{ form.customer_name.label.text }}</label>
-        {{ form.customer_name(class='form-control', placeholder='Dr. Anna Becker') }}
+        <label for="customerNameInput" class="form-label fw-semibold">{{ form.customer_name.label.text }}</label>
+        {{ form.customer_name(class='form-control', placeholder='Dr. Anna Becker', id='customerNameInput') }}
       </div>
       <div class="col-md-6">
-        <label class="form-label fw-semibold">{{ form.country.label.text }}</label>
-        {{ form.country(class='form-control', placeholder='Germany') }}
+        <label for="countryInput" class="form-label fw-semibold">{{ form.country.label.text }}</label>
+        {{ form.country(class='form-control', placeholder='Germany', id='countryInput') }}
       </div>
       <div class="col-md-4">
-        <label class="form-label fw-semibold">{{ form.rating.label.text }}</label>
-        {{ form.rating(class='form-select') }}
+        <label for="ratingSelect" class="form-label fw-semibold">{{ form.rating.label.text }}</label>
+        {{ form.rating(class='form-select', id='ratingSelect') }}
       </div>
       <div class="col-md-8 d-flex align-items-end">
         <div class="form-check mb-2">
-          {{ form.featured(class='form-check-input') }}
-          <label class="form-check-label fw-semibold" for="{{ form.featured.id }}">{{ form.featured.label.text }}</label>
+          {{ form.featured(class='form-check-input', id='featuredCheckbox') }}
+          <label class="form-check-label fw-semibold" for="featuredCheckbox">{{ form.featured.label.text }}</label>
         </div>
       </div>
       <div class="col-12">
-        <label class="form-label fw-semibold">{{ form.review_text.label.text }}</label>
-        {{ form.review_text(class='form-control', rows='6', placeholder='Write the review text here.') }}
+        <label for="reviewTextarea" class="form-label fw-semibold">{{ form.review_text.label.text }}</label>
+        {{ form.review_text(class='form-control', rows='6', placeholder='Write the review text here.', id='reviewTextarea') }}
       </div>
     </div>
 

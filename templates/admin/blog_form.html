@@ -14,22 +14,22 @@
 </div>
 
 <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2.5rem; max-width: 960px; box-shadow: var(--shadow-sm);">
-  <form method="POST" enctype="multipart/form-data" id="blogArticleForm">
+  <form method="POST" enctype="multipart/form-data" id="blogArticleForm" novalidate>
     {{ form.hidden_tag() }}
 
     <!-- Title & Slug Row -->
     <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
       <div class="order-form-group">
-        <label for="title">Article Title *</label>
-        {{ form.title(class="form-control", placeholder="e.g. Clinical Pharmacokinetics of Semaglutide", id="titleInput") }}
+        <label for="postTitleInput">Article Title *</label>
+        {{ form.title(id="postTitleInput", class="form-control", placeholder="e.g. Clinical Pharmacokinetics of Semaglutide") }}
         {% if form.title.errors %}
           <div style="color: #DC2626; font-size: 0.8rem; margin-top: 0.35rem; font-weight: 600;">{{ form.title.errors[0] }}</div>
         {% endif %}
       </div>
 
       <div class="order-form-group">
-        <label for="slug">URL Slug</label>
-        {{ form.slug(class="form-control", placeholder="auto-generated-from-title", id="slugInput") }}
+        <label for="postSlugInput">URL Slug</label>
+        {{ form.slug(id="postSlugInput", class="form-control", placeholder="auto-generated-from-title") }}
         {% if form.slug.errors %}
           <div style="color: #DC2626; font-size: 0.8rem; margin-top: 0.35rem; font-weight: 600;">{{ form.slug.errors[0] }}</div>
         {% endif %}
@@ -38,8 +38,8 @@
 
     <!-- Executive Summary / Excerpt -->
     <div class="order-form-group" style="margin-bottom: 1.5rem;">
-      <label for="summary">Executive Summary / Excerpt</label>
-      {{ form.summary(class="form-control", rows="3", placeholder="Short overview snippet for article preview cards...") }}
+      <label for="summaryInput">Executive Summary / Excerpt</label>
+      {{ form.summary(class="form-control", rows="3", placeholder="Short overview snippet for article preview cards...", id="summaryInput") }}
       {% if form.summary.errors %}
         <div style="color: #DC2626; font-size: 0.8rem; margin-top: 0.35rem; font-weight: 600;">{{ form.summary.errors[0] }}</div>
       {% endif %}
@@ -47,8 +47,8 @@
 
     <!-- Rich Text Content Editor -->
     <div class="order-form-group" style="margin-bottom: 2rem;">
-      <label for="content">Full Article Body Content *</label>
-      <!-- Hidden textarea bound to WTForms field -->
+      <label for="hiddenContentInput">Full Article Body Content *</label>
+      <!-- Hidden textarea bound to WTForms field (novalidate on form prevents invalid form control focus error) -->
       {{ form.content(id="hiddenContentInput", style="display:none;") }}
       
       <!-- Quill Editor Container -->
@@ -78,17 +78,15 @@
       <div>
         <label style="font-size: 0.85rem; font-weight: 600; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Image Preview</label>
         <div id="imagePreviewContainer" style="border: 1px dashed var(--border-color); border-radius: var(--radius-md); padding: 0.75rem; background: var(--bg-secondary); min-height: 120px; display: flex; align-items: center; justify-content: center; text-align: center;">
-          {% if is_edit and post and post.image_filename %}
-            <img id="imagePreview" src="{{ url_for('static', filename='uploads/blog/' ~ post.image_filename) }}" alt="{{ post.title }}" style="max-height: 130px; max-width: 100%; border-radius: 4px; object-fit: cover; display: block;" data-initial-src="{{ url_for('static', filename='uploads/blog/' ~ post.image_filename) }}">
-            <div id="emptyPreviewNotice" style="color: var(--text-muted); font-size: 0.85rem; display: none;">
-              📷 No cover image selected.
-            </div>
-          {% else %}
-            <img id="imagePreview" src="" alt="Cover Preview" style="max-height: 130px; max-width: 100%; border-radius: 4px; object-fit: cover; display: none;">
-            <div id="emptyPreviewNotice" style="color: var(--text-muted); font-size: 0.85rem; display: block;">
-              📷 No cover image uploaded yet. Select a file to view preview.
-            </div>
-          {% endif %}
+          <img id="imagePreview"
+               src="{% if is_edit and post and post.image_filename %}{{ url_for('static', filename='uploads/blog/' ~ post.image_filename) }}{% endif %}"
+               alt="{{ post.title if is_edit and post else 'Cover Preview' }}"
+               style="max-height: 130px; max-width: 100%; border-radius: 4px; object-fit: cover; display: {% if is_edit and post and post.image_filename %}block{% else %}none{% endif %};"
+               {% if is_edit and post and post.image_filename %}data-initial-src="{{ url_for('static', filename='uploads/blog/' ~ post.image_filename) }}"{% endif %}
+               onerror="this.onerror=null; this.style.display='none'; const n=document.getElementById('emptyPreviewNotice'); if(n) n.style.display='block';">
+          <div id="emptyPreviewNotice" style="color: var(--text-muted); font-size: 0.85rem; display: {% if is_edit and post and post.image_filename %}none{% else %}block{% endif %};">
+            📷 {% if is_edit and post and post.image_filename %}No cover image selected.{% else %}No cover image uploaded yet. Select a file to view preview.{% endif %}
+          </div>
         </div>
       </div>
     </div>
@@ -96,33 +94,33 @@
     <!-- SEO & Localization Row -->
     <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
       <div class="order-form-group">
-        <label for="seo_title">SEO Title</label>
-        {{ form.seo_title(class="form-control", placeholder="Meta title tag for search engines") }}
+        <label for="seoTitleInput">SEO Title</label>
+        {{ form.seo_title(class="form-control", placeholder="Meta title tag for search engines", id="seoTitleInput") }}
       </div>
 
       <div class="order-form-group">
-        <label for="meta_description">Meta Description</label>
-        {{ form.meta_description(class="form-control", placeholder="Meta description tag for search engines") }}
+        <label for="metaDescriptionInput">Meta Description</label>
+        {{ form.meta_description(class="form-control", placeholder="Meta description tag for search engines", id="metaDescriptionInput") }}
       </div>
 
       <div class="order-form-group">
-        <label for="language">Article Language</label>
-        {{ form.language(class="form-control") }}
+        <label for="languageSelect">Article Language</label>
+        {{ form.language(class="form-control", id="languageSelect") }}
       </div>
     </div>
 
     <!-- Publication & Featured Checkboxes -->
     <div style="display: flex; gap: 2rem; align-items: center; margin-bottom: 2rem; background: var(--bg-secondary); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
       <div style="display: flex; align-items: center; gap: 0.6rem;">
-        {{ form.is_published(style="width: 20px; height: 20px; cursor: pointer;", id="is_published") }}
-        <label for="is_published" style="font-weight: 600; color: var(--navy-deep); cursor: pointer; margin-bottom: 0;">
+        {{ form.is_published(style="width: 20px; height: 20px; cursor: pointer;", id="isPublishedCheckbox") }}
+        <label for="isPublishedCheckbox" style="font-weight: 600; color: var(--navy-deep); cursor: pointer; margin-bottom: 0;">
           Publish Article Immediately
         </label>
       </div>
 
       <div style="display: flex; align-items: center; gap: 0.6rem;">
-        {{ form.is_featured(style="width: 20px; height: 20px; cursor: pointer;", id="is_featured") }}
-        <label for="is_featured" style="font-weight: 600; color: var(--gold-primary); cursor: pointer; margin-bottom: 0;">
+        {{ form.is_featured(style="width: 20px; height: 20px; cursor: pointer;", id="isFeaturedCheckbox") }}
+        <label for="isFeaturedCheckbox" style="font-weight: 600; color: var(--gold-primary); cursor: pointer; margin-bottom: 0;">
           ⭐ Feature at Top of Research Journal
         </label>
       </div>
@@ -159,8 +157,8 @@
 
     const hiddenContentInput = document.getElementById('hiddenContentInput');
     const form = document.getElementById('blogArticleForm');
-    const titleInput = document.getElementById('titleInput');
-    const slugInput = document.getElementById('slugInput');
+    const titleInput = document.getElementById('postTitleInput');
+    const slugInput = document.getElementById('postSlugInput');
     const submitBtn = document.getElementById('submitBtn');
 
     // Field Error containers
@@ -275,31 +273,39 @@
       contentErrorContainer.textContent = '';
 
       // Sync Quill HTML content into hidden textarea
-      const htmlContent = quill.root.innerHTML;
-      hiddenContentInput.value = htmlContent;
+      const rawHtml = quill.root.innerHTML ? quill.root.innerHTML.trim() : '';
+      hiddenContentInput.value = rawHtml;
 
       // Validate required fields
       const titleVal = titleInput ? titleInput.value.trim() : '';
-      const textLen = quill.getText().trim().length;
-      const hasMedia = htmlContent.includes('<img') || htmlContent.includes('<iframe');
-      const isContentEmpty = textLen === 0 && !hasMedia;
+      const rawText = quill.getText() ? quill.getText().trim() : '';
+      const hasMedia = rawHtml.includes('<img') || rawHtml.includes('<iframe');
+      const isContentEmpty = (rawText.length === 0 && !hasMedia) || rawHtml === '<p><br></p>' || rawHtml === '<p></p>' || rawHtml === '';
 
       let hasError = false;
+      let firstInvalidElement = null;
 
       if (!titleVal) {
         hasError = true;
         titleErrorContainer.textContent = 'Article title is required.';
         titleErrorContainer.style.display = 'block';
-        titleInput.focus();
+        if (!firstInvalidElement) firstInvalidElement = titleInput;
       }
 
       if (isContentEmpty) {
         hasError = true;
         contentErrorContainer.textContent = 'Article body content is required.';
         contentErrorContainer.style.display = 'block';
+        if (!firstInvalidElement) firstInvalidElement = quillEditor;
       }
 
       if (hasError) {
+        if (firstInvalidElement) {
+          firstInvalidElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          if (firstInvalidElement.focus && typeof firstInvalidElement.focus === 'function') {
+            firstInvalidElement.focus();
+          }
+        }
         if (window.AppAjax && window.AppAjax.showToast) {
           window.AppAjax.showToast('Validation Error', 'Please complete all required fields.', true);
         }
@@ -308,7 +314,7 @@
 
       // Lock submit button & apply loading state
       isSubmitting = true;
-      const isPublishedCheckbox = document.getElementById('is_published');
+      const isPublishedCheckbox = document.getElementById('isPublishedCheckbox');
       const loadingText = (isPublishedCheckbox && isPublishedCheckbox.checked) ? 'Publishing...' : 'Saving...';
 
       if (window.AppAjax && window.AppAjax.setLoading) {

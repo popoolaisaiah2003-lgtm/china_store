@@ -18,13 +18,13 @@
       {{ form.hidden_tag() }}
 
       <div class="order-form-group" style="margin-bottom: 1rem;">
-        <label for="name">Category Name *</label>
-        {{ form.name(class="form-control", placeholder="e.g. Metabolic Peptides") }}
+        <label for="categoryNameInput">Category Name *</label>
+        {{ form.name(class="form-control", placeholder="e.g. Metabolic Peptides", id="categoryNameInput") }}
       </div>
 
       <div class="order-form-group" style="margin-bottom: 1.5rem;">
-        <label for="description">Description (Optional)</label>
-        {{ form.description(class="form-control", rows="3", placeholder="Brief description of this chemical group.") }}
+        <label for="categoryDescriptionInput">Description (Optional)</label>
+        {{ form.description(class="form-control", rows="3", placeholder="Brief description of this chemical group.", id="categoryDescriptionInput") }}
       </div>
 
       <button type="submit" class="btn btn-navy" style="width: 100%;">Create Category</button>

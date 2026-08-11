@@ -14,41 +14,41 @@
 
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
       <div class="order-form-group">
-        <label for="company_name">Company Brand Name *</label>
-        {{ form.company_name(class="form-control") }}
+        <label for="companyNameInput">Company Brand Name *</label>
+        {{ form.company_name(class="form-control", id="companyNameInput") }}
       </div>
 
       <div class="order-form-group">
-        <label for="whatsapp_number">WhatsApp Support Number *</label>
-        {{ form.whatsapp_number(class="form-control") }}
+        <label for="whatsappNumberInput">WhatsApp Support Number *</label>
+        {{ form.whatsapp_number(class="form-control", id="whatsappNumberInput") }}
       </div>
     </div>
 
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
       <div class="order-form-group">
-        <label for="email">Contact Email</label>
-        {{ form.email(class="form-control") }}
+        <label for="emailInput">Contact Email</label>
+        {{ form.email(class="form-control", id="emailInput") }}
       </div>
 
       <div class="order-form-group">
-        <label for="default_language">Default System Language</label>
-        {{ form.default_language(class="form-control") }}
+        <label for="defaultLanguageSelect">Default System Language</label>
+        {{ form.default_language(class="form-control", id="defaultLanguageSelect") }}
       </div>
     </div>
 
     <div class="order-form-group" style="margin-bottom: 1.5rem;">
-      <label for="address">Facility Address</label>
-      {{ form.address(class="form-control") }}
+      <label for="addressInput">Facility Address</label>
+      {{ form.address(class="form-control", id="addressInput") }}
     </div>
 
     <div class="order-form-group" style="margin-bottom: 1.5rem;">
-      <label for="seo_title">Default SEO Meta Title</label>
-      {{ form.seo_title(class="form-control") }}
+      <label for="seoTitleInput">Default SEO Meta Title</label>
+      {{ form.seo_title(class="form-control", id="seoTitleInput") }}
     </div>
 
     <div class="order-form-group" style="margin-bottom: 2rem;">
-      <label for="meta_description">Default SEO Meta Description</label>
-      {{ form.meta_description(class="form-control", rows="3") }}
+      <label for="metaDescriptionTextarea">Default SEO Meta Description</label>
+      {{ form.meta_description(class="form-control", rows="3", id="metaDescriptionTextarea") }}
     </div>
 
     <button type="submit" class="btn btn-primary" style="padding: 0.85rem 2.5rem;">Save System Settings</button>

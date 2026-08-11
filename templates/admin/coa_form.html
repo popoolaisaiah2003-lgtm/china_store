@@ -13,37 +13,37 @@
     {{ form.hidden_tag() }}
 
     <div class="order-form-group" style="margin-bottom: 1.5rem;">
-      <label for="product_id">Related Product *</label>
-      {{ form.product_id(class="form-control") }}
+      <label for="productIdSelect">Related Product *</label>
+      {{ form.product_id(class="form-control", id="productIdSelect") }}
     </div>
 
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
       <div class="order-form-group">
-        <label for="batch_number">Batch / Lot Number *</label>
-        {{ form.batch_number(class="form-control", placeholder="e.g. BATCH-2026-081") }}
+        <label for="batchNumberInput">Batch / Lot Number *</label>
+        {{ form.batch_number(class="form-control", placeholder="e.g. BATCH-2026-081", id="batchNumberInput") }}
       </div>
 
       <div class="order-form-group">
-        <label for="issue_date">Issue Date *</label>
-        {{ form.issue_date(class="form-control", placeholder="e.g. July 2026") }}
+        <label for="issueDateInput">Issue Date *</label>
+        {{ form.issue_date(class="form-control", placeholder="e.g. July 2026", id="issueDateInput") }}
       </div>
     </div>
 
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
       <div class="order-form-group">
-        <label for="coa_pdf">Upload COA Document (PDF) *</label>
-        {{ form.coa_pdf(class="form-control") }}
+        <label for="coaPdfInput">Upload COA Document (PDF) *</label>
+        {{ form.coa_pdf(class="form-control", id="coaPdfInput") }}
       </div>
 
       <div class="order-form-group">
-        <label for="preview_image">Optional Preview Image</label>
-        {{ form.preview_image(class="form-control") }}
+        <label for="previewImageInput">Optional Preview Image</label>
+        {{ form.preview_image(class="form-control", id="previewImageInput") }}
       </div>
     </div>
 
     <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 2rem;">
-      {{ form.active(style="width: 20px; height: 20px;") }}
-      <label for="active" style="font-weight: 600; color: var(--navy-deep); cursor: pointer;">
+      {{ form.active(style="width: 20px; height: 20px;", id="activeCheckbox") }}
+      <label for="activeCheckbox" style="font-weight: 600; color: var(--navy-deep); cursor: pointer;">
         Activate / Publish Immediately on Public Website
       </label>
     </div>

@@ -13,20 +13,23 @@ from translations import translate
 def _ensure_mysql_database_exists(database_uri):
     url = make_url(database_uri)
     if not url.drivername.startswith('mysql'):
-        raise RuntimeError(f"Unsupported database driver for this deployment: {url.drivername}")
+        return
 
-    connection = pymysql.connect(
-        host=url.host or 'localhost',
-        user=url.username or 'root',
-        password=url.password or '',
-        port=url.port or 3306,
-        autocommit=True,
-    )
     try:
-        with connection.cursor() as cursor:
-            cursor.execute(f"CREATE DATABASE IF NOT EXISTS `{url.database}` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
-    finally:
-        connection.close()
+        connection = pymysql.connect(
+            host=url.host or 'localhost',
+            user=url.username or 'root',
+            password=url.password or '',
+            port=url.port or 3306,
+            autocommit=True,
+        )
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute(f"CREATE DATABASE IF NOT EXISTS `{url.database}` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
+        finally:
+            connection.close()
+    except Exception as exc:
+        print(f"Notice: MySQL connection check skipped: {exc}")
 
 
 def repair_and_upgrade_migrations(app):

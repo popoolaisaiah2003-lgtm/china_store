@@ -63,11 +63,13 @@
     <!-- Cover Image Upload & Existing Image Preview -->
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; align-items: start;">
       <div class="order-form-group">
-        <label for="image">Cover Image (Optional)</label>
-        {{ form.image(class="form-control") }}
+        <label for="imageInput">Cover Image (Optional)</label>
+        {{ form.image(class="form-control", id="imageInput", accept="image/*") }}
         <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.25rem;">
           Supported formats: JPG, PNG, WEBP. If unchanged, existing image will be kept.
         </div>
+        <div id="selectedFileName" style="font-size: 0.82rem; font-weight: 600; color: var(--navy-deep); margin-top: 0.35rem; display: none;"></div>
+        <div id="imageError" style="color: #DC2626; font-size: 0.8rem; margin-top: 0.35rem; font-weight: 600; display: none;"></div>
         {% if form.image.errors %}
           <div style="color: #DC2626; font-size: 0.8rem; margin-top: 0.35rem; font-weight: 600;">{{ form.image.errors[0] }}</div>
         {% endif %}
@@ -75,15 +77,19 @@
 
       <div>
         <label style="font-size: 0.85rem; font-weight: 600; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Image Preview</label>
-        {% if is_edit and post and post.image_filename %}
-          <div style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 0.5rem; background: var(--bg-secondary); display: inline-block;">
-            <img src="{{ url_for('static', filename='uploads/blog/' ~ post.image_filename) }}" alt="{{ post.title }}" style="max-height: 110px; border-radius: 4px; object-fit: cover;">
-          </div>
-        {% else %}
-          <div style="border: 1px dashed var(--border-color); border-radius: var(--radius-md); padding: 1.5rem; color: var(--text-muted); font-size: 0.85rem; text-align: center;">
-            No cover image uploaded yet.
-          </div>
-        {% endif %}
+        <div id="imagePreviewContainer" style="border: 1px dashed var(--border-color); border-radius: var(--radius-md); padding: 0.75rem; background: var(--bg-secondary); min-height: 120px; display: flex; align-items: center; justify-content: center; text-align: center;">
+          {% if is_edit and post and post.image_filename %}
+            <img id="imagePreview" src="{{ url_for('static', filename='uploads/blog/' ~ post.image_filename) }}" alt="{{ post.title }}" style="max-height: 130px; max-width: 100%; border-radius: 4px; object-fit: cover; display: block;" data-initial-src="{{ url_for('static', filename='uploads/blog/' ~ post.image_filename) }}">
+            <div id="emptyPreviewNotice" style="color: var(--text-muted); font-size: 0.85rem; display: none;">
+              📷 No cover image selected.
+            </div>
+          {% else %}
+            <img id="imagePreview" src="" alt="Cover Preview" style="max-height: 130px; max-width: 100%; border-radius: 4px; object-fit: cover; display: none;">
+            <div id="emptyPreviewNotice" style="color: var(--text-muted); font-size: 0.85rem; display: block;">
+              📷 No cover image uploaded yet. Select a file to view preview.
+            </div>
+          {% endif %}
+        </div>
       </div>
     </div>
 
@@ -123,7 +129,7 @@
     </div>
 
     <div style="display: flex; gap: 1rem;">
-      <button type="submit" class="btn btn-primary" style="padding: 0.85rem 2.5rem;">Save Article</button>
+      <button type="submit" id="submitBtn" class="btn btn-primary" style="padding: 0.85rem 2.5rem;">Save Article</button>
       <a href="{{ url_for('admin.blog_posts') }}" class="btn btn-outline">Cancel</a>
     </div>
 
@@ -153,16 +159,25 @@
 
     const hiddenContentInput = document.getElementById('hiddenContentInput');
     const form = document.getElementById('blogArticleForm');
-
-    // On form submit, copy Quill HTML into hidden form textarea
-    form.addEventListener('submit', () => {
-      hiddenContentInput.value = quill.root.innerHTML;
-    });
-
-    // Auto-generate slug from title if slug field is empty
     const titleInput = document.getElementById('titleInput');
     const slugInput = document.getElementById('slugInput');
+    const submitBtn = document.getElementById('submitBtn');
 
+    // Field Error containers
+    const titleErrorContainer = document.createElement('div');
+    titleErrorContainer.style.cssText = 'color: #DC2626; font-size: 0.8rem; margin-top: 0.35rem; font-weight: 600; display: none;';
+    if (titleInput && titleInput.parentNode) {
+      titleInput.parentNode.appendChild(titleErrorContainer);
+    }
+
+    const contentErrorContainer = document.createElement('div');
+    contentErrorContainer.style.cssText = 'color: #DC2626; font-size: 0.8rem; margin-top: 0.35rem; font-weight: 600; display: none;';
+    const quillEditor = document.getElementById('quillEditor');
+    if (quillEditor && quillEditor.parentNode) {
+      quillEditor.parentNode.appendChild(contentErrorContainer);
+    }
+
+    // Auto-generate slug from title if slug field is empty
     if (titleInput && slugInput) {
       titleInput.addEventListener('input', () => {
         if (!slugInput.dataset.manual) {
@@ -177,6 +192,160 @@
         slugInput.dataset.manual = "true";
       });
     }
+
+    // Live Image Preview & File Name Handling
+    const imageInput = document.getElementById('imageInput');
+    const imagePreview = document.getElementById('imagePreview');
+    const emptyPreviewNotice = document.getElementById('emptyPreviewNotice');
+    const selectedFileName = document.getElementById('selectedFileName');
+    const imageError = document.getElementById('imageError');
+    let activeObjectURL = null;
+
+    if (imageInput) {
+      imageInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (imageError) {
+          imageError.style.display = 'none';
+          imageError.textContent = '';
+        }
+
+        if (activeObjectURL) {
+          URL.revokeObjectURL(activeObjectURL);
+          activeObjectURL = null;
+        }
+
+        if (file) {
+          const allowedExtensions = ['jpg', 'jpeg', 'png', 'webp'];
+          const ext = file.name.split('.').pop().toLowerCase();
+          if (!allowedExtensions.includes(ext)) {
+            if (imageError) {
+              imageError.textContent = 'Invalid image format. Allowed: JPG, JPEG, PNG, WEBP.';
+              imageError.style.display = 'block';
+            }
+            imageInput.value = '';
+            if (selectedFileName) selectedFileName.style.display = 'none';
+            return;
+          }
+
+          if (selectedFileName) {
+            selectedFileName.textContent = `📄 Selected File: ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+            selectedFileName.style.display = 'block';
+          }
+
+          activeObjectURL = URL.createObjectURL(file);
+          if (imagePreview) {
+            imagePreview.src = activeObjectURL;
+            imagePreview.style.display = 'block';
+          }
+          if (emptyPreviewNotice) {
+            emptyPreviewNotice.style.display = 'none';
+          }
+        } else {
+          if (selectedFileName) {
+            selectedFileName.style.display = 'none';
+            selectedFileName.textContent = '';
+          }
+          const initialSrc = imagePreview ? imagePreview.dataset.initialSrc : null;
+          if (initialSrc) {
+            imagePreview.src = initialSrc;
+            imagePreview.style.display = 'block';
+            if (emptyPreviewNotice) emptyPreviewNotice.style.display = 'none';
+          } else {
+            if (imagePreview) {
+              imagePreview.src = '';
+              imagePreview.style.display = 'none';
+            }
+            if (emptyPreviewNotice) emptyPreviewNotice.style.display = 'block';
+          }
+        }
+      });
+    }
+
+    // Form Submission Handler with Validation, Loading State, and AJAX
+    let isSubmitting = false;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (isSubmitting) return;
+
+      // Reset inline errors
+      titleErrorContainer.style.display = 'none';
+      titleErrorContainer.textContent = '';
+      contentErrorContainer.style.display = 'none';
+      contentErrorContainer.textContent = '';
+
+      // Sync Quill HTML content into hidden textarea
+      const htmlContent = quill.root.innerHTML;
+      hiddenContentInput.value = htmlContent;
+
+      // Validate required fields
+      const titleVal = titleInput ? titleInput.value.trim() : '';
+      const textLen = quill.getText().trim().length;
+      const hasMedia = htmlContent.includes('<img') || htmlContent.includes('<iframe');
+      const isContentEmpty = textLen === 0 && !hasMedia;
+
+      let hasError = false;
+
+      if (!titleVal) {
+        hasError = true;
+        titleErrorContainer.textContent = 'Article title is required.';
+        titleErrorContainer.style.display = 'block';
+        titleInput.focus();
+      }
+
+      if (isContentEmpty) {
+        hasError = true;
+        contentErrorContainer.textContent = 'Article body content is required.';
+        contentErrorContainer.style.display = 'block';
+      }
+
+      if (hasError) {
+        if (window.AppAjax && window.AppAjax.showToast) {
+          window.AppAjax.showToast('Validation Error', 'Please complete all required fields.', true);
+        }
+        return;
+      }
+
+      // Lock submit button & apply loading state
+      isSubmitting = true;
+      const isPublishedCheckbox = document.getElementById('is_published');
+      const loadingText = (isPublishedCheckbox && isPublishedCheckbox.checked) ? 'Publishing...' : 'Saving...';
+
+      if (window.AppAjax && window.AppAjax.setLoading) {
+        window.AppAjax.setLoading(submitBtn, true, loadingText);
+      } else {
+        submitBtn.disabled = true;
+        submitBtn.textContent = loadingText;
+      }
+
+      try {
+        const payload = await window.AppAjax.request(form.action || window.location.href, {
+          method: 'POST',
+          form: form
+        });
+
+        if (window.AppAjax && window.AppAjax.showToast) {
+          window.AppAjax.showToast('Success', payload.message || 'Article saved successfully.', false);
+        }
+
+        setTimeout(() => {
+          window.location.href = payload.redirect_url || '{{ url_for("admin.blog_posts") }}';
+        }, 300);
+
+      } catch (error) {
+        isSubmitting = false;
+        if (window.AppAjax && window.AppAjax.setLoading) {
+          window.AppAjax.setLoading(submitBtn, false);
+        } else {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Save Article';
+        }
+
+        if (window.AppAjax && window.AppAjax.showToast) {
+          window.AppAjax.showToast('Failed to Save', error.message || 'Failed to submit form.', true);
+        }
+      }
+    });
   });
 </script>
 {% endblock %}

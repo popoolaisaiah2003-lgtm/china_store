@@ -480,28 +480,46 @@ def blog_new():
             if bname:
                 bext = bname.rsplit('.', 1)[1].lower() if '.' in bname else 'jpg'
                 image_filename = f"blog_{slug}.{bext}"
-                bfile.save(os.path.join(current_app.config['BLOG_UPLOAD_FOLDER'], image_filename))
+                upload_folder = current_app.config['BLOG_UPLOAD_FOLDER']
+                os.makedirs(upload_folder, exist_ok=True)
+                bfile.save(os.path.join(upload_folder, image_filename))
 
         post = BlogPost(
-            title=form.title.data,
+            title=form.title.data.strip(),
             slug=slug,
-            summary=form.summary.data,
+            summary=form.summary.data.strip() if form.summary.data else None,
             content=form.content.data,
             image_filename=image_filename,
-            seo_title=form.seo_title.data,
-            meta_description=form.meta_description.data,
-            language=form.language.data,
-            tags=form.tags.data,
+            seo_title=form.seo_title.data.strip() if form.seo_title.data else None,
+            meta_description=form.meta_description.data.strip() if form.meta_description.data else None,
+            language=form.language.data or 'en',
+            tags=form.tags.data.strip() if form.tags.data else None,
             is_published=form.is_published.data,
             is_featured=form.is_featured.data
         )
         db.session.add(post)
         if commit_with_rollback('Blog article created successfully.', 'success'):
+            if wants_json_response():
+                return jsonify({
+                    'success': True,
+                    'message': 'Blog article created successfully.',
+                    'redirect_url': url_for('admin.blog_posts'),
+                    'post_id': post.id
+                })
             return redirect(url_for('admin.blog_posts'))
+        else:
+            if wants_json_response():
+                return jsonify({'success': False, 'message': 'Database error saving blog article.'}), 500
+
     elif request.method == 'POST':
+        err_msgs = []
         for field, errors in form.errors.items():
             for err in errors:
+                err_msgs.append(f"{field.capitalize()}: {err}")
                 flash(f"Error in {field}: {err}", 'danger')
+        if wants_json_response():
+            error_msg = "; ".join(err_msgs) if err_msgs else "Validation failed."
+            return jsonify({'success': False, 'message': error_msg, 'errors': form.errors}), 400
 
     return render_template('admin/blog_form.html', form=form, title="Create Research Article", is_edit=False)
 
@@ -512,19 +530,19 @@ def blog_edit(id):
     form = BlogPostForm(obj=post)
 
     if form.validate_on_submit():
-        post.title = form.title.data
+        post.title = form.title.data.strip()
         if form.slug.data and form.slug.data.strip():
             new_slug = slugify(form.slug.data.strip())
             existing = BlogPost.query.filter(BlogPost.slug == new_slug, BlogPost.id != id).first()
             if not existing:
                 post.slug = new_slug
         
-        post.summary = form.summary.data
+        post.summary = form.summary.data.strip() if form.summary.data else None
         post.content = form.content.data
-        post.seo_title = form.seo_title.data
-        post.meta_description = form.meta_description.data
-        post.language = form.language.data
-        post.tags = form.tags.data
+        post.seo_title = form.seo_title.data.strip() if form.seo_title.data else None
+        post.meta_description = form.meta_description.data.strip() if form.meta_description.data else None
+        post.language = form.language.data or 'en'
+        post.tags = form.tags.data.strip() if form.tags.data else None
         post.is_published = form.is_published.data
         post.is_featured = form.is_featured.data
         post.updated_at = datetime.utcnow()
@@ -535,15 +553,33 @@ def blog_edit(id):
             if bname:
                 bext = bname.rsplit('.', 1)[1].lower() if '.' in bname else 'jpg'
                 new_image_filename = f"blog_{post.slug}.{bext}"
-                bfile.save(os.path.join(current_app.config['BLOG_UPLOAD_FOLDER'], new_image_filename))
+                upload_folder = current_app.config['BLOG_UPLOAD_FOLDER']
+                os.makedirs(upload_folder, exist_ok=True)
+                bfile.save(os.path.join(upload_folder, new_image_filename))
                 post.image_filename = new_image_filename
 
         if commit_with_rollback('Blog article updated successfully.', 'success'):
+            if wants_json_response():
+                return jsonify({
+                    'success': True,
+                    'message': 'Blog article updated successfully.',
+                    'redirect_url': url_for('admin.blog_posts'),
+                    'post_id': post.id
+                })
             return redirect(url_for('admin.blog_posts'))
+        else:
+            if wants_json_response():
+                return jsonify({'success': False, 'message': 'Database error updating blog article.'}), 500
+
     elif request.method == 'POST':
+        err_msgs = []
         for field, errors in form.errors.items():
             for err in errors:
+                err_msgs.append(f"{field.capitalize()}: {err}")
                 flash(f"Error in {field}: {err}", 'danger')
+        if wants_json_response():
+            error_msg = "; ".join(err_msgs) if err_msgs else "Validation failed."
+            return jsonify({'success': False, 'message': error_msg, 'errors': form.errors}), 400
 
     return render_template('admin/blog_form.html', form=form, post=post, title=f"Edit {post.title}", is_edit=True)
 

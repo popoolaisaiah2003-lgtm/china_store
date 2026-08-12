@@ -4,7 +4,7 @@ from datetime import timedelta
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'yan-zhen-peptide-production-secret-2026'
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'qS1LlujIc4F40akOT20n8wIwZZlIK9L8eoJS1RkSIVwmmrX-_6HgfHLOl6ixPjvc'
 
     # MySQL-only database configuration (local XAMPP default, Railway override via DATABASE_URL).
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'mysql+pymysql://root:@localhost/china_store_db')

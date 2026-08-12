@@ -7,7 +7,7 @@ class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'yan-zhen-peptide-production-secret-2026'
 
     # MySQL-only database configuration (local XAMPP default, Railway override via DATABASE_URL).
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'mysql+pymysql://root:@localhost/yan_zhen_peptide')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', 'mysql+pymysql://root:@localhost/china_store_db')
     if SQLALCHEMY_DATABASE_URI.startswith('mysql://'):
         SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace('mysql://', 'mysql+pymysql://', 1)
 

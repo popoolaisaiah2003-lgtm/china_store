@@ -96,7 +96,7 @@ def login():
                 return render_template('admin/login.html', form=form)
             
             login_user(admin_account, remember=False)
-            flash('Welcome to Yan Zhen Secure Management Console.', 'success')
+            flash('Welcome to Velora Secure Management Console.', 'success')
             next_page = request.args.get('next')
             return redirect(next_page or url_for('admin.dashboard'))
         else:
@@ -748,12 +748,12 @@ def languages():
 def settings():
     form = SettingForm()
     if request.method == 'GET':
-        form.company_name.data = Setting.get_val('company_name', 'Yan Zhen Peptide')
-        form.whatsapp_number.data = Setting.get_val('whatsapp_number', '85263294280')
-        form.email.data = Setting.get_val('email', 'zhenyan640@gmail.com')
-        form.address.data = Setting.get_val('address', 'Yan Zhen Biotechnology Facility, Cleanroom Suite 4')
+        form.company_name.data = Setting.get_val('company_name', 'Velora Peptide')
+        form.whatsapp_number.data = Setting.get_val('whatsapp_number', '447763743631')
+        form.email.data = Setting.get_val('email', 'info@velorapeptide.com')
+        form.address.data = Setting.get_val('address', 'Velora Biotechnology Facility, Cleanroom Suite 4')
         form.default_language.data = Setting.get_val('default_language', 'en')
-        form.seo_title.data = Setting.get_val('seo_title', 'Yan Zhen Peptide | HPLC Certified Wholesale Peptides')
+        form.seo_title.data = Setting.get_val('seo_title', 'Velora Peptide | HPLC Certified Wholesale Peptides')
         form.meta_description.data = Setting.get_val('meta_description', 'High-purity laboratory research peptides with guaranteed >=99.8% purity.')
 
     if form.validate_on_submit():

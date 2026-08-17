@@ -1,4 +1,4 @@
-# 🔬 Yan Zhen Peptide — B2B Wholesale Quotation & Research Portal
+# 🔬 Velora Peptide — B2B Wholesale Quotation & Research Portal
 
 A high-performance, international B2B wholesale quotation system and administrative portal engineered for precision research peptides, HPLC-certified compounds, and analytical standards.
 
@@ -53,9 +53,9 @@ pip install -r requirements.txt
 
 ### 3. Database Configuration (MySQL / XAMPP)
 1. Start MySQL from XAMPP Control Panel.
-2. Create the database `yan_zhen_peptide` in phpMyAdmin or via MySQL CLI:
+2. Create the database `china_store_db` in phpMyAdmin or via MySQL CLI:
    ```sql
-   CREATE DATABASE yan_zhen_peptide CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+   CREATE DATABASE china_store_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
    ```
 3. Run database migrations:
    ```bash
@@ -78,7 +78,7 @@ The application will launch locally at:
 | :--- | :--- |
 | **Admin Login URL** | `http://localhost:8080/admin/login` |
 | **Default Username** | `isaiah` |
-| **Default Email** | `admin@yanzhen.com` |
+| **Default Email** | `admin@velorapeptide.com` |
 | **Default Password** | `ChangeMe123!` |
 
 ---
@@ -100,4 +100,4 @@ The application will launch locally at:
 ---
 
 ## 📄 License
-Commercial License — Proprietary software created for **Yan Zhen Peptide**.
+Commercial License — Proprietary software created for **Velora Peptide**.

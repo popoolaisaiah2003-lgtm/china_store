@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ _('b2b_catalog_title') }} | Yan Zhen Peptide{% endblock %}
+{% block title %}{{ _('b2b_catalog_title') }} | Velora Peptide{% endblock %}
 
 {% block content %}
-<section style="background: var(--navy-deep); color: white; padding: 3rem 0; border-bottom: 3px solid var(--gold-primary);">
+<section class="page-hero catalog-page-hero" style="background: var(--navy-deep); color: white; padding: 3rem 0; border-bottom: 3px solid var(--biotech-blue);">
   <div class="container">
     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
       <div>
-        <div style="font-size: 0.8rem; font-weight: 800; color: var(--gold-primary); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.35rem;">
+        <div style="font-size: 0.8rem; font-weight: 800; color: var(--biotech-blue); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.35rem;">
           🇨🇳 {{ _('analytical_catalog_tag') }}
         </div>
         <h1 style="color: white; margin-bottom: 0.35rem; font-size: 2.25rem;">{{ _('b2b_catalog_title') }}</h1>
@@ -25,8 +25,8 @@
   </div>
 </section>
 
-<!-- Category Icons Pills Bar -->
-<section class="category-bar">
+<!-- Category Icons Pills Bar (mobile-friendly quick filter; sidebar mirrors this on desktop) -->
+<section class="category-bar catalog-mobile-pills">
   <div class="container">
     <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
       <a href="{{ url_for('main.products') }}" class="cat-pill {{ 'active' if not selected_category }}" data-ajax-product-filter-link>
@@ -47,50 +47,56 @@
   </div>
 </section>
 
-<section class="section" style="padding: 3rem 0;">
+<section class="section catalog-content" style="padding: 3rem 0;">
   <div class="container">
-    
-    <!-- Filter, Search, and Sort Bar -->
-    <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 2.5rem; box-shadow: var(--shadow-sm);">
-      
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-        <form method="GET" action="{{ url_for('main.products') }}" style="display: flex; gap: 0.75rem; flex: 1; min-width: 280px; max-width: 520px;" data-ajax-products-form>
-          <input type="text" name="q" value="{{ search_query }}" placeholder="{{ _('search_placeholder') }}" class="form-control">
-          {% if selected_category %}
-            <input type="hidden" name="category" value="{{ selected_category.slug }}">
-          {% endif %}
+
+    <div class="catalog-layout">
+      <!-- Glassmorphism Filter Sidebar (desktop) -->
+      <aside class="catalog-sidebar">
+        <div class="catalog-sidebar-title"><i class="bi bi-sliders"></i> Filters</div>
+
+        <form method="GET" action="{{ url_for('main.products') }}" data-ajax-products-form>
+          {% if selected_category %}<input type="hidden" name="category" value="{{ selected_category.slug }}">{% endif %}
           <input type="hidden" name="sort" value="{{ sort_by }}">
-          <button type="submit" class="btn btn-navy">{{ _('search') }}</button>
+          <label class="catalog-sidebar-label" for="sidebarSearch">Search</label>
+          <input type="text" id="sidebarSearch" name="q" value="{{ search_query }}" placeholder="{{ _('search_placeholder') }}" class="form-control">
         </form>
 
-        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-          <span style="font-weight: 800; color: var(--navy-deep); font-size: 0.95rem;" id="productsSummaryText">
+        <div class="catalog-sidebar-label" style="margin-top: 1.5rem;">Categories</div>
+        <ul class="catalog-sidebar-categories">
+          <li><a href="{{ url_for('main.products') }}" class="{{ 'active' if not selected_category }}" data-ajax-product-filter-link><i class="bi bi-grid-fill"></i> {{ _('all_peptides') }}</a></li>
+          {% for cat in categories %}
+            <li><a href="{{ url_for('main.products', category=cat.slug) }}" class="{{ 'active' if selected_category and selected_category.id == cat.id }}" data-ajax-product-filter-link>{{ cat.name }}</a></li>
+          {% endfor %}
+        </ul>
+
+        <div class="catalog-sidebar-label" style="margin-top: 1.5rem;">
+          <label for="sidebarSort">{{ _('sort_by') }}</label>
+        </div>
+        <form method="GET" action="{{ url_for('main.products') }}" data-ajax-products-form>
+          {% if search_query %}<input type="hidden" name="q" value="{{ search_query }}">{% endif %}
+          {% if selected_category %}<input type="hidden" name="category" value="{{ selected_category.slug }}">{% endif %}
+          <select name="sort" id="sidebarSort" class="form-select" data-ajax-products-sort>
+            <option value="name_asc" {{ 'selected' if sort_by == 'name_asc' }}>{{ _('sort_name_asc') }}</option>
+            <option value="name_desc" {{ 'selected' if sort_by == 'name_desc' }}>{{ _('sort_name_desc') }}</option>
+            <option value="price_asc" {{ 'selected' if sort_by == 'price_asc' }}>{{ _('sort_price_asc') }}</option>
+            <option value="price_desc" {{ 'selected' if sort_by == 'price_desc' }}>{{ _('sort_price_desc') }}</option>
+          </select>
+        </form>
+      </aside>
+
+      <!-- Right: Summary Bar + Equal-Height Product Grid -->
+      <div class="catalog-main">
+        <div class="catalog-summary-bar">
+          <span style="font-weight: 800; color: var(--text-main); font-size: 0.95rem;" id="productsSummaryText">
             {{ _('showing_all_prefix') }} {{ total_matching_products }} {{ _('showing_all_suffix') }}
           </span>
+        </div>
 
-          <form method="GET" action="{{ url_for('main.products') }}" style="display: flex; align-items: center; gap: 0.5rem;" data-ajax-products-form>
-            {% if search_query %}
-              <input type="hidden" name="q" value="{{ search_query }}">
-            {% endif %}
-            {% if selected_category %}
-              <input type="hidden" name="category" value="{{ selected_category.slug }}">
-            {% endif %}
-            <label for="sort" style="font-size: 0.85rem; font-weight: 700; color: var(--navy-deep);">{{ _('sort_by') }}</label>
-            <select name="sort" id="sort" class="form-control" style="width: auto; padding: 0.4rem 0.85rem;" data-ajax-products-sort>
-              <option value="name_asc" {{ 'selected' if sort_by == 'name_asc' }}>{{ _('sort_name_asc') }}</option>
-              <option value="name_desc" {{ 'selected' if sort_by == 'name_desc' }}>{{ _('sort_name_desc') }}</option>
-              <option value="price_asc" {{ 'selected' if sort_by == 'price_asc' }}>{{ _('sort_price_asc') }}</option>
-              <option value="price_desc" {{ 'selected' if sort_by == 'price_desc' }}>{{ _('sort_price_desc') }}</option>
-            </select>
-          </form>
+        <div class="product-grid product-grid-equal" id="productsGrid">
+          {% include 'partials/product_cards.html' %}
         </div>
       </div>
-
-    </div>
-
-    <!-- Product Cards Grid -->
-    <div class="product-grid" style="margin-bottom: 3rem;" id="productsGrid">
-      {% include 'partials/product_cards.html' %}
     </div>
 
   </div>

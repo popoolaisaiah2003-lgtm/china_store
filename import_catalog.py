@@ -42,7 +42,7 @@ def categorize(name, cat_no=""):
     return 'Other Peptides'
 
 def run_import():
-    excel_path = r"C:\Users\HomePC\Desktop\YAN ZHEN PEPTIDE FOLDER\BTC, USDT PRICELIST.xlsx"
+    excel_path = r"C:\Users\HomePC\Desktop\VELORA PEPTIDE FOLDER\BTC, USDT PRICELIST.xlsx"
     wb = openpyxl.load_workbook(excel_path)
     sheet = wb.active
 

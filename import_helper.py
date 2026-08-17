@@ -1,5 +1,6 @@
 import os
 import re
+import glob
 from extensions import db
 from sqlalchemy import text, inspect
 
@@ -269,7 +270,7 @@ def import_sql_file_if_empty(app):
         except Exception:
             current_count = 0
 
-        sql_file_path = os.path.join(app.root_path, 'yan_zhen_peptide.sql')
+        sql_file_path = next((path for path in glob.glob(os.path.join(app.root_path, '*.sql')) if os.path.isfile(path)), os.path.join(app.root_path, 'missing.sql'))
         if not os.path.exists(sql_file_path):
             print(f"[Database Import Warning] {sql_file_path} file not found.")
             _ensure_mots_c_blog_image(app)
@@ -300,13 +301,13 @@ def import_sql_file_if_empty(app):
             
             admin = Admin.query.filter_by(username='isaiah').first()
             if not admin:
-                admin = Admin(username='isaiah', email='admin@yanzhen.com')
+                admin = Admin(username='isaiah', email='admin@velorapeptide.com')
                 admin.set_password('ChangeMe123!')
                 db.session.add(admin)
                 db.session.commit()
                 print("[Database Import] Admin 'isaiah' created.")
             else:
-                admin.email = 'admin@yanzhen.com'
+                admin.email = 'admin@velorapeptide.com'
                 admin.set_password('ChangeMe123!')
                 db.session.commit()
                 print("[Database Import] Admin 'isaiah' password/email updated.")

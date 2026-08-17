@@ -2,7 +2,7 @@ import os
 import pymysql
 from datetime import datetime, date
 
-conn = pymysql.connect(host='127.0.0.1', user='root', password='', db='yan_zhen_peptide', charset='utf8mb4')
+conn = pymysql.connect(host='127.0.0.1', user='root', password='', db='china_store_db', charset='utf8mb4')
 cursor = conn.cursor()
 
 tables = ['admins', 'categories', 'products', 'product_images', 'coas', 'blog_posts', 'comments', 'reviews', 'order_records', 'shipment_updates', 'settings', 'alembic_version']
@@ -44,7 +44,8 @@ for t in tables:
 
 sql_lines.append('SET FOREIGN_KEY_CHECKS=1;')
 
-with open('yan_zhen_peptide.sql', 'w', encoding='utf-8') as f:
+sql_dump_name = next(name for name in os.listdir('.') if name.lower().endswith('.sql'))
+with open(sql_dump_name, 'w', encoding='utf-8') as f:
     f.write('\n'.join(sql_lines))
 
-print("Created yan_zhen_peptide.sql successfully!")
+print(f"Created {sql_dump_name} successfully!")

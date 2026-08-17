@@ -113,8 +113,8 @@ def inject_global_vars():
         wishlist_product_ids=wishlist_product_ids,
         wishlist_count=len(wishlist_product_ids),
         show_lang_modal=show_lang_modal,
-        company_name=Setting.get_val('company_name', 'Yan Zhen Peptide'),
-        whatsapp_number=Setting.get_val('whatsapp_number', current_app.config.get('WHATSAPP_NUMBER', '85263294280'))
+        company_name=Setting.get_val('company_name', 'Velora Peptide'),
+        whatsapp_number=Setting.get_val('whatsapp_number', current_app.config.get('WHATSAPP_NUMBER', '447763743631'))
     )
 
 @main.route('/set_language/<lang_code>')
@@ -340,7 +340,7 @@ def product_detail(slug):
         Product.category_id == product.category_id,
         Product.id != product.id
     ).limit(4).all()
-    whatsapp_number = Setting.get_val('whatsapp_number', current_app.config.get('WHATSAPP_NUMBER', '85263294280'))
+    whatsapp_number = Setting.get_val('whatsapp_number', current_app.config.get('WHATSAPP_NUMBER', '447763743631'))
     return render_template('product_detail.html', product=product, related_products=related_products, whatsapp_number=whatsapp_number)
 
 # --- PUBLIC COA SYSTEM (/coa) ---
@@ -375,12 +375,12 @@ def download_coa(coa_id):
 
     if not os.path.exists(file_path):
         pdf_content = (
-            b'%PDF-1.4\n1 0 obj\n<< /Title (Yan Zhen Peptide Certificate of Analysis) >>\nendobj\n'
+            b'%PDF-1.4\n1 0 obj\n<< /Title (Velora Peptide Certificate of Analysis) >>\nendobj\n'
             b'2 0 obj\n<< /Type /Catalog /Pages 3 0 R >>\nendobj\n'
             b'3 0 obj\n<< /Type /Pages /Kids [4 0 R] /Count 1 >>\nendobj\n'
             b'4 0 obj\n<< /Type /Page /Parent 3 0 R /MediaBox [0 0 612 792] /Contents 5 0 R >>\nendobj\n'
             b'5 0 obj\n<< /Length 120 >>\nstream\n'
-            b'BT /F1 18 Tf 50 700 Td (Yan Zhen Peptide - Certificate of Analysis Purity >=99.8%) Tj ET\n'
+            b'BT /F1 18 Tf 50 700 Td (Velora Peptide - Certificate of Analysis Purity >=99.8%) Tj ET\n'
             b'endstream\nendobj\nxref\n0 6\n0000000000 65535 f\n0000000009 00000 n\n0000000078 00000 n\n'
             b'0000000127 00000 n\n0000000190 00000 n\n0000000285 00000 n\ntrailer\n<< /Size 6 /Root 2 0 R >>\n'
             b'startxref\n428\n%%EOF'
@@ -527,7 +527,7 @@ def checkout():
         order_summary_text = "\n".join(order_lines)
 
         raw_message = (
-            f"Hello Yan Zhen Peptide,\n\n"
+            f"Hello Velora Peptide,\n\n"
             f"I would like to place a wholesale order.\n\n"
             f"Quotation Reference: {quotation_number}\n\n"
             f"Customer Information\n"
@@ -565,7 +565,7 @@ def checkout():
             raise
 
         encoded_message = urllib.parse.quote(raw_message)
-        wa_number = Setting.get_val('whatsapp_number', current_app.config.get('WHATSAPP_NUMBER', '85263294280'))
+        wa_number = Setting.get_val('whatsapp_number', current_app.config.get('WHATSAPP_NUMBER', '447763743631'))
         whatsapp_url = f"https://wa.me/{wa_number}?text={encoded_message}"
 
     return render_template('checkout.html', form=form, cart_items=cart_items, grand_total=grand_total, total_quantity=total_quantity, whatsapp_url=whatsapp_url, quotation_number=quotation_number)
@@ -573,7 +573,7 @@ def checkout():
 @main.route('/contact', methods=['GET', 'POST'])
 def contact():
     form = ContactForm()
-    whatsapp_number = Setting.get_val('whatsapp_number', current_app.config.get('WHATSAPP_NUMBER', '85263294280'))
+    whatsapp_number = Setting.get_val('whatsapp_number', current_app.config.get('WHATSAPP_NUMBER', '447763743631'))
 
     if form.validate_on_submit():
         inquiry = ContactInquiry(
@@ -638,5 +638,5 @@ def shipments():
 
 @main.route('/about')
 def about():
-    whatsapp_number = Setting.get_val('whatsapp_number', current_app.config.get('WHATSAPP_NUMBER', '85263294280'))
+    whatsapp_number = Setting.get_val('whatsapp_number', current_app.config.get('WHATSAPP_NUMBER', '447763743631'))
     return render_template('about.html', whatsapp_number=whatsapp_number)

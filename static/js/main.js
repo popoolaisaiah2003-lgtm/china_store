@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var orderPanel = document.getElementById('orderPanel');
 
   function updateCartBadges(count) {
-    document.querySelectorAll('.cart-badge').forEach(function (badge) {
+    document.querySelectorAll('.cart-badge, .cart-badge-count').forEach(function (badge) {
       badge.textContent = count;
     });
   }
@@ -77,6 +77,22 @@ document.addEventListener('DOMContentLoaded', function () {
       navLinks.classList.toggle('active');
     });
   }
+
+  document.body.addEventListener('click', function (event) {
+    var tab = event.target.closest('[data-detail-tab]');
+    if (!tab) return;
+    var tabName = tab.getAttribute('data-detail-tab');
+    document.querySelectorAll('[data-detail-tab]').forEach(function (button) {
+      var active = button === tab;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+    document.querySelectorAll('[data-detail-panel]').forEach(function (panel) {
+      var active = panel.getAttribute('data-detail-panel') === tabName;
+      panel.classList.toggle('active', active);
+      panel.hidden = !active;
+    });
+  });
 
   var currentLangMatch = window.location.pathname.match(/\/set_language\/([a-z]{2})/);
   if (currentLangMatch && currentLangMatch[1]) {
@@ -181,5 +197,33 @@ document.addEventListener('DOMContentLoaded', function () {
         window.location.href = checkoutUrl;
       });
     }
+  }
+
+  // Reviews page: reveal the remaining review cards on demand.
+  var loadMoreReviewsBtn = document.getElementById('loadMoreReviewsBtn');
+  if (loadMoreReviewsBtn) {
+    loadMoreReviewsBtn.addEventListener('click', function () {
+      document.querySelectorAll('.review-card-extra').forEach(function (card) {
+        card.style.display = '';
+      });
+      loadMoreReviewsBtn.style.display = 'none';
+    });
+  }
+
+  // Shipments page: client-side filter across already-loaded shipment cards.
+  var shipmentSearchInput = document.getElementById('shipmentTrackingSearch');
+  if (shipmentSearchInput) {
+    shipmentSearchInput.addEventListener('input', function () {
+      var term = shipmentSearchInput.value.trim().toLowerCase();
+      var cards = document.querySelectorAll('[data-shipment-search]');
+      var visibleCount = 0;
+      cards.forEach(function (card) {
+        var matches = !term || card.getAttribute('data-shipment-search').indexOf(term) !== -1;
+        card.style.display = matches ? '' : 'none';
+        if (matches) visibleCount += 1;
+      });
+      var emptyState = document.getElementById('shipmentTrackingEmpty');
+      if (emptyState) emptyState.hidden = visibleCount !== 0 || cards.length === 0;
+    });
   }
 });

@@ -25,11 +25,16 @@ class Config:
     COA_UPLOAD_FOLDER = os.path.join(UPLOAD_FOLDER, 'coa')
     
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024
-    WHATSAPP_NUMBER = '85263294280'
-    BUSINESS_EMAIL = 'zhenyan640@gmail.com'
-    BRAND_NAME = 'Yan Zhen Peptide'
+    WHATSAPP_NUMBER = '447763743631'
+    BUSINESS_EMAIL = 'info@velorapeptide.com'
+    BRAND_NAME = 'Velora Peptide'
 
     # Session & Security Settings
     SESSION_COOKIE_HTTPONLY = True
     SESSION_COOKIE_SAMESITE = 'Lax'
     PERMANENT_SESSION_LIFETIME = timedelta(hours=2)
+
+    # CSRF protection stays enabled; the token is bound to the session instead of
+    # Flask-WTF's separate 1-hour clock, which expired before the 2-hour session did.
+    WTF_CSRF_ENABLED = True
+    WTF_CSRF_TIME_LIMIT = None

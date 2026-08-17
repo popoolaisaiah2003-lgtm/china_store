@@ -159,8 +159,8 @@ class ContactForm(FlaskForm):
 
 
 class SettingForm(FlaskForm):
-    company_name = StringField('Company Name', validators=[DataRequired()], default='Yan Zhen Peptide')
-    whatsapp_number = StringField('WhatsApp Support Number', validators=[DataRequired()], default='85263294280')
+    company_name = StringField('Company Name', validators=[DataRequired()], default='Velora Peptide')
+    whatsapp_number = StringField('WhatsApp Support Number', validators=[DataRequired()], default='447763743631')
     email = StringField('Contact Email', validators=[Optional()])
     address = StringField('Facility Address', validators=[Optional()])
     default_language = SelectField('Default Site Language', choices=[

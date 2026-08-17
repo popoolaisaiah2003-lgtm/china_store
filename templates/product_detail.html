@@ -3,24 +3,27 @@
 {% block title %}{{ product.name }} | {{ product.purity }} | {{ company_name }}{% endblock %}
 
 {% block content %}
-<div class="container" style="padding: 3rem 1.25rem;">
+<div class="container product-detail-page" style="padding: 3rem 1.25rem;">
   
   <div style="margin-bottom: 1.5rem; font-size: 0.9rem; color: var(--text-muted);">
     <a href="{{ url_for('main.index') }}">{{ _('home') }}</a> &nbsp;/&nbsp; 
     <a href="{{ url_for('main.products') }}">{{ _('catalog') }}</a> &nbsp;/&nbsp; 
-    <span style="color: var(--navy-deep); font-weight: 600;">{{ product.name }}</span>
+    <span style="color: var(--text-main); font-weight: 600;">{{ product.name }}</span>
   </div>
 
-  <div class="product-detail-grid">
+  <div class="product-detail-grid product-detail-layout">
     <!-- Left: Gallery / Display -->
     <div>
-      <div class="product-detail-gallery">
+      <div class="product-detail-gallery product-gallery-shell">
         <div style="text-align: center;">
           <span class="purity-tag" style="position: relative; top: 0; right: 0; display: inline-block; margin-bottom: 1rem;">
             HPLC {{ _('hplc_certified_tag') }} {{ product.purity }}
           </span>
-          <img src="{{ url_for('static', filename=product.catalog_image) }}" alt="{{ product.name }}" style="max-height: 280px; width: 100%; margin: 0 auto; border-radius: var(--radius-md); object-fit: contain;">
-          <div style="font-weight: 700; color: var(--navy-deep); margin-top: 1rem;">
+          <div class="gallery-main-image">
+            <img src="{{ url_for('static', filename=product.catalog_image) }}" alt="{{ product.name }}" style="max-height: 280px; width: 100%; margin: 0 auto; border-radius: var(--radius-md); object-fit: contain;">
+          </div>
+          <div class="gallery-caption-row"><span><i class="bi bi-shield-check"></i> HPLC batch verified</span><span><i class="bi bi-snow2"></i> Cold-chain ready</span></div>
+          <div style="font-weight: 700; color: var(--text-main); margin-top: 1rem;">
             {{ _('lyophilized_vial') }}
           </div>
         </div>
@@ -29,13 +32,23 @@
 
     <!-- Right: Product Info & COA Badge & Quotation Action -->
     <div>
-      <div style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700; color: var(--gold-primary); letter-spacing: 0.05em; margin-bottom: 0.35rem;">
+      <div class="detail-eyebrow" style="font-size: 0.85rem; text-transform: uppercase; font-weight: 700; color: var(--gold-primary); letter-spacing: 0.05em; margin-bottom: 0.35rem;">
         {{ product.category.name if product.category else _('research_compound') }}
       </div>
-      <h1 style="font-size: 2.25rem; margin-bottom: 0.5rem;">{{ product.name }}</h1>
+      <h1 class="detail-title" style="font-size: 2.25rem; margin-bottom: 0.5rem;">{{ product.name }}</h1>
+
+      {% set approved_reviews = product.reviews|selectattr('approved')|list %}
+      {% if approved_reviews %}
+        {% set avg = (approved_reviews|sum(attribute='rating') / approved_reviews|length) %}
+        <div class="detail-rating-row">
+          <span class="detail-stars">{% for i in range(avg|round(0, 'floor')|int) %}★{% endfor %}{% for i in range(5 - (avg|round(0, 'floor')|int)) %}<span class="star-empty">★</span>{% endfor %}</span>
+          <span class="detail-rating-value">{{ avg|round(1) }}/5</span>
+          <span class="detail-rating-count">({{ approved_reviews|length }} {{ _('approved_reviews_count') }})</span>
+        </div>
+      {% endif %}
       
       <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem;">
-        <span style="font-size: 2rem; font-weight: 800; color: var(--navy-deep);">${{ "%.2f"|format(product.price) }}</span>
+        <span style="font-size: 2rem; font-weight: 800; color: var(--biotech-blue);">${{ "%.2f"|format(product.price) }}</span>
         <span style="background: #E0F2FE; color: #0369A1; font-weight: 600; font-size: 0.8rem; padding: 0.25rem 0.75rem; border-radius: var(--radius-sm);">
           {{ product.stock_status }}
         </span>
@@ -93,8 +106,41 @@
         </tr>
       </table>
 
+      <div class="detail-tabs" role="tablist" aria-label="Product information">
+        <button class="detail-tab active" type="button" data-detail-tab="specifications" aria-selected="true">Overview</button>
+        <button class="detail-tab" type="button" data-detail-tab="coa" aria-selected="false">COA</button>
+        <button class="detail-tab" type="button" data-detail-tab="reviews" aria-selected="false">{{ _('reviews_link') }}</button>
+        <button class="detail-tab" type="button" data-detail-tab="handling" aria-selected="false">{{ _('storage') }} &amp; handling</button>
+      </div>
+      <div class="detail-tab-panel active" data-detail-panel="specifications">
+        <p>{{ product.short_description or product.description or _('analytical_standard_vials') }}</p>
+        {% if product.sequence_or_cas %}<span class="detail-code"><i class="bi bi-upc-scan"></i> {{ product.sequence_or_cas }}</span>{% endif %}
+      </div>
+      <div class="detail-tab-panel" data-detail-panel="coa" hidden>
+        {% if product.latest_coa %}
+          <p>{{ _('coa_available') }} — Batch {{ product.latest_coa.batch_number }}, {{ _('issue_date') }} {{ product.latest_coa.issue_date }}</p>
+          <a href="{{ url_for('main.coa_download', id=product.latest_coa.id) }}" class="detail-code"><i class="bi bi-file-earmark-arrow-down"></i> {{ _('download_latest_coa') }}</a>
+        {% else %}
+          <p>{{ _('coa_request_note') }}</p>
+          <a href="{{ url_for('main.coa_list') }}" class="detail-code"><i class="bi bi-folder2-open"></i> {{ _('coa_repo_link') }}</a>
+        {% endif %}
+      </div>
+      <div class="detail-tab-panel" data-detail-panel="reviews" hidden>
+        {% if approved_reviews %}
+          {% for review in approved_reviews[:3] %}
+            <p><strong style="color: var(--text-main);">{{ review.customer_name }}</strong> — {% for i in range(review.rating) %}★{% endfor %}<br>{{ review.review_text }}</p>
+          {% endfor %}
+        {% else %}
+          <p>No reviews yet for this compound. <a href="{{ url_for('main.reviews') }}" class="detail-code">Write the first review &rarr;</a></p>
+        {% endif %}
+      </div>
+      <div class="detail-tab-panel" data-detail-panel="handling" hidden>
+        <p>{{ product.storage_info or _('climate_controlled_storage') }}</p>
+        <span class="detail-code"><i class="bi bi-thermometer-snow"></i> Cold-chain handling available</span>
+      </div>
+
       <!-- Wholesale Quotation Box -->
-      <div class="order-box">
+      <div class="order-box sticky-order-panel">
         <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--navy-deep);">
           {{ _('add_to_wholesale_quotation') }}
         </h3>
@@ -119,6 +165,9 @@
             </a>
           </div>
         </form>
+        <a class="btn btn-whatsapp whatsapp-detail-cta" href="https://wa.me/447763743631?text=Hello,%20I%20would%20like%20to%20request%20a%20quotation%20for%20{{ product.name|urlencode }}." target="_blank" rel="noopener">
+          <i class="bi bi-whatsapp"></i> {{ _('request_a_quote_btn') }}
+        </a>
       </div>
 
     </div>
@@ -127,7 +176,7 @@
   <!-- Related Products Section -->
   {% if related_products %}
   <div style="margin-top: 4rem; border-top: 1px solid var(--border-color); padding-top: 3rem;">
-    <h3 style="margin-bottom: 1.5rem; font-size: 1.35rem; color: var(--navy-deep);">
+    <h3 style="margin-bottom: 1.5rem; font-size: 1.35rem; color: var(--text-main);">
       {{ _('related_peptides_title') }}
     </h3>
 

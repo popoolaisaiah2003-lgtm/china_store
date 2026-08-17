@@ -1,5 +1,6 @@
 import os
-from flask import Flask, session, redirect, request
+from flask import Flask, session, redirect, request, url_for, flash
+from flask_wtf.csrf import CSRFError
 import pymysql
 from sqlalchemy.engine.url import make_url
 from sqlalchemy import inspect, text, func
@@ -87,6 +88,19 @@ def create_app():
     migrate.init_app(app, db)
     login_manager.login_view = 'admin.login'
 
+    @app.before_request
+    def enforce_permanent_session():
+        # Without this the cookie is a browser-session cookie and PERMANENT_SESSION_LIFETIME never applies.
+        session.permanent = True
+
+    @app.errorhandler(CSRFError)
+    def handle_csrf_error(error):
+        # The request is still rejected; the user is returned to a page carrying a fresh token.
+        flash('Your security token expired. Please submit the form again.', 'warning')
+        if (request.endpoint or '') == 'admin.login':
+            return redirect(url_for('admin.login')), 303
+        return redirect(request.referrer or url_for('main.index')), 303
+
     # Global Context Processor for Templates (Multi-language & Cart Badge)
     @app.context_processor
     def inject_global_vars():
@@ -125,9 +139,9 @@ def create_app():
             unread_inquiries_count=unread_inquiries_count,
             pending_orders_count=pending_orders_count,
             in_progress_orders_count=in_progress_orders_count,
-            company_name=Setting.get_val('company_name', 'Yan Zhen Peptide'),
-            whatsapp_number=Setting.get_val('whatsapp_number', app.config.get('WHATSAPP_NUMBER', '85263294280')),
-            business_email=Setting.get_val('business_email', app.config.get('BUSINESS_EMAIL', 'zhenyan640@gmail.com'))
+            company_name=Setting.get_val('company_name', 'Velora Peptide'),
+            whatsapp_number=Setting.get_val('whatsapp_number', app.config.get('WHATSAPP_NUMBER', '447763743631')),
+            business_email=Setting.get_val('business_email', app.config.get('BUSINESS_EMAIL', 'info@velorapeptide.com'))
         )
 
     # Register Blueprints

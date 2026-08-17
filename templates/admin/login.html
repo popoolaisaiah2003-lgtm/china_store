@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Login | AntiGravity Peptides</title>
+  <title>Admin Login | Velora Peptide</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
@@ -12,8 +12,9 @@
   <div style="width: 100%; max-width: 420px; padding: 2rem;">
     
     <div style="text-align: center; margin-bottom: 2rem;">
-      <a href="{{ url_for('main.index') }}" class="brand-logo" style="justify-content: center; text-decoration: none;">
-        <img src="{{ url_for('static', filename='logo1.png') }}" alt="Yan Zhen Peptide" class="logo-img">
+      <a href="{{ url_for('main.index') }}" class="brand-logo" style="justify-content: center; text-decoration: none;" aria-label="Velora Peptide Home">
+        <img src="{{ url_for('static', filename='images/logo1.png') }}" alt="Velora Peptide" class="logo-img">
+        <span class="brand-subtitle">PREMIUM RESEARCH PEPTIDES</span>
       </a>
       <p style="color: #94A3B8; font-size: 0.9rem; margin-top: 0.5rem;">Laboratory Management Portal</p>
     </div>

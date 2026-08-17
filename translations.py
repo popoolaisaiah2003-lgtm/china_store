@@ -1,4 +1,4 @@
-# Complete Translations System for Yan Zhen Peptide
+# Complete Translations System for Velora Peptide
 # Languages: English (en), Chinese (zh), Spanish (es), Arabic (ar), French (fr)
 
 TRANSLATIONS = {
@@ -14,11 +14,11 @@ TRANSLATIONS = {
         'admin_panel': 'Admin Panel',
         'admin_login': 'Admin Login',
         'choose_language': 'Choose Your Language / 选择语言',
-        'language_subtitle': 'Select your preferred language to customize your Yan Zhen Peptide wholesale experience.',
+        'language_subtitle': 'Select your preferred language to customize your Velora Peptide wholesale experience.',
 
         # Hero & Homepage
         'hero_title': 'Elevate Your Research with Purity ≥ 99.8%',
-        'hero_subtitle': 'Yan Zhen Peptide delivers clinical laboratory-grade research compounds, HPLC batch-certified, sequence-verified, and sealed for cold-chain precision delivery.',
+        'hero_subtitle': 'Velora Peptide delivers clinical laboratory-grade research compounds, HPLC batch-certified, sequence-verified, and sealed for cold-chain precision delivery.',
         'mass_spec_tested': '✓ Mass Spec Batch Tested',
         'hplc_verified': '✓ HPLC Purity Verified',
         'express_shipping': '✓ Express Global Shipping',
@@ -33,7 +33,7 @@ TRANSLATIONS = {
         'featured_desc': 'Explore our top-tier research formulations prepared under sterile cleanroom protocols.',
         'view_specs': 'View Specifications',
         'view_all_products': 'View All Products',
-        'yan_zhen_advantage': 'The Yan Zhen Advantage',
+        'velora_advantage': 'The Velora Advantage',
         'built_for_researchers': 'Built for Uncompromising Researchers',
         'hplc_ms_testing': 'Independent HPLC & MS Testing',
         'hplc_ms_desc': 'Every batch undergoes rigorous High-Performance Liquid Chromatography and Mass Spectrometry analysis to confirm exact peptide sequence and purity.',
@@ -44,7 +44,7 @@ TRANSLATIONS = {
 
         # Catalog Page
         'b2b_catalog_title': 'B2B Wholesale Peptide Catalog',
-        'b2b_catalog_desc': 'Complete Yan Zhen Peptide wholesale price list. Select quantities and assemble multi-product quotation sheets for instant WhatsApp submission.',
+        'b2b_catalog_desc': 'Complete Velora Peptide wholesale price list. Select quantities and assemble multi-product quotation sheets for instant WhatsApp submission.',
         'review_quotation_sheet': '📋 Review Quotation Sheet',
         'search_placeholder': 'Search peptide name, CAS or spec...',
         'search': 'Search',
@@ -85,7 +85,7 @@ TRANSLATIONS = {
 
         # COA Repository
         'coa_repo_title': 'Certificate of Analysis (COA) Repository',
-        'coa_repo_desc': 'Search and download verified mass spectrometry and HPLC purity reports for all Yan Zhen research peptide batches.',
+        'coa_repo_desc': 'Search and download verified mass spectrometry and HPLC purity reports for all Velora research peptide batches.',
         'coa_search_placeholder': 'Search by product name or batch number (e.g. BATCH-2026-01)...',
         'all_product_categories': 'All Product Categories',
         'search_certificates': 'Search Certificates',
@@ -139,7 +139,7 @@ TRANSLATIONS = {
         'ref_label': 'Ref:',
         'date_label': 'Date:',
         'item_description': 'Item Description',
-        'facility_footnote': 'Yan Zhen Peptide Facility • Direct WhatsApp Desk: +234 818 188 2418 • For Research Purposes Only',
+        'facility_footnote': 'Velora Peptide Facility • Direct WhatsApp Desk: +234 818 188 2418 • For Research Purposes Only',
 
         # Footer & General
         'footer_desc': 'Pioneering analytical purity and synthesis standard in research peptides. Guaranteed ≥ 99.8% mass spectrometry & HPLC verified laboratory compounds.',
@@ -208,7 +208,7 @@ TRANSLATIONS = {
         'featured_reviews_header': 'Featured Reviews',
         'featured_badge': 'Featured',
         'no_reviews_title': 'No Reviews Published Yet',
-        'no_reviews_desc': 'Be the first to share your laboratory client experience with Yan Zhen Peptide.',
+        'no_reviews_desc': 'Be the first to share your laboratory client experience with Velora Peptide.',
         'reviews_link': 'Reviews',
 
         # Footer Section
@@ -247,12 +247,12 @@ TRANSLATIONS = {
         'need_assistance': 'Need assistance? Contact us on WhatsApp:',
         'go_back': 'Go Back',
         'i_understand_continue': 'I Understand & Continue',
-        'chat_with_us': 'Chat with Yan Zhen Peptide',
+        'chat_with_us': 'Chat with Velora Peptide',
         'back_to_top': 'Back to top',
         'official_exporter_tag': '🇨🇳 Official Chinese Pharmaceutical Manufacturer & Exporter',
         'hero_main_heading': 'Premium Research Peptides for Global Laboratories',
         'hero_sub_strip': 'High Purity • Reliable Quality • Worldwide Shipping',
-        'hero_company_desc': 'Yan Zhen Peptide is a professional manufacturer from China specializing in analytical-grade research peptides with strict quality control and global shipping support.',
+        'hero_company_desc': 'Velora Peptide is a professional manufacturer from China specializing in analytical-grade research peptides with strict quality control and global shipping support.',
         'view_products_btn': 'View Products',
         'request_a_quote_btn': 'Request a Quote',
         'analytical_standard_vials': 'Analytical Standard Vials',
@@ -288,7 +288,7 @@ TRANSLATIONS = {
         'climate_controlled_storage': '-20°C Desiccated / Climate Controlled',
         'related_peptides_title': 'Related Research Peptides',
         'about_warehouse_tag': '📦 Specialized Peptide Warehouse & Supply Facility',
-        'about_hero_title': 'About Yan Zhen Peptide',
+        'about_hero_title': 'About Velora Peptide',
         'about_hero_subtitle': 'Professional Peptide Warehouse & Global Supply Partner',
         'view_catalog_btn': 'View Peptide Catalog',
         'contact_export_desk': 'Contact Export Desk',
@@ -296,7 +296,7 @@ TRANSLATIONS = {
         'bulk_stocks_sublabel': 'Bulk Stocks & Lyophilized Vial Inventory',
         'exclusive_specialization': 'EXCLUSIVE SPECIALIZATION',
         'who_we_are_title': 'Who We Are',
-        'who_we_are_text': 'Yan Zhen Peptide is a China-based peptide warehouse and supply company focused exclusively on research peptide products. We provide high-purity peptide compounds for laboratories, distributors, resellers, and research buyers worldwide. Our operation is built around quality verification, secure packaging, and reliable international shipping.',
+        'who_we_are_text': 'Velora Peptide is a China-based peptide warehouse and supply company focused exclusively on research peptide products. We provide high-purity peptide compounds for laboratories, distributors, resellers, and research buyers worldwide. Our operation is built around quality verification, secure packaging, and reliable international shipping.',
         'product_scope': 'PRODUCT SCOPE',
         'what_we_sell_title': 'What We Sell',
         'research_peptides_only': 'Research peptides only',
@@ -332,7 +332,7 @@ TRANSLATIONS = {
         'dispatch_tracking_support': 'International Dispatch & Tracking Support',
         'discreet_packaging_sub': 'Discreet Packaging • Express Courier • Cold-Chain Monitoring',
         'why_choose_us_tag': 'WHY CHOOSE US',
-        'why_choose_title': 'Why Choose Yan Zhen Peptide?',
+        'why_choose_title': 'Why Choose Velora Peptide?',
         'why_choose_subtitle': 'Specialized warehouse operations built for reliable peptide supply.',
         'pep_only_spec': 'Peptide-only specialization',
         'bulk_small_supply': 'Bulk and small-quantity supply',
@@ -340,7 +340,7 @@ TRANSLATIONS = {
         'responsive_comm': 'Responsive communication',
         'confidential_handling': 'Confidential order handling',
         'reliable_dispatch': 'Reliable dispatch process',
-        'partner_with_title': 'Partner with Yan Zhen Peptide',
+        'partner_with_title': 'Partner with Velora Peptide',
         'partner_with_desc': 'Contact our export desk to request pricing, warehouse stock availability, or direct wholesale quotations.',
         'request_peptide_quote_btn': 'Request a Peptide Quote'
     },
@@ -357,11 +357,11 @@ TRANSLATIONS = {
         'admin_panel': '管理后台',
         'admin_login': '管理员登录',
         'choose_language': '选择您的语言 / Choose Language',
-        'language_subtitle': '请选择您的首选语言，以定制颜真多肽批发体验。',
+        'language_subtitle': '请选择您的首选语言，以定制Velora Peptide批发体验。',
 
         # Hero & Homepage
         'hero_title': '提升您的科研品质 纯度 ≥ 99.8%',
-        'hero_subtitle': '颜真多肽提供临床实验室级科研化合物，经HPLC批次认证、序列验证，冷链无菌封存。',
+        'hero_subtitle': 'Velora Peptide提供临床实验室级科研化合物，经HPLC批次认证、序列验证，冷链无菌封存。',
         'mass_spec_tested': '✓ 质谱批次检测',
         'hplc_verified': '✓ HPLC纯度认证',
         'express_shipping': '✓ 全球快速发货',
@@ -376,7 +376,7 @@ TRANSLATIONS = {
         'featured_desc': '探索我们在无菌洁净室标准下制备的顶级科研配方。',
         'view_specs': '查看规格明细',
         'view_all_products': '查看全部产品',
-        'yan_zhen_advantage': '颜真多肽的核心优势',
+        'velora_advantage': 'Velora Peptide的核心优势',
         'built_for_researchers': '为严格的科研人员打造',
         'hplc_ms_testing': '独立 HPLC & MS 检测',
         'hplc_ms_desc': '每个批次均经过严格的高效液相色谱及质谱分析，确认多肽序列与纯度。',
@@ -386,8 +386,8 @@ TRANSLATIONS = {
         'whatsapp_desk_desc': '无需复杂结账流程，直接提交自定义数量订购，实时获取运输报价。',
 
         # Catalog Page
-        'b2b_catalog_title': '颜真多肽 B2B 批发目录',
-        'b2b_catalog_desc': '完整颜真多肽批发价格表。选择数量并生成多产品报价单，一键发送至 WhatsApp。',
+        'b2b_catalog_title': 'Velora Peptide B2B 批发目录',
+        'b2b_catalog_desc': '完整Velora Peptide批发价格表。选择数量并生成多产品报价单，一键发送至 WhatsApp。',
         'review_quotation_sheet': '📋 查看报价单清单',
         'search_placeholder': '搜索多肽名称、CAS或规格...',
         'search': '搜索',
@@ -428,7 +428,7 @@ TRANSLATIONS = {
 
         # COA Repository
         'coa_repo_title': 'COA 质量检测报告库',
-        'coa_repo_desc': '搜索并下载颜真科研多肽批次质谱及高效液相色谱纯度报告。',
+        'coa_repo_desc': '搜索并下载Velora科研多肽批次质谱及高效液相色谱纯度报告。',
         'coa_search_placeholder': '按产品名称或批号搜索 (例如 BATCH-2026-01)...',
         'all_product_categories': '所有产品分类',
         'search_certificates': '搜索质检报告',
@@ -482,7 +482,7 @@ TRANSLATIONS = {
         'ref_label': '报价单号:',
         'date_label': '日期:',
         'item_description': '商品描述',
-        'facility_footnote': '颜真多肽实验室 • WhatsApp 直连服务: +234 818 188 2418 • 仅供科研用途',
+        'facility_footnote': 'Velora Peptide实验室 • WhatsApp 直连服务: +234 818 188 2418 • 仅供科研用途',
 
         # Footer & General
         'footer_desc': '引领科研多肽的分析纯度与合成标准。保证 ≥ 99.8% 质谱及 HPLC 认证实验室化合物。',
@@ -550,7 +550,7 @@ TRANSLATIONS = {
         'featured_reviews_header': '精选评价',
         'featured_badge': '精选',
         'no_reviews_title': '暂无发布的评价',
-        'no_reviews_desc': '成为首位分享您与颜真多肽合作体验的科研客户。',
+        'no_reviews_desc': '成为首位分享您与Velora Peptide合作体验的科研客户。',
         'reviews_link': '客户评价',
 
         # Footer Section
@@ -589,12 +589,12 @@ TRANSLATIONS = {
         'need_assistance': '需要帮助？欢迎通过 WhatsApp 联系我们：',
         'go_back': '返回',
         'i_understand_continue': '我已了解并继续',
-        'chat_with_us': '与颜真多肽在线沟通',
+        'chat_with_us': '与Velora Peptide在线沟通',
         'back_to_top': '返回顶部',
         'official_exporter_tag': '🇨🇳 中国官方医药多肽生产出口基地',
         'hero_main_heading': '面向全球实验室的高级科研多肽',
         'hero_sub_strip': '高纯度 • 稳定品质 • 全球冷链送达',
-        'hero_company_desc': '颜真多肽是一家来自中国的专业多肽生产商，专注于分析级科研多肽，具备严格的质量控制与全球发货支持。',
+        'hero_company_desc': 'Velora Peptide是一家来自中国的专业多肽生产商，专注于分析级科研多肽，具备严格的质量控制与全球发货支持。',
         'view_products_btn': '查看产品目录',
         'request_a_quote_btn': '索取产品报价',
         'analytical_standard_vials': '分析标准品西林瓶',
@@ -630,7 +630,7 @@ TRANSLATIONS = {
         'climate_controlled_storage': '-20°C 干燥 / 控温保存',
         'related_peptides_title': '相关科研多肽产品',
         'about_warehouse_tag': '📦 专业多肽仓库与供应基地',
-        'about_hero_title': '关于颜真多肽',
+        'about_hero_title': '关于Velora Peptide',
         'about_hero_subtitle': '专业的多肽仓库与全球供应合作伙伴',
         'view_catalog_btn': '查看多肽目录',
         'contact_export_desk': '联系出口专柜',
@@ -638,7 +638,7 @@ TRANSLATIONS = {
         'bulk_stocks_sublabel': '大宗库存及冻干粉针剂存货',
         'exclusive_specialization': '专属专业化',
         'who_we_are_title': '我们是谁',
-        'who_we_are_text': '颜真多肽是一家总部位于中国的多肽仓库与供应公司，专注于科研多肽产品。我们为全球实验室、分销商、经销商及科研买家提供高纯度多肽化合物。',
+        'who_we_are_text': 'Velora Peptide是一家总部位于中国的多肽仓库与供应公司，专注于科研多肽产品。我们为全球实验室、分销商、经销商及科研买家提供高纯度多肽化合物。',
         'product_scope': '产品范围',
         'what_we_sell_title': '我们销售什么',
         'research_peptides_only': '仅限科研多肽',
@@ -674,7 +674,7 @@ TRANSLATIONS = {
         'dispatch_tracking_support': '国际发货与追踪支持',
         'discreet_packaging_sub': '隐藏式包装 • 快捷快递 • 冷链监测',
         'why_choose_us_tag': '为什么选择我们',
-        'why_choose_title': '为什么选择颜真多肽？',
+        'why_choose_title': '为什么选择Velora Peptide？',
         'why_choose_subtitle': '为可靠多肽供应打造的专业仓库运营。',
         'pep_only_spec': '仅专注于多肽产品',
         'bulk_small_supply': '大宗与小额同时支持',
@@ -682,7 +682,7 @@ TRANSLATIONS = {
         'responsive_comm': '快速响应沟通',
         'confidential_handling': '保密订单处理',
         'reliable_dispatch': '可靠发货流程',
-        'partner_with_title': '与颜真多肽达成合作',
+        'partner_with_title': '与Velora Peptide达成合作',
         'partner_with_desc': '联系我们的出口专柜，索取报价、仓库现货状态或直接批发报价。',
         'request_peptide_quote_btn': '索取多肽报价'
     },
@@ -699,11 +699,11 @@ TRANSLATIONS = {
         'admin_panel': 'Panel Admin',
         'admin_login': 'Iniciar Sesión Admin',
         'choose_language': 'Seleccione su idioma / Choose Language',
-        'language_subtitle': 'Seleccione su idioma preferido para personalizar su experiencia en Yan Zhen Peptide.',
+        'language_subtitle': 'Seleccione su idioma preferido para personalizar su experiencia en Velora Peptide.',
 
         # Hero & Homepage
         'hero_title': 'Eleve su Investigación con Pureza ≥ 99.8%',
-        'hero_subtitle': 'Yan Zhen Peptide suministra compuestos de investigación de grado clínico, certificados por lote HPLC y sellados para cadena de frío.',
+        'hero_subtitle': 'Velora Peptide suministra compuestos de investigación de grado clínico, certificados por lote HPLC y sellados para cadena de frío.',
         'mass_spec_tested': '✓ Probado por Espectrometría de Masas',
         'hplc_verified': '✓ Pureza HPLC Verificada',
         'express_shipping': '✓ Envío Global Exprés',
@@ -718,7 +718,7 @@ TRANSLATIONS = {
         'featured_desc': 'Formulaciones preparadas bajo estrictos protocolos de sala limpia.',
         'view_specs': 'Ver Especificaciones',
         'view_all_products': 'Ver Todos los Productos',
-        'yan_zhen_advantage': 'La Ventaja Yan Zhen',
+        'velora_advantage': 'La Ventaja Velora',
         'built_for_researchers': 'Creado para Investigadores Exigentes',
         'hplc_ms_testing': 'Pruebas Independientes HPLC y MS',
         'hplc_ms_desc': 'Cada lote se somete a análisis rigurosos de HPLC y espectrometría de masas.',
@@ -728,7 +728,7 @@ TRANSLATIONS = {
         'whatsapp_desk_desc': 'Realice pedidos directos con cantidades personalizadas a través de WhatsApp.',
 
         # Catalog Page
-        'b2b_catalog_title': 'Catálogo Mayorista Yan Zhen Peptide',
+        'b2b_catalog_title': 'Catálogo Mayorista Velora Peptide',
         'b2b_catalog_desc': 'Lista completa de precios al por mayor. Seleccione cantidades y genere cotizaciones para envío instantáneo por WhatsApp.',
         'review_quotation_sheet': '📋 Ver Lista de Cotización',
         'search_placeholder': 'Buscar péptido, CAS o especificación...',
@@ -770,7 +770,7 @@ TRANSLATIONS = {
 
         # COA Repository
         'coa_repo_title': 'Repositorio de Certificados COA',
-        'coa_repo_desc': 'Busque y descargue informes de pureza HPLC e informe de masa de los lotes de péptidos Yan Zhen.',
+        'coa_repo_desc': 'Busque y descargue informes de pureza HPLC e informe de masa de los lotes de péptidos Velora.',
         'coa_search_placeholder': 'Buscar por nombre o número de lote...',
         'all_product_categories': 'Todas las Categorías',
         'search_certificates': 'Buscar Certificados',
@@ -824,7 +824,7 @@ TRANSLATIONS = {
         'ref_label': 'Ref:',
         'date_label': 'Fecha:',
         'item_description': 'Descripción del Artículo',
-        'facility_footnote': 'Instalaciones Yan Zhen Peptide • Atención WhatsApp: +234 818 188 2418 • Solo para Investigación',
+        'facility_footnote': 'Instalaciones Velora Peptide • Atención WhatsApp: +234 818 188 2418 • Solo para Investigación',
 
         # Footer
         'footer_desc': 'Líderes en estándar de pureza analítica en péptidos de investigación. Compuestos garantizados ≥ 99.8%.',
@@ -847,11 +847,11 @@ TRANSLATIONS = {
         'admin_panel': 'لوحة التحكم',
         'admin_login': 'تسجيل الدخول',
         'choose_language': 'اختر لغتك / Choose Language',
-        'language_subtitle': 'يرجى اختيار لغتك المفضلة لتخصيص تجربتك في يان تشن ببتيد.',
+        'language_subtitle': 'يرجى اختيار لغتك المفضلة لتخصيص تجربتك في Velora ببتيد.',
 
         # Hero & Homepage
         'hero_title': 'ارتقِ ببحوثك مع نقاء ≥ 99.8%',
-        'hero_subtitle': 'تقدم يان تشن ببتيد مركبات بحثية عالية النقاء بدرجة مختبرية سريعة التوصيل وموثقة بشرائح HPLC.',
+        'hero_subtitle': 'تقدم Velora ببتيد مركبات بحثية عالية النقاء بدرجة مختبرية سريعة التوصيل وموثقة بشرائح HPLC.',
         'mass_spec_tested': '✓ مفسور باختبار الكتلة',
         'hplc_verified': '✓ موثق بنقاء HPLC',
         'express_shipping': '✓ شحن دولي سريع',
@@ -866,7 +866,7 @@ TRANSLATIONS = {
         'featured_desc': 'استكشف تركيباتنا البحثية المعدة وفقاً لأعلى معايير الغرف النظيفة.',
         'view_specs': 'عرض المواصفات',
         'view_all_products': 'عرض جميع المنتجات',
-        'yan_zhen_advantage': 'ميزة يان تشن',
+        'velora_advantage': 'ميزة Velora',
         'built_for_researchers': 'مصمم للباحثين المتميزين',
         'hplc_ms_testing': 'اختبارات HPLC و MS مستقلة',
         'hplc_ms_desc': 'تخضع كل دفعة لفحص دقيق بواسطة الكروماتوغرافيا السائلة عالية الأداء وقياس الطيف الكتلي.',
@@ -918,7 +918,7 @@ TRANSLATIONS = {
 
         # COA Repository
         'coa_repo_title': 'مستودع شهادات التحليل (COA)',
-        'coa_repo_desc': 'ابحث وحمّل تقارير النقاء الموثقة لجميع دفعات ببتيدات يان تشن.',
+        'coa_repo_desc': 'ابحث وحمّل تقارير النقاء الموثقة لجميع دفعات ببتيدات Velora.',
         'coa_search_placeholder': 'ابحث باسم المنتج أو رقم الدفعة...',
         'all_product_categories': 'جميع الفئات',
         'search_certificates': 'بحث عن الشهادات',
@@ -972,7 +972,7 @@ TRANSLATIONS = {
         'ref_label': 'المرجع:',
         'date_label': 'التاريخ:',
         'item_description': 'وصف العنصر',
-        'facility_footnote': 'مرفق يان تشن ببتيد • واتساب المباشر: +234 818 188 2418 • لأغراض البحث فقط',
+        'facility_footnote': 'مرفق Velora ببتيد • واتساب المباشر: +234 818 188 2418 • لأغراض البحث فقط',
 
         # Footer
         'footer_desc': 'الرائدة في النقاء التحليلي ومعايير التصنيع للببتيدات البحثية. مركبات مختبرية موثقة بنسبة ≥ 99.8%.',
@@ -995,11 +995,11 @@ TRANSLATIONS = {
         'admin_panel': 'Panneau Admin',
         'admin_login': 'Connexion Admin',
         'choose_language': 'Choisissez votre langue / Choose Language',
-        'language_subtitle': 'Sélectionnez votre langue pour personnaliser votre expérience chez Yan Zhen Peptide.',
+        'language_subtitle': 'Sélectionnez votre langue pour personnaliser votre expérience chez Velora Peptide.',
 
         # Hero & Homepage
         'hero_title': 'Élevez vos Recherches avec une Pureté ≥ 99.8%',
-        'hero_subtitle': 'Yan Zhen Peptide fournit des composés de recherche de qualité clinique, certifiés HPLC et scellés pour la chaîne du froid.',
+        'hero_subtitle': 'Velora Peptide fournit des composés de recherche de qualité clinique, certifiés HPLC et scellés pour la chaîne du froid.',
         'mass_spec_tested': '✓ Testé par Spectrométrie de Masse',
         'hplc_verified': '✓ Pureté HPLC Vérifiée',
         'express_shipping': '✓ Expédition Mondiale Rapide',
@@ -1014,7 +1014,7 @@ TRANSLATIONS = {
         'featured_desc': 'Formulations préparées selon les normes de salle blanche.',
         'view_specs': 'Voir les Spécifications',
         'view_all_products': 'Voir Tous les Produits',
-        'yan_zhen_advantage': 'L\'Avantage Yan Zhen',
+        'velora_advantage': 'L\'Avantage Velora',
         'built_for_researchers': 'Conçu pour les Chercheurs Exigeants',
         'hplc_ms_testing': 'Tests Indépendants HPLC & MS',
         'hplc_ms_desc': 'Chaque lot est soumis à une analyse rigoureuse HPLC et de spectrométrie de masse.',
@@ -1024,7 +1024,7 @@ TRANSLATIONS = {
         'whatsapp_desk_desc': 'Passez des commandes directes avec des quantités personnalisées via WhatsApp.',
 
         # Catalog Page
-        'b2b_catalog_title': 'Catalogue Vente de Gros Yan Zhen Peptide',
+        'b2b_catalog_title': 'Catalogue Vente de Gros Velora Peptide',
         'b2b_catalog_desc': 'Liste complète des prix de gros. Sélectionnez les quantités et générez des devis envoyés par WhatsApp.',
         'review_quotation_sheet': '📋 Voir le Panier de Devis',
         'search_placeholder': 'Rechercher un peptide, CAS ou spécification...',
@@ -1066,7 +1066,7 @@ TRANSLATIONS = {
 
         # COA Repository
         'coa_repo_title': 'Dépôt des Certificats d\'Analyse (COA)',
-        'coa_repo_desc': 'Recherchez et téléchargez les rapports de pureté HPLC des lots de peptides Yan Zhen.',
+        'coa_repo_desc': 'Recherchez et téléchargez les rapports de pureté HPLC des lots de peptides Velora.',
         'coa_search_placeholder': 'Rechercher par nom ou numéro de lot...',
         'all_product_categories': 'Toutes les Catégories',
         'search_certificates': 'Rechercher Certificats',
@@ -1120,7 +1120,7 @@ TRANSLATIONS = {
         'ref_label': 'Réf:',
         'date_label': 'Date:',
         'item_description': 'Description de l\'Article',
-        'facility_footnote': 'Laboratoire Yan Zhen Peptide • Bureau WhatsApp Direct: +234 818 188 2418 • Pour la Recherche Uniquement',
+        'facility_footnote': 'Laboratoire Velora Peptide • Bureau WhatsApp Direct: +234 818 188 2418 • Pour la Recherche Uniquement',
 
         # Footer
         'footer_desc': 'Pionnier des normes de pureté analytique. Composés certifiés HPLC ≥ 99.8%.',

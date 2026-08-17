@@ -1,113 +1,109 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ company_name }} | {{ _('hero_main_heading') }}{% endblock %}
+{% block title %}{{ company_name }} | Premium Peptides. Proven Purity. Global Delivery.{% endblock %}
 
 {% block content %}
-<!-- Cinematic Pharmaceutical Hero Section -->
-<section class="hero animate-fade-up">
-  <!-- Desktop Video Loop Background -->
-  <video autoplay loop muted playsinline class="hero-video-bg" poster="{{ url_for('static', filename='images/hero/hero-mobile.jpg') }}">
-    <source src="{{ url_for('static', filename='images/hero/hero-lab.mp4') }}" type="video/mp4">
-    <source src="{{ url_for('static', filename='videos/hero-lab.mp4') }}" type="video/mp4">
-  </video>
-
-  <!-- Soft Blue Overlay -->
-  <div class="hero-overlay"></div>
-
-  <div class="container hero-content">
-    <div class="hero-grid">
+<!-- 1. Hero Section (Vial on Marble Pedestal) -->
+<section class="hero-luxury">
+  <div class="container">
+    <div class="hero-luxury-grid">
+      
+      <!-- Left Column: Headlines & Call-To-Action -->
       <div>
-        <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(2, 132, 199, 0.1); border: 1px solid var(--biotech-blue); padding: 0.35rem 0.85rem; border-radius: 50px; margin-bottom: 1.25rem;">
-          <span style="font-size: 0.78rem; font-weight: 800; color: var(--biotech-blue); text-transform: uppercase; letter-spacing: 0.06em;">
-            {{ _('official_exporter_tag') }}
-          </span>
+        <div class="badge-pill-luxury">
+          <span class="bullet-dot"></span>
+          <span>Chinese Pharmaceutical Manufacturer &amp; Exporter</span>
         </div>
 
-        <h1 class="hero-title">
-          {{ _('hero_main_heading') }}
+        <h1 class="hero-headline">
+          Premium Peptides.<br>
+          <span class="gold-highlight">Proven Purity.</span>
+          Global Delivery.
         </h1>
 
-        <div class="hero-subtitle">
-          {{ _('hero_sub_strip') }}
-        </div>
-
-        <p class="hero-desc">
-          {{ _('hero_company_desc') }}
+        <p class="hero-description">
+          High-purity research peptides manufactured in China under strict quality standards. Trusted by researchers worldwide.
         </p>
 
-        <div class="hero-cta-group">
-          <a href="{{ url_for('main.products') }}" class="btn btn-primary" style="padding: 0.85rem 2.25rem; font-size: 1rem;">
-            {{ _('view_products_btn') }} &rarr;
+        <div class="hero-actions">
+          <a href="{{ url_for('main.products') }}" class="btn btn-primary" style="padding: 0.85rem 2rem;">
+            <span>Browse Catalog</span> &rarr;
           </a>
-          <a href="https://wa.me/85263294280?text=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20research%20peptides%20and%20request%20a%20quotation." target="_blank" class="btn btn-outline-blue" style="padding: 0.85rem 2.25rem; font-size: 1rem;">
-            {{ _('request_a_quote_btn') }}
+          <a href="https://wa.me/447763743631?text=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20research%20peptides%20and%20request%20a%20quotation." target="_blank" class="btn btn-secondary" style="padding: 0.85rem 2rem;">
+            <i class="bi bi-file-earmark-text"></i> <span>Request a Quote</span>
           </a>
         </div>
       </div>
 
-      <!-- Right Visual Showcase -->
-      <div>
-        <div class="hero-card">
-          <div style="background: var(--bg-primary); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.25rem; display: inline-block; border: 1px solid var(--border-color);">
-            <img src="{{ url_for('static', filename='images/products/glp1/semaglutide.jpg') }}" alt="{{ company_name }} Lyophilized Vial" style="height: 180px; width: auto; object-fit: contain;">
+      <!-- Right Column: 3D Showcase with Vial, Halo & Marble Pedestal -->
+      <div class="hero-visual-stage">
+        <div class="hero-glow-halo"></div>
+        <img src="{{ url_for('static', filename='images/dna-gold.png') }}" alt="DNA Helix" class="hero-bg-dna" loading="lazy">
+        <img src="{{ url_for('static', filename='images/glassware-lab-alpha.png') }}" alt="Laboratory Glassware" class="hero-bg-glass" loading="lazy">
+
+        <div class="hero-pedestal-wrapper">
+          <img src="{{ url_for('static', filename='images/semaglutide-vial.png') }}" alt="Semaglutide 5mg Research Vial" class="hero-vial-img">
+          <div class="marble-pedestal"></div>
+        </div>
+
+        <!-- Floating COA Badge -->
+        <div class="floating-coa-card">
+          <div class="floating-coa-icon">
+            <i class="bi bi-file-earmark-medical"></i>
           </div>
-          <h3 style="color: var(--navy-deep); font-size: 1.3rem; margin-bottom: 0.35rem; font-weight: 800;">{{ _('analytical_standard_vials') }}</h3>
-          <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5;">
-            {{ _('hero_vial_desc') }}
-          </p>
-          <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
-            <a href="{{ url_for('main.coa_list') }}" style="color: var(--biotech-blue); font-size: 0.88rem; font-weight: 700;">
-              {{ _('browse_batch_coa') }} &rarr;
-            </a>
+          <div>
+            <div class="floating-coa-title">COA Available</div>
+            <div class="floating-coa-subtitle">Batch-specific reports</div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- Pharmaceutical Certification Strip (Trust Bar) -->
-<section class="trust-bar">
+<!-- 2. Statistics Bar (White Rounded Bar) -->
+<section class="stats-bar-section">
   <div class="container">
-    <div class="trust-grid">
+    <div class="stats-bar-card">
       
-      <div class="trust-item">
-        <div class="trust-circle-icon"><i class="bi bi-patch-check"></i></div>
+      <div class="stat-item">
+        <div class="stat-icon">
+          <i class="bi bi-shield-check"></i>
+        </div>
         <div>
-          <div class="trust-label">{{ _('hplc_tested_label') }}</div>
-          <div class="trust-sublabel">{{ _('analytical_verification_label') }}</div>
+          <div class="stat-value">&ge; 99.8%</div>
+          <div class="stat-label">Verified Purity</div>
         </div>
       </div>
 
-      <div class="trust-item">
-        <div class="trust-circle-icon"><i class="bi bi-shield-fill-check"></i></div>
+      <div class="stat-item">
+        <div class="stat-icon">
+          <i class="bi bi-bezier2"></i>
+        </div>
         <div>
-          <div class="trust-label">&ge;99.8% {{ _('purity_col') }}</div>
-          <div class="trust-sublabel">{{ _('highest_standard_grade') }}</div>
+          <div class="stat-value">HPLC</div>
+          <div class="stat-label">Tested</div>
         </div>
       </div>
 
-      <div class="trust-item">
-        <div class="trust-circle-icon"><i class="bi bi-file-earmark-medical"></i></div>
+      <div class="stat-item">
+        <div class="stat-icon">
+          <i class="bi bi-clock-history"></i>
+        </div>
         <div>
-          <div class="trust-label">{{ _('coa_verified_label') }}</div>
-          <div class="trust-sublabel">{{ _('batch_specific_reports') }}</div>
+          <div class="stat-value">24h</div>
+          <div class="stat-label">Response Time</div>
         </div>
       </div>
 
-      <div class="trust-item">
-        <div class="trust-circle-icon"><i class="bi bi-gear-wide-connected"></i></div>
-        <div>
-          <div class="trust-label">{{ _('gmp_process_label') }}</div>
-          <div class="trust-sublabel">{{ _('cleanroom_mfg_label') }}</div>
+      <div class="stat-item">
+        <div class="stat-icon">
+          <i class="bi bi-globe-americas"></i>
         </div>
-      </div>
-
-      <div class="trust-item">
-        <div class="trust-circle-icon"><i class="bi bi-globe-americas"></i></div>
         <div>
-          <div class="trust-label">{{ _('global_export_label') }}</div>
-          <div class="trust-sublabel">{{ _('worldwide_cold_chain_label') }}</div>
+          <div class="stat-value">40+</div>
+          <div class="stat-label">Countries Served</div>
         </div>
       </div>
 
@@ -115,47 +111,224 @@
   </div>
 </section>
 
-<!-- Category Icons Bar -->
-<section class="category-bar">
+<!-- 3. Black Certification Strip -->
+<section class="cert-strip-section">
   <div class="container">
-    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
-      <a href="{{ url_for('main.products') }}" class="cat-pill active">
-        <i class="bi bi-grid-fill"></i> {{ _('all_peptides') }}
-      </a>
-      <a href="{{ url_for('main.products', category='metabolic-glp-1') }}" class="cat-pill">
-        <i class="bi bi-capsule"></i> {{ _('cat_metabolic') }}
-      </a>
-      <a href="{{ url_for('main.products', category='tissue-recovery') }}" class="cat-pill">
-        <i class="bi bi-heart-pulse"></i> {{ _('cat_recovery') }}
-      </a>
-      <a href="{{ url_for('main.products', category='gh-secretagogues') }}" class="cat-pill">
-        <i class="bi bi-activity"></i> {{ _('cat_gh') }}
-      </a>
-      <a href="{{ url_for('main.products', category='pigmentation-wellness') }}" class="cat-pill">
-        <i class="bi bi-stars"></i> {{ _('cat_wellness') }}
-      </a>
-      <a href="{{ url_for('main.products', category='other-peptides') }}" class="cat-pill">
-        <i class="bi bi-beaker"></i> {{ _('cat_other') }}
-      </a>
+    <div class="cert-strip-card">
+      
+      <div class="cert-item">
+        <div class="cert-icon">
+          <i class="bi bi-gear-wide-connected"></i>
+        </div>
+        <div>
+          <div class="cert-title">GMP Certified</div>
+          <div class="cert-subtitle">Cleanroom Manufacturing</div>
+        </div>
+      </div>
+
+      <div class="cert-item">
+        <div class="cert-icon">
+          <i class="bi bi-box-seam"></i>
+        </div>
+        <div>
+          <div class="cert-title">Cold-Chain Delivery</div>
+          <div class="cert-subtitle">Discreet &amp; Secure Packaging</div>
+        </div>
+      </div>
+
+      <div class="cert-item">
+        <div class="cert-icon">
+          <i class="bi bi-eyedropper"></i>
+        </div>
+        <div>
+          <div class="cert-title">Third-Party Tested</div>
+          <div class="cert-subtitle">HPLC &amp; Mass Spectrometry</div>
+        </div>
+      </div>
+
+      <div class="cert-item">
+        <div class="cert-icon">
+          <i class="bi bi-file-earmark-check"></i>
+        </div>
+        <div>
+          <div class="cert-title">Research Grade</div>
+          <div class="cert-subtitle">Not for Human Use</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- Featured Research Compounds Section -->
-<section class="section" style="padding: 4.5rem 0;">
+<!-- 4. Peptide Category Cards (6 Distinct Luxury Cards) -->
+<section class="category-section">
   <div class="container">
-    <div style="text-align: center; margin-bottom: 3.5rem;">
-      <div style="font-size: 0.85rem; font-weight: 800; color: var(--biotech-blue); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.35rem;">
-        {{ _('precision_standards_tag') }}
+    <div class="section-header-center">
+      <div class="badge-pill-luxury">
+        <span class="bullet-dot"></span>
+        <span>Research Categories</span>
       </div>
-      <h2 style="font-size: 2.25rem; color: var(--navy-deep); font-weight: 800;">{{ _('featured_compounds') }}</h2>
-      <p style="color: var(--text-muted); max-width: 620px; margin: 0.5rem auto 0 auto;">
+      <h2 class="section-title">Explore Our Peptide Categories</h2>
+    </div>
+
+    <div class="category-grid-6">
+      
+      <!-- Card 1: Metabolic Peptides -->
+      <a href="{{ url_for('main.products', category='metabolic-glp-1') }}" class="category-card">
+        <div class="category-img-frame">
+          <img src="{{ url_for('static', filename='images/molecule-gold.png') }}" alt="Metabolic Peptides" loading="lazy">
+        </div>
+        <div class="category-card-title">Metabolic Peptides</div>
+        <div class="category-card-desc">GLP-1, GIP, Insulin</div>
+        <div class="category-card-footer">
+          <span class="btn-circle-arrow">&rarr;</span>
+        </div>
+      </a>
+
+      <!-- Card 2: Tissue Recovery -->
+      <a href="{{ url_for('main.products', category='tissue-recovery') }}" class="category-card">
+        <div class="category-img-frame">
+          <img src="{{ url_for('static', filename='images/dna-gold.png') }}" alt="Tissue Recovery" loading="lazy">
+        </div>
+        <div class="category-card-title">Tissue Recovery</div>
+        <div class="category-card-desc">BPC-157, TB-500, GHK-Cu</div>
+        <div class="category-card-footer">
+          <span class="btn-circle-arrow">&rarr;</span>
+        </div>
+      </a>
+
+      <!-- Card 3: GH Secretagogues -->
+      <a href="{{ url_for('main.products', category='gh-secretagogues') }}" class="category-card">
+        <div class="category-img-frame">
+          <img src="{{ url_for('static', filename='images/cells-white.png') }}" alt="GH Secretagogues" loading="lazy">
+        </div>
+        <div class="category-card-title">GH Secretagogues</div>
+        <div class="category-card-desc">Ipamorelin, CJC-1295, Hexarelin</div>
+        <div class="category-card-footer">
+          <span class="btn-circle-arrow">&rarr;</span>
+        </div>
+      </a>
+
+      <!-- Card 4: Hormone Peptides -->
+      <a href="{{ url_for('main.products', category='hormone-peptides') if 'hormone-peptides' else url_for('main.products') }}" class="category-card">
+        <div class="category-img-frame">
+          <img src="{{ url_for('static', filename='images/hormone-molecule.png') }}" alt="Hormone Peptides" loading="lazy">
+        </div>
+        <div class="category-card-title">Hormone Peptides</div>
+        <div class="category-card-desc">Growth Hormone, Gonadorelin</div>
+        <div class="category-card-footer">
+          <span class="btn-circle-arrow">&rarr;</span>
+        </div>
+      </a>
+
+      <!-- Card 5: Skin & Wellness -->
+      <a href="{{ url_for('main.products', category='pigmentation-wellness') }}" class="category-card">
+        <div class="category-img-frame">
+          <img src="{{ url_for('static', filename='images/skincare-lab.png') }}" alt="Skin & Wellness" loading="lazy">
+        </div>
+        <div class="category-card-title">Skin &amp; Wellness</div>
+        <div class="category-card-desc">Melanotan II, GHK-Cu, Collagen Peptides</div>
+        <div class="category-card-footer">
+          <span class="btn-circle-arrow">&rarr;</span>
+        </div>
+      </a>
+
+      <!-- Card 6: Other Peptides -->
+      <a href="{{ url_for('main.products', category='other-peptides') }}" class="category-card">
+        <div class="category-img-frame">
+          <img src="{{ url_for('static', filename='images/other-peptides.png') }}" alt="Other Peptides" loading="lazy">
+        </div>
+        <div class="category-card-title">Other Peptides</div>
+        <div class="category-card-desc">Custom &amp; Specialized</div>
+        <div class="category-card-footer">
+          <span class="btn-circle-arrow">&rarr;</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- 5. About / Trust Section & KPI Grid -->
+<section class="about-trust-section">
+  <div class="container">
+    <div class="about-trust-grid">
+      
+      <!-- Left: Black Luxury Card -->
+      <div class="about-dark-card">
+        <img src="{{ url_for('static', filename='images/molecule-gold.png') }}" alt="Gold Molecule Structure" class="about-dark-card-bg-mol" loading="lazy">
+        
+        <div class="about-card-content">
+          <div class="about-card-badge">About {{ company_name }}</div>
+          <h2 class="about-card-heading">
+            Science. Quality.<br>
+            <span class="text-gold">Trust.</span>
+          </h2>
+          <p class="about-card-desc">
+            We are a professional peptide manufacturer dedicated to providing researchers worldwide with the highest quality compounds, advanced testing, and reliable global shipping.
+          </p>
+          <a href="{{ url_for('main.about') }}" class="btn btn-primary" style="padding: 0.75rem 1.75rem;">
+            <span>Learn More About Us</span> &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: 2x2 KPI Grid -->
+      <div class="kpi-grid-2x2">
+        
+        <div class="kpi-card">
+          <div class="kpi-icon">
+            <i class="bi bi-patch-check"></i>
+          </div>
+          <div class="kpi-number">98%+</div>
+          <div class="kpi-label">Purity</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon">
+            <i class="bi bi-shield-check"></i>
+          </div>
+          <div class="kpi-number">100%</div>
+          <div class="kpi-label">Quality Assurance</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon">
+            <i class="bi bi-globe-americas"></i>
+          </div>
+          <div class="kpi-number">40+</div>
+          <div class="kpi-label">Countries Served</div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon">
+            <i class="bi bi-headset"></i>
+          </div>
+          <div class="kpi-number">24h</div>
+          <div class="kpi-label">Fast Response Time</div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 6. Featured Compounds Grid -->
+<section style="padding: 2rem 0 4rem 0;">
+  <div class="container">
+    <div class="section-header-center">
+      <div class="badge-pill-luxury">
+        <span class="bullet-dot"></span>
+        <span>{{ _('precision_standards_tag') }}</span>
+      </div>
+      <h2 class="section-title">{{ _('featured_compounds') }}</h2>
+      <p style="color: var(--text-muted); max-width: 600px; margin: 0.5rem auto 0 auto; font-size: 0.95rem;">
         {{ _('featured_compounds_desc') }}
       </p>
     </div>
 
-    <!-- 4 Featured Cards -->
-    <div class="product-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+    <div class="product-grid">
       {% for product in featured_products[:4] %}
         <div class="product-card">
           <div class="product-thumb">
@@ -181,8 +354,8 @@
             <div class="product-price-row">
               <div class="product-price">${{ "%.2f"|format(product.price) }}</div>
               
-              <div style="display: flex; gap: 0.4rem; align-items: center;">
-                <a href="{{ url_for('main.product_detail', slug=product.slug) }}" class="btn btn-sm btn-outline-blue" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">
+              <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <a href="{{ url_for('main.product_detail', slug=product.slug) }}" class="btn btn-sm btn-outline" style="padding: 0.4rem 0.75rem;">
                   {{ _('view_details') }}
                 </a>
                 
@@ -190,7 +363,7 @@
                   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                   <input type="hidden" name="next" value="{{ request.full_path if request.query_string else request.path }}">
                   <input type="hidden" name="quantity" value="1">
-                  <button type="submit" class="btn btn-sm btn-primary" style="padding: 0.35rem 0.65rem;" title="{{ _('add_to_cart_tooltip') }}" data-loading-text="Adding...">
+                  <button type="submit" class="btn btn-sm btn-primary" style="padding: 0.4rem 0.75rem;" title="{{ _('add_to_cart_tooltip') }}">
                     <i class="bi bi-cart-plus"></i> +
                   </button>
                 </form>
@@ -201,45 +374,47 @@
       {% endfor %}
     </div>
 
-    <div style="text-align: center; margin-top: 3.5rem;">
-      <a href="{{ url_for('main.products') }}" class="btn btn-navy" style="padding: 0.85rem 2.5rem; font-size: 1rem;">
-        {{ _('view_all_wholesale_prefix') }} {{ total_product_count }} {{ _('view_all_wholesale_suffix') }} &rarr;
+    <div style="text-align: center; margin-top: 3rem;">
+      <a href="{{ url_for('main.products') }}" class="btn btn-secondary" style="padding: 0.85rem 2.5rem; font-size: 0.95rem;">
+        <span>{{ _('view_all_wholesale_prefix') }} {{ total_product_count }} {{ _('view_all_wholesale_suffix') }}</span> &rarr;
       </a>
     </div>
   </div>
 </section>
 
+<!-- 7. Verified Client Reviews & Submission -->
 {% if featured_reviews %}
-<section class="section" style="padding: 0 0 3.5rem 0;">
+<section style="padding: 1rem 0 4rem 0;">
   <div class="container">
-    <div style="text-align: center; margin-bottom: 2.2rem;">
-      <div style="font-size: 0.82rem; font-weight: 800; color: var(--biotech-blue); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem;">
-        {{ _('global_trust_signal') }}
+    <div class="section-header-center">
+      <div class="badge-pill-luxury">
+        <span class="bullet-dot"></span>
+        <span>{{ _('global_trust_signal') }}</span>
       </div>
-      <h2 style="font-size: 2rem; color: var(--navy-deep); font-weight: 800; margin-bottom: 0.45rem;">{{ _('trusted_by_clients') }}</h2>
-      <p style="color: var(--text-muted); max-width: 640px; margin: 0 auto; font-size: 0.92rem;">
+      <h2 class="section-title">{{ _('trusted_by_clients') }}</h2>
+      <p style="color: var(--text-muted); max-width: 600px; margin: 0.5rem auto 0 auto; font-size: 0.92rem;">
         {{ _('trusted_by_clients_desc') }}
       </p>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.15rem;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
       {% for r in featured_reviews %}
-        <article class="home-featured-review-card" style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.35rem; box-shadow: var(--shadow-sm);">
+        <article style="background: #FFFFFF; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: var(--shadow-subtle);">
           <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
-            <div style="font-weight: 800; color: var(--navy-deep);">{{ r.name }}</div>
-            <div style="font-size: 0.76rem; color: #065F46; background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 999px; padding: 0.18rem 0.5rem; font-weight: 700;">
+            <div style="font-weight: 700; color: var(--text-main); font-family: var(--font-heading); font-size: 1.05rem;">{{ r.name }}</div>
+            <div style="font-size: 0.72rem; color: #065F46; background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 999px; padding: 0.15rem 0.5rem; font-weight: 600;">
               {{ _('approved_badge') }}
             </div>
           </div>
 
-          <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.45rem; font-weight: 600;">{{ r.country }}</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 500;">{{ r.country }}</div>
 
-          <div style="color: #F59E0B; letter-spacing: 0.08em; margin-bottom: 0.6rem;">
+          <div style="color: var(--gold-primary); letter-spacing: 0.1em; margin-bottom: 0.75rem; font-size: 0.9rem;">
             {% for i in range(r.rating) %}★{% endfor %}
-            {% for i in range(5 - r.rating) %}<span style="color: #CBD5E1;">★</span>{% endfor %}
+            {% for i in range(5 - r.rating) %}<span style="color: #E2E8F0;">★</span>{% endfor %}
           </div>
 
-          <p style="font-size: 0.9rem; color: var(--text-main); line-height: 1.6; margin: 0;">
+          <p style="font-size: 0.88rem; color: var(--text-main); line-height: 1.6; margin: 0;">
             "{{ r.comment[:145] }}{% if r.comment|length > 145 %}...{% endif %}"
           </p>
         </article>
@@ -247,7 +422,7 @@
     </div>
 
     <div style="text-align: center; margin-top: 2rem;">
-      <a href="{{ url_for('main.reviews') }}" class="btn btn-outline-blue" style="padding: 0.78rem 2rem; font-size: 0.95rem;">
+      <a href="{{ url_for('main.reviews') }}" class="btn btn-outline" style="padding: 0.75rem 2rem;">
         {{ _('view_all_reviews') }}
       </a>
     </div>
@@ -255,19 +430,20 @@
 </section>
 {% endif %}
 
-<!-- Interactive Customer Review Submission System (Share Your Experience) -->
-<section class="section" id="share-experience-section" style="padding: 0 0 4.5rem 0;">
+<!-- 8. Review Submission Form -->
+<section id="share-experience-section" style="padding: 1rem 0 4.5rem 0;">
   <div class="container">
-    <div style="background: white; border: 1.5px solid var(--border-color); border-radius: var(--radius-lg); padding: 2.5rem 2rem; box-shadow: var(--shadow-sm); max-width: 820px; margin: 0 auto; position: relative;">
+    <div style="background: #FFFFFF; border: 1px solid var(--border-color); border-radius: var(--radius-xl); padding: 2.5rem 2rem; box-shadow: var(--shadow-subtle); max-width: 780px; margin: 0 auto;">
       
-      <div style="text-align: center; margin-bottom: 2rem;">
-        <div style="font-size: 0.8rem; font-weight: 800; color: var(--biotech-blue); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.35rem;">
-          {{ _('share_experience_tag') }}
+      <div class="section-header-center" style="margin-bottom: 2rem;">
+        <div class="badge-pill-luxury">
+          <span class="bullet-dot"></span>
+          <span>{{ _('share_experience_tag') }}</span>
         </div>
-        <h2 style="font-size: 1.85rem; color: var(--navy-deep); font-weight: 800; margin-bottom: 0.45rem;">
+        <h2 style="font-size: 1.85rem; color: var(--text-main); font-weight: 700; margin-top: 0.5rem;">
           {{ _('share_experience_title') }}
         </h2>
-        <p style="color: var(--text-muted); font-size: 0.92rem; max-width: 580px; margin: 0 auto;">
+        <p style="color: var(--text-muted); font-size: 0.9rem; max-width: 540px; margin: 0.4rem auto 0 auto;">
           {{ _('share_experience_subtitle') }}
         </p>
       </div>
@@ -279,25 +455,25 @@
         
         <div class="row g-3 mb-3">
           <div class="col-md-6">
-            <label class="form-label fw-semibold" style="font-size: 0.9rem; color: var(--navy-deep);">
+            <label class="form-label fw-semibold" style="font-size: 0.85rem; color: var(--text-main);">
               {{ _('customer_name_label') }}
             </label>
-            <input type="text" name="customer_name" class="form-control" placeholder="{{ _('customer_name_placeholder') }}" required style="padding: 0.65rem 0.9rem;">
+            <input type="text" name="customer_name" class="form-control" placeholder="{{ _('customer_name_placeholder') }}" required>
           </div>
           
           <div class="col-md-6">
-            <label class="form-label fw-semibold" style="font-size: 0.9rem; color: var(--navy-deep);">
+            <label class="form-label fw-semibold" style="font-size: 0.85rem; color: var(--text-main);">
               {{ _('country_label') }}
             </label>
-            <input type="text" name="country" class="form-control" placeholder="{{ _('country_placeholder') }}" style="padding: 0.65rem 0.9rem;">
+            <input type="text" name="country" class="form-control" placeholder="{{ _('country_placeholder') }}">
           </div>
         </div>
 
         <div class="mb-3">
-          <label class="form-label fw-semibold" style="font-size: 0.9rem; color: var(--navy-deep);">
+          <label class="form-label fw-semibold" style="font-size: 0.85rem; color: var(--text-main);">
             {{ _('rating_label') }}
           </label>
-          <select name="rating" class="form-select" style="padding: 0.65rem 0.9rem; font-weight: 600;" required>
+          <select name="rating" class="form-select" required>
             <option value="5" selected>{{ _('rating_5_stars') }}</option>
             <option value="4">{{ _('rating_4_stars') }}</option>
             <option value="3">{{ _('rating_3_stars') }}</option>
@@ -307,18 +483,18 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label fw-semibold" style="font-size: 0.9rem; color: var(--navy-deep);">
+          <label class="form-label fw-semibold" style="font-size: 0.85rem; color: var(--text-main);">
             {{ _('review_text_label') }}
           </label>
-          <textarea name="review_text" rows="4" class="form-control" placeholder="{{ _('review_text_placeholder') }}" required style="padding: 0.75rem 0.9rem;"></textarea>
+          <textarea name="review_text" rows="4" class="form-control" placeholder="{{ _('review_text_placeholder') }}" required></textarea>
         </div>
 
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem;">
           <div style="font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.4rem;">
             <span>🛡️</span> {{ _('review_moderation_note') }}
           </div>
-          <button type="submit" class="btn btn-primary px-4 py-2" style="font-weight: 700; font-size: 0.95rem;">
-            {{ _('submit_review_btn') }} &rarr;
+          <button type="submit" class="btn btn-primary px-4 py-2">
+            <span>{{ _('submit_review_btn') }}</span> &rarr;
           </button>
         </div>
       </form>
@@ -327,4 +503,3 @@
   </div>
 </section>
 {% endblock %}
-

@@ -85,7 +85,7 @@ def run_import():
         
         cat_map = {}
         for cname in cat_names:
-            c = Category(name=cname, slug=slugify(cname), description=f"Yan Zhen Wholesale {cname}.")
+            c = Category(name=cname, slug=slugify(cname), description=f"Velora Wholesale {cname}.")
             db.session.add(c)
             db.session.flush()
             cat_map[cname] = c.id
@@ -142,7 +142,7 @@ def run_import():
                 purity='>= 99.8%',
                 sequence_or_cas=code if code else None,
                 short_description=f"Specification: {formatted_spec}" if formatted_spec else "Wholesale research peptide vial.",
-                description=f"Authentic Yan Zhen Wholesale {full_product_name}. Analytical HPLC batch-certified research peptide vial.",
+                description=f"Authentic Velora Wholesale {full_product_name}. Analytical HPLC batch-certified research peptide vial.",
                 price=price,
                 stock_status='In Stock',
                 is_featured=(imported_count < 8)

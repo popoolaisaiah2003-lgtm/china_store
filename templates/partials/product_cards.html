@@ -1,5 +1,5 @@
 {% for product in products %}
-  <div class="product-card" data-product-card data-product-id="{{ product.id }}">
+  <article class="product-card" data-product-card data-product-id="{{ product.id }}">
     <div class="product-thumb">
       <span class="purity-tag">{{ product.purity }}</span>
       <form method="POST" action="{{ url_for('main.wishlist_toggle', product_id=product.id) }}" class="wishlist-form" data-ajax-wishlist>
@@ -33,7 +33,7 @@
         </form>
       </div>
     </div>
-  </div>
+  </article>
 {% else %}
   <div style="grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: 5rem 2rem; background: white; border-radius: var(--radius-lg); border: 1px dashed var(--border-color);">
     <div style="font-size: 3.5rem; margin-bottom: 1rem;">🔍</div>

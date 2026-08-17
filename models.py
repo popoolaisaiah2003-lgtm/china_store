@@ -1,3 +1,6 @@
+import hashlib
+import binascii
+import hmac
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
@@ -17,7 +20,43 @@ class Admin(UserMixin, db.Model):
         self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
+        if not self.password_hash or not password:
+            return False
+
+        # Handle legacy scrypt format "N:r:p$salt$hash" missing scheme prefix
+        if self.password_hash.count('$') == 2 and not self.password_hash.startswith(('scrypt:', 'pbkdf2:', 'argon2:')):
+            try:
+                parts = self.password_hash.split('$')
+                if len(parts) == 3 and ':' in parts[0]:
+                    params, salt_str, hash_str = parts
+                    param_parts = params.split(':')
+                    if len(param_parts) == 3 and all(p.isdigit() for p in param_parts):
+                        n, r, p = map(int, param_parts)
+                        salt = salt_str.encode('utf-8')
+                        expected_hash = bytes.fromhex(hash_str)
+                        derived = hashlib.scrypt(
+                            password.encode('utf-8'),
+                            salt=salt,
+                            n=n,
+                            r=r,
+                            p=p,
+                            maxmem=128 * 1024 * 1024,
+                            dklen=len(expected_hash)
+                        )
+                        if hmac.compare_digest(binascii.hexlify(derived).decode('utf-8'), hash_str):
+                            return True
+            except Exception:
+                pass
+
+        try:
+            return check_password_hash(self.password_hash, password)
+        except ValueError:
+            if not self.password_hash.startswith('scrypt:'):
+                try:
+                    return check_password_hash('scrypt:' + self.password_hash, password)
+                except Exception:
+                    pass
+            return False
 
     def __repr__(self):
         return f'<Admin {self.username}>'

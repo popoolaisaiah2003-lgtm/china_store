@@ -9,7 +9,7 @@
 
 {% block content %}
 <div style="margin-bottom: 1.5rem;">
-  <a href="{{ url_for('admin.blog_posts') }}" style="color: var(--text-muted); font-size: 0.9rem;">&larr; Back to Research Journal</a>
+  <a href="{{ url_for('admin.blog_posts') }}" style="color: var(--text-muted); font-size: 0.9rem;">&larr; {{ _('journal') }}</a>
   <h1 style="font-size: 1.75rem; margin-top: 0.5rem;">{{ title }}</h1>
 </div>
 
@@ -99,12 +99,12 @@
       </div>
 
       <div class="order-form-group">
-        <label for="metaDescriptionInput">Meta Description</label>
+        <label for="metaDescriptionInput">{{ _('description') }}</label>
         {{ form.meta_description(class="form-control", placeholder="Meta description tag for search engines", id="metaDescriptionInput") }}
       </div>
 
       <div class="order-form-group">
-        <label for="languageSelect">Article Language</label>
+        <label for="languageSelect">{{ _('languages') }}</label>
         {{ form.language(class="form-control", id="languageSelect") }}
       </div>
     </div>
@@ -127,8 +127,8 @@
     </div>
 
     <div style="display: flex; gap: 1rem;">
-      <button type="submit" id="submitBtn" class="btn btn-primary" style="padding: 0.85rem 2.5rem;">Save Article</button>
-      <a href="{{ url_for('admin.blog_posts') }}" class="btn btn-outline">Cancel</a>
+      <button type="submit" id="submitBtn" class="btn btn-primary" style="padding: 0.85rem 2.5rem;">{{ _('save') }}</button>
+      <a href="{{ url_for('admin.blog_posts') }}" class="btn btn-outline">{{ _('cancel') }}</a>
     </div>
 
   </form>

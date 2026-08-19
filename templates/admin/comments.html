@@ -5,7 +5,7 @@
 {% block content %}
 <div style="margin-bottom: 2rem;">
   <h1 style="font-size: 1.75rem;">Article Comments</h1>
-  <p style="color: var(--text-muted); font-size: 0.9rem;">Moderate public comments on published research papers.</p>
+  <p style="color: var(--text-muted); font-size: 0.9rem;">{{ _('published_papers') }}</p>
 </div>
 
 <div style="background: white; border-radius: var(--radius-md); border: 1px solid var(--border-color); overflow: hidden;">
@@ -16,8 +16,8 @@
         <th>Author</th>
         <th>Article</th>
         <th>Comment</th>
-        <th>Date</th>
-        <th>Status</th>
+        <th>{{ _('date') }}</th>
+        <th>{{ _('status_processing') }}</th>
       </tr>
     </thead>
     <tbody>
@@ -32,7 +32,7 @@
             {% if comment.is_approved %}
               <span style="background: #D1FAE5; color: #065F46; font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 700;">Approved</span>
             {% else %}
-              <span style="background: #FEF3C7; color: #92400E; font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 700;">Pending</span>
+              <span style="background: #FEF3C7; color: #92400E; font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 700;">{{ _('status_processing') }}</span>
             {% endif %}
           </td>
         </tr>

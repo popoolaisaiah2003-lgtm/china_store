@@ -29,9 +29,9 @@
     <!-- Tracking Search Bar (client-side filter across loaded shipments) -->
     <div class="tracking-search-bar">
       <i class="bi bi-search"></i>
-      <input type="text" id="shipmentTrackingSearch" placeholder="Search by country, courier, or product..." aria-label="Search shipments">
+      <input type="text" id="shipmentTrackingSearch" placeholder="{{ _('search_shipments') }}" aria-label="{{ _('search_shipments_aria') }}">
     </div>
-    <div id="shipmentTrackingEmpty" class="tracking-search-empty" hidden>No shipments match your search.</div>
+    <div id="shipmentTrackingEmpty" class="tracking-search-empty" hidden>{{ _('no_shipments_match') }}</div>
 
     <!-- Shipment Cards Grid -->
     {% if shipments %}
@@ -78,16 +78,16 @@
                 </span>
               {% endif %}
 
-              <div class="shipment-timeline" aria-label="Shipment progress">
-                <span class="timeline-step is-complete"><i class="bi bi-bag-check-fill"></i><small>Order Placed</small></span>
+              <div class="shipment-timeline" aria-label="{{ _('shipment_updates_title') }}">
+                <span class="timeline-step is-complete"><i class="bi bi-bag-check-fill"></i><small>{{ _('order_placed') }}</small></span>
                 <span class="timeline-line {{ 'is-complete' if s.status in ['Processing', 'Dispatched', 'In Transit', 'Delivered'] else '' }}"></span>
-                <span class="timeline-step {{ 'is-complete' if s.status in ['Processing', 'Dispatched', 'In Transit', 'Delivered'] else '' }}"><i class="bi bi-gear-fill"></i><small>Processing</small></span>
+                <span class="timeline-step {{ 'is-complete' if s.status in ['Processing', 'Dispatched', 'In Transit', 'Delivered'] else '' }}"><i class="bi bi-gear-fill"></i><small>{{ _('processing') }}</small></span>
                 <span class="timeline-line {{ 'is-complete' if s.status in ['Dispatched', 'In Transit', 'Delivered'] else '' }}"></span>
-                <span class="timeline-step {{ 'is-complete' if s.status in ['Dispatched', 'In Transit', 'Delivered'] else '' }}"><i class="bi bi-send-fill"></i><small>Shipped</small></span>
+                <span class="timeline-step {{ 'is-complete' if s.status in ['Dispatched', 'In Transit', 'Delivered'] else '' }}"><i class="bi bi-send-fill"></i><small>{{ _('shipped') }}</small></span>
                 <span class="timeline-line {{ 'is-complete' if s.status in ['In Transit', 'Delivered'] else '' }}"></span>
                 <span class="timeline-step {{ 'is-complete' if s.status in ['In Transit', 'Delivered'] else '' }}"><i class="bi bi-airplane-fill"></i><small>In Transit</small></span>
                 <span class="timeline-line {{ 'is-complete' if s.status == 'Delivered' else '' }}"></span>
-                <span class="timeline-step {{ 'is-complete' if s.status == 'Delivered' else '' }}"><i class="bi bi-check2-circle"></i><small>Delivered</small></span>
+                <span class="timeline-step {{ 'is-complete' if s.status == 'Delivered' else '' }}"><i class="bi bi-check2-circle"></i><small>{{ _('delivered') }}</small></span>
               </div>
             </div>
 
@@ -151,11 +151,11 @@
     <!-- WhatsApp Support CTA -->
     <div class="shipment-support-cta">
       <div>
-        <strong>Need help tracking your order?</strong>
-        <span>Our export desk responds within 24 hours.</span>
+        <strong>{{ _('need_assistance') }}</strong>
+        <span>{{ _('export_desk_response') }}</span>
       </div>
       <a href="https://wa.me/447763743631?text=Hello,%20I%20would%20like%20an%20update%20on%20my%20shipment." target="_blank" rel="noopener" class="btn btn-whatsapp">
-        <i class="bi bi-whatsapp"></i> Chat on WhatsApp
+        <i class="bi bi-whatsapp"></i> {{ _('chat_on_whatsapp') }}
       </a>
     </div>
 

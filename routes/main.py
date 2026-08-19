@@ -5,7 +5,7 @@ import urllib.parse
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session, current_app, send_from_directory, Response, jsonify
 from models import Product, Category, Review, COA, BlogPost, Comment, Setting, OrderRecord, ProductImage, ShipmentUpdate, ContactInquiry
 from forms import CheckoutForm, ReviewForm, ContactForm
-from translations import translate
+from translations import SUPPORTED_LANGUAGES, normalize_language, translate
 from extensions import db
 
 main = Blueprint('main', __name__)
@@ -44,7 +44,9 @@ def _review_card_data(review):
     }
 
 def get_current_lang():
-    return session.get('lang', 'en')
+    lang = normalize_language(session.get('lang'))
+    session['lang'] = lang
+    return lang
 
 
 def wants_json_response():
@@ -119,7 +121,7 @@ def inject_global_vars():
 
 @main.route('/set_language/<lang_code>')
 def set_language(lang_code):
-    if lang_code in ['en', 'zh', 'es', 'ar', 'fr']:
+    if lang_code in SUPPORTED_LANGUAGES:
         session['lang'] = lang_code
     session['lang_modal_shown'] = True
     next_page = request.referrer or url_for('main.index')
@@ -219,7 +221,7 @@ def submit_review():
     except Exception:
         db.session.rollback()
         current_app.logger.exception('Public review submission failed')
-        flash('An unexpected error occurred while saving your review. Please try again.', 'danger')
+        flash(_('review_save_error'), 'danger')
 
     return redirect(request.referrer or url_for('main.index'))
 
@@ -260,7 +262,7 @@ def reviews():
             except Exception:
                 db.session.rollback()
                 current_app.logger.exception('Reviews page submission failed')
-                flash('An unexpected error occurred while saving your review. Please try again.', 'danger')
+                flash(_('review_save_error'), 'danger')
         else:
             flash(_('please_fill_required_review_fields'), 'danger')
 
@@ -411,12 +413,12 @@ def cart_add(product_id):
         return jsonify({
             'success': True,
             'cart_total_count': total_quantity,
-            'message': f'Added {qty} × {product.name} to your quotation.',
+            'message': f"{_('added_to_cart')}: {product.name} × {qty}",
             'product_name': product.name,
             'quantity': qty,
         })
 
-    flash(f'Added {qty} × "{product.name}" to your quotation.', 'success')
+    flash(f"{_('added_to_cart')}: {product.name} × {qty}", 'success')
     next_page = request.form.get('next') or request.referrer
     return redirect(next_page or url_for('main.order'))
 
@@ -436,7 +438,7 @@ def cart_add_ajax(product_id):
     return jsonify({
         'success': True,
         'cart_total_count': total_quantity,
-        'message': f"Added {qty} × {product.name} to quotation cart",
+        'message': f"{_('added_to_cart')}: {product.name} × {qty}",
         'product_name': product.name,
         'quantity': qty
     })
@@ -450,10 +452,10 @@ def cart_update(product_id):
 
     cart = session.get('cart', {})
     pid_str = str(product_id)
-    message = 'Quotation quantity updated.'
+    message = _('quantity_updated')
     if qty <= 0:
         cart.pop(pid_str, None)
-        message = 'Item removed from quotation.'
+        message = _('item_removed')
         flash(message, 'info')
     else:
         cart[pid_str] = qty
@@ -471,7 +473,7 @@ def cart_update(product_id):
 def cart_remove(product_id):
     cart = session.get('cart', {})
     pid_str = str(product_id)
-    message = 'Item removed from wholesale quotation.'
+    message = _('item_removed_wholesale')
     if pid_str in cart:
         cart.pop(pid_str)
         session['cart'] = cart
@@ -497,11 +499,11 @@ def order_print():
 def checkout():
     cart_items, grand_total, total_quantity = get_cart_details()
     if not cart_items and request.method == 'POST':
-        flash('Your quotation cart is currently empty. Please add products first.', 'warning')
+        flash(_('cart_empty_checkout'), 'warning')
         return redirect(url_for('main.order'))
 
     if not cart_items and request.method == 'GET':
-        flash('Your quotation cart is currently empty. You can still complete customer details, then add products anytime.', 'info')
+        flash(_('cart_empty_details'), 'info')
 
     form = CheckoutForm()
     whatsapp_url = None

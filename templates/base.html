@@ -44,7 +44,7 @@
         <span class="brand-subtitle">PREMIUM RESEARCH PEPTIDES</span>
       </a>
 
-      <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation">
+      <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="{{ _('navigation') }}">
         <i class="bi bi-list"></i>
       </button>
 
@@ -109,8 +109,8 @@
             <i class="bi bi-patch-check"></i>
           </div>
           <div>
-            <div class="feature-strip-title">Strict Quality Control</div>
-            <div class="feature-strip-subtitle">Every batch tested</div>
+            <div class="feature-strip-title">{{ _('quality_assurance_band') }}</div>
+              <div class="feature-strip-subtitle">{{ _('hplc_tested_peptides') }}</div>
           </div>
         </div>
 
@@ -119,8 +119,8 @@
             <i class="bi bi-bezier2"></i>
           </div>
           <div>
-            <div class="feature-strip-title">Advanced Analytics</div>
-            <div class="feature-strip-subtitle">HPLC &amp; MS Verified</div>
+            <div class="feature-strip-title">{{ _('analytical_excellence') }}</div>
+            <div class="feature-strip-subtitle">{{ _('hplc_ms_testing') }}</div>
           </div>
         </div>
 
@@ -129,8 +129,8 @@
             <i class="bi bi-truck"></i>
           </div>
           <div>
-            <div class="feature-strip-title">Global Shipping</div>
-            <div class="feature-strip-subtitle">Fast &amp; Discreet</div>
+            <div class="feature-strip-title">{{ _('worldwide_delivery_band') }}</div>
+            <div class="feature-strip-subtitle">{{ _('express_shipping') }}</div>
           </div>
         </div>
 
@@ -139,8 +139,8 @@
             <i class="bi bi-headset"></i>
           </div>
           <div>
-            <div class="feature-strip-title">Researcher Support</div>
-            <div class="feature-strip-subtitle">Dedicated Assistance</div>
+            <div class="feature-strip-title">{{ _('wholesale_support') }}</div>
+            <div class="feature-strip-subtitle">{{ _('need_assistance') }}</div>
           </div>
         </div>
       </div>
@@ -231,7 +231,7 @@
             </h6>
             <ul style="margin: 0; padding-left: 1.25rem; font-size: 0.88rem; color: var(--text-main); line-height: 1.8; list-style-type: disc;">
               <li><strong>USDT</strong> (TRC20 / ERC20)</li>
-              <li><strong>Bank Transfer</strong> (Wire Transfer)</li>
+              <li><strong>{{ _('bank_transfer') }}</strong> ({{ _('wire_transfer') }})</li>
               <li><strong>Western Union</strong></li>
               <li>
                 <strong>Made-in-China Trade Assurance</strong> 
@@ -311,6 +311,22 @@
   <script src="{{ url_for('static', filename='js/ajax.js') }}"></script>
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   <script>
+    window.VeloraI18n = {{ {
+      'added_to_cart': _('added_to_cart'),
+      'quotation_updated': _('quotation_updated'),
+      'favorites_updated': _('favorites_updated'),
+      'request_failed': _('request_failed'),
+      'search_failed': _('search_failed'),
+      'filter_failed': _('filter_failed'),
+      'invalid_server_response': _('invalid_server_response'),
+      'loading': _('loading'),
+      'updating': _('updating'),
+      'removing': _('removing'),
+      'adding': _('adding'),
+      'showing': _('showing'),
+      'products': _('products')
+    }|tojson }};
+
     (function () {
       const backToTopBtn = document.getElementById('backToTopBtn');
       if (backToTopBtn) {

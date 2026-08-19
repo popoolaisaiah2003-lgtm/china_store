@@ -15,36 +15,29 @@
     <table class="table table-hover align-middle mb-0">
       <thead class="table-light">
         <tr>
-          <th class="ps-3">Customer</th>
-          <th>Country</th>
-          <th>Rating</th>
-          <th>Review</th>
-          <th>Date</th>
-          <th>Status</th>
-          <th>Featured</th>
-          <th class="text-end pe-3">Actions</th>
+          <th class="ps-3">{{ _('customer_name') }}</th><th>{{ _('country') }}</th><th>{{ _('rating_label') }}</th><th>{{ _('reviews_link') }}</th><th>{{ _('date') }}</th><th>{{ _('status_processing') }}</th><th>{{ _('featured') }}</th><th class="text-end pe-3">{{ _('action') }}</th>
         </tr>
       </thead>
       <tbody>
         {% for review in reviews %}
           <tr>
             <td class="ps-3 fw-bold text-dark">{{ review.customer_name or review.reviewer_name }}</td>
-            <td>{{ review.country or 'International Client' }}</td>
+            <td>{{ review.country or _('international_client') }}</td>
             <td><span class="badge bg-warning-subtle text-warning border border-warning-subtle">{{ review.rating }} ★</span></td>
             <td style="max-width: 420px;">{{ (review.review_text or review.comment or '')[:140] }}{% if (review.review_text or review.comment or '')|length > 140 %}...{% endif %}</td>
             <td class="text-muted small">{{ review.created_at.strftime('%Y-%m-%d') if review.created_at else '' }}</td>
             <td>
               {% if review.approved %}
-                <span class="badge bg-success-subtle text-success border border-success-subtle">Approved</span>
+                <span class="badge bg-success-subtle text-success border border-success-subtle">{{ _('approved_badge') }}</span>
               {% else %}
-                <span class="badge bg-warning-subtle text-warning border border-warning-subtle">Pending</span>
+                <span class="badge bg-warning-subtle text-warning border border-warning-subtle">{{ _('status_processing') }}</span>
               {% endif %}
             </td>
             <td>
               {% if review.featured %}
                 <span class="badge bg-primary-subtle text-primary border border-primary-subtle">Featured</span>
               {% else %}
-                <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle">Standard</span>
+                <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle">{{ _('standard') }}</span>
               {% endif %}
             </td>
             <td class="text-end pe-3">
@@ -52,23 +45,23 @@
                 {% if not review.approved %}
                   <form method="POST" action="{{ url_for('admin.review_approve', id=review.id) }}" style="display: inline;">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                    <button type="submit" class="btn btn-sm btn-success">Approve</button>
+                    <button type="submit" class="btn btn-sm btn-success">{{ _('approve') }}</button>
                   </form>
                 {% else %}
                   <form method="POST" action="{{ url_for('admin.review_reject', id=review.id) }}" style="display: inline;">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                    <button type="submit" class="btn btn-sm btn-warning">Reject</button>
+                    <button type="submit" class="btn btn-sm btn-warning">{{ _('reject') }}</button>
                   </form>
                 {% endif %}
 
                 <form method="POST" action="{{ url_for('admin.review_feature', id=review.id) }}" style="display: inline;">
                   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                  <button type="submit" class="btn btn-sm btn-outline-primary">{{ 'Unfeature' if review.featured else 'Feature' }}</button>
+                  <button type="submit" class="btn btn-sm btn-outline-primary">{{ _('unfeature') if review.featured else _('featured') }}</button>
                 </form>
 
                 <form method="POST" action="{{ url_for('admin.review_delete', id=review.id) }}" onsubmit="return confirm('Delete this review permanently?');" style="display: inline;">
                   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                  <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                  <button type="submit" class="btn btn-sm btn-outline-danger">{{ _('delete') }}</button>
                 </form>
               </div>
             </td>
@@ -76,7 +69,7 @@
         {% else %}
           <tr>
             <td colspan="8" class="text-center text-muted py-4">
-              No reviews have been added yet.
+              {{ _('no_reviews_title') }}
             </td>
           </tr>
         {% endfor %}

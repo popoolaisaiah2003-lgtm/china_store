@@ -10,35 +10,35 @@
       Received {{ inquiry.created_at.strftime('%Y-%m-%d %H:%M') if inquiry.created_at else '-' }}
     </p>
   </div>
-  <a href="{{ url_for('admin.inquiries') }}" class="btn btn-outline">&larr; Back to Inquiries</a>
+  <a href="{{ url_for('admin.inquiries') }}" class="btn btn-outline">&larr; {{ _('inquiries') }}</a>
 </div>
 
 <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); padding: 2rem;">
   <div class="row g-3 mb-4">
     <div class="col-md-6">
-      <div style="font-weight: 700; color: var(--navy-deep); margin-bottom: 0.2rem;">Name</div>
+      <div style="font-weight: 700; color: var(--navy-deep); margin-bottom: 0.2rem;">{{ _('customer_name') }}</div>
       <div>{{ inquiry.name }}</div>
     </div>
     <div class="col-md-6">
-      <div style="font-weight: 700; color: var(--navy-deep); margin-bottom: 0.2rem;">Email</div>
+      <div style="font-weight: 700; color: var(--navy-deep); margin-bottom: 0.2rem;">{{ _('email_label') }}</div>
       <div>{{ inquiry.email }}</div>
     </div>
     <div class="col-md-6">
-      <div style="font-weight: 700; color: var(--navy-deep); margin-bottom: 0.2rem;">Company</div>
+      <div style="font-weight: 700; color: var(--navy-deep); margin-bottom: 0.2rem;">{{ _('company_name') }}</div>
       <div>{{ inquiry.company or '-' }}</div>
     </div>
     <div class="col-md-6">
-      <div style="font-weight: 700; color: var(--navy-deep); margin-bottom: 0.2rem;">Status</div>
+      <div style="font-weight: 700; color: var(--navy-deep); margin-bottom: 0.2rem;">{{ _('status_processing') }}</div>
       <div>
         {% if inquiry.is_read %}
-          <span class="badge bg-secondary">Read</span>
+          <span class="badge bg-secondary">{{ _('read') }}</span>
         {% else %}
-          <span class="badge bg-danger">Unread</span>
+          <span class="badge bg-danger">{{ _('unread') }}</span>
         {% endif %}
       </div>
     </div>
     <div class="col-12">
-      <div style="font-weight: 700; color: var(--navy-deep); margin-bottom: 0.2rem;">Subject</div>
+      <div style="font-weight: 700; color: var(--navy-deep); margin-bottom: 0.2rem;">{{ _('subject') }}</div>
       <div>{{ inquiry.subject }}</div>
     </div>
     <div class="col-12">
@@ -51,12 +51,12 @@
     {% if not inquiry.is_read %}
       <form method="POST" action="{{ url_for('admin.inquiry_mark_read', id=inquiry.id) }}">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <button type="submit" class="btn btn-success">Mark as Read</button>
+        <button type="submit" class="btn btn-success">{{ _('mark_read') }}</button>
       </form>
     {% endif %}
     <form method="POST" action="{{ url_for('admin.inquiry_delete', id=inquiry.id) }}" onsubmit="return confirm('Delete this inquiry permanently?');">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-      <button type="submit" class="btn btn-outline-danger">Delete Inquiry</button>
+      <button type="submit" class="btn btn-outline-danger">{{ _('delete') }} {{ _('inquiries') }}</button>
     </form>
   </div>
 </div>

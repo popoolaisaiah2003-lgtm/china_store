@@ -12,25 +12,23 @@
       <div>
         <div class="badge-pill-luxury">
           <span class="bullet-dot"></span>
-          <span>Chinese Pharmaceutical Manufacturer &amp; Exporter</span>
+          <span>{{ _('official_exporter_tag') }}</span>
         </div>
 
         <h1 class="hero-headline">
-          Premium Peptides.<br>
-          <span class="gold-highlight">Proven Purity.</span>
-          Global Delivery.
+          {{ _('hero_main_heading') }}
         </h1>
 
         <p class="hero-description">
-          High-purity research peptides manufactured in China under strict quality standards. Trusted by researchers worldwide.
+          {{ _('hero_company_desc') }}
         </p>
 
         <div class="hero-actions">
           <a href="{{ url_for('main.products') }}" class="btn btn-primary" style="padding: 0.85rem 2rem;">
-            <span>Browse Catalog</span> &rarr;
+            <span>{{ _('view_products_btn') }}</span> &rarr;
           </a>
           <a href="https://wa.me/447763743631?text=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20research%20peptides%20and%20request%20a%20quotation." target="_blank" class="btn btn-secondary" style="padding: 0.85rem 2rem;">
-            <i class="bi bi-file-earmark-text"></i> <span>Request a Quote</span>
+            <i class="bi bi-file-earmark-text"></i> <span>{{ _('request_a_quote_btn') }}</span>
           </a>
         </div>
       </div>
@@ -52,8 +50,8 @@
             <i class="bi bi-file-earmark-medical"></i>
           </div>
           <div>
-            <div class="floating-coa-title">COA Available</div>
-            <div class="floating-coa-subtitle">Batch-specific reports</div>
+            <div class="floating-coa-title">{{ _('coa_available') }}</div>
+            <div class="floating-coa-subtitle">{{ _('batch_specific_reports') }}</div>
           </div>
         </div>
       </div>
@@ -73,7 +71,7 @@
         </div>
         <div>
           <div class="stat-value">&ge; 99.8%</div>
-          <div class="stat-label">Verified Purity</div>
+          <div class="stat-label">{{ _('analytical_purity') }}</div>
         </div>
       </div>
 
@@ -83,7 +81,7 @@
         </div>
         <div>
           <div class="stat-value">HPLC</div>
-          <div class="stat-label">Tested</div>
+          <div class="stat-label">{{ _('hplc_tested_label') }}</div>
         </div>
       </div>
 
@@ -93,7 +91,7 @@
         </div>
         <div>
           <div class="stat-value">24h</div>
-          <div class="stat-label">Response Time</div>
+          <div class="stat-label">{{ _('within_24_hours') }}</div>
         </div>
       </div>
 
@@ -103,7 +101,7 @@
         </div>
         <div>
           <div class="stat-value">40+</div>
-          <div class="stat-label">Countries Served</div>
+          <div class="stat-label">{{ _('worldwide_shipping_available') }}</div>
         </div>
       </div>
 
@@ -121,8 +119,8 @@
           <i class="bi bi-gear-wide-connected"></i>
         </div>
         <div>
-          <div class="cert-title">GMP Certified</div>
-          <div class="cert-subtitle">Cleanroom Manufacturing</div>
+          <div class="cert-title">{{ _('gmp_process_label') }}</div>
+          <div class="cert-subtitle">{{ _('cleanroom_mfg_label') }}</div>
         </div>
       </div>
 
@@ -131,8 +129,8 @@
           <i class="bi bi-box-seam"></i>
         </div>
         <div>
-          <div class="cert-title">Cold-Chain Delivery</div>
-          <div class="cert-subtitle">Discreet &amp; Secure Packaging</div>
+          <div class="cert-title">{{ _('worldwide_delivery_band') }}</div>
+          <div class="cert-subtitle">{{ _('secure_sealed_packaging') }}</div>
         </div>
       </div>
 
@@ -141,8 +139,8 @@
           <i class="bi bi-eyedropper"></i>
         </div>
         <div>
-          <div class="cert-title">Third-Party Tested</div>
-          <div class="cert-subtitle">HPLC &amp; Mass Spectrometry</div>
+          <div class="cert-title">{{ _('analytical_verification_label') }}</div>
+          <div class="cert-subtitle">{{ _('hplc_ms_testing') }}</div>
         </div>
       </div>
 
@@ -151,8 +149,8 @@
           <i class="bi bi-file-earmark-check"></i>
         </div>
         <div>
-          <div class="cert-title">Research Grade</div>
-          <div class="cert-subtitle">Not for Human Use</div>
+          <div class="cert-title">{{ _('research_compound') }}</div>
+          <div class="cert-subtitle">{{ _('research_peptides_only') }}</div>
         </div>
       </div>
 
@@ -166,9 +164,9 @@
     <div class="section-header-center">
       <div class="badge-pill-luxury">
         <span class="bullet-dot"></span>
-        <span>Research Categories</span>
+        <span>{{ _('explore_categories') }}</span>
       </div>
-      <h2 class="section-title">Explore Our Peptide Categories</h2>
+      <h2 class="section-title">{{ _('explore_categories') }}</h2>
     </div>
 
     <div class="category-grid-6">
@@ -178,7 +176,7 @@
         <div class="category-img-frame">
           <img src="{{ url_for('static', filename='images/molecule-gold.png') }}" alt="Metabolic Peptides" loading="lazy">
         </div>
-        <div class="category-card-title">Metabolic Peptides</div>
+        <div class="category-card-title">{{ _('cat_metabolic') }}</div>
         <div class="category-card-desc">GLP-1, GIP, Insulin</div>
         <div class="category-card-footer">
           <span class="btn-circle-arrow">&rarr;</span>
@@ -190,7 +188,7 @@
         <div class="category-img-frame">
           <img src="{{ url_for('static', filename='images/dna-gold.png') }}" alt="Tissue Recovery" loading="lazy">
         </div>
-        <div class="category-card-title">Tissue Recovery</div>
+        <div class="category-card-title">{{ _('cat_recovery') }}</div>
         <div class="category-card-desc">BPC-157, TB-500, GHK-Cu</div>
         <div class="category-card-footer">
           <span class="btn-circle-arrow">&rarr;</span>
@@ -202,7 +200,7 @@
         <div class="category-img-frame">
           <img src="{{ url_for('static', filename='images/cells-white.png') }}" alt="GH Secretagogues" loading="lazy">
         </div>
-        <div class="category-card-title">GH Secretagogues</div>
+        <div class="category-card-title">{{ _('cat_gh') }}</div>
         <div class="category-card-desc">Ipamorelin, CJC-1295, Hexarelin</div>
         <div class="category-card-footer">
           <span class="btn-circle-arrow">&rarr;</span>
@@ -214,7 +212,7 @@
         <div class="category-img-frame">
           <img src="{{ url_for('static', filename='images/hormone-molecule.png') }}" alt="Hormone Peptides" loading="lazy">
         </div>
-        <div class="category-card-title">Hormone Peptides</div>
+        <div class="category-card-title">{{ _('cat_hormone') }}</div>
         <div class="category-card-desc">Growth Hormone, Gonadorelin</div>
         <div class="category-card-footer">
           <span class="btn-circle-arrow">&rarr;</span>
@@ -226,7 +224,7 @@
         <div class="category-img-frame">
           <img src="{{ url_for('static', filename='images/skincare-lab.png') }}" alt="Skin & Wellness" loading="lazy">
         </div>
-        <div class="category-card-title">Skin &amp; Wellness</div>
+        <div class="category-card-title">{{ _('cat_skin') }}</div>
         <div class="category-card-desc">Melanotan II, GHK-Cu, Collagen Peptides</div>
         <div class="category-card-footer">
           <span class="btn-circle-arrow">&rarr;</span>
@@ -238,7 +236,7 @@
         <div class="category-img-frame">
           <img src="{{ url_for('static', filename='images/other-peptides.png') }}" alt="Other Peptides" loading="lazy">
         </div>
-        <div class="category-card-title">Other Peptides</div>
+        <div class="category-card-title">{{ _('cat_other') }}</div>
         <div class="category-card-desc">Custom &amp; Specialized</div>
         <div class="category-card-footer">
           <span class="btn-circle-arrow">&rarr;</span>
@@ -259,16 +257,15 @@
         <img src="{{ url_for('static', filename='images/molecule-gold.png') }}" alt="Gold Molecule Structure" class="about-dark-card-bg-mol" loading="lazy">
         
         <div class="about-card-content">
-          <div class="about-card-badge">About {{ company_name }}</div>
+          <div class="about-card-badge">{{ _('about_company') }} {{ company_name }}</div>
           <h2 class="about-card-heading">
-            Science. Quality.<br>
-            <span class="text-gold">Trust.</span>
+            {{ _('science_quality_trust') }}
           </h2>
           <p class="about-card-desc">
-            We are a professional peptide manufacturer dedicated to providing researchers worldwide with the highest quality compounds, advanced testing, and reliable global shipping.
+            {{ _('about_trust_desc') }}
           </p>
           <a href="{{ url_for('main.about') }}" class="btn btn-primary" style="padding: 0.75rem 1.75rem;">
-            <span>Learn More About Us</span> &rarr;
+            <span>{{ _('learn_more_about') }}</span> &rarr;
           </a>
         </div>
       </div>
@@ -281,7 +278,7 @@
             <i class="bi bi-patch-check"></i>
           </div>
           <div class="kpi-number">98%+</div>
-          <div class="kpi-label">Purity</div>
+          <div class="kpi-label">{{ _('purity_label') }}</div>
         </div>
 
         <div class="kpi-card">
@@ -297,7 +294,7 @@
             <i class="bi bi-globe-americas"></i>
           </div>
           <div class="kpi-number">40+</div>
-          <div class="kpi-label">Countries Served</div>
+          <div class="kpi-label">{{ _('countries_served') }}</div>
         </div>
 
         <div class="kpi-card">
@@ -305,7 +302,7 @@
             <i class="bi bi-headset"></i>
           </div>
           <div class="kpi-number">24h</div>
-          <div class="kpi-label">Fast Response Time</div>
+          <div class="kpi-label">{{ _('fast_response_time') }}</div>
         </div>
 
       </div>

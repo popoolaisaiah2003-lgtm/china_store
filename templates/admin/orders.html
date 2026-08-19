@@ -4,22 +4,22 @@
 
 {% block content %}
 <div style="margin-bottom: 2rem;">
-  <h1 style="font-size: 1.75rem;">Wholesale Quotations & Orders Log</h1>
-  <p style="color: var(--text-muted); font-size: 0.9rem;">View customer wholesale order submissions generated via the website.</p>
+  <h1 style="font-size: 1.75rem;">{{ _('orders_log') }}</h1>
+  <p style="color: var(--text-muted); font-size: 0.9rem;">{{ _('view_orders') }}</p>
 </div>
 
 <div style="background: white; border-radius: var(--radius-md); border: 1px solid var(--border-color); overflow: hidden;">
   <table class="data-table">
     <thead>
       <tr>
-        <th>Quotation Ref</th>
-        <th>Customer Name</th>
-        <th>Phone / Country</th>
-        <th>Order Summary</th>
-        <th>Grand Total</th>
-        <th>Status</th>
-        <th>Date</th>
-        <th style="text-align: right;">Actions</th>
+        <th>{{ _('quotation_ref') }}</th>
+        <th>{{ _('customer_name') }}</th>
+        <th>{{ _('phone_country') }}</th>
+        <th>{{ _('order_summary') }}</th>
+        <th>{{ _('grand_total') }}</th>
+        <th>{{ _('status_processing') }}</th>
+        <th>{{ _('date') }}</th>
+        <th style="text-align: right;">{{ _('action') }}</th>
       </tr>
     </thead>
     <tbody>
@@ -39,13 +39,13 @@
               {% if order.status != 'In Progress' %}
                 <form method="POST" action="{{ url_for('admin.order_mark_in_progress', id=order.id) }}" class="d-inline" data-ajax-order-action data-order-action-type="in-progress">
                   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                  <button type="submit" class="btn btn-sm btn-outline-primary" data-loading-text="Saving...">Mark In Progress</button>
+                  <button type="submit" class="btn btn-sm btn-outline-primary" data-loading-text="{{ _('saving') }}">{{ _('mark_in_progress') }}</button>
                 </form>
               {% endif %}
               {% if order.status != 'Completed' %}
                 <form method="POST" action="{{ url_for('admin.order_mark_completed', id=order.id) }}" class="d-inline" data-ajax-order-action data-order-action-type="completed">
                   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                  <button type="submit" class="btn btn-sm btn-success" data-loading-text="Saving...">Mark Completed</button>
+                  <button type="submit" class="btn btn-sm btn-success" data-loading-text="{{ _('saving') }}">{{ _('mark_completed') }}</button>
                 </form>
               {% endif %}
             </div>
@@ -54,7 +54,7 @@
       {% else %}
         <tr>
           <td colspan="8" style="text-align: center; color: var(--text-muted); padding: 3rem;">
-            No wholesale order submissions logged yet.
+            {{ _('no_orders') }}
           </td>
         </tr>
       {% endfor %}

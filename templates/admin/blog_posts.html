@@ -5,8 +5,8 @@
 {% block content %}
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
   <div>
-    <h1 style="font-size: 1.75rem; margin-bottom: 0.25rem;">📰 Research Journal (Blog CMS)</h1>
-    <p style="color: var(--text-muted); font-size: 0.9rem;">Manage published scientific research, clinical articles, and product news.</p>
+    <h1 style="font-size: 1.75rem; margin-bottom: 0.25rem;">📰 {{ _('journal') }} ({{ _('blog_cms') }})</h1>
+    <p style="color: var(--text-muted); font-size: 0.9rem;">{{ _('manage_catalog') }}</p>
   </div>
   <div>
     <a href="{{ url_for('admin.blog_new') }}" class="btn btn-primary">+ Create New Article</a>
@@ -19,12 +19,12 @@
       <thead>
         <tr>
           <th style="width: 30%;">Title & Slug</th>
-          <th style="width: 10%;">Language</th>
-          <th style="width: 12%;">Published</th>
+          <th style="width: 10%;">{{ _('languages') }}</th>
+          <th style="width: 12%;">{{ _('published') }}</th>
           <th style="width: 12%;">Featured</th>
           <th style="width: 12%;">Created</th>
           <th style="width: 12%;">Updated</th>
-          <th style="width: 12%; text-align: right;">Actions</th>
+          <th style="width: 12%; text-align: right;">{{ _('action') }}</th>
         </tr>
       </thead>
       <tbody>
@@ -58,7 +58,7 @@
               <form method="POST" action="{{ url_for('admin.blog_toggle_publish', id=post.id) }}" style="display: inline;">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <button type="submit" class="btn btn-sm {{ 'btn-success' if post.is_published else 'btn-outline' }}" style="padding: 0.25rem 0.65rem; font-size: 0.78rem;" title="Click to toggle publication status">
-                  {{ 'Published' if post.is_published else 'Draft / Hidden' }}
+                  {{ _('published') if post.is_published else _('draft') }}
                 </button>
               </form>
             </td>
@@ -83,13 +83,13 @@
             <td style="text-align: right;">
               <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
                 <a href="{{ url_for('admin.blog_edit', id=post.id) }}" class="btn btn-sm btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.8rem;">
-                  Edit
+                  {{ _('edit') }}
                 </a>
 
                 <form method="POST" action="{{ url_for('admin.blog_delete', id=post.id) }}" onsubmit="return confirm('Are you sure you want to delete article \'{{ post.title }}\'? This cannot be undone.');" style="display: inline;">
                   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                   <button type="submit" class="btn btn-sm btn-danger" style="padding: 0.3rem 0.6rem; font-size: 0.8rem;">
-                    Delete
+                    {{ _('delete') }}
                   </button>
                 </form>
               </div>
@@ -98,7 +98,7 @@
         {% else %}
           <tr>
             <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 3rem;">
-              No research articles found. <a href="{{ url_for('admin.blog_new') }}">Create your first blog post</a>.
+              {{ _('no_reviews_desc') }} <a href="{{ url_for('admin.blog_new') }}">{{ _('create_blog') }}</a>.
             </td>
           </tr>
         {% endfor %}

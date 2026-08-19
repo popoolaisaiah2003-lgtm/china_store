@@ -58,7 +58,7 @@
         <form method="GET" action="{{ url_for('main.products') }}" data-ajax-products-form>
           {% if selected_category %}<input type="hidden" name="category" value="{{ selected_category.slug }}">{% endif %}
           <input type="hidden" name="sort" value="{{ sort_by }}">
-          <label class="catalog-sidebar-label" for="sidebarSearch">Search</label>
+          <label class="catalog-sidebar-label" for="sidebarSearch">{{ _('search') }}</label>
           <input type="text" id="sidebarSearch" name="q" value="{{ search_query }}" placeholder="{{ _('search_placeholder') }}" class="form-control">
         </form>
 

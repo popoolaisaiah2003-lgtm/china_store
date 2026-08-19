@@ -16,13 +16,13 @@
       <thead class="table-light">
         <tr>
           <th class="ps-3">Customer</th>
-          <th>Country</th>
+          <th>{{ _('country') }}</th>
           <th>Rating</th>
           <th>Review</th>
-          <th>Date</th>
-          <th>Status</th>
+          <th>{{ _('date') }}</th>
+          <th>{{ _('status_processing') }}</th>
           <th>Featured</th>
-          <th class="text-end pe-3">Actions</th>
+          <th class="text-end pe-3">{{ _('action') }}</th>
         </tr>
       </thead>
       <tbody>
@@ -44,7 +44,7 @@
               {% if review.featured %}
                 <span class="badge bg-primary-subtle text-primary border border-primary-subtle">Featured</span>
               {% else %}
-                <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle">Standard</span>
+                <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle">{{ _('standard') }}</span>
               {% endif %}
             </td>
             <td class="text-end pe-3">
@@ -68,7 +68,7 @@
 
                 <form method="POST" action="{{ url_for('admin.review_delete', id=review.id) }}" onsubmit="return confirm('Delete this review permanently?');" style="display: inline;">
                   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                  <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                  <button type="submit" class="btn btn-sm btn-outline-danger">{{ _('delete') }}</button>
                 </form>
               </div>
             </td>

@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
-{% block title %}Research Journal & Articles | Velora Peptide{% endblock %}
+{% block title %}{{ _('research_journal_title') }} | Velora Peptide{% endblock %}
 
 {% block content %}
 <section style="background: var(--navy-deep); color: white; padding: 3rem 0; border-bottom: 3px solid var(--gold-primary);">
   <div class="container">
-    <h1 style="color: white; margin-bottom: 0.5rem;">Research Journal & Technical Articles</h1>
-    <p style="color: #94A3B8; max-width: 600px;">
-      In-depth clinical overviews, analytical protocol guides, and chemical structure analysis of novel synthetic peptides.
+    <h1 style="color: white; margin-bottom: 0.5rem;">{{ _('journal') }}</h1>
+    <p style="color: #F1F5F9; max-width: 600px;">
+      {{ _('featured_compounds_desc') }}
     </p>
   </div>
 </section>
@@ -32,14 +32,14 @@
             </p>
           </div>
           <div style="padding: 1rem 1.5rem; border-top: 1px solid var(--border-color); background: var(--bg-secondary);">
-            <a href="{{ url_for('blog.detail', slug=post.slug) }}" class="btn btn-sm btn-outline">Read Full Paper &rarr;</a>
+            <a href="{{ url_for('blog.detail', slug=post.slug) }}" class="btn btn-sm btn-outline">{{ _('view_details') }} &rarr;</a>
           </div>
         </div>
       {% else %}
         <div style="grid-column: 1 / -1; text-align: center; padding: 4rem; background: white; border-radius: var(--radius-md);">
           <div style="font-size: 3rem; margin-bottom: 1rem;">📝</div>
           <h3>Journal Articles Coming Soon</h3>
-          <p style="color: var(--text-muted);">Our research team is preparing comprehensive literature reviews. Check back shortly!</p>
+          <p style="color: var(--text-muted);">{{ _('no_reviews_desc') }}</p>
         </div>
       {% endfor %}
     </div>

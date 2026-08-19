@@ -29,24 +29,26 @@
           <form method="POST" action="{{ url_for('main.reviews') }}">
             {{ form.hidden_tag() }}
             <div class="mb-3">
-              <label class="form-label fw-semibold">{{ form.customer_name.label.text }}</label>
-              {{ form.customer_name(class='form-control', placeholder='Your name or lab name') }}
+              <label class="form-label fw-semibold">{{ _('review_name_field') }}</label>
+              {{ form.customer_name(class='form-control', placeholder=_('review_name_placeholder')) }}
               {% for error in form.customer_name.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
             </div>
             <div class="mb-3">
-              <label class="form-label fw-semibold">{{ form.country.label.text }}</label>
-              {{ form.country(class='form-control', placeholder='Country') }}
+              <label class="form-label fw-semibold">{{ _('review_country_field') }}</label>
+              {{ form.country(class='form-control', placeholder=_('review_country_placeholder')) }}
               {% for error in form.country.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
             </div>
             <div class="mb-3">
-              <label class="form-label fw-semibold">{{ form.rating.label.text }}</label>
-              {{ form.rating(class='form-select') }}
-              <div class="small text-muted mt-1">Choose one to five stars.</div>
+              <label class="form-label fw-semibold">{{ _('review_rating_field') }}</label>
+              <select class="form-select" id="rating" name="rating">
+                <option value="5">{{ _('rating_excellent') }}</option><option value="4">{{ _('rating_very_good') }}</option><option value="3">{{ _('rating_good') }}</option><option value="2">{{ _('rating_fair') }}</option><option value="1">{{ _('rating_poor') }}</option>
+              </select>
+              <div class="small text-muted mt-1">{{ _('review_stars_help') }}</div>
               {% for error in form.rating.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
             </div>
             <div class="mb-3">
-              <label class="form-label fw-semibold">{{ form.review_text.label.text }}</label>
-              {{ form.review_text(class='form-control', rows='5', placeholder='Write your review message here.') }}
+              <label class="form-label fw-semibold">{{ _('review_message_field') }}</label>
+              {{ form.review_text(class='form-control', rows='5', placeholder=_('review_message_placeholder')) }}
               {% for error in form.review_text.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
             </div>
             <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold">{{ _('submit_review_btn') }}</button>

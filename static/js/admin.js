@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+  var i18n = window.VeloraI18n || {};
   var storageKey = 'adminSidebarCollapsed';
   var body = document.body;
   var toggleButton = document.getElementById('adminSidebarToggle');
@@ -153,9 +154,9 @@ document.addEventListener('DOMContentLoaded', function () {
           updateInquiryRow(inquiryRow, payload.is_read, payload.deleted);
         }
 
-        AppAjax.showToast('Saved', payload.message || '', false);
+        AppAjax.showToast(i18n.saved || 'Saved', payload.message || '', false);
       } catch (error) {
-        AppAjax.showToast('Request failed', error.message, true);
+        AppAjax.showToast(i18n.request_failed || 'Request failed', error.message, true);
       } finally {
         AppAjax.setLoading(button, false);
       }

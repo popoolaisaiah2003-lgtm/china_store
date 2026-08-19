@@ -79,12 +79,12 @@
       </h3>
 
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; font-size: 0.9rem;">
-        <span style="color: var(--text-muted);">Total Line Items:</span>
+        <span style="color: var(--text-muted);">{{ _('total_items') }}</span>
         <span style="font-weight: 700; color: var(--navy-deep);">{{ cart_items|length }}</span>
       </div>
 
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; font-size: 0.9rem;">
-        <span style="color: var(--text-muted);">Total Units / Vials:</span>
+        <span style="color: var(--text-muted);">{{ _('quantity') }}:</span>
         <span style="font-weight: 700; color: var(--navy-deep);">{{ total_quantity }}</span>
       </div>
 

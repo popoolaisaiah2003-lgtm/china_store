@@ -4,7 +4,7 @@
 
 {% block content %}
 <div style="margin-bottom: 1.5rem;">
-  <a href="{{ url_for('admin.products') }}" style="color: var(--text-muted); font-size: 0.9rem;">&larr; Back to Products</a>
+  <a href="{{ url_for('admin.products') }}" style="color: var(--text-muted); font-size: 0.9rem;">&larr; {{ _('products') }}</a>
   <h1 style="font-size: 1.75rem; margin-top: 0.5rem;">{{ title }}</h1>
 </div>
 
@@ -15,7 +15,7 @@
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
       
       <div class="order-form-group">
-        <label for="productNameInput">Product Name *</label>
+        <label for="productNameInput">{{ _('product_name') }} *</label>
         {{ form.name(class="form-control", placeholder="e.g. Test Product", id="productNameInput") }}
         {% if form.name.errors %}
           <div style="color: #DC2626; font-size: 0.8rem; margin-top: 0.35rem; font-weight: 600;">{{ form.name.errors[0] }}</div>
@@ -43,7 +43,7 @@
       </div>
 
       <div class="order-form-group">
-        <label for="priceInput">Price ($ USD) *</label>
+        <label for="priceInput">{{ _('price_usd_col') }} *</label>
         {{ form.price(class="form-control", placeholder="e.g. 10", id="priceInput") }}
         {% if form.price.errors %}
           <div style="color: #DC2626; font-size: 0.8rem; margin-top: 0.35rem; font-weight: 600;">{{ form.price.errors[0] }}</div>
@@ -89,7 +89,7 @@
     </div>
 
     <div class="order-form-group" style="margin-bottom: 1.5rem;">
-      <label for="descriptionTextarea">Detailed Description & Research Specifications</label>
+      <label for="descriptionTextarea">{{ _('description') }} &amp; {{ _('research_compound') }}</label>
       {{ form.description(class="form-control", rows="5", placeholder="Detailed analytical properties, reconstitution notes, etc.", id="descriptionTextarea") }}
       {% if form.description.errors %}
         <div style="color: #DC2626; font-size: 0.8rem; margin-top: 0.35rem; font-weight: 600;">{{ form.description.errors[0] }}</div>
@@ -98,7 +98,7 @@
 
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: center; margin-bottom: 2rem;">
       <div class="order-form-group">
-        <label for="productImageInput">Upload Product Image (Optional)</label>
+        <label for="productImageInput">{{ _('upload') }} {{ _('product_name') }} ({{ _('optional') }})</label>
         {{ form.image(class="form-control", id="productImageInput") }}
         {% if form.image.errors %}
           <div style="color: #DC2626; font-size: 0.8rem; margin-top: 0.35rem; font-weight: 600;">{{ form.image.errors[0] }}</div>
@@ -114,8 +114,8 @@
     </div>
 
     <div style="display: flex; gap: 1rem;">
-      <button type="submit" class="btn btn-primary" style="padding: 0.85rem 2.5rem;">Save Product</button>
-      <a href="{{ url_for('admin.products') }}" class="btn btn-outline">Cancel</a>
+      <button type="submit" class="btn btn-primary" style="padding: 0.85rem 2.5rem;">{{ _('save') }} {{ _('product_name') }}</button>
+      <a href="{{ url_for('admin.products') }}" class="btn btn-outline">{{ _('cancel') }}</a>
     </div>
 
   </form>

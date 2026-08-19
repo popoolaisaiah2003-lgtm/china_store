@@ -8,7 +8,7 @@ from flask_migrate import stamp, upgrade
 from config import Config
 from extensions import db, login_manager, migrate, csrf
 from models import Admin, Setting, Product, ContactInquiry, OrderRecord
-from translations import translate
+from translations import normalize_language, translate
 
 
 def _ensure_mysql_database_exists(database_uri):
@@ -104,7 +104,8 @@ def create_app():
     # Global Context Processor for Templates (Multi-language & Cart Badge)
     @app.context_processor
     def inject_global_vars():
-        lang = session.get('lang', 'en')
+        lang = normalize_language(session.get('lang'))
+        session['lang'] = lang
         is_admin_request = request.blueprint == 'admin' or (request.endpoint or '').startswith('admin.')
         
         # Calculate cart total count

@@ -6,18 +6,18 @@
 <section style="background: var(--navy-deep); color: white; padding: 3rem 0; border-bottom: 3px solid var(--gold-primary);">
   <div class="container">
     <div style="font-size: 0.8rem; font-weight: 800; color: var(--gold-primary); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.35rem;">
-      🇨🇳 Global Export Support Desk
+      🇨🇳 {{ _('support_direct_orders') }}
     </div>
-    <h1 style="color: white; margin-bottom: 0.5rem; font-size: 2.25rem;">Contact Velora Peptide</h1>
-    <p style="color: #94A3B8; max-width: 650px; font-size: 0.95rem;">
-      Get in touch with our pharmaceutical inquiry desk for bulk wholesale pricing, COA verification, and custom synthesis specifications.
+    <h1 style="color: white; margin-bottom: 0.5rem; font-size: 2.25rem;">{{ _('contact') }}</h1>
+    <p style="color: #F1F5F9; max-width: 650px; font-size: 0.95rem;">
+      {{ _('contact_export_support_desc') }}
     </p>
   </div>
 </section>
 
 <section class="section" style="padding: 4rem 0;">
   <div class="container">
-    <div style="display: grid; grid-template-columns: 1fr 1.35fr; gap: 3rem; align-items: start;">
+    <div class="contact-layout" style="display: grid; grid-template-columns: 1fr 1.35fr; gap: 3rem; align-items: start;">
       
       <!-- Left Column: Contact Info Cards -->
       <div style="display: flex; flex-direction: column; gap: 1.25rem;">
@@ -29,13 +29,13 @@
           </div>
           <div>
             <div style="font-size: 0.78rem; font-weight: 800; color: var(--biotech-blue); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.2rem;">
-              Business Email
+              {{ _('business_email') }}
             </div>
             <div style="font-weight: 800; color: var(--navy-deep); font-size: 1.05rem;">
               info@velorapeptide.com
             </div>
             <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.15rem;">
-              Official Quotations & Procurement
+              {{ _('official_quotations') }}
             </div>
           </div>
         </div>
@@ -47,13 +47,13 @@
           </div>
           <div>
             <div style="font-size: 0.78rem; font-weight: 800; color: #16A34A; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.2rem;">
-              WhatsApp Business
+              {{ _('whatsapp_business') }}
             </div>
             <div style="font-weight: 800; color: var(--navy-deep); font-size: 1.05rem;">
              +447763743631
             </div>
             <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.15rem;">
-              Direct Wholesale Desk
+              {{ _('direct_wholesale_desk') }}
             </div>
           </div>
         </div>
@@ -65,13 +65,13 @@
           </div>
           <div>
             <div style="font-size: 0.78rem; font-weight: 800; color: var(--biotech-blue); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.2rem;">
-              Service Area
+              {{ _('service_area') }}
             </div>
             <div style="font-weight: 800; color: var(--navy-deep); font-size: 1.05rem;">
-              Worldwide Shipping Available
+              {{ _('worldwide_available') }}
             </div>
             <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.15rem;">
-             FedEx, DHL, UPS, and other international couriers supported.
+              {{ _('international_couriers_supported') }}
             </div>
           </div>
         </div>
@@ -83,13 +83,13 @@
           </div>
           <div>
             <div style="font-size: 0.78rem; font-weight: 800; color: var(--biotech-blue); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.2rem;">
-              Response Time
+              {{ _('response_time') }}
             </div>
             <div style="font-weight: 800; color: var(--navy-deep); font-size: 1.05rem;">
-              Within 24 Hours
+              {{ _('within_hours') }}
             </div>
             <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.15rem;">
-              Dedicated Customer Desk
+              {{ _('dedicated_customer_desk') }}
             </div>
           </div>
         </div>
@@ -99,24 +99,24 @@
       <!-- Right Column: Professional Inquiry Form -->
       <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2.5rem; box-shadow: var(--shadow-md);">
         <h2 style="font-size: 1.5rem; color: var(--navy-deep); font-weight: 800; margin-bottom: 0.35rem;">
-          Submit a Professional Inquiry
+          {{ _('submit_professional_inquiry') }}
         </h2>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">
-          Fill out the form below to connect with our export team regarding custom synthesis or bulk orders.
+          {{ _('inquiry_form_desc') }}
         </p>
 
         <form method="POST">
           {{ form.hidden_tag() }}
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
             <div class="form-group">
-              <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Full Name</label>
+              <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">{{ _('full_name') }}</label>
               {{ form.name(class="form-control" + (" is-invalid" if form.name.errors else ""), placeholder="e.g. Dr. Alexander Wright") }}
               {% for err in form.name.errors %}
                 <div style="color: #DC2626; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;">{{ err }}</div>
               {% endfor %}
             </div>
             <div class="form-group">
-              <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Email Address</label>
+              <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">{{ _('email_address') }}</label>
               {{ form.email(class="form-control" + (" is-invalid" if form.email.errors else ""), placeholder="e.g. research@lab.com") }}
               {% for err in form.email.errors %}
                 <div style="color: #DC2626; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;">{{ err }}</div>
@@ -126,14 +126,14 @@
 
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
             <div class="form-group">
-              <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Company / Organization</label>
+              <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">{{ _('company_name') }}</label>
               {{ form.company(class="form-control" + (" is-invalid" if form.company.errors else ""), placeholder="e.g. Apex Biotech Labs") }}
               {% for err in form.company.errors %}
                 <div style="color: #DC2626; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;">{{ err }}</div>
               {% endfor %}
             </div>
             <div class="form-group">
-              <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Inquiry Subject</label>
+              <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">{{ _('subject') }}</label>
               {{ form.subject(class="form-control" + (" is-invalid" if form.subject.errors else ""), placeholder="e.g. Bulk Wholesale Quotation") }}
               {% for err in form.subject.errors %}
                 <div style="color: #DC2626; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;">{{ err }}</div>
@@ -142,7 +142,7 @@
           </div>
 
           <div class="form-group" style="margin-bottom: 1.75rem;">
-            <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Message / Product Specifications</label>
+            <label style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">{{ _('message') }} / {{ _('product_spec_col') }}</label>
             {{ form.message(class="form-control" + (" is-invalid" if form.message.errors else ""), rows="4", placeholder="Specify target peptide codes, desired quantity (vials/grams), and purity requirements.") }}
             {% for err in form.message.errors %}
               <div style="color: #DC2626; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;">{{ err }}</div>
@@ -150,19 +150,19 @@
           </div>
 
           <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.95rem; font-size: 1.05rem;">
-            Send Inquiry &rarr;
+            {{ _('send_inquiry') }} &rarr;
           </button>
         </form>
 
         <div style="margin-top: 1.75rem; text-align: center; border-top: 1px solid var(--border-color); padding-top: 1.5rem;">
           <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.75rem;">
-            Prefer immediate chat support?
+            {{ _('prefer_chat_support') }}
           </p>
           <a href="https://wa.me/447763743631?text=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20research%20peptides%20and%20request%20a%20quotation."
              target="_blank" 
              class="btn btn-whatsapp" 
              style="width: 100%; padding: 0.85rem; font-size: 1rem;">
-            <i class="bi bi-whatsapp"></i> Or contact us directly on WhatsApp
+            <i class="bi bi-whatsapp"></i> {{ _('contact_whatsapp_directly') }}
           </a>
         </div>
 

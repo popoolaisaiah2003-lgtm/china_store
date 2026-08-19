@@ -22,7 +22,7 @@
           <div class="gallery-main-image">
             <img src="{{ url_for('static', filename=product.catalog_image) }}" alt="{{ product.name }}" style="max-height: 280px; width: 100%; margin: 0 auto; border-radius: var(--radius-md); object-fit: contain;">
           </div>
-          <div class="gallery-caption-row"><span><i class="bi bi-shield-check"></i> HPLC batch verified</span><span><i class="bi bi-snow2"></i> Cold-chain ready</span></div>
+          <div class="gallery-caption-row"><span><i class="bi bi-shield-check"></i> {{ _('hplc_batch_verified') }}</span><span><i class="bi bi-snow2"></i> {{ _('cold_chain_ready') }}</span></div>
           <div style="font-weight: 700; color: var(--text-main); margin-top: 1rem;">
             {{ _('lyophilized_vial') }}
           </div>
@@ -55,7 +55,7 @@
         <form method="POST" action="{{ url_for('main.wishlist_toggle', product_id=product.id) }}" data-ajax-wishlist>
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
           <input type="hidden" name="next" value="{{ request.full_path if request.query_string else request.path }}">
-          <button type="submit" class="wishlist-toggle wishlist-toggle-inline{{ ' is-active' if product.id in wishlist_product_ids else '' }}" aria-label="Toggle favorite" aria-pressed="{{ 'true' if product.id in wishlist_product_ids else 'false' }}" data-wishlist-button>
+          <button type="submit" class="wishlist-toggle wishlist-toggle-inline{{ ' is-active' if product.id in wishlist_product_ids else '' }}" aria-label="{{ _('toggle_favorite') }}" aria-pressed="{{ 'true' if product.id in wishlist_product_ids else 'false' }}" data-wishlist-button>
             <i class="bi {{ 'bi-heart-fill' if product.id in wishlist_product_ids else 'bi-heart' }}"></i>
           </button>
         </form>
@@ -106,11 +106,11 @@
         </tr>
       </table>
 
-      <div class="detail-tabs" role="tablist" aria-label="Product information">
-        <button class="detail-tab active" type="button" data-detail-tab="specifications" aria-selected="true">Overview</button>
+      <div class="detail-tabs" role="tablist" aria-label="{{ _('product_information') }}">
+        <button class="detail-tab active" type="button" data-detail-tab="specifications" aria-selected="true">{{ _('overview') }}</button>
         <button class="detail-tab" type="button" data-detail-tab="coa" aria-selected="false">COA</button>
         <button class="detail-tab" type="button" data-detail-tab="reviews" aria-selected="false">{{ _('reviews_link') }}</button>
-        <button class="detail-tab" type="button" data-detail-tab="handling" aria-selected="false">{{ _('storage') }} &amp; handling</button>
+        <button class="detail-tab" type="button" data-detail-tab="handling" aria-selected="false">{{ _('storage') }} &amp; {{ _('handling') }}</button>
       </div>
       <div class="detail-tab-panel active" data-detail-panel="specifications">
         <p>{{ product.short_description or product.description or _('analytical_standard_vials') }}</p>
@@ -131,12 +131,12 @@
             <p><strong style="color: var(--text-main);">{{ review.customer_name }}</strong> — {% for i in range(review.rating) %}★{% endfor %}<br>{{ review.review_text }}</p>
           {% endfor %}
         {% else %}
-          <p>No reviews yet for this compound. <a href="{{ url_for('main.reviews') }}" class="detail-code">Write the first review &rarr;</a></p>
+          <p>{{ _('no_reviews_yet') }} <a href="{{ url_for('main.reviews') }}" class="detail-code">{{ _('write_first_review') }} &rarr;</a></p>
         {% endif %}
       </div>
       <div class="detail-tab-panel" data-detail-panel="handling" hidden>
         <p>{{ product.storage_info or _('climate_controlled_storage') }}</p>
-        <span class="detail-code"><i class="bi bi-thermometer-snow"></i> Cold-chain handling available</span>
+        <span class="detail-code"><i class="bi bi-thermometer-snow"></i> {{ _('cold_chain_handling') }}</span>
       </div>
 
       <!-- Wholesale Quotation Box -->
@@ -188,7 +188,7 @@
             <form method="POST" action="{{ url_for('main.wishlist_toggle', product_id=rel.id) }}" class="wishlist-form" data-ajax-wishlist>
               <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
               <input type="hidden" name="next" value="{{ request.full_path if request.query_string else request.path }}">
-              <button type="submit" class="wishlist-toggle{{ ' is-active' if rel.id in wishlist_product_ids else '' }}" aria-label="Toggle favorite" aria-pressed="{{ 'true' if rel.id in wishlist_product_ids else 'false' }}" data-wishlist-button>
+                <button type="submit" class="wishlist-toggle{{ ' is-active' if rel.id in wishlist_product_ids else '' }}" aria-label="{{ _('toggle_favorite') }}" aria-pressed="{{ 'true' if rel.id in wishlist_product_ids else 'false' }}" data-wishlist-button>
                 <i class="bi {{ 'bi-heart-fill' if rel.id in wishlist_product_ids else 'bi-heart' }}"></i>
               </button>
             </form>

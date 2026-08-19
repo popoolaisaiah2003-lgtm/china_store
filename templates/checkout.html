@@ -14,7 +14,7 @@
 
 <section class="section">
   <div class="container">
-    <div style="display: grid; grid-template-columns: 1fr 400px; gap: 2.5rem;">
+    <div class="checkout-layout" style="display: grid; grid-template-columns: 1fr 400px; gap: 2.5rem;">
       
       <!-- Left: Customer Info Form -->
       <div>
@@ -24,28 +24,26 @@
           {% if grand_total < 350 %}
             <div class="dhgate-notice-orange">
               <div style="font-weight: 800; font-size: 0.95rem; margin-bottom: 0.25rem;">
-                ⚠️ DHgate Payment Notice
+                ⚠️ {{ _('dhgate_payment_notice') }}
               </div>
               <div style="font-size: 0.88rem; font-weight: 500;">
-                DHgate is not available for this order.<br>
-                Please use USDT, Bank Transfer, Western Union, or Made-in-China Trade Assurance.
+                {{ _('dhgate_unavailable') }}<br>{{ _('payment_methods_line') }}
               </div>
             </div>
           {% else %}
             <div class="dhgate-notice-green">
               <div style="font-weight: 800; font-size: 0.95rem; margin-bottom: 0.25rem;">
-                ✅ DHgate Payment Available
+                ✅ {{ _('dhgate_payment_available') }}
               </div>
               <div style="font-size: 0.88rem; font-weight: 500;">
-                This order qualifies for DHgate payment.<br>
-                You may also pay using USDT, Bank Transfer, Western Union, or Made-in-China Trade Assurance.
+                {{ _('qualifies_dhgate') }}<br>{{ _('also_pay_methods') }}
               </div>
             </div>
           {% endif %}
 
-          <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--navy-deep); font-weight: 800;">International Shipping Information</h2>
+          <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--navy-deep); font-weight: 800;">{{ _('shipping_delivery_info') }}</h2>
           <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem;">
-            Please enter your official logistics and destination address for analytical peptide dispatch.
+            {{ _('logistics_address_prompt') }}
           </p>
 
           <form method="POST">
@@ -55,7 +53,7 @@
               
               <!-- 1. Full Name -->
               <div class="order-form-group">
-                <label for="full_name" style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Full Name *</label>
+                <label for="full_name" style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">{{ _('full_name') }}</label>
                 {{ form.full_name(class="form-control" + (" is-invalid" if form.full_name.errors else ""), placeholder="e.g. Dr. Alexander Wright") }}
                 {% if form.full_name.errors %}
                   {% for err in form.full_name.errors %}
@@ -66,7 +64,7 @@
 
               <!-- 2. Email Address -->
               <div class="order-form-group">
-                <label for="email" style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Email Address *</label>
+                <label for="email" style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">{{ _('email_address') }}</label>
                 {{ form.email(class="form-control" + (" is-invalid" if form.email.errors else ""), placeholder="e.g. research@institution.edu") }}
                 {% if form.email.errors %}
                   {% for err in form.email.errors %}
@@ -77,7 +75,7 @@
 
               <!-- 3. Country -->
               <div class="order-form-group">
-                <label for="country" style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Country *</label>
+                <label for="country" style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">{{ _('country') }} *</label>
                 {{ form.country(class="form-select" + (" is-invalid" if form.country.errors else ""), style="padding: 0.65rem 0.85rem; font-size: 0.92rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); width: 100%;") }}
                 {% if form.country.errors %}
                   {% for err in form.country.errors %}
@@ -88,7 +86,7 @@
 
               <!-- 4. ZIP / Postal Code -->
               <div class="order-form-group">
-                <label for="zip_code" style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">ZIP / Postal Code <span style="font-weight:400; color:var(--text-muted);">(Optional)</span></label>
+                <label for="zip_code" style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">{{ _('zip_postal_code') }} <span style="font-weight:400; color:var(--text-muted);">({{ _('optional') }})</span></label>
                 {{ form.zip_code(class="form-control" + (" is-invalid" if form.zip_code.errors else ""), placeholder="e.g. 90210 / SW1A 1AA") }}
                 {% if form.zip_code.errors %}
                   {% for err in form.zip_code.errors %}
@@ -99,8 +97,8 @@
 
               <!-- 5. Shipping Address -->
               <div class="order-form-group" style="grid-column: 1 / -1;">
-                <label for="address" style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Shipping Address *</label>
-                {{ form.address(class="form-control" + (" is-invalid" if form.address.errors else ""), rows="3", placeholder="Street Address, Suite / Laboratory Unit, City, State / Province") }}
+                <label for="address" style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">{{ _('shipping_address') }}</label>
+                {{ form.address(class="form-control" + (" is-invalid" if form.address.errors else ""), rows="3", placeholder=_('street_address_placeholder')) }}
                 {% if form.address.errors %}
                   {% for err in form.address.errors %}
                     <div style="color: #DC2626; font-size: 0.82rem; font-weight: 600; margin-top: 0.35rem;">⚠️ {{ err }}</div>
@@ -110,7 +108,7 @@
 
               <!-- 6. Phone Number -->
               <div class="order-form-group" style="grid-column: 1 / -1;">
-                <label for="phone" style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">Phone Number *</label>
+                <label for="phone" style="font-weight: 700; font-size: 0.88rem; color: var(--navy-deep); margin-bottom: 0.35rem; display: block;">{{ _('phone_number') }} *</label>
                 {{ form.phone(class="form-control" + (" is-invalid" if form.phone.errors else ""), placeholder="e.g. +1 555 019 2831") }}
                 {% if form.phone.errors %}
                   {% for err in form.phone.errors %}

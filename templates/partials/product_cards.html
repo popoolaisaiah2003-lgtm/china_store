@@ -5,7 +5,7 @@
       <form method="POST" action="{{ url_for('main.wishlist_toggle', product_id=product.id) }}" class="wishlist-form" data-ajax-wishlist>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <input type="hidden" name="next" value="{{ request.full_path if request.query_string else request.path }}">
-        <button type="submit" class="wishlist-toggle{{ ' is-active' if product.id in wishlist_product_ids else '' }}" aria-label="Toggle favorite" aria-pressed="{{ 'true' if product.id in wishlist_product_ids else 'false' }}" data-wishlist-button>
+        <button type="submit" class="wishlist-toggle{{ ' is-active' if product.id in wishlist_product_ids else '' }}" aria-label="{{ _('toggle_favorite') }}" aria-pressed="{{ 'true' if product.id in wishlist_product_ids else 'false' }}" data-wishlist-button>
           <i class="bi {{ 'bi-heart-fill' if product.id in wishlist_product_ids else 'bi-heart' }}"></i>
         </button>
       </form>

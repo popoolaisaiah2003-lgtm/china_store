@@ -1,4 +1,7 @@
 window.AppAjax = (function () {
+  function t(key, fallback) {
+    return (window.VeloraI18n && window.VeloraI18n[key]) || fallback;
+  }
   function getMetaCsrfToken() {
     var meta = document.querySelector('meta[name="csrf-token"]');
     return meta ? meta.getAttribute('content') : '';
@@ -63,7 +66,7 @@ window.AppAjax = (function () {
       button.dataset.originalHtml = button.innerHTML;
       button.disabled = true;
       button.classList.add('is-loading');
-      button.innerHTML = loadingText || button.dataset.loadingText || 'Loading...';
+      button.innerHTML = loadingText || button.dataset.loadingText || t('loading', 'Loading...');
       return;
     }
 
@@ -103,11 +106,11 @@ window.AppAjax = (function () {
     try {
       payload = await response.json();
     } catch (error) {
-      payload = { success: false, message: 'Invalid server response.' };
+      payload = { success: false, message: t('invalid_server_response', 'Invalid server response.') };
     }
 
     if (!response.ok) {
-      throw new Error(payload.message || ('Request failed with status ' + response.status));
+      throw new Error(payload.message || (t('request_failed', 'Request failed') + ' (' + response.status + ')'));
     }
 
     return payload;

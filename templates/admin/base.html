@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ lang }}" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,14 +21,14 @@
 </head>
 <body class="admin-body">
 
-  <button type="button"
+          <button type="button"
           class="admin-sidebar-toggle"
           id="adminSidebarToggle"
           aria-controls="adminSidebar"
           aria-expanded="true"
-          aria-label="Toggle admin sidebar">
+          aria-label="{{ _('toggle_admin_sidebar') }}">
     <i class="bi bi-list" aria-hidden="true"></i>
-    <span class="visually-hidden">Toggle admin sidebar</span>
+    <span class="visually-hidden">{{ _('toggle_admin_sidebar') }}</span>
   </button>
 
   <div class="admin-sidebar-overlay" id="adminSidebarOverlay" hidden></div>
@@ -42,45 +42,45 @@
         <img src="{{ url_for('static', filename='images/logo1.png') }}" alt="Velora Peptide Logo" class="logo-img">
         <span class="admin-brand-tagline">PREMIUM RESEARCH PEPTIDES</span>
       </a>
-      <span class="admin-badge">ADMIN PORTAL</span>
+      <span class="admin-badge">{{ _('admin_portal') }}</span>
     </div>
 
     <!-- Sidebar Navigation List (No bullets) -->
     <ul class="nav flex-column admin-nav">
       <li class="nav-item">
         <a class="nav-link {{ 'active' if request.endpoint == 'admin.dashboard' }}" href="{{ url_for('admin.dashboard') }}">
-          <i class="bi bi-speedometer2"></i><span class="nav-label">Dashboard</span>
+          <i class="bi bi-speedometer2"></i><span class="nav-label">{{ _('dashboard') }}</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ 'active' if 'product' in request.endpoint }}" href="{{ url_for('admin.products') }}">
-          <i class="bi bi-beaker"></i><span class="nav-label">Catalog</span>
+          <i class="bi bi-beaker"></i><span class="nav-label">{{ _('catalog') }}</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ 'active' if request.endpoint == 'admin.categories' }}" href="{{ url_for('admin.categories') }}">
-          <i class="bi bi-folder2-open"></i><span class="nav-label">Categories</span>
+          <i class="bi bi-folder2-open"></i><span class="nav-label">{{ _('categories') }}</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ 'active' if 'coa' in request.endpoint }}" href="{{ url_for('admin.coa_index') }}">
-          <i class="bi bi-patch-check"></i><span class="nav-label">COA Certificates</span>
+          <i class="bi bi-patch-check"></i><span class="nav-label">{{ _('coa_certificates') }}</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ 'active' if 'blog' in request.endpoint }}" href="{{ url_for('admin.blog_posts') }}">
-          <i class="bi bi-journal-text"></i><span class="nav-label">Blog CMS</span>
+          <i class="bi bi-journal-text"></i><span class="nav-label">{{ _('blog_cms') }}</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ 'active' if request.endpoint == 'admin.reviews_index' }}" href="{{ url_for('admin.reviews_index') }}">
-          <i class="bi bi-star"></i><span class="nav-label">Product Reviews</span>
+          <i class="bi bi-star"></i><span class="nav-label">{{ _('product_reviews') }}</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ 'active' if request.endpoint == 'admin.orders' }}" href="{{ url_for('admin.orders') }}">
           <i class="bi bi-box-seam"></i>
-          <span class="nav-label">Orders Inquiry</span>
+          <span class="nav-label">{{ _('orders_inquiry') }}</span>
           {% if pending_orders_count %}
             <span class="admin-nav-badge admin-nav-badge-warning" aria-label="{{ pending_orders_count }} order notifications" data-sidebar-pending-badge>
               <span class="admin-nav-badge-text">{{ pending_orders_count }}</span>
@@ -102,7 +102,7 @@
       <li class="nav-item">
         <a class="nav-link {{ 'active' if 'inquiry' in request.endpoint or request.endpoint == 'admin.inquiries' }}" href="{{ url_for('admin.inquiries') }}">
           <i class="bi bi-envelope-paper"></i>
-          <span class="nav-label">Inquiries</span>
+          <span class="nav-label">{{ _('inquiries') }}</span>
           {% if unread_inquiries_count %}
             <span class="admin-nav-badge admin-nav-badge-danger" aria-label="{{ unread_inquiries_count }} unread inquiries" data-sidebar-unread-badge>
               <span class="admin-nav-badge-text">{{ unread_inquiries_count }}</span>
@@ -118,22 +118,22 @@
       </li>
       <li class="nav-item">
         <a class="nav-link {{ 'active' if 'shipment' in request.endpoint }}" href="{{ url_for('admin.shipments') }}">
-          <i class="bi bi-airplane"></i><span class="nav-label">Global Shipments</span>
+          <i class="bi bi-airplane"></i><span class="nav-label">{{ _('global_shipments') }}</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ 'active' if request.endpoint == 'admin.languages' }}" href="{{ url_for('admin.languages') }}">
-          <i class="bi bi-translate"></i><span class="nav-label">Languages</span>
+          <i class="bi bi-translate"></i><span class="nav-label">{{ _('languages') }}</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ 'active' if request.endpoint == 'admin.settings' }}" href="{{ url_for('admin.settings') }}">
-          <i class="bi bi-gear"></i><span class="nav-label">Settings</span>
+          <i class="bi bi-gear"></i><span class="nav-label">{{ _('settings') }}</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link {{ 'active' if request.endpoint == 'admin.change_password' }}" href="{{ url_for('admin.change_password') }}">
-          <i class="bi bi-key"></i><span class="nav-label">Change Password</span>
+          <i class="bi bi-key"></i><span class="nav-label">{{ _('change_password') }}</span>
         </a>
       </li>
     </ul>
@@ -151,10 +151,18 @@
       </div>
       <div class="d-flex align-items-center gap-3">
         <a href="{{ url_for('main.index') }}" target="_blank" class="btn btn-sm btn-outline-secondary">
-          <i class="bi bi-box-arrow-up-right me-1"></i> View Public Site
+          <i class="bi bi-box-arrow-up-right me-1"></i> {{ _('view_public_site') }}
         </a>
+        <div class="dropdown">
+          <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">🌐 {{ lang|upper }}</button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            {% for code, label in [('en', 'English'), ('zh', '中文'), ('es', 'Español'), ('ar', 'العربية'), ('fr', 'Français')] %}
+              <li><a class="dropdown-item" href="{{ url_for('main.set_language', lang_code=code) }}">{{ label }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
         <a href="{{ url_for('admin.logout') }}" class="btn btn-sm btn-danger">
-          <i class="bi bi-box-arrow-right me-1"></i> Logout
+          <i class="bi bi-box-arrow-right me-1"></i> {{ _('logout') }}
         </a>
       </div>
     </div>
@@ -180,6 +188,13 @@
 
   <!-- Local Bootstrap 5 Bundle JS -->
   <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script>
+    window.VeloraI18n = {{ {
+      'request_failed': _('request_failed'),
+      'loading': _('loading'),
+      'saved': _('saved')
+    }|tojson }};
+  </script>
   <script src="{{ url_for('static', filename='js/ajax.js') }}"></script>
   <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
   {% block extra_js %}{% endblock %}

@@ -2,15 +2,19 @@ import os
 import time
 import re
 from datetime import datetime
-from flask import Blueprint, render_template, redirect, url_for, flash, request, current_app, abort, jsonify
+from flask import Blueprint, render_template, redirect, url_for, flash, request, session, current_app, abort, jsonify
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.utils import secure_filename
 
 from extensions import db
 from models import Admin, Product, Category, ProductImage, COA, BlogPost, Review, Comment, Setting, OrderRecord, ShipmentUpdate, ContactInquiry
 from forms import LoginForm, CategoryForm, ProductForm, COAForm, BlogPostForm, SettingForm, ChangePasswordForm, ShipmentUpdateForm, ReviewForm
+from translations import translate, normalize_language
 
 admin = Blueprint('admin', __name__, url_prefix='/admin')
+
+def _(key):
+    return translate(key, normalize_language(session.get('lang')))
 
 # In-memory Failed Login Tracking (Rate limiting: max 5 failed attempts per 15 minutes)
 FAILED_ATTEMPTS = {}
@@ -84,7 +88,7 @@ def login():
     form = LoginForm()
 
     if is_rate_limited(client_ip):
-        flash('Account temporarily locked due to multiple failed login attempts. Please try again in 15 minutes.', 'danger')
+        flash(_('login_locked'), 'danger')
         return render_template('admin/login.html', form=form)
 
     if form.validate_on_submit():
@@ -92,16 +96,16 @@ def login():
         if admin_account and admin_account.check_password(form.password.data):
             clear_failed_attempts(client_ip)
             admin_account.last_login = datetime.utcnow()
-            if not commit_with_rollback(error_message='Could not complete login write. Please try again.'):
+            if not commit_with_rollback(error_message=_('login_write_error')):
                 return render_template('admin/login.html', form=form)
             
             login_user(admin_account, remember=False)
-            flash('Welcome to Velora Secure Management Console.', 'success')
+            flash(_('login_welcome'), 'success')
             next_page = request.args.get('next')
             return redirect(next_page or url_for('admin.dashboard'))
         else:
             record_failed_attempt(client_ip)
-            flash('Invalid admin credentials. Failed attempt logged.', 'danger')
+            flash(_('login_invalid'), 'danger')
             
     return render_template('admin/login.html', form=form)
 
@@ -109,7 +113,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    flash('Logged out of Secure Panel.', 'info')
+    flash(_('logged_out'), 'info')
     return redirect(url_for('admin.login'))
 
 @admin.route('/dashboard')
@@ -144,10 +148,10 @@ def change_password():
     form = ChangePasswordForm()
     if form.validate_on_submit():
         if not current_user.check_password(form.current_password.data):
-            flash('Current password is incorrect.', 'danger')
+            flash(_('current_password_incorrect'), 'danger')
         else:
             current_user.set_password(form.new_password.data)
-            if commit_with_rollback('Password updated successfully! Please use your new credentials for future logins.', 'success'):
+            if commit_with_rollback(_('password_updated'), 'success'):
                 return redirect(url_for('admin.dashboard'))
 
     return render_template('admin/change_password.html', form=form)
@@ -173,7 +177,7 @@ def product_new():
     form.category_id.choices = [(c.id, c.name) for c in Category.query.order_by(Category.name).all()]
     
     if not form.category_id.choices:
-        flash('Please create at least one Category before adding products.', 'warning')
+        flash(_('category_required'), 'warning')
         return redirect(url_for('admin.categories'))
 
     if form.validate_on_submit():
@@ -216,7 +220,7 @@ def product_new():
     elif request.method == 'POST':
         for field, errors in form.errors.items():
             for error in errors:
-                flash(f"Validation Error ({field}): {error}", 'danger')
+                flash(f"{_('validation_error')} ({field}): {error}", 'danger')
 
     return render_template('admin/product_form.html', form=form, title="Add New Product", is_edit=False)
 
@@ -435,7 +439,7 @@ def categories():
         slug = slugify(form.name.data)
         existing = Category.query.filter_by(slug=slug).first()
         if existing:
-            flash('A category with a similar name already exists.', 'warning')
+            flash(_('category_duplicate'), 'warning')
         else:
             cat = Category(name=form.name.data, slug=slug, description=form.description.data)
             db.session.add(cat)
@@ -502,14 +506,14 @@ def blog_new():
             if wants_json_response():
                 return jsonify({
                     'success': True,
-                    'message': 'Blog article created successfully.',
+                    'message': _('blog_created'),
                     'redirect_url': url_for('admin.blog_posts'),
                     'post_id': post.id
                 })
             return redirect(url_for('admin.blog_posts'))
         else:
             if wants_json_response():
-                return jsonify({'success': False, 'message': 'Database error saving blog article.'}), 500
+                return jsonify({'success': False, 'message': _('db_save_error')}), 500
 
     elif request.method == 'POST':
         err_msgs = []
@@ -562,14 +566,14 @@ def blog_edit(id):
             if wants_json_response():
                 return jsonify({
                     'success': True,
-                    'message': 'Blog article updated successfully.',
+                    'message': _('blog_updated'),
                     'redirect_url': url_for('admin.blog_posts'),
                     'post_id': post.id
                 })
             return redirect(url_for('admin.blog_posts'))
         else:
             if wants_json_response():
-                return jsonify({'success': False, 'message': 'Database error updating blog article.'}), 500
+                return jsonify({'success': False, 'message': _('db_update_error')}), 500
 
     elif request.method == 'POST':
         err_msgs = []
@@ -643,14 +647,14 @@ def order_mark_in_progress(id):
         if wants_json_response():
             return jsonify({
                 'success': True,
-                'message': 'Order marked as In Progress.',
+                'message': _('order_in_progress'),
                 'order_id': order.id,
                 'status': order.status,
                 **get_admin_ajax_counts(),
             })
         return redirect(url_for('admin.orders'))
     if wants_json_response():
-        return jsonify({'success': False, 'message': 'Could not update order status.'}), 500
+        return jsonify({'success': False, 'message': _('order_status_error')}), 500
     return redirect(url_for('admin.orders'))
 
 
@@ -663,14 +667,14 @@ def order_mark_completed(id):
         if wants_json_response():
             return jsonify({
                 'success': True,
-                'message': 'Order marked as Completed.',
+                'message': _('order_completed'),
                 'order_id': order.id,
                 'status': order.status,
                 **get_admin_ajax_counts(),
             })
         return redirect(url_for('admin.orders'))
     if wants_json_response():
-        return jsonify({'success': False, 'message': 'Could not update order status.'}), 500
+        return jsonify({'success': False, 'message': _('order_status_error')}), 500
     return redirect(url_for('admin.orders'))
 
 @admin.route('/comments')
@@ -705,14 +709,14 @@ def inquiry_mark_read(id):
         if wants_json_response():
             return jsonify({
                 'success': True,
-                'message': 'Inquiry marked as read.',
+                'message': _('inquiry_read'),
                 'inquiry_id': inquiry.id,
                 'is_read': True,
                 **get_admin_ajax_counts(),
             })
         return redirect(url_for('admin.inquiries'))
     if wants_json_response():
-        return jsonify({'success': False, 'message': 'Could not mark inquiry as read.'}), 500
+        return jsonify({'success': False, 'message': _('inquiry_action_error')}), 500
     return redirect(url_for('admin.inquiries'))
 
 
@@ -726,14 +730,14 @@ def inquiry_delete(id):
         if wants_json_response():
             return jsonify({
                 'success': True,
-                'message': 'Inquiry deleted.',
+                'message': _('inquiry_deleted'),
                 'inquiry_id': inquiry_id,
                 'deleted': True,
                 **get_admin_ajax_counts(),
             })
         return redirect(url_for('admin.inquiries'))
     if wants_json_response():
-        return jsonify({'success': False, 'message': 'Could not delete inquiry.'}), 500
+        return jsonify({'success': False, 'message': _('inquiry_action_error')}), 500
     return redirect(url_for('admin.inquiries'))
 
 

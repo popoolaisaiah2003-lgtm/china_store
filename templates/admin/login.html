@@ -1,26 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ lang }}" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Login | Velora Peptide</title>
+  <title>{{ _('admin_login') }} | Velora Peptide</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body style="background: var(--navy-deep); display: flex; align-items: center; justify-content: center; min-height: 100vh;">
 
   <div style="width: 100%; max-width: 420px; padding: 2rem;">
+    <div style="text-align: right; margin-bottom: 1rem;">
+      <div class="dropdown">
+        <button class="btn btn-sm btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">🌐 {{ lang|upper }}</button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          {% for code, label in [('en', 'English'), ('zh', '中文'), ('es', 'Español'), ('ar', 'العربية'), ('fr', 'Français')] %}
+            <li><a class="dropdown-item" href="{{ url_for('main.set_language', lang_code=code) }}">{{ label }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
     
     <div style="text-align: center; margin-bottom: 2rem;">
       <a href="{{ url_for('main.index') }}" class="brand-logo" style="justify-content: center; text-decoration: none;" aria-label="Velora Peptide Home">
         <img src="{{ url_for('static', filename='images/logo1.png') }}" alt="Velora Peptide" class="logo-img">
         <span class="brand-subtitle">PREMIUM RESEARCH PEPTIDES</span>
       </a>
-      <p style="color: #94A3B8; font-size: 0.9rem; margin-top: 0.5rem;">Laboratory Management Portal</p>
+      <p style="color: #94A3B8; font-size: 0.9rem; margin-top: 0.5rem;">{{ _('admin_portal') }}</p>
     </div>
 
     <div style="background: white; padding: 2.5rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); border-top: 4px solid var(--biotech-blue);">
-      <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center;">Administrator Sign In</h2>
+      <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center;">{{ _('admin_login') }}</h2>
 
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -36,16 +46,16 @@
         {{ form.hidden_tag() }}
         
         <div class="order-form-group">
-          <label for="username">Username</label>
-          {{ form.username(class="form-control", placeholder="Enter admin username", id="username") }}
+          <label for="username">{{ _('username') }}</label>
+          {{ form.username(class="form-control", placeholder=_('username_placeholder'), id="username") }}
         </div>
 
         <div class="order-form-group" style="margin-bottom: 1.5rem;">
-          <label for="password">Password</label>
-          {{ form.password(class="form-control", placeholder="Enter password", id="password") }}
+          <label for="password">{{ _('password') }}</label>
+          {{ form.password(class="form-control", placeholder=_('password_placeholder'), id="password") }}
         </div>
 
-        <button type="submit" class="btn btn-navy" style="width: 100%; padding: 0.85rem;">Sign In to Console</button>
+        <button type="submit" class="btn btn-navy" style="width: 100%; padding: 0.85rem;">{{ _('sign_in') }}</button>
       </form>
     </div>
 
@@ -54,6 +64,8 @@
     </div>
 
   </div>
+
+  <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
 </body>
 </html>

@@ -1,0 +1,3694 @@
+PAGE: /set_language/1
+ROUTE: main.set_language
+LANGUAGE: en
+STATUS: 302
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /
+ROUTE: main.index
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- GMP -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /reviews
+ROUTE: main.reviews
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /products
+ROUTE: main.products
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /product/sm2-semaglutide-2mg-10vials
+ROUTE: main.product_detail
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- CAS -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /coa
+ROUTE: main.coa_list
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /order
+ROUTE: main.order
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /order/print
+ROUTE: main.order_print
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- WhatsApp -> technical/brand/acronym
+- USD -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /checkout
+ROUTE: main.checkout
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /contact
+ROUTE: main.contact
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /faq
+ROUTE: main.faq
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /shipments
+ROUTE: main.shipments
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /about
+ROUTE: main.about
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/login
+ROUTE: admin.login
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/logout
+ROUTE: admin.logout
+LANGUAGE: en
+STATUS: 302
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/dashboard
+ROUTE: admin.dashboard
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USD -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/change-password
+ROUTE: admin.change_password
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/products
+ROUTE: admin.products
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USD -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/products/new
+ROUTE: admin.product_new
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- CAS -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/products/edit/7
+ROUTE: admin.product_edit
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- CAS -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/coa
+ROUTE: admin.coa_index
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/coa/new
+ROUTE: admin.coa_new
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/reviews
+ROUTE: admin.reviews_index
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/reviews/new
+ROUTE: admin.review_new
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/reviews/edit/7
+ROUTE: admin.review_edit
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/categories
+ROUTE: admin.categories
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/blog
+ROUTE: admin.blog_posts
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/blog/new
+ROUTE: admin.blog_new
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/blog/7/edit
+ROUTE: admin.blog_edit
+LANGUAGE: en
+STATUS: 404
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/orders
+ROUTE: admin.orders
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/comments
+ROUTE: admin.comments
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/inquiries
+ROUTE: admin.inquiries
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/inquiries/7
+ROUTE: admin.inquiry_detail
+LANGUAGE: en
+STATUS: 404
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/languages
+ROUTE: admin.languages
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/settings
+ROUTE: admin.settings
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/shipments
+ROUTE: admin.shipments
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/shipments/create
+ROUTE: admin.shipment_create
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/shipments/7/edit
+ROUTE: admin.shipment_edit
+LANGUAGE: en
+STATUS: 404
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /blog
+ROUTE: blog.index
+LANGUAGE: en
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /blog/sm2-semaglutide-2mg-10vials
+ROUTE: blog.detail
+LANGUAGE: en
+STATUS: 404
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /secure-panel
+ROUTE: secure_panel_legacy_redirect
+LANGUAGE: en
+STATUS: 302
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /secure-panel/1
+ROUTE: secure_panel_legacy_redirect
+LANGUAGE: en
+STATUS: 302
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /set_language/1
+ROUTE: main.set_language
+LANGUAGE: zh
+STATUS: 302
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /
+ROUTE: main.index
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- GMP -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "order" -> possible English interface text or stored content; review source
+- "orders" -> possible English interface text or stored content; review source
+- "product" -> possible English interface text or stored content; review source
+- "wholesale" -> possible English interface text or stored content; review source
+
+PAGE: /reviews
+ROUTE: main.reviews
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "Product" -> possible English interface text or stored content; review source
+- "order" -> possible English interface text or stored content; review source
+- "orders" -> possible English interface text or stored content; review source
+- "product" -> possible English interface text or stored content; review source
+- "shipping" -> possible English interface text or stored content; review source
+- "wholesale" -> possible English interface text or stored content; review source
+
+PAGE: /products
+ROUTE: main.products
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "Categories" -> possible English interface text or stored content; review source
+- "Standard" -> possible English interface text or stored content; review source
+
+PAGE: /product/sm2-semaglutide-2mg-10vials
+ROUTE: main.product_detail
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- CAS -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /coa
+ROUTE: main.coa_list
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "available" -> possible English interface text or stored content; review source
+- "customer" -> possible English interface text or stored content; review source
+- "details" -> possible English interface text or stored content; review source
+- "order" -> possible English interface text or stored content; review source
+- "previous" -> possible English interface text or stored content; review source
+- "product" -> possible English interface text or stored content; review source
+- "products" -> possible English interface text or stored content; review source
+
+PAGE: /order
+ROUTE: main.order
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /order/print
+ROUTE: main.order_print
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- WhatsApp -> technical/brand/acronym
+- USD -> technical/brand/acronym
+FAIL:
+- "QUOTATION" -> possible English interface text or stored content; review source
+- "WHOLESALE" -> possible English interface text or stored content; review source
+
+PAGE: /checkout
+ROUTE: main.checkout
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "Address" -> possible English interface text or stored content; review source
+- "Country" -> possible English interface text or stored content; review source
+
+PAGE: /contact
+ROUTE: main.contact
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "Contact" -> possible English interface text or stored content; review source
+- "Customer" -> possible English interface text or stored content; review source
+
+PAGE: /faq
+ROUTE: main.faq
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /shipments
+ROUTE: main.shipments
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "Delivered" -> possible English interface text or stored content; review source
+- "loading" -> possible English interface text or stored content; review source
+
+PAGE: /about
+ROUTE: main.about
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/login
+ROUTE: admin.login
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/logout
+ROUTE: admin.logout
+LANGUAGE: zh
+STATUS: 302
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- "admin" -> possible English interface text or stored content; review source
+- "login" -> possible English interface text or stored content; review source
+- "next" -> possible English interface text or stored content; review source
+
+PAGE: /admin/dashboard
+ROUTE: admin.dashboard
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USD -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Dashboard" -> possible English interface text or stored content; review source
+- "Products" -> possible English interface text or stored content; review source
+- "View" -> possible English interface text or stored content; review source
+
+PAGE: /admin/change-password
+ROUTE: admin.change_password
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Password" -> possible English interface text or stored content; review source
+
+PAGE: /admin/products
+ROUTE: admin.products
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USD -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Products" -> possible English interface text or stored content; review source
+
+PAGE: /admin/products/new
+ROUTE: admin.product_new
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- CAS -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Product" -> possible English interface text or stored content; review source
+- "Status" -> possible English interface text or stored content; review source
+
+PAGE: /admin/products/edit/7
+ROUTE: admin.product_edit
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- CAS -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Edit" -> possible English interface text or stored content; review source
+- "Status" -> possible English interface text or stored content; review source
+- "Wholesale" -> possible English interface text or stored content; review source
+
+PAGE: /admin/coa
+ROUTE: admin.coa_index
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+
+PAGE: /admin/coa/new
+ROUTE: admin.coa_new
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Upload" -> possible English interface text or stored content; review source
+
+PAGE: /admin/reviews
+ROUTE: admin.reviews_index
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Featured" -> possible English interface text or stored content; review source
+- "Product" -> possible English interface text or stored content; review source
+- "Reviews" -> possible English interface text or stored content; review source
+- "order" -> possible English interface text or stored content; review source
+- "orders" -> possible English interface text or stored content; review source
+- "product" -> possible English interface text or stored content; review source
+- "reviews" -> possible English interface text or stored content; review source
+- "shipping" -> possible English interface text or stored content; review source
+- "wholesale" -> possible English interface text or stored content; review source
+
+PAGE: /admin/reviews/new
+ROUTE: admin.review_new
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+
+PAGE: /admin/reviews/edit/7
+ROUTE: admin.review_edit
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "orders" -> possible English interface text or stored content; review source
+- "wholesale" -> possible English interface text or stored content; review source
+
+PAGE: /admin/categories
+ROUTE: admin.categories
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+
+PAGE: /admin/blog
+ROUTE: admin.blog_posts
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Create" -> possible English interface text or stored content; review source
+- "Featured" -> possible English interface text or stored content; review source
+- "Journal" -> possible English interface text or stored content; review source
+- "Standard" -> possible English interface text or stored content; review source
+- "Update" -> possible English interface text or stored content; review source
+- "blog" -> possible English interface text or stored content; review source
+
+PAGE: /admin/blog/new
+ROUTE: admin.blog_new
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Create" -> possible English interface text or stored content; review source
+- "Journal" -> possible English interface text or stored content; review source
+- "view" -> possible English interface text or stored content; review source
+
+PAGE: /admin/blog/7/edit
+ROUTE: admin.blog_edit
+LANGUAGE: zh
+STATUS: 404
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/orders
+ROUTE: admin.orders
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Orders" -> possible English interface text or stored content; review source
+- "Pending" -> possible English interface text or stored content; review source
+- "Wholesale" -> possible English interface text or stored content; review source
+
+PAGE: /admin/comments
+ROUTE: admin.comments
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "blog" -> possible English interface text or stored content; review source
+
+PAGE: /admin/inquiries
+ROUTE: admin.inquiries
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Contact" -> possible English interface text or stored content; review source
+- "Inquiries" -> possible English interface text or stored content; review source
+
+PAGE: /admin/inquiries/7
+ROUTE: admin.inquiry_detail
+LANGUAGE: zh
+STATUS: 404
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/languages
+ROUTE: admin.languages
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+
+PAGE: /admin/settings
+ROUTE: admin.settings
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+FAIL:
+- "Address" -> possible English interface text or stored content; review source
+- "Admin" -> possible English interface text or stored content; review source
+- "Settings" -> possible English interface text or stored content; review source
+
+PAGE: /admin/shipments
+ROUTE: admin.shipments
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Delivered" -> possible English interface text or stored content; review source
+
+PAGE: /admin/shipments/create
+ROUTE: admin.shipment_create
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Back" -> possible English interface text or stored content; review source
+- "Country" -> possible English interface text or stored content; review source
+- "Date" -> possible English interface text or stored content; review source
+- "Delivered" -> possible English interface text or stored content; review source
+- "Processing" -> possible English interface text or stored content; review source
+- "Product" -> possible English interface text or stored content; review source
+- "Quantity" -> possible English interface text or stored content; review source
+- "Save" -> possible English interface text or stored content; review source
+- "Status" -> possible English interface text or stored content; review source
+- "Update" -> possible English interface text or stored content; review source
+- "Upload" -> possible English interface text or stored content; review source
+- "edit" -> possible English interface text or stored content; review source
+
+PAGE: /admin/shipments/7/edit
+ROUTE: admin.shipment_edit
+LANGUAGE: zh
+STATUS: 404
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /blog
+ROUTE: blog.index
+LANGUAGE: zh
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "Update" -> possible English interface text or stored content; review source
+
+PAGE: /blog/sm2-semaglutide-2mg-10vials
+ROUTE: blog.detail
+LANGUAGE: zh
+STATUS: 404
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /secure-panel
+ROUTE: secure_panel_legacy_redirect
+LANGUAGE: zh
+STATUS: 302
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- "admin" -> possible English interface text or stored content; review source
+
+PAGE: /secure-panel/1
+ROUTE: secure_panel_legacy_redirect
+LANGUAGE: zh
+STATUS: 302
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- "admin" -> possible English interface text or stored content; review source
+
+PAGE: /set_language/1
+ROUTE: main.set_language
+LANGUAGE: es
+STATUS: 302
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /
+ROUTE: main.index
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- GMP -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "order" -> possible English interface text or stored content; review source
+- "orders" -> possible English interface text or stored content; review source
+- "product" -> possible English interface text or stored content; review source
+- "wholesale" -> possible English interface text or stored content; review source
+
+PAGE: /reviews
+ROUTE: main.reviews
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "Product" -> possible English interface text or stored content; review source
+- "order" -> possible English interface text or stored content; review source
+- "orders" -> possible English interface text or stored content; review source
+- "product" -> possible English interface text or stored content; review source
+- "shipping" -> possible English interface text or stored content; review source
+- "wholesale" -> possible English interface text or stored content; review source
+
+PAGE: /products
+ROUTE: main.products
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "Categories" -> possible English interface text or stored content; review source
+- "Standard" -> possible English interface text or stored content; review source
+
+PAGE: /product/sm2-semaglutide-2mg-10vials
+ROUTE: main.product_detail
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- CAS -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /coa
+ROUTE: main.coa_list
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "available" -> possible English interface text or stored content; review source
+- "customer" -> possible English interface text or stored content; review source
+- "details" -> possible English interface text or stored content; review source
+- "order" -> possible English interface text or stored content; review source
+- "previous" -> possible English interface text or stored content; review source
+- "product" -> possible English interface text or stored content; review source
+- "products" -> possible English interface text or stored content; review source
+
+PAGE: /order
+ROUTE: main.order
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /order/print
+ROUTE: main.order_print
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- WhatsApp -> technical/brand/acronym
+- USD -> technical/brand/acronym
+FAIL:
+- "Total" -> possible English interface text or stored content; review source
+
+PAGE: /checkout
+ROUTE: main.checkout
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "Address" -> possible English interface text or stored content; review source
+- "Country" -> possible English interface text or stored content; review source
+- "Total" -> possible English interface text or stored content; review source
+
+PAGE: /contact
+ROUTE: main.contact
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "Contact" -> possible English interface text or stored content; review source
+- "Customer" -> possible English interface text or stored content; review source
+
+PAGE: /faq
+ROUTE: main.faq
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /shipments
+ROUTE: main.shipments
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "Delivered" -> possible English interface text or stored content; review source
+- "loading" -> possible English interface text or stored content; review source
+
+PAGE: /about
+ROUTE: main.about
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/login
+ROUTE: admin.login
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+
+PAGE: /admin/logout
+ROUTE: admin.logout
+LANGUAGE: es
+STATUS: 302
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- "admin" -> possible English interface text or stored content; review source
+- "login" -> possible English interface text or stored content; review source
+- "next" -> possible English interface text or stored content; review source
+
+PAGE: /admin/dashboard
+ROUTE: admin.dashboard
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USD -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Dashboard" -> possible English interface text or stored content; review source
+- "Products" -> possible English interface text or stored content; review source
+- "Total" -> possible English interface text or stored content; review source
+- "View" -> possible English interface text or stored content; review source
+
+PAGE: /admin/change-password
+ROUTE: admin.change_password
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Password" -> possible English interface text or stored content; review source
+
+PAGE: /admin/products
+ROUTE: admin.products
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USD -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Products" -> possible English interface text or stored content; review source
+- "Total" -> possible English interface text or stored content; review source
+
+PAGE: /admin/products/new
+ROUTE: admin.product_new
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- CAS -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Product" -> possible English interface text or stored content; review source
+- "Status" -> possible English interface text or stored content; review source
+
+PAGE: /admin/products/edit/7
+ROUTE: admin.product_edit
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- CAS -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Edit" -> possible English interface text or stored content; review source
+- "Status" -> possible English interface text or stored content; review source
+- "Wholesale" -> possible English interface text or stored content; review source
+
+PAGE: /admin/coa
+ROUTE: admin.coa_index
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+
+PAGE: /admin/coa/new
+ROUTE: admin.coa_new
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Upload" -> possible English interface text or stored content; review source
+
+PAGE: /admin/reviews
+ROUTE: admin.reviews_index
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Featured" -> possible English interface text or stored content; review source
+- "Product" -> possible English interface text or stored content; review source
+- "Reviews" -> possible English interface text or stored content; review source
+- "order" -> possible English interface text or stored content; review source
+- "orders" -> possible English interface text or stored content; review source
+- "product" -> possible English interface text or stored content; review source
+- "reviews" -> possible English interface text or stored content; review source
+- "shipping" -> possible English interface text or stored content; review source
+- "wholesale" -> possible English interface text or stored content; review source
+
+PAGE: /admin/reviews/new
+ROUTE: admin.review_new
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+
+PAGE: /admin/reviews/edit/7
+ROUTE: admin.review_edit
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "orders" -> possible English interface text or stored content; review source
+- "wholesale" -> possible English interface text or stored content; review source
+
+PAGE: /admin/categories
+ROUTE: admin.categories
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+
+PAGE: /admin/blog
+ROUTE: admin.blog_posts
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Create" -> possible English interface text or stored content; review source
+- "Featured" -> possible English interface text or stored content; review source
+- "Journal" -> possible English interface text or stored content; review source
+- "Standard" -> possible English interface text or stored content; review source
+- "Update" -> possible English interface text or stored content; review source
+- "blog" -> possible English interface text or stored content; review source
+
+PAGE: /admin/blog/new
+ROUTE: admin.blog_new
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Create" -> possible English interface text or stored content; review source
+- "Journal" -> possible English interface text or stored content; review source
+- "view" -> possible English interface text or stored content; review source
+
+PAGE: /admin/blog/7/edit
+ROUTE: admin.blog_edit
+LANGUAGE: es
+STATUS: 404
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/orders
+ROUTE: admin.orders
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Orders" -> possible English interface text or stored content; review source
+- "Pending" -> possible English interface text or stored content; review source
+- "Total" -> possible English interface text or stored content; review source
+- "Wholesale" -> possible English interface text or stored content; review source
+
+PAGE: /admin/comments
+ROUTE: admin.comments
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "blog" -> possible English interface text or stored content; review source
+
+PAGE: /admin/inquiries
+ROUTE: admin.inquiries
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Contact" -> possible English interface text or stored content; review source
+- "Inquiries" -> possible English interface text or stored content; review source
+
+PAGE: /admin/inquiries/7
+ROUTE: admin.inquiry_detail
+LANGUAGE: es
+STATUS: 404
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/languages
+ROUTE: admin.languages
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+
+PAGE: /admin/settings
+ROUTE: admin.settings
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+FAIL:
+- "Address" -> possible English interface text or stored content; review source
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Settings" -> possible English interface text or stored content; review source
+
+PAGE: /admin/shipments
+ROUTE: admin.shipments
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Delivered" -> possible English interface text or stored content; review source
+- "Total" -> possible English interface text or stored content; review source
+
+PAGE: /admin/shipments/create
+ROUTE: admin.shipment_create
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Back" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Country" -> possible English interface text or stored content; review source
+- "Date" -> possible English interface text or stored content; review source
+- "Delivered" -> possible English interface text or stored content; review source
+- "Processing" -> possible English interface text or stored content; review source
+- "Product" -> possible English interface text or stored content; review source
+- "Quantity" -> possible English interface text or stored content; review source
+- "Save" -> possible English interface text or stored content; review source
+- "Status" -> possible English interface text or stored content; review source
+- "Update" -> possible English interface text or stored content; review source
+- "Upload" -> possible English interface text or stored content; review source
+- "edit" -> possible English interface text or stored content; review source
+
+PAGE: /admin/shipments/7/edit
+ROUTE: admin.shipment_edit
+LANGUAGE: es
+STATUS: 404
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /blog
+ROUTE: blog.index
+LANGUAGE: es
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "Update" -> possible English interface text or stored content; review source
+
+PAGE: /blog/sm2-semaglutide-2mg-10vials
+ROUTE: blog.detail
+LANGUAGE: es
+STATUS: 404
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /secure-panel
+ROUTE: secure_panel_legacy_redirect
+LANGUAGE: es
+STATUS: 302
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- "admin" -> possible English interface text or stored content; review source
+
+PAGE: /secure-panel/1
+ROUTE: secure_panel_legacy_redirect
+LANGUAGE: es
+STATUS: 302
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- "admin" -> possible English interface text or stored content; review source
+
+PAGE: /set_language/1
+ROUTE: main.set_language
+LANGUAGE: ar
+STATUS: 302
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /
+ROUTE: main.index
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- GMP -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "order" -> possible English interface text or stored content; review source
+- "orders" -> possible English interface text or stored content; review source
+- "product" -> possible English interface text or stored content; review source
+- "wholesale" -> possible English interface text or stored content; review source
+
+PAGE: /reviews
+ROUTE: main.reviews
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "Product" -> possible English interface text or stored content; review source
+- "order" -> possible English interface text or stored content; review source
+- "orders" -> possible English interface text or stored content; review source
+- "product" -> possible English interface text or stored content; review source
+- "shipping" -> possible English interface text or stored content; review source
+- "wholesale" -> possible English interface text or stored content; review source
+
+PAGE: /products
+ROUTE: main.products
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "Categories" -> possible English interface text or stored content; review source
+- "Standard" -> possible English interface text or stored content; review source
+
+PAGE: /product/sm2-semaglutide-2mg-10vials
+ROUTE: main.product_detail
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- CAS -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /coa
+ROUTE: main.coa_list
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "available" -> possible English interface text or stored content; review source
+- "customer" -> possible English interface text or stored content; review source
+- "details" -> possible English interface text or stored content; review source
+- "order" -> possible English interface text or stored content; review source
+- "previous" -> possible English interface text or stored content; review source
+- "product" -> possible English interface text or stored content; review source
+- "products" -> possible English interface text or stored content; review source
+
+PAGE: /order
+ROUTE: main.order
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /order/print
+ROUTE: main.order_print
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- USD -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /checkout
+ROUTE: main.checkout
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "Address" -> possible English interface text or stored content; review source
+- "Country" -> possible English interface text or stored content; review source
+
+PAGE: /contact
+ROUTE: main.contact
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "Contact" -> possible English interface text or stored content; review source
+- "Customer" -> possible English interface text or stored content; review source
+
+PAGE: /faq
+ROUTE: main.faq
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /shipments
+ROUTE: main.shipments
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "Delivered" -> possible English interface text or stored content; review source
+- "loading" -> possible English interface text or stored content; review source
+
+PAGE: /about
+ROUTE: main.about
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/login
+ROUTE: admin.login
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/logout
+ROUTE: admin.logout
+LANGUAGE: ar
+STATUS: 302
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- "admin" -> possible English interface text or stored content; review source
+- "login" -> possible English interface text or stored content; review source
+- "next" -> possible English interface text or stored content; review source
+
+PAGE: /admin/dashboard
+ROUTE: admin.dashboard
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USD -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Dashboard" -> possible English interface text or stored content; review source
+- "Products" -> possible English interface text or stored content; review source
+- "View" -> possible English interface text or stored content; review source
+
+PAGE: /admin/change-password
+ROUTE: admin.change_password
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Password" -> possible English interface text or stored content; review source
+
+PAGE: /admin/products
+ROUTE: admin.products
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USD -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Products" -> possible English interface text or stored content; review source
+
+PAGE: /admin/products/new
+ROUTE: admin.product_new
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- CAS -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Product" -> possible English interface text or stored content; review source
+- "Status" -> possible English interface text or stored content; review source
+
+PAGE: /admin/products/edit/7
+ROUTE: admin.product_edit
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- CAS -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Edit" -> possible English interface text or stored content; review source
+- "Status" -> possible English interface text or stored content; review source
+- "Wholesale" -> possible English interface text or stored content; review source
+
+PAGE: /admin/coa
+ROUTE: admin.coa_index
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+
+PAGE: /admin/coa/new
+ROUTE: admin.coa_new
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Upload" -> possible English interface text or stored content; review source
+
+PAGE: /admin/reviews
+ROUTE: admin.reviews_index
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Featured" -> possible English interface text or stored content; review source
+- "Product" -> possible English interface text or stored content; review source
+- "Reviews" -> possible English interface text or stored content; review source
+- "order" -> possible English interface text or stored content; review source
+- "orders" -> possible English interface text or stored content; review source
+- "product" -> possible English interface text or stored content; review source
+- "reviews" -> possible English interface text or stored content; review source
+- "shipping" -> possible English interface text or stored content; review source
+- "wholesale" -> possible English interface text or stored content; review source
+
+PAGE: /admin/reviews/new
+ROUTE: admin.review_new
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+
+PAGE: /admin/reviews/edit/7
+ROUTE: admin.review_edit
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "orders" -> possible English interface text or stored content; review source
+- "wholesale" -> possible English interface text or stored content; review source
+
+PAGE: /admin/categories
+ROUTE: admin.categories
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+
+PAGE: /admin/blog
+ROUTE: admin.blog_posts
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Create" -> possible English interface text or stored content; review source
+- "Featured" -> possible English interface text or stored content; review source
+- "Journal" -> possible English interface text or stored content; review source
+- "Standard" -> possible English interface text or stored content; review source
+- "Update" -> possible English interface text or stored content; review source
+- "blog" -> possible English interface text or stored content; review source
+
+PAGE: /admin/blog/new
+ROUTE: admin.blog_new
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Create" -> possible English interface text or stored content; review source
+- "Journal" -> possible English interface text or stored content; review source
+- "view" -> possible English interface text or stored content; review source
+
+PAGE: /admin/blog/7/edit
+ROUTE: admin.blog_edit
+LANGUAGE: ar
+STATUS: 404
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/orders
+ROUTE: admin.orders
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Orders" -> possible English interface text or stored content; review source
+- "Pending" -> possible English interface text or stored content; review source
+- "Wholesale" -> possible English interface text or stored content; review source
+
+PAGE: /admin/comments
+ROUTE: admin.comments
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "blog" -> possible English interface text or stored content; review source
+
+PAGE: /admin/inquiries
+ROUTE: admin.inquiries
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Contact" -> possible English interface text or stored content; review source
+- "Inquiries" -> possible English interface text or stored content; review source
+
+PAGE: /admin/inquiries/7
+ROUTE: admin.inquiry_detail
+LANGUAGE: ar
+STATUS: 404
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/languages
+ROUTE: admin.languages
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+
+PAGE: /admin/settings
+ROUTE: admin.settings
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+FAIL:
+- "Address" -> possible English interface text or stored content; review source
+- "Admin" -> possible English interface text or stored content; review source
+- "Settings" -> possible English interface text or stored content; review source
+
+PAGE: /admin/shipments
+ROUTE: admin.shipments
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Delivered" -> possible English interface text or stored content; review source
+
+PAGE: /admin/shipments/create
+ROUTE: admin.shipment_create
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+FAIL:
+- "Admin" -> possible English interface text or stored content; review source
+- "Back" -> possible English interface text or stored content; review source
+- "Country" -> possible English interface text or stored content; review source
+- "Date" -> possible English interface text or stored content; review source
+- "Delivered" -> possible English interface text or stored content; review source
+- "Processing" -> possible English interface text or stored content; review source
+- "Product" -> possible English interface text or stored content; review source
+- "Quantity" -> possible English interface text or stored content; review source
+- "Save" -> possible English interface text or stored content; review source
+- "Status" -> possible English interface text or stored content; review source
+- "Update" -> possible English interface text or stored content; review source
+- "Upload" -> possible English interface text or stored content; review source
+- "edit" -> possible English interface text or stored content; review source
+
+PAGE: /admin/shipments/7/edit
+ROUTE: admin.shipment_edit
+LANGUAGE: ar
+STATUS: 404
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /blog
+ROUTE: blog.index
+LANGUAGE: ar
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "Update" -> possible English interface text or stored content; review source
+
+PAGE: /blog/sm2-semaglutide-2mg-10vials
+ROUTE: blog.detail
+LANGUAGE: ar
+STATUS: 404
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /secure-panel
+ROUTE: secure_panel_legacy_redirect
+LANGUAGE: ar
+STATUS: 302
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- "admin" -> possible English interface text or stored content; review source
+
+PAGE: /secure-panel/1
+ROUTE: secure_panel_legacy_redirect
+LANGUAGE: ar
+STATUS: 302
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- "admin" -> possible English interface text or stored content; review source
+
+PAGE: /set_language/1
+ROUTE: main.set_language
+LANGUAGE: fr
+STATUS: 302
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /
+ROUTE: main.index
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- GMP -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "order" -> possible English interface text or stored content; review source
+- "orders" -> possible English interface text or stored content; review source
+- "product" -> possible English interface text or stored content; review source
+- "wholesale" -> possible English interface text or stored content; review source
+
+PAGE: /reviews
+ROUTE: main.reviews
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "Product" -> possible English interface text or stored content; review source
+- "order" -> possible English interface text or stored content; review source
+- "orders" -> possible English interface text or stored content; review source
+- "product" -> possible English interface text or stored content; review source
+- "shipping" -> possible English interface text or stored content; review source
+- "wholesale" -> possible English interface text or stored content; review source
+
+PAGE: /products
+ROUTE: main.products
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "Categories" -> possible English interface text or stored content; review source
+- "Standard" -> possible English interface text or stored content; review source
+
+PAGE: /product/sm2-semaglutide-2mg-10vials
+ROUTE: main.product_detail
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- CAS -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /coa
+ROUTE: main.coa_list
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "Date" -> possible English interface text or stored content; review source
+- "available" -> possible English interface text or stored content; review source
+- "customer" -> possible English interface text or stored content; review source
+- "details" -> possible English interface text or stored content; review source
+- "order" -> possible English interface text or stored content; review source
+- "previous" -> possible English interface text or stored content; review source
+- "product" -> possible English interface text or stored content; review source
+- "products" -> possible English interface text or stored content; review source
+
+PAGE: /order
+ROUTE: main.order
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /order/print
+ROUTE: main.order_print
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- WhatsApp -> technical/brand/acronym
+- USD -> technical/brand/acronym
+FAIL:
+- "Date" -> possible English interface text or stored content; review source
+- "Description" -> possible English interface text or stored content; review source
+- "Total" -> possible English interface text or stored content; review source
+- "total" -> possible English interface text or stored content; review source
+
+PAGE: /checkout
+ROUTE: main.checkout
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "Address" -> possible English interface text or stored content; review source
+- "Country" -> possible English interface text or stored content; review source
+- "Total" -> possible English interface text or stored content; review source
+
+PAGE: /contact
+ROUTE: main.contact
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "Contact" -> possible English interface text or stored content; review source
+- "Customer" -> possible English interface text or stored content; review source
+- "message" -> possible English interface text or stored content; review source
+
+PAGE: /faq
+ROUTE: main.faq
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "message" -> possible English interface text or stored content; review source
+
+PAGE: /shipments
+ROUTE: main.shipments
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "Date" -> possible English interface text or stored content; review source
+- "Delivered" -> possible English interface text or stored content; review source
+- "loading" -> possible English interface text or stored content; review source
+
+PAGE: /about
+ROUTE: main.about
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/login
+ROUTE: admin.login
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- "ADMIN" -> possible English interface text or stored content; review source
+- "Admin" -> possible English interface text or stored content; review source
+
+PAGE: /admin/logout
+ROUTE: admin.logout
+LANGUAGE: fr
+STATUS: 302
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- "admin" -> possible English interface text or stored content; review source
+- "login" -> possible English interface text or stored content; review source
+- "next" -> possible English interface text or stored content; review source
+
+PAGE: /admin/dashboard
+ROUTE: admin.dashboard
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USD -> technical/brand/acronym
+FAIL:
+- "ADMIN" -> possible English interface text or stored content; review source
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Dashboard" -> possible English interface text or stored content; review source
+- "Products" -> possible English interface text or stored content; review source
+- "Total" -> possible English interface text or stored content; review source
+- "View" -> possible English interface text or stored content; review source
+- "admin" -> possible English interface text or stored content; review source
+
+PAGE: /admin/change-password
+ROUTE: admin.change_password
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "ADMIN" -> possible English interface text or stored content; review source
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Password" -> possible English interface text or stored content; review source
+- "admin" -> possible English interface text or stored content; review source
+
+PAGE: /admin/products
+ROUTE: admin.products
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USD -> technical/brand/acronym
+FAIL:
+- "ADMIN" -> possible English interface text or stored content; review source
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Products" -> possible English interface text or stored content; review source
+- "Total" -> possible English interface text or stored content; review source
+- "admin" -> possible English interface text or stored content; review source
+- "standard" -> possible English interface text or stored content; review source
+
+PAGE: /admin/products/new
+ROUTE: admin.product_new
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- CAS -> technical/brand/acronym
+FAIL:
+- "ADMIN" -> possible English interface text or stored content; review source
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Product" -> possible English interface text or stored content; review source
+- "Status" -> possible English interface text or stored content; review source
+- "admin" -> possible English interface text or stored content; review source
+
+PAGE: /admin/products/edit/7
+ROUTE: admin.product_edit
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- CAS -> technical/brand/acronym
+FAIL:
+- "ADMIN" -> possible English interface text or stored content; review source
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Edit" -> possible English interface text or stored content; review source
+- "Status" -> possible English interface text or stored content; review source
+- "Wholesale" -> possible English interface text or stored content; review source
+- "admin" -> possible English interface text or stored content; review source
+
+PAGE: /admin/coa
+ROUTE: admin.coa_index
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "ADMIN" -> possible English interface text or stored content; review source
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Date" -> possible English interface text or stored content; review source
+- "admin" -> possible English interface text or stored content; review source
+
+PAGE: /admin/coa/new
+ROUTE: admin.coa_new
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "ADMIN" -> possible English interface text or stored content; review source
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Date" -> possible English interface text or stored content; review source
+- "Upload" -> possible English interface text or stored content; review source
+- "admin" -> possible English interface text or stored content; review source
+
+PAGE: /admin/reviews
+ROUTE: admin.reviews_index
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "ADMIN" -> possible English interface text or stored content; review source
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Date" -> possible English interface text or stored content; review source
+- "Featured" -> possible English interface text or stored content; review source
+- "Product" -> possible English interface text or stored content; review source
+- "Reviews" -> possible English interface text or stored content; review source
+- "admin" -> possible English interface text or stored content; review source
+- "order" -> possible English interface text or stored content; review source
+- "orders" -> possible English interface text or stored content; review source
+- "product" -> possible English interface text or stored content; review source
+- "reviews" -> possible English interface text or stored content; review source
+- "shipping" -> possible English interface text or stored content; review source
+- "standard" -> possible English interface text or stored content; review source
+- "wholesale" -> possible English interface text or stored content; review source
+
+PAGE: /admin/reviews/new
+ROUTE: admin.review_new
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "ADMIN" -> possible English interface text or stored content; review source
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "admin" -> possible English interface text or stored content; review source
+
+PAGE: /admin/reviews/edit/7
+ROUTE: admin.review_edit
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "ADMIN" -> possible English interface text or stored content; review source
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "admin" -> possible English interface text or stored content; review source
+- "orders" -> possible English interface text or stored content; review source
+- "wholesale" -> possible English interface text or stored content; review source
+
+PAGE: /admin/categories
+ROUTE: admin.categories
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+FAIL:
+- "ADMIN" -> possible English interface text or stored content; review source
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Description" -> possible English interface text or stored content; review source
+- "admin" -> possible English interface text or stored content; review source
+
+PAGE: /admin/blog
+ROUTE: admin.blog_posts
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "ADMIN" -> possible English interface text or stored content; review source
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Create" -> possible English interface text or stored content; review source
+- "Featured" -> possible English interface text or stored content; review source
+- "Journal" -> possible English interface text or stored content; review source
+- "Standard" -> possible English interface text or stored content; review source
+- "Update" -> possible English interface text or stored content; review source
+- "admin" -> possible English interface text or stored content; review source
+- "blog" -> possible English interface text or stored content; review source
+
+PAGE: /admin/blog/new
+ROUTE: admin.blog_new
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "ADMIN" -> possible English interface text or stored content; review source
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Create" -> possible English interface text or stored content; review source
+- "Journal" -> possible English interface text or stored content; review source
+- "admin" -> possible English interface text or stored content; review source
+- "view" -> possible English interface text or stored content; review source
+
+PAGE: /admin/blog/7/edit
+ROUTE: admin.blog_edit
+LANGUAGE: fr
+STATUS: 404
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/orders
+ROUTE: admin.orders
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "ADMIN" -> possible English interface text or stored content; review source
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Date" -> possible English interface text or stored content; review source
+- "Journal" -> possible English interface text or stored content; review source
+- "Orders" -> possible English interface text or stored content; review source
+- "Pending" -> possible English interface text or stored content; review source
+- "Total" -> possible English interface text or stored content; review source
+- "Wholesale" -> possible English interface text or stored content; review source
+- "admin" -> possible English interface text or stored content; review source
+
+PAGE: /admin/comments
+ROUTE: admin.comments
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "ADMIN" -> possible English interface text or stored content; review source
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Date" -> possible English interface text or stored content; review source
+- "admin" -> possible English interface text or stored content; review source
+- "blog" -> possible English interface text or stored content; review source
+
+PAGE: /admin/inquiries
+ROUTE: admin.inquiries
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "ADMIN" -> possible English interface text or stored content; review source
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Contact" -> possible English interface text or stored content; review source
+- "Inquiries" -> possible English interface text or stored content; review source
+- "admin" -> possible English interface text or stored content; review source
+
+PAGE: /admin/inquiries/7
+ROUTE: admin.inquiry_detail
+LANGUAGE: fr
+STATUS: 404
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /admin/languages
+ROUTE: admin.languages
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "ADMIN" -> possible English interface text or stored content; review source
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "admin" -> possible English interface text or stored content; review source
+
+PAGE: /admin/settings
+ROUTE: admin.settings
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+FAIL:
+- "ADMIN" -> possible English interface text or stored content; review source
+- "Address" -> possible English interface text or stored content; review source
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Settings" -> possible English interface text or stored content; review source
+- "admin" -> possible English interface text or stored content; review source
+- "description" -> possible English interface text or stored content; review source
+
+PAGE: /admin/shipments
+ROUTE: admin.shipments
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "ADMIN" -> possible English interface text or stored content; review source
+- "Admin" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Delivered" -> possible English interface text or stored content; review source
+- "Journal" -> possible English interface text or stored content; review source
+- "Total" -> possible English interface text or stored content; review source
+- "admin" -> possible English interface text or stored content; review source
+
+PAGE: /admin/shipments/create
+ROUTE: admin.shipment_create
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- COA -> technical/brand/acronym
+FAIL:
+- "ADMIN" -> possible English interface text or stored content; review source
+- "Admin" -> possible English interface text or stored content; review source
+- "Back" -> possible English interface text or stored content; review source
+- "Blog" -> possible English interface text or stored content; review source
+- "Country" -> possible English interface text or stored content; review source
+- "Date" -> possible English interface text or stored content; review source
+- "Delivered" -> possible English interface text or stored content; review source
+- "Processing" -> possible English interface text or stored content; review source
+- "Product" -> possible English interface text or stored content; review source
+- "Quantity" -> possible English interface text or stored content; review source
+- "Save" -> possible English interface text or stored content; review source
+- "Status" -> possible English interface text or stored content; review source
+- "Update" -> possible English interface text or stored content; review source
+- "Upload" -> possible English interface text or stored content; review source
+- "admin" -> possible English interface text or stored content; review source
+- "edit" -> possible English interface text or stored content; review source
+
+PAGE: /admin/shipments/7/edit
+ROUTE: admin.shipment_edit
+LANGUAGE: fr
+STATUS: 404
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /blog
+ROUTE: blog.index
+LANGUAGE: fr
+STATUS: 200
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+- HPLC -> technical/brand/acronym
+- MS -> technical/brand/acronym
+- COA -> technical/brand/acronym
+- WhatsApp -> technical/brand/acronym
+- DHgate -> technical/brand/acronym
+- GLP-1 -> technical/brand/acronym
+- USDT -> technical/brand/acronym
+- USD -> technical/brand/acronym
+- TRC20 -> technical/brand/acronym
+- ERC20 -> technical/brand/acronym
+FAIL:
+- "Update" -> possible English interface text or stored content; review source
+
+PAGE: /blog/sm2-semaglutide-2mg-10vials
+ROUTE: blog.detail
+LANGUAGE: fr
+STATUS: 404
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- none detected by interface vocabulary audit
+
+PAGE: /secure-panel
+ROUTE: secure_panel_legacy_redirect
+LANGUAGE: fr
+STATUS: 302
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- "admin" -> possible English interface text or stored content; review source
+
+PAGE: /secure-panel/1
+ROUTE: secure_panel_legacy_redirect
+LANGUAGE: fr
+STATUS: 302
+PASS:
+- language session applied
+- HTML rendered
+- interface audit completed
+EXCLUDED:
+FAIL:
+- "admin" -> possible English interface text or stored content; review source

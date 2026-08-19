@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+  var i18n = window.VeloraI18n || {};
   var mobileToggle = document.getElementById('mobileNavToggle');
   var navLinks = document.getElementById('navLinks');
   var modalElement = document.getElementById('orderInfoModal');
@@ -27,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
     productsGrid.innerHTML = payload.products_html;
 
     if (productsSummaryText) {
-      productsSummaryText.textContent = 'Showing ' + (payload.total_count || payload.loaded_count || 0) + ' Products';
+      productsSummaryText.textContent = (i18n.showing || 'Showing') + ' ' + (payload.total_count || payload.loaded_count || 0) + ' ' + (i18n.products || 'Products');
     }
   }
 
@@ -65,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
       AppAjax.showToast(successTitle, payload.message || '', false);
       return payload;
     } catch (error) {
-      AppAjax.showToast('Request failed', error.message, true);
+      AppAjax.showToast(i18n.request_failed || 'Request failed', error.message, true);
       throw error;
     } finally {
       AppAjax.setLoading(button, false);
@@ -94,11 +95,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  var currentLangMatch = window.location.pathname.match(/\/set_language\/([a-z]{2})/);
-  if (currentLangMatch && currentLangMatch[1]) {
-    localStorage.setItem('yz_language', currentLangMatch[1]);
-  }
-
   document.body.addEventListener('submit', async function (event) {
     var form = event.target;
     if (!form) return;
@@ -106,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (form.matches('[data-ajax-cart-add]')) {
       event.preventDefault();
       try {
-        var cartAddPayload = await submitAjaxForm(form, 'Added to quotation cart');
+        var cartAddPayload = await submitAjaxForm(form, i18n.added_to_cart || 'Added to quotation cart');
         updateCartBadges(cartAddPayload.cart_total_count || 0);
       } catch (error) {}
       return;
@@ -115,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (form.matches('[data-ajax-cart-update], [data-ajax-cart-remove]')) {
       event.preventDefault();
       try {
-        var cartPayload = await submitAjaxForm(form, 'Quotation updated');
+        var cartPayload = await submitAjaxForm(form, i18n.quotation_updated || 'Quotation updated');
         updateCartBadges(cartPayload.cart_total_count || 0);
         if (orderPanel && cartPayload.order_panel_html) {
           orderPanel.innerHTML = cartPayload.order_panel_html;
@@ -127,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (form.matches('[data-ajax-wishlist]')) {
       event.preventDefault();
       try {
-        var wishlistPayload = await submitAjaxForm(form, 'Favorites updated');
+        var wishlistPayload = await submitAjaxForm(form, i18n.favorites_updated || 'Favorites updated');
         updateWishlistButtonState(form.querySelector('[data-wishlist-button]'), wishlistPayload.is_favorited);
       } catch (error) {}
       return;
@@ -150,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
         syncProductFilterState(queryUrl.toString());
         window.history.replaceState({}, '', queryUrl.toString());
       } catch (error) {
-        AppAjax.showToast('Search failed', error.message, true);
+        AppAjax.showToast(i18n.search_failed || 'Search failed', error.message, true);
       }
     }
   });
@@ -175,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function () {
         syncProductFilterState(filterLink.href);
         window.history.replaceState({}, '', filterLink.href);
       } catch (error) {
-        AppAjax.showToast('Filter failed', error.message, true);
+        AppAjax.showToast(i18n.filter_failed || 'Filter failed', error.message, true);
       }
       return;
     }

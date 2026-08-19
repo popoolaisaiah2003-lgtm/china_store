@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ lang }}" dir="ltr">
 <head>
   <meta charset="UTF-8">
-  <title>Wholesale Quotation {{ quotation_number }} | Velora Peptide</title>
+  <title>{{ _('wholesale_quotation_title_print') }} {{ quotation_number }} | Velora Peptide</title>
   <style>
     body { font-family: system-ui, -apple-system, sans-serif; color: #0F172A; margin: 0; padding: 2rem; background: white; }
     .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #C8A96B; padding-bottom: 1.5rem; margin-bottom: 2rem; }
@@ -23,29 +23,29 @@
 
   <div class="no-print" style="margin-bottom: 1.5rem; text-align: right;">
     <button onclick="window.print()" style="background: #0B1F3A; color: white; border: none; padding: 0.65rem 1.5rem; border-radius: 6px; font-weight: 600; cursor: pointer;">
-      🖨️ Print / Save as PDF
+      {{ _('print_save_pdf') }}
     </button>
   </div>
 
   <div class="header">
     <div>
       <div class="logo"><img src="{{ url_for('static', filename='images/logo1.png') }}" alt="Velora Peptide" style="height: 54px; width: auto; vertical-align: middle;"><span class="print-brand-tagline">PREMIUM RESEARCH PEPTIDES</span></div>
-      <div class="meta">Analytical Grade Research Peptides &amp; Synthesis Facility</div>
+      <div class="meta">{{ _('direct_analytical_facility') }}</div>
     </div>
     <div style="text-align: right;">
-      <div class="title">WHOLESALE QUOTATION</div>
-      <div class="meta"><strong>Ref:</strong> {{ quotation_number }}</div>
-      <div class="meta"><strong>Date:</strong> {{ today_date }}</div>
+      <div class="title">{{ _('wholesale_quotation_title') }}</div>
+      <div class="meta"><strong>{{ _('ref_label') }}</strong> {{ quotation_number }}</div>
+      <div class="meta"><strong>{{ _('date_label') }}</strong> {{ today_date }}</div>
     </div>
   </div>
 
   <table class="table">
     <thead>
       <tr>
-        <th>Item Description</th>
-        <th>Unit Price</th>
-        <th>Quantity</th>
-        <th>Line Total (USD)</th>
+        <th>{{ _('item_description') }}</th>
+        <th>{{ _('unit_price') }}</th>
+        <th>{{ _('quantity') }}</th>
+        <th>{{ _('line_total') }} (USD)</th>
       </tr>
     </thead>
     <tbody>
@@ -61,12 +61,12 @@
   </table>
 
   <div class="total-box">
-    <div style="font-size: 0.9rem; color: #64748B; margin-bottom: 0.25rem;">Total Items: {{ total_quantity }}</div>
-    <div><span style="font-size: 1.1rem; font-weight: 700; color: #0B1F3A;">Grand Total (USD):</span> <span class="total-amount">${{ "%.2f"|format(grand_total) }}</span></div>
+    <div style="font-size: 0.9rem; color: #64748B; margin-bottom: 0.25rem;">{{ _('total_items') }} {{ total_quantity }}</div>
+    <div><span style="font-size: 1.1rem; font-weight: 700; color: #0B1F3A;">{{ _('grand_total_usd') }}</span> <span class="total-amount">${{ "%.2f"|format(grand_total) }}</span></div>
   </div>
 
   <div class="footer">
-    <p>Velora Peptide Facility • Direct WhatsApp Desk: +447763743631 • For Research Purposes Only</p>
+    <p>{{ _('facility_footnote') }}</p>
   </div>
 
 </body>

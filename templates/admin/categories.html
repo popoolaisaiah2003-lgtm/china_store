@@ -4,30 +4,30 @@
 
 {% block content %}
 <div style="margin-bottom: 2rem;">
-  <h1 style="font-size: 1.75rem;">Categories Management</h1>
-  <p style="color: var(--text-muted); font-size: 0.9rem;">Organize research peptides into functional chemical or therapeutic groupings.</p>
+  <h1 style="font-size: 1.75rem;">{{ _('categories_management') }}</h1>
+  <p style="color: var(--text-muted); font-size: 0.9rem;">{{ _('organize_categories') }}</p>
 </div>
 
 <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem;">
   
   <!-- Add Category Form -->
   <div style="background: white; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.75rem;">
-    <h3 style="font-size: 1.15rem; margin-bottom: 1rem;">Add New Category</h3>
+    <h3 style="font-size: 1.15rem; margin-bottom: 1rem;">{{ _('add_new_category') }}</h3>
     
     <form method="POST" action="{{ url_for('admin.categories') }}">
       {{ form.hidden_tag() }}
 
       <div class="order-form-group" style="margin-bottom: 1rem;">
-        <label for="categoryNameInput">Category Name *</label>
+        <label for="categoryNameInput">{{ _('category_name') }} *</label>
         {{ form.name(class="form-control", placeholder="e.g. Metabolic Peptides", id="categoryNameInput") }}
       </div>
 
       <div class="order-form-group" style="margin-bottom: 1.5rem;">
-        <label for="categoryDescriptionInput">Description (Optional)</label>
+        <label for="categoryDescriptionInput">{{ _('description_optional') }}</label>
         {{ form.description(class="form-control", rows="3", placeholder="Brief description of this chemical group.", id="categoryDescriptionInput") }}
       </div>
 
-      <button type="submit" class="btn btn-navy" style="width: 100%;">Create Category</button>
+      <button type="submit" class="btn btn-navy" style="width: 100%;">{{ _('create_category') }}</button>
     </form>
   </div>
 
@@ -37,10 +37,7 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th>Name</th>
-          <th>Slug</th>
-          <th>Product Count</th>
-          <th>Actions</th>
+          <th>{{ _('product_name') }}</th><th>{{ _('slug') }}</th><th>{{ _('product_count') }}</th><th>{{ _('action') }}</th>
         </tr>
       </thead>
       <tbody>
@@ -49,18 +46,18 @@
             <td>#{{ cat.id }}</td>
             <td style="font-weight: 600; color: var(--navy-deep);">{{ cat.name }}</td>
             <td><code>{{ cat.slug }}</code></td>
-            <td><span style="font-weight: 700; color: var(--gold-primary);">{{ cat.products.count() }}</span> items</td>
+            <td><span style="font-weight: 700; color: var(--gold-primary);">{{ cat.products.count() }}</span> {{ _('items') }}</td>
             <td>
               <form method="POST" action="{{ url_for('admin.category_delete', id=cat.id) }}" onsubmit="return confirm('Deleting this category will remove associated product links. Continue?');">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                <button type="submit" class="btn btn-sm" style="background:#FEE2E2; color:#991B1B; border:1px solid #FCA5A5;">Delete</button>
+                <button type="submit" class="btn btn-sm" style="background:#FEE2E2; color:#991B1B; border:1px solid #FCA5A5;">{{ _('delete') }}</button>
               </form>
             </td>
           </tr>
         {% else %}
           <tr>
             <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 2rem;">
-              No categories created yet. Fill out the form on the left to add one.
+              {{ _('no_categories') }}
             </td>
           </tr>
         {% endfor %}

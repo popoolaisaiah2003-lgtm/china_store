@@ -1,0 +1,585 @@
+LANGUAGE es
+COUNT 189
+ref_label | Ref: | Ref: | TRANSLATE
+shipment_updates_tag | ✈️ Real-Time Cold-Chain Logistics | ✈️ Real-Time Cold-Chain Logistics | TRANSLATE
+shipment_updates_title | Global Shipment Updates | Global Shipment Updates | TRANSLATE
+shipment_updates_desc | Live dispatch and delivery updates for analytical-grade research peptide orders shipped to international research laboratories worldwide. | Live dispatch and delivery updates for analytical-grade research peptide orders shipped to international research laboratories worldwide. | TRANSLATE
+privacy_notice_label | Privacy Notice: | Privacy Notice: | TRANSLATE
+privacy_notice_text | Tracking numbers and customer addresses are partially hidden for privacy and security. | Tracking numbers and customer addresses are partially hidden for privacy and security. | TRANSLATE
+sealed_export_parcel | HPLC Sealed Export Parcel | HPLC Sealed Export Parcel | TRANSLATE
+cold_chain_active | Cold-Chain Temperature Logger Active | Cold-Chain Temperature Logger Active | TRANSLATE
+status_processing | Processing | Processing | TRANSLATE
+status_dispatched | Dispatched | Dispatched | TRANSLATE
+status_in_transit | In Transit | In Transit | TRANSLATE
+status_delivered | Delivered | Delivered | TRANSLATE
+status_issue | Issue | Issue | REVIEW
+shipped_date | Shipped Date | Shipped Date | TRANSLATE
+estimated_delivery | Estimated Delivery | Estimated Delivery | TRANSLATE
+no_shipments_title | No Global Shipments Published Yet | No Global Shipments Published Yet | TRANSLATE
+no_shipments_desc | Check back soon for live international dispatch and tracking logs. | Check back soon for live international dispatch and tracking logs. | TRANSLATE
+global_trust_signal | Global Trust Signal | Global Trust Signal | TRANSLATE
+trusted_by_clients | Trusted by Clients Worldwide | Trusted by Clients Worldwide | TRANSLATE
+trusted_by_clients_desc | Real feedback from approved wholesale peptide buyers, analytical teams, and international clients who depend on consistent quality and responsive export support. | Real feedback from approved wholesale peptide buyers, analytical teams, and international clients who depend on consistent quality and responsive export support. | TRANSLATE
+approved_badge | Approved | Approved | TRANSLATE
+view_all_reviews | View All Reviews | View All Reviews | TRANSLATE
+verified_testimonials | Verified Global Testimonials | Verified Global Testimonials | TRANSLATE
+client_reviews_title | Client Reviews & Laboratory Feedback | Client Reviews & Laboratory Feedback | TRANSLATE
+client_reviews_desc | Trusted by wholesale peptide customers, research labs, aesthetic clinics, and international scientific buyers seeking consistent quality, transparent communication, and reliable global delivery. | Trusted by wholesale peptide customers, research labs, aesthetic clinics, and international scientific buyers seeking consistent quality, transparent communication, and reliable global delivery. | TRANSLATE
+share_experience_tag | CLIENT FEEDBACK | CLIENT FEEDBACK | TRANSLATE
+share_experience_title | Share Your Experience | Share Your Experience | TRANSLATE
+share_experience_subtitle | We value feedback from analytical laboratories, research partners, and wholesale buyers worldwide. | We value feedback from analytical laboratories, research partners, and wholesale buyers worldwide. | TRANSLATE
+customer_name_label | Your Name / Organization * | Your Name / Organization * | TRANSLATE
+customer_name_placeholder | e.g. Dr. Alex Morgan / Apex Biotech | e.g. Dr. Alex Morgan / Apex Biotech | TRANSLATE
+country_label | Country / Region (Optional) | Country / Region (Optional) | TRANSLATE
+country_placeholder | e.g. United States, Germany, Singapore | e.g. United States, Germany, Singapore | TRANSLATE
+rating_label | Rating Grade * | Rating Grade * | TRANSLATE
+rating_5_stars | ★★★★★ 5 Stars (Excellent Quality) | ★★★★★ 5 Stars (Excellent Quality) | TRANSLATE
+rating_4_stars | ★★★★☆ 4 Stars (Very Good) | ★★★★☆ 4 Stars (Very Good) | TRANSLATE
+rating_3_stars | ★★★☆☆ 3 Stars (Satisfactory) | ★★★☆☆ 3 Stars (Satisfactory) | TRANSLATE
+rating_2_stars | ★★☆☆☆ 2 Stars (Needs Improvement) | ★★☆☆☆ 2 Stars (Needs Improvement) | TRANSLATE
+rating_1_star | ★☆☆☆☆ 1 Star (Unsatisfactory) | ★☆☆☆☆ 1 Star (Unsatisfactory) | TRANSLATE
+review_text_label | Your Review & Laboratory Experience * | Your Review & Laboratory Experience * | TRANSLATE
+review_text_placeholder | Share details about purity verification, delivery speed, packaging, or customer service... | Share details about purity verification, delivery speed, packaging, or customer service... | TRANSLATE
+review_submitted_success | Thank you! Your review has been submitted successfully and will be published following quality moderation. | Thank you! Your review has been submitted successfully and will be published following quality moderation. | TRANSLATE
+please_fill_required_review_fields | Please fill in all required review fields (Name and Review text). | Please fill in all required review fields (Name and Review text). | TRANSLATE
+review_moderation_note | Your submission will be reviewed before publication. | Your submission will be reviewed before publication. | TRANSLATE
+submit_review_btn | Submit Review for Approval | Submit Review for Approval | TRANSLATE
+contact_inquiry_submitted_success | Thank you. Your inquiry has been submitted successfully. Our team will contact you shortly. | Thank you. Your inquiry has been submitted successfully. Our team will contact you shortly. | TRANSLATE
+contact_inquiry_submit_error | We could not submit your inquiry at the moment. Please try again. | We could not submit your inquiry at the moment. Please try again. | TRANSLATE
+contact_inquiry_validation_error | Please review the form and correct the highlighted fields. | Please review the form and correct the highlighted fields. | TRANSLATE
+overall_satisfaction | Overall Satisfaction | Overall Satisfaction | TRANSLATE
+based_on_approved | Based on approved client feedback | Based on approved client feedback | TRANSLATE
+approved_reviews_count | approved reviews | approved reviews | TRANSLATE
+partners_subtitle | Labs, clinics, distributors, and research partners | Labs, clinics, distributors, and research partners | TRANSLATE
+featured_reviews_header | Featured Reviews | Featured Reviews | TRANSLATE
+featured_badge | Featured | Featured | TRANSLATE
+no_reviews_title | No Reviews Published Yet | No Reviews Published Yet | TRANSLATE
+no_reviews_desc | Be the first to share your laboratory client experience with Velora Peptide. | Be the first to share your laboratory client experience with Velora Peptide. | TRANSLATE
+reviews_link | Reviews | Reviews | TRANSLATE
+footer_company_desc | International Research Peptide Supplier specializing in HPLC certified analytical standards and custom synthesis. | International Research Peptide Supplier specializing in HPLC certified analytical standards and custom synthesis. | TRANSLATE
+chinese_export_facility | 🇨🇳 Pharmaceutical Export Facility (China) | 🇨🇳 Pharmaceutical Export Facility (China) | TRANSLATE
+quick_links | Quick Links | Quick Links | TRANSLATE
+support_direct_orders | Support & Direct Orders | Support & Direct Orders | TRANSLATE
+email_label | Email | Email | TRANSLATE
+whatsapp_label | WhatsApp | WhatsApp | NEUTRAL
+coverage_label | Coverage | Coverage | TRANSLATE
+worldwide_shipping_available | Worldwide Shipping Available | Worldwide Shipping Available | TRANSLATE
+response_time_label | Response Time | Response Time | TRANSLATE
+within_24_hours | Within 24 hours | Within 24 hours | TRANSLATE
+all_rights_reserved | All rights reserved. | All rights reserved. | TRANSLATE
+footer_bottom_tagline | Research Use Only • COA Available • Global Customer Support | Research Use Only • COA Available • Global Customer Support | TRANSLATE
+about_us | About Us | About Us | TRANSLATE
+high_purity_band | High Purity | High Purity | TRANSLATE
+advanced_tech_band | Advanced Synthesis Technology | Advanced Synthesis Technology | TRANSLATE
+quality_assurance_band | Quality Assurance | Quality Assurance | TRANSLATE
+discreet_packaging_band | Discreet Packaging | Discreet Packaging | TRANSLATE
+worldwide_delivery_band | Worldwide Cold-Chain Delivery | Worldwide Cold-Chain Delivery | TRANSLATE
+modal_important_info | Important Order Information | Important Order Information | TRANSLATE
+modal_intro_text | Please review our official payment methods, shipping procedures, and minimum transaction thresholds before proceeding to checkout: | Please review our official payment methods, shipping procedures, and minimum transaction thresholds before proceeding to checkout: | REVIEW
+accepted_payment_methods | Accepted Payment Methods | Accepted Payment Methods | TRANSLATE
+buyer_protection | Buyer Protection | Buyer Protection | TRANSLATE
+dhgate_threshold_note | (orders from $350 USD and above only) | (orders from $350 USD and above only) | TRANSLATE
+shipping_delivery_info | Shipping & Delivery Information | Shipping & Delivery Information | TRANSLATE
+estimated_delivery_time_label | Estimated Delivery Time | Estimated Delivery Time | TRANSLATE
+working_days_10_14 | 10–14 Working Days | 10–14 Working Days | TRANSLATE
+dispatch_label | Dispatch | Dispatch | TRANSLATE
+dispatched_after_payment | Dispatched after payment confirmation and quality inspection | Dispatched after payment confirmation and quality inspection | TRANSLATE
+dhgate_notice_title | Important Notice About DHgate | Important Notice About DHgate | TRANSLATE
+dhgate_notice_body | DHgate payment is available only for orders of <strong>$350 USD and above</strong> due to transaction processing fees.<br><br>For orders below $350 USD, please use USDT, Bank Transfer, Western Union, or Made-in-China Trade Assurance. | DHgate payment is available only for orders of <strong>$350 USD and above</strong> due to transaction processing fees.<br><br>For orders below $350 USD, please use USDT, Bank Transfer, Western Union, or Made-in-China Trade Assurance. | REVIEW
+need_assistance | Need assistance? Contact us on WhatsApp: | Need assistance? Contact us on WhatsApp: | TRANSLATE
+go_back | Go Back | Go Back | TRANSLATE
+i_understand_continue | I Understand & Continue | I Understand & Continue | TRANSLATE
+chat_with_us | Chat with Velora Peptide | Chat with Velora Peptide | TRANSLATE
+back_to_top | Back to top | Back to top | TRANSLATE
+official_exporter_tag | 🇨🇳 Official Chinese Pharmaceutical Manufacturer & Exporter | 🇨🇳 Official Chinese Pharmaceutical Manufacturer & Exporter | TRANSLATE
+hero_main_heading | Premium Research Peptides for Global Laboratories | Premium Research Peptides for Global Laboratories | TRANSLATE
+hero_sub_strip | High Purity • Reliable Quality • Worldwide Shipping | High Purity • Reliable Quality • Worldwide Shipping | TRANSLATE
+hero_company_desc | Velora Peptide is a professional manufacturer from China specializing in analytical-grade research peptides with strict quality control and global shipping support. | Velora Peptide is a professional manufacturer from China specializing in analytical-grade research peptides with strict quality control and global shipping support. | TRANSLATE
+view_products_btn | View Products | View Products | TRANSLATE
+request_a_quote_btn | Request a Quote | Request a Quote | TRANSLATE
+analytical_standard_vials | Analytical Standard Vials | Analytical Standard Vials | TRANSLATE
+hero_vial_desc | High-Performance Liquid Chromatography (HPLC) & Mass Spectrometry (MS) Certified ≥99.8% Purity. | High-Performance Liquid Chromatography (HPLC) & Mass Spectrometry (MS) Certified ≥99.8% Purity. | REVIEW
+browse_batch_coa | Browse Batch COA Reports | Browse Batch COA Reports | TRANSLATE
+hplc_tested_label | HPLC Tested | HPLC Tested | TRANSLATE
+analytical_verification_label | Analytical Verification | Analytical Verification | TRANSLATE
+highest_standard_grade | Highest Standard Grade | Highest Standard Grade | TRANSLATE
+coa_verified_label | COA Verified | COA Verified | TRANSLATE
+batch_specific_reports | Batch Specific Reports | Batch Specific Reports | TRANSLATE
+gmp_process_label | GMP Process | GMP Process | TRANSLATE
+cleanroom_mfg_label | Cleanroom Manufacturing | Cleanroom Manufacturing | TRANSLATE
+global_export_label | Global Export | Global Export | TRANSLATE
+worldwide_cold_chain_label | Worldwide Cold-Chain | Worldwide Cold-Chain | TRANSLATE
+cat_metabolic | Metabolic & GLP-1 | Metabolic & GLP-1 | TRANSLATE
+cat_recovery | Tissue Recovery | Tissue Recovery | TRANSLATE
+cat_gh | GH Secretagogues | GH Secretagogues | TRANSLATE
+cat_wellness | Pigmentation & Wellness | Pigmentation & Wellness | TRANSLATE
+cat_other | Other Peptides | Other Peptides | TRANSLATE
+precision_standards_tag | Analytical Precision Standards | Analytical Precision Standards | TRANSLATE
+featured_compounds_desc | Explore our primary GLP-1 analogues, tissue regeneration peptides, and somatropin research compounds. | Explore our primary GLP-1 analogues, tissue regeneration peptides, and somatropin research compounds. | REVIEW
+general_peptides | General Peptides | General Peptides | TRANSLATE
+view_details | View Details | View Details | TRANSLATE
+add_to_cart_tooltip | Add 1 to Quotation Cart | Add 1 to Quotation Cart | TRANSLATE
+view_all_wholesale_prefix | View All | View All | TRANSLATE
+view_all_wholesale_suffix | Wholesale Products | Wholesale Products | TRANSLATE
+analytical_catalog_tag | High-Purity Analytical Research Peptide Catalog | High-Purity Analytical Research Peptide Catalog | TRANSLATE
+showing_all_prefix | Showing all | Showing all | TRANSLATE
+showing_all_suffix | Products | Products | TRANSLATE
+select_quantity_title | Select quantity | Select quantity | TRANSLATE
+hplc_certified_tag | Certified | Certified | TRANSLATE
+research_compound | Research Compound | Research Compound | TRANSLATE
+climate_controlled_storage | -20°C Desiccated / Climate Controlled | -20°C Desiccated / Climate Controlled | TRANSLATE
+related_peptides_title | Related Research Peptides | Related Research Peptides | TRANSLATE
+about_warehouse_tag | 📦 Specialized Peptide Warehouse & Supply Facility | 📦 Specialized Peptide Warehouse & Supply Facility | TRANSLATE
+about_hero_title | About Velora Peptide | About Velora Peptide | TRANSLATE
+about_hero_subtitle | Professional Peptide Warehouse & Global Supply Partner | Professional Peptide Warehouse & Global Supply Partner | TRANSLATE
+view_catalog_btn | View Peptide Catalog | View Peptide Catalog | TRANSLATE
+contact_export_desk | Contact Export Desk | Contact Export Desk | TRANSLATE
+warehouse_storage_label | Peptide Warehouse Storage | Peptide Warehouse Storage | TRANSLATE
+bulk_stocks_sublabel | Bulk Stocks & Lyophilized Vial Inventory | Bulk Stocks & Lyophilized Vial Inventory | TRANSLATE
+exclusive_specialization | EXCLUSIVE SPECIALIZATION | EXCLUSIVE SPECIALIZATION | TRANSLATE
+who_we_are_title | Who We Are | Who We Are | TRANSLATE
+who_we_are_text | Velora Peptide is a China-based peptide warehouse and supply company focused exclusively on research peptide products. We provide high-purity peptide compounds for laboratories, distributors, resellers, and research buyers worldwide. Our operation is built around quality verification, secure packaging, and reliable international shipping. | Velora Peptide is a China-based peptide warehouse and supply company focused exclusively on research peptide products. We provide high-purity peptide compounds for laboratories, distributors, resellers, and research buyers worldwide. Our operation is built around quality verification, secure packaging, and reliable international shipping. | TRANSLATE
+product_scope | PRODUCT SCOPE | PRODUCT SCOPE | TRANSLATE
+what_we_sell_title | What We Sell | What We Sell | TRANSLATE
+research_peptides_only | Research peptides only | Research peptides only | TRANSLATE
+lyophilized_peptide_vials | Lyophilized peptide vials | Lyophilized peptide vials | TRANSLATE
+bulk_peptide_supply | Bulk peptide supply | Bulk peptide supply | TRANSLATE
+wholesale_peptide_orders | Wholesale peptide orders | Wholesale peptide orders | TRANSLATE
+normal_quantity_orders | Normal quantity orders | Normal quantity orders | TRANSLATE
+coa_supported_products | COA-supported products | COA-supported products | TRANSLATE
+order_flexibility | ORDER FLEXIBILITY | ORDER FLEXIBILITY | TRANSLATE
+supply_options_title | Supply Options | Supply Options | TRANSLATE
+supply_options_desc | We support both large distributor shipments and small individual research orders. | We support both large distributor shipments and small individual research orders. | TRANSLATE
+bulk_and_wholesale | Bulk & Wholesale | Bulk & Wholesale | TRANSLATE
+distributor_tier | DISTRIBUTOR TIER | DISTRIBUTOR TIER | TRANSLATE
+large_quantity_supply | Large quantity supply | Large quantity supply | TRANSLATE
+distributor_support | Distributor support | Distributor support | TRANSLATE
+warehouse_stock | Warehouse stock | Warehouse stock | TRANSLATE
+export_packaging | Export packaging | Export packaging | TRANSLATE
+normal_quantity | Normal Quantity | Normal Quantity | TRANSLATE
+flexible_tier | FLEXIBLE TIER | FLEXIBLE TIER | TRANSLATE
+small_quantity_orders | Small quantity orders | Small quantity orders | TRANSLATE
+individual_research_needs | Individual research needs | Individual research needs | TRANSLATE
+flexible_ordering | Flexible ordering | Flexible ordering | TRANSLATE
+analytical_integrity | ANALYTICAL INTEGRITY | ANALYTICAL INTEGRITY | TRANSLATE
+quality_documentation | Quality & Documentation | Quality & Documentation | TRANSLATE
+hplc_tested_peptides_list | HPLC-tested peptides | HPLC-tested peptides | TRANSLATE
+batch_specific_coa_reports | Batch-specific COA reports | Batch-specific COA reports | TRANSLATE
+secure_sealed_packaging | Secure sealed packaging | Secure sealed packaging | TRANSLATE
+consistent_inventory | Consistent warehouse inventory | Consistent warehouse inventory | TRANSLATE
+export_handling | Export-oriented handling | Export-oriented handling | TRANSLATE
+global_logistics | GLOBAL LOGISTICS | GLOBAL LOGISTICS | TRANSLATE
+worldwide_supply_title | Worldwide Peptide Supply | Worldwide Peptide Supply | TRANSLATE
+worldwide_supply_text | We support customers across Europe, North America, Asia-Pacific, the Middle East, and other international destinations through secure export and shipping procedures. | We support customers across Europe, North America, Asia-Pacific, the Middle East, and other international destinations through secure export and shipping procedures. | TRANSLATE
+dispatch_tracking_support | International Dispatch & Tracking Support | International Dispatch & Tracking Support | TRANSLATE
+discreet_packaging_sub | Discreet Packaging • Express Courier • Cold-Chain Monitoring | Discreet Packaging • Express Courier • Cold-Chain Monitoring | TRANSLATE
+why_choose_us_tag | WHY CHOOSE US | WHY CHOOSE US | TRANSLATE
+why_choose_title | Why Choose Velora Peptide? | Why Choose Velora Peptide? | TRANSLATE
+why_choose_subtitle | Specialized warehouse operations built for reliable peptide supply. | Specialized warehouse operations built for reliable peptide supply. | TRANSLATE
+pep_only_spec | Peptide-only specialization | Peptide-only specialization | TRANSLATE
+bulk_small_supply | Bulk and small-quantity supply | Bulk and small-quantity supply | TRANSLATE
+verified_doc | Verified product documentation | Verified product documentation | TRANSLATE
+responsive_comm | Responsive communication | Responsive communication | TRANSLATE
+confidential_handling | Confidential order handling | Confidential order handling | TRANSLATE
+reliable_dispatch | Reliable dispatch process | Reliable dispatch process | TRANSLATE
+partner_with_title | Partner with Velora Peptide | Partner with Velora Peptide | TRANSLATE
+partner_with_desc | Contact our export desk to request pricing, warehouse stock availability, or direct wholesale quotations. | Contact our export desk to request pricing, warehouse stock availability, or direct wholesale quotations. | TRANSLATE
+request_peptide_quote_btn | Request a Peptide Quote | Request a Peptide Quote | TRANSLATE
+products_label | Products | Products | TRANSLATE
+slug | Slug | Slug | TRANSLATE
+total | Total: | Total: | TRANSLATE
+eta_label | ETA: | ETA: | TRANSLATE
+
+LANGUAGE ar
+COUNT 185
+shipment_updates_tag | ✈️ Real-Time Cold-Chain Logistics | ✈️ Real-Time Cold-Chain Logistics | TRANSLATE
+shipment_updates_title | Global Shipment Updates | Global Shipment Updates | TRANSLATE
+shipment_updates_desc | Live dispatch and delivery updates for analytical-grade research peptide orders shipped to international research laboratories worldwide. | Live dispatch and delivery updates for analytical-grade research peptide orders shipped to international research laboratories worldwide. | TRANSLATE
+privacy_notice_label | Privacy Notice: | Privacy Notice: | TRANSLATE
+privacy_notice_text | Tracking numbers and customer addresses are partially hidden for privacy and security. | Tracking numbers and customer addresses are partially hidden for privacy and security. | TRANSLATE
+sealed_export_parcel | HPLC Sealed Export Parcel | HPLC Sealed Export Parcel | TRANSLATE
+cold_chain_active | Cold-Chain Temperature Logger Active | Cold-Chain Temperature Logger Active | TRANSLATE
+status_processing | Processing | Processing | TRANSLATE
+status_dispatched | Dispatched | Dispatched | TRANSLATE
+status_in_transit | In Transit | In Transit | TRANSLATE
+status_delivered | Delivered | Delivered | TRANSLATE
+status_issue | Issue | Issue | REVIEW
+shipped_date | Shipped Date | Shipped Date | TRANSLATE
+estimated_delivery | Estimated Delivery | Estimated Delivery | TRANSLATE
+no_shipments_title | No Global Shipments Published Yet | No Global Shipments Published Yet | TRANSLATE
+no_shipments_desc | Check back soon for live international dispatch and tracking logs. | Check back soon for live international dispatch and tracking logs. | TRANSLATE
+global_trust_signal | Global Trust Signal | Global Trust Signal | TRANSLATE
+trusted_by_clients | Trusted by Clients Worldwide | Trusted by Clients Worldwide | TRANSLATE
+trusted_by_clients_desc | Real feedback from approved wholesale peptide buyers, analytical teams, and international clients who depend on consistent quality and responsive export support. | Real feedback from approved wholesale peptide buyers, analytical teams, and international clients who depend on consistent quality and responsive export support. | TRANSLATE
+approved_badge | Approved | Approved | TRANSLATE
+view_all_reviews | View All Reviews | View All Reviews | TRANSLATE
+verified_testimonials | Verified Global Testimonials | Verified Global Testimonials | TRANSLATE
+client_reviews_title | Client Reviews & Laboratory Feedback | Client Reviews & Laboratory Feedback | TRANSLATE
+client_reviews_desc | Trusted by wholesale peptide customers, research labs, aesthetic clinics, and international scientific buyers seeking consistent quality, transparent communication, and reliable global delivery. | Trusted by wholesale peptide customers, research labs, aesthetic clinics, and international scientific buyers seeking consistent quality, transparent communication, and reliable global delivery. | TRANSLATE
+share_experience_tag | CLIENT FEEDBACK | CLIENT FEEDBACK | TRANSLATE
+share_experience_title | Share Your Experience | Share Your Experience | TRANSLATE
+share_experience_subtitle | We value feedback from analytical laboratories, research partners, and wholesale buyers worldwide. | We value feedback from analytical laboratories, research partners, and wholesale buyers worldwide. | TRANSLATE
+customer_name_label | Your Name / Organization * | Your Name / Organization * | TRANSLATE
+customer_name_placeholder | e.g. Dr. Alex Morgan / Apex Biotech | e.g. Dr. Alex Morgan / Apex Biotech | TRANSLATE
+country_label | Country / Region (Optional) | Country / Region (Optional) | TRANSLATE
+country_placeholder | e.g. United States, Germany, Singapore | e.g. United States, Germany, Singapore | TRANSLATE
+rating_label | Rating Grade * | Rating Grade * | TRANSLATE
+rating_5_stars | ★★★★★ 5 Stars (Excellent Quality) | ★★★★★ 5 Stars (Excellent Quality) | TRANSLATE
+rating_4_stars | ★★★★☆ 4 Stars (Very Good) | ★★★★☆ 4 Stars (Very Good) | TRANSLATE
+rating_3_stars | ★★★☆☆ 3 Stars (Satisfactory) | ★★★☆☆ 3 Stars (Satisfactory) | TRANSLATE
+rating_2_stars | ★★☆☆☆ 2 Stars (Needs Improvement) | ★★☆☆☆ 2 Stars (Needs Improvement) | TRANSLATE
+rating_1_star | ★☆☆☆☆ 1 Star (Unsatisfactory) | ★☆☆☆☆ 1 Star (Unsatisfactory) | TRANSLATE
+review_text_label | Your Review & Laboratory Experience * | Your Review & Laboratory Experience * | TRANSLATE
+review_text_placeholder | Share details about purity verification, delivery speed, packaging, or customer service... | Share details about purity verification, delivery speed, packaging, or customer service... | TRANSLATE
+review_submitted_success | Thank you! Your review has been submitted successfully and will be published following quality moderation. | Thank you! Your review has been submitted successfully and will be published following quality moderation. | TRANSLATE
+please_fill_required_review_fields | Please fill in all required review fields (Name and Review text). | Please fill in all required review fields (Name and Review text). | TRANSLATE
+review_moderation_note | Your submission will be reviewed before publication. | Your submission will be reviewed before publication. | TRANSLATE
+submit_review_btn | Submit Review for Approval | Submit Review for Approval | TRANSLATE
+contact_inquiry_submitted_success | Thank you. Your inquiry has been submitted successfully. Our team will contact you shortly. | Thank you. Your inquiry has been submitted successfully. Our team will contact you shortly. | TRANSLATE
+contact_inquiry_submit_error | We could not submit your inquiry at the moment. Please try again. | We could not submit your inquiry at the moment. Please try again. | TRANSLATE
+contact_inquiry_validation_error | Please review the form and correct the highlighted fields. | Please review the form and correct the highlighted fields. | TRANSLATE
+overall_satisfaction | Overall Satisfaction | Overall Satisfaction | TRANSLATE
+based_on_approved | Based on approved client feedback | Based on approved client feedback | TRANSLATE
+approved_reviews_count | approved reviews | approved reviews | TRANSLATE
+partners_subtitle | Labs, clinics, distributors, and research partners | Labs, clinics, distributors, and research partners | TRANSLATE
+featured_reviews_header | Featured Reviews | Featured Reviews | TRANSLATE
+featured_badge | Featured | Featured | TRANSLATE
+no_reviews_title | No Reviews Published Yet | No Reviews Published Yet | TRANSLATE
+no_reviews_desc | Be the first to share your laboratory client experience with Velora Peptide. | Be the first to share your laboratory client experience with Velora Peptide. | TRANSLATE
+reviews_link | Reviews | Reviews | TRANSLATE
+footer_company_desc | International Research Peptide Supplier specializing in HPLC certified analytical standards and custom synthesis. | International Research Peptide Supplier specializing in HPLC certified analytical standards and custom synthesis. | TRANSLATE
+chinese_export_facility | 🇨🇳 Pharmaceutical Export Facility (China) | 🇨🇳 Pharmaceutical Export Facility (China) | TRANSLATE
+quick_links | Quick Links | Quick Links | TRANSLATE
+support_direct_orders | Support & Direct Orders | Support & Direct Orders | TRANSLATE
+email_label | Email | Email | TRANSLATE
+whatsapp_label | WhatsApp | WhatsApp | NEUTRAL
+coverage_label | Coverage | Coverage | TRANSLATE
+worldwide_shipping_available | Worldwide Shipping Available | Worldwide Shipping Available | TRANSLATE
+response_time_label | Response Time | Response Time | TRANSLATE
+within_24_hours | Within 24 hours | Within 24 hours | TRANSLATE
+all_rights_reserved | All rights reserved. | All rights reserved. | TRANSLATE
+footer_bottom_tagline | Research Use Only • COA Available • Global Customer Support | Research Use Only • COA Available • Global Customer Support | TRANSLATE
+about_us | About Us | About Us | TRANSLATE
+high_purity_band | High Purity | High Purity | TRANSLATE
+advanced_tech_band | Advanced Synthesis Technology | Advanced Synthesis Technology | TRANSLATE
+quality_assurance_band | Quality Assurance | Quality Assurance | TRANSLATE
+discreet_packaging_band | Discreet Packaging | Discreet Packaging | TRANSLATE
+worldwide_delivery_band | Worldwide Cold-Chain Delivery | Worldwide Cold-Chain Delivery | TRANSLATE
+modal_important_info | Important Order Information | Important Order Information | TRANSLATE
+modal_intro_text | Please review our official payment methods, shipping procedures, and minimum transaction thresholds before proceeding to checkout: | Please review our official payment methods, shipping procedures, and minimum transaction thresholds before proceeding to checkout: | REVIEW
+accepted_payment_methods | Accepted Payment Methods | Accepted Payment Methods | TRANSLATE
+buyer_protection | Buyer Protection | Buyer Protection | TRANSLATE
+dhgate_threshold_note | (orders from $350 USD and above only) | (orders from $350 USD and above only) | TRANSLATE
+shipping_delivery_info | Shipping & Delivery Information | Shipping & Delivery Information | TRANSLATE
+estimated_delivery_time_label | Estimated Delivery Time | Estimated Delivery Time | TRANSLATE
+working_days_10_14 | 10–14 Working Days | 10–14 Working Days | TRANSLATE
+dispatch_label | Dispatch | Dispatch | TRANSLATE
+dispatched_after_payment | Dispatched after payment confirmation and quality inspection | Dispatched after payment confirmation and quality inspection | TRANSLATE
+dhgate_notice_title | Important Notice About DHgate | Important Notice About DHgate | TRANSLATE
+dhgate_notice_body | DHgate payment is available only for orders of <strong>$350 USD and above</strong> due to transaction processing fees.<br><br>For orders below $350 USD, please use USDT, Bank Transfer, Western Union, or Made-in-China Trade Assurance. | DHgate payment is available only for orders of <strong>$350 USD and above</strong> due to transaction processing fees.<br><br>For orders below $350 USD, please use USDT, Bank Transfer, Western Union, or Made-in-China Trade Assurance. | REVIEW
+need_assistance | Need assistance? Contact us on WhatsApp: | Need assistance? Contact us on WhatsApp: | TRANSLATE
+go_back | Go Back | Go Back | TRANSLATE
+i_understand_continue | I Understand & Continue | I Understand & Continue | TRANSLATE
+chat_with_us | Chat with Velora Peptide | Chat with Velora Peptide | TRANSLATE
+back_to_top | Back to top | Back to top | TRANSLATE
+official_exporter_tag | 🇨🇳 Official Chinese Pharmaceutical Manufacturer & Exporter | 🇨🇳 Official Chinese Pharmaceutical Manufacturer & Exporter | TRANSLATE
+hero_main_heading | Premium Research Peptides for Global Laboratories | Premium Research Peptides for Global Laboratories | TRANSLATE
+hero_sub_strip | High Purity • Reliable Quality • Worldwide Shipping | High Purity • Reliable Quality • Worldwide Shipping | TRANSLATE
+hero_company_desc | Velora Peptide is a professional manufacturer from China specializing in analytical-grade research peptides with strict quality control and global shipping support. | Velora Peptide is a professional manufacturer from China specializing in analytical-grade research peptides with strict quality control and global shipping support. | TRANSLATE
+view_products_btn | View Products | View Products | TRANSLATE
+request_a_quote_btn | Request a Quote | Request a Quote | TRANSLATE
+analytical_standard_vials | Analytical Standard Vials | Analytical Standard Vials | TRANSLATE
+hero_vial_desc | High-Performance Liquid Chromatography (HPLC) & Mass Spectrometry (MS) Certified ≥99.8% Purity. | High-Performance Liquid Chromatography (HPLC) & Mass Spectrometry (MS) Certified ≥99.8% Purity. | REVIEW
+browse_batch_coa | Browse Batch COA Reports | Browse Batch COA Reports | TRANSLATE
+hplc_tested_label | HPLC Tested | HPLC Tested | TRANSLATE
+analytical_verification_label | Analytical Verification | Analytical Verification | TRANSLATE
+highest_standard_grade | Highest Standard Grade | Highest Standard Grade | TRANSLATE
+coa_verified_label | COA Verified | COA Verified | TRANSLATE
+batch_specific_reports | Batch Specific Reports | Batch Specific Reports | TRANSLATE
+gmp_process_label | GMP Process | GMP Process | TRANSLATE
+cleanroom_mfg_label | Cleanroom Manufacturing | Cleanroom Manufacturing | TRANSLATE
+global_export_label | Global Export | Global Export | TRANSLATE
+worldwide_cold_chain_label | Worldwide Cold-Chain | Worldwide Cold-Chain | TRANSLATE
+cat_metabolic | Metabolic & GLP-1 | Metabolic & GLP-1 | TRANSLATE
+cat_recovery | Tissue Recovery | Tissue Recovery | TRANSLATE
+cat_gh | GH Secretagogues | GH Secretagogues | TRANSLATE
+cat_wellness | Pigmentation & Wellness | Pigmentation & Wellness | TRANSLATE
+cat_other | Other Peptides | Other Peptides | TRANSLATE
+precision_standards_tag | Analytical Precision Standards | Analytical Precision Standards | TRANSLATE
+featured_compounds_desc | Explore our primary GLP-1 analogues, tissue regeneration peptides, and somatropin research compounds. | Explore our primary GLP-1 analogues, tissue regeneration peptides, and somatropin research compounds. | REVIEW
+general_peptides | General Peptides | General Peptides | TRANSLATE
+view_details | View Details | View Details | TRANSLATE
+add_to_cart_tooltip | Add 1 to Quotation Cart | Add 1 to Quotation Cart | TRANSLATE
+view_all_wholesale_prefix | View All | View All | TRANSLATE
+view_all_wholesale_suffix | Wholesale Products | Wholesale Products | TRANSLATE
+analytical_catalog_tag | High-Purity Analytical Research Peptide Catalog | High-Purity Analytical Research Peptide Catalog | TRANSLATE
+showing_all_prefix | Showing all | Showing all | TRANSLATE
+showing_all_suffix | Products | Products | TRANSLATE
+select_quantity_title | Select quantity | Select quantity | TRANSLATE
+hplc_certified_tag | Certified | Certified | TRANSLATE
+research_compound | Research Compound | Research Compound | TRANSLATE
+climate_controlled_storage | -20°C Desiccated / Climate Controlled | -20°C Desiccated / Climate Controlled | TRANSLATE
+related_peptides_title | Related Research Peptides | Related Research Peptides | TRANSLATE
+about_warehouse_tag | 📦 Specialized Peptide Warehouse & Supply Facility | 📦 Specialized Peptide Warehouse & Supply Facility | TRANSLATE
+about_hero_title | About Velora Peptide | About Velora Peptide | TRANSLATE
+about_hero_subtitle | Professional Peptide Warehouse & Global Supply Partner | Professional Peptide Warehouse & Global Supply Partner | TRANSLATE
+view_catalog_btn | View Peptide Catalog | View Peptide Catalog | TRANSLATE
+contact_export_desk | Contact Export Desk | Contact Export Desk | TRANSLATE
+warehouse_storage_label | Peptide Warehouse Storage | Peptide Warehouse Storage | TRANSLATE
+bulk_stocks_sublabel | Bulk Stocks & Lyophilized Vial Inventory | Bulk Stocks & Lyophilized Vial Inventory | TRANSLATE
+exclusive_specialization | EXCLUSIVE SPECIALIZATION | EXCLUSIVE SPECIALIZATION | TRANSLATE
+who_we_are_title | Who We Are | Who We Are | TRANSLATE
+who_we_are_text | Velora Peptide is a China-based peptide warehouse and supply company focused exclusively on research peptide products. We provide high-purity peptide compounds for laboratories, distributors, resellers, and research buyers worldwide. Our operation is built around quality verification, secure packaging, and reliable international shipping. | Velora Peptide is a China-based peptide warehouse and supply company focused exclusively on research peptide products. We provide high-purity peptide compounds for laboratories, distributors, resellers, and research buyers worldwide. Our operation is built around quality verification, secure packaging, and reliable international shipping. | TRANSLATE
+product_scope | PRODUCT SCOPE | PRODUCT SCOPE | TRANSLATE
+what_we_sell_title | What We Sell | What We Sell | TRANSLATE
+research_peptides_only | Research peptides only | Research peptides only | TRANSLATE
+lyophilized_peptide_vials | Lyophilized peptide vials | Lyophilized peptide vials | TRANSLATE
+bulk_peptide_supply | Bulk peptide supply | Bulk peptide supply | TRANSLATE
+wholesale_peptide_orders | Wholesale peptide orders | Wholesale peptide orders | TRANSLATE
+normal_quantity_orders | Normal quantity orders | Normal quantity orders | TRANSLATE
+coa_supported_products | COA-supported products | COA-supported products | TRANSLATE
+order_flexibility | ORDER FLEXIBILITY | ORDER FLEXIBILITY | TRANSLATE
+supply_options_title | Supply Options | Supply Options | TRANSLATE
+supply_options_desc | We support both large distributor shipments and small individual research orders. | We support both large distributor shipments and small individual research orders. | TRANSLATE
+bulk_and_wholesale | Bulk & Wholesale | Bulk & Wholesale | TRANSLATE
+distributor_tier | DISTRIBUTOR TIER | DISTRIBUTOR TIER | TRANSLATE
+large_quantity_supply | Large quantity supply | Large quantity supply | TRANSLATE
+distributor_support | Distributor support | Distributor support | TRANSLATE
+warehouse_stock | Warehouse stock | Warehouse stock | TRANSLATE
+export_packaging | Export packaging | Export packaging | TRANSLATE
+normal_quantity | Normal Quantity | Normal Quantity | TRANSLATE
+flexible_tier | FLEXIBLE TIER | FLEXIBLE TIER | TRANSLATE
+small_quantity_orders | Small quantity orders | Small quantity orders | TRANSLATE
+individual_research_needs | Individual research needs | Individual research needs | TRANSLATE
+flexible_ordering | Flexible ordering | Flexible ordering | TRANSLATE
+analytical_integrity | ANALYTICAL INTEGRITY | ANALYTICAL INTEGRITY | TRANSLATE
+quality_documentation | Quality & Documentation | Quality & Documentation | TRANSLATE
+hplc_tested_peptides_list | HPLC-tested peptides | HPLC-tested peptides | TRANSLATE
+batch_specific_coa_reports | Batch-specific COA reports | Batch-specific COA reports | TRANSLATE
+secure_sealed_packaging | Secure sealed packaging | Secure sealed packaging | TRANSLATE
+consistent_inventory | Consistent warehouse inventory | Consistent warehouse inventory | TRANSLATE
+export_handling | Export-oriented handling | Export-oriented handling | TRANSLATE
+global_logistics | GLOBAL LOGISTICS | GLOBAL LOGISTICS | TRANSLATE
+worldwide_supply_title | Worldwide Peptide Supply | Worldwide Peptide Supply | TRANSLATE
+worldwide_supply_text | We support customers across Europe, North America, Asia-Pacific, the Middle East, and other international destinations through secure export and shipping procedures. | We support customers across Europe, North America, Asia-Pacific, the Middle East, and other international destinations through secure export and shipping procedures. | TRANSLATE
+dispatch_tracking_support | International Dispatch & Tracking Support | International Dispatch & Tracking Support | TRANSLATE
+discreet_packaging_sub | Discreet Packaging • Express Courier • Cold-Chain Monitoring | Discreet Packaging • Express Courier • Cold-Chain Monitoring | TRANSLATE
+why_choose_us_tag | WHY CHOOSE US | WHY CHOOSE US | TRANSLATE
+why_choose_title | Why Choose Velora Peptide? | Why Choose Velora Peptide? | TRANSLATE
+why_choose_subtitle | Specialized warehouse operations built for reliable peptide supply. | Specialized warehouse operations built for reliable peptide supply. | TRANSLATE
+pep_only_spec | Peptide-only specialization | Peptide-only specialization | TRANSLATE
+bulk_small_supply | Bulk and small-quantity supply | Bulk and small-quantity supply | TRANSLATE
+verified_doc | Verified product documentation | Verified product documentation | TRANSLATE
+responsive_comm | Responsive communication | Responsive communication | TRANSLATE
+confidential_handling | Confidential order handling | Confidential order handling | TRANSLATE
+reliable_dispatch | Reliable dispatch process | Reliable dispatch process | TRANSLATE
+partner_with_title | Partner with Velora Peptide | Partner with Velora Peptide | TRANSLATE
+partner_with_desc | Contact our export desk to request pricing, warehouse stock availability, or direct wholesale quotations. | Contact our export desk to request pricing, warehouse stock availability, or direct wholesale quotations. | TRANSLATE
+request_peptide_quote_btn | Request a Peptide Quote | Request a Peptide Quote | TRANSLATE
+products_label | Products | Products | TRANSLATE
+
+LANGUAGE fr
+COUNT 198
+faq | FAQ | FAQ | NEUTRAL
+contact | Contact | Contact | TRANSLATE
+code_label | Code: | Code: | TRANSLATE
+action | Action | Action | TRANSLATE
+date_label | Date: | Date: | TRANSLATE
+navigation | Navigation | Navigation | TRANSLATE
+shipment_updates_tag | ✈️ Real-Time Cold-Chain Logistics | ✈️ Real-Time Cold-Chain Logistics | TRANSLATE
+shipment_updates_title | Global Shipment Updates | Global Shipment Updates | TRANSLATE
+shipment_updates_desc | Live dispatch and delivery updates for analytical-grade research peptide orders shipped to international research laboratories worldwide. | Live dispatch and delivery updates for analytical-grade research peptide orders shipped to international research laboratories worldwide. | TRANSLATE
+privacy_notice_label | Privacy Notice: | Privacy Notice: | TRANSLATE
+privacy_notice_text | Tracking numbers and customer addresses are partially hidden for privacy and security. | Tracking numbers and customer addresses are partially hidden for privacy and security. | TRANSLATE
+sealed_export_parcel | HPLC Sealed Export Parcel | HPLC Sealed Export Parcel | TRANSLATE
+cold_chain_active | Cold-Chain Temperature Logger Active | Cold-Chain Temperature Logger Active | TRANSLATE
+status_processing | Processing | Processing | TRANSLATE
+status_dispatched | Dispatched | Dispatched | TRANSLATE
+status_in_transit | In Transit | In Transit | TRANSLATE
+status_delivered | Delivered | Delivered | TRANSLATE
+status_issue | Issue | Issue | REVIEW
+shipped_date | Shipped Date | Shipped Date | TRANSLATE
+estimated_delivery | Estimated Delivery | Estimated Delivery | TRANSLATE
+no_shipments_title | No Global Shipments Published Yet | No Global Shipments Published Yet | TRANSLATE
+no_shipments_desc | Check back soon for live international dispatch and tracking logs. | Check back soon for live international dispatch and tracking logs. | TRANSLATE
+global_trust_signal | Global Trust Signal | Global Trust Signal | TRANSLATE
+trusted_by_clients | Trusted by Clients Worldwide | Trusted by Clients Worldwide | TRANSLATE
+trusted_by_clients_desc | Real feedback from approved wholesale peptide buyers, analytical teams, and international clients who depend on consistent quality and responsive export support. | Real feedback from approved wholesale peptide buyers, analytical teams, and international clients who depend on consistent quality and responsive export support. | TRANSLATE
+approved_badge | Approved | Approved | TRANSLATE
+view_all_reviews | View All Reviews | View All Reviews | TRANSLATE
+verified_testimonials | Verified Global Testimonials | Verified Global Testimonials | TRANSLATE
+client_reviews_title | Client Reviews & Laboratory Feedback | Client Reviews & Laboratory Feedback | TRANSLATE
+client_reviews_desc | Trusted by wholesale peptide customers, research labs, aesthetic clinics, and international scientific buyers seeking consistent quality, transparent communication, and reliable global delivery. | Trusted by wholesale peptide customers, research labs, aesthetic clinics, and international scientific buyers seeking consistent quality, transparent communication, and reliable global delivery. | TRANSLATE
+share_experience_tag | CLIENT FEEDBACK | CLIENT FEEDBACK | TRANSLATE
+share_experience_title | Share Your Experience | Share Your Experience | TRANSLATE
+share_experience_subtitle | We value feedback from analytical laboratories, research partners, and wholesale buyers worldwide. | We value feedback from analytical laboratories, research partners, and wholesale buyers worldwide. | TRANSLATE
+customer_name_label | Your Name / Organization * | Your Name / Organization * | TRANSLATE
+customer_name_placeholder | e.g. Dr. Alex Morgan / Apex Biotech | e.g. Dr. Alex Morgan / Apex Biotech | TRANSLATE
+country_label | Country / Region (Optional) | Country / Region (Optional) | TRANSLATE
+country_placeholder | e.g. United States, Germany, Singapore | e.g. United States, Germany, Singapore | TRANSLATE
+rating_label | Rating Grade * | Rating Grade * | TRANSLATE
+rating_5_stars | ★★★★★ 5 Stars (Excellent Quality) | ★★★★★ 5 Stars (Excellent Quality) | TRANSLATE
+rating_4_stars | ★★★★☆ 4 Stars (Very Good) | ★★★★☆ 4 Stars (Very Good) | TRANSLATE
+rating_3_stars | ★★★☆☆ 3 Stars (Satisfactory) | ★★★☆☆ 3 Stars (Satisfactory) | TRANSLATE
+rating_2_stars | ★★☆☆☆ 2 Stars (Needs Improvement) | ★★☆☆☆ 2 Stars (Needs Improvement) | TRANSLATE
+rating_1_star | ★☆☆☆☆ 1 Star (Unsatisfactory) | ★☆☆☆☆ 1 Star (Unsatisfactory) | TRANSLATE
+review_text_label | Your Review & Laboratory Experience * | Your Review & Laboratory Experience * | TRANSLATE
+review_text_placeholder | Share details about purity verification, delivery speed, packaging, or customer service... | Share details about purity verification, delivery speed, packaging, or customer service... | TRANSLATE
+review_submitted_success | Thank you! Your review has been submitted successfully and will be published following quality moderation. | Thank you! Your review has been submitted successfully and will be published following quality moderation. | TRANSLATE
+please_fill_required_review_fields | Please fill in all required review fields (Name and Review text). | Please fill in all required review fields (Name and Review text). | TRANSLATE
+review_moderation_note | Your submission will be reviewed before publication. | Your submission will be reviewed before publication. | TRANSLATE
+submit_review_btn | Submit Review for Approval | Submit Review for Approval | TRANSLATE
+contact_inquiry_submitted_success | Thank you. Your inquiry has been submitted successfully. Our team will contact you shortly. | Thank you. Your inquiry has been submitted successfully. Our team will contact you shortly. | TRANSLATE
+contact_inquiry_submit_error | We could not submit your inquiry at the moment. Please try again. | We could not submit your inquiry at the moment. Please try again. | TRANSLATE
+contact_inquiry_validation_error | Please review the form and correct the highlighted fields. | Please review the form and correct the highlighted fields. | TRANSLATE
+overall_satisfaction | Overall Satisfaction | Overall Satisfaction | TRANSLATE
+based_on_approved | Based on approved client feedback | Based on approved client feedback | TRANSLATE
+approved_reviews_count | approved reviews | approved reviews | TRANSLATE
+partners_subtitle | Labs, clinics, distributors, and research partners | Labs, clinics, distributors, and research partners | TRANSLATE
+featured_reviews_header | Featured Reviews | Featured Reviews | TRANSLATE
+featured_badge | Featured | Featured | TRANSLATE
+no_reviews_title | No Reviews Published Yet | No Reviews Published Yet | TRANSLATE
+no_reviews_desc | Be the first to share your laboratory client experience with Velora Peptide. | Be the first to share your laboratory client experience with Velora Peptide. | TRANSLATE
+reviews_link | Reviews | Reviews | TRANSLATE
+footer_company_desc | International Research Peptide Supplier specializing in HPLC certified analytical standards and custom synthesis. | International Research Peptide Supplier specializing in HPLC certified analytical standards and custom synthesis. | TRANSLATE
+chinese_export_facility | 🇨🇳 Pharmaceutical Export Facility (China) | 🇨🇳 Pharmaceutical Export Facility (China) | TRANSLATE
+quick_links | Quick Links | Quick Links | TRANSLATE
+support_direct_orders | Support & Direct Orders | Support & Direct Orders | TRANSLATE
+email_label | Email | Email | TRANSLATE
+whatsapp_label | WhatsApp | WhatsApp | NEUTRAL
+coverage_label | Coverage | Coverage | TRANSLATE
+worldwide_shipping_available | Worldwide Shipping Available | Worldwide Shipping Available | TRANSLATE
+response_time_label | Response Time | Response Time | TRANSLATE
+within_24_hours | Within 24 hours | Within 24 hours | TRANSLATE
+all_rights_reserved | All rights reserved. | All rights reserved. | TRANSLATE
+footer_bottom_tagline | Research Use Only • COA Available • Global Customer Support | Research Use Only • COA Available • Global Customer Support | TRANSLATE
+about_us | About Us | About Us | TRANSLATE
+high_purity_band | High Purity | High Purity | TRANSLATE
+advanced_tech_band | Advanced Synthesis Technology | Advanced Synthesis Technology | TRANSLATE
+quality_assurance_band | Quality Assurance | Quality Assurance | TRANSLATE
+discreet_packaging_band | Discreet Packaging | Discreet Packaging | TRANSLATE
+worldwide_delivery_band | Worldwide Cold-Chain Delivery | Worldwide Cold-Chain Delivery | TRANSLATE
+modal_important_info | Important Order Information | Important Order Information | TRANSLATE
+modal_intro_text | Please review our official payment methods, shipping procedures, and minimum transaction thresholds before proceeding to checkout: | Please review our official payment methods, shipping procedures, and minimum transaction thresholds before proceeding to checkout: | REVIEW
+accepted_payment_methods | Accepted Payment Methods | Accepted Payment Methods | TRANSLATE
+buyer_protection | Buyer Protection | Buyer Protection | TRANSLATE
+dhgate_threshold_note | (orders from $350 USD and above only) | (orders from $350 USD and above only) | TRANSLATE
+shipping_delivery_info | Shipping & Delivery Information | Shipping & Delivery Information | TRANSLATE
+estimated_delivery_time_label | Estimated Delivery Time | Estimated Delivery Time | TRANSLATE
+working_days_10_14 | 10–14 Working Days | 10–14 Working Days | TRANSLATE
+dispatch_label | Dispatch | Dispatch | TRANSLATE
+dispatched_after_payment | Dispatched after payment confirmation and quality inspection | Dispatched after payment confirmation and quality inspection | TRANSLATE
+dhgate_notice_title | Important Notice About DHgate | Important Notice About DHgate | TRANSLATE
+dhgate_notice_body | DHgate payment is available only for orders of <strong>$350 USD and above</strong> due to transaction processing fees.<br><br>For orders below $350 USD, please use USDT, Bank Transfer, Western Union, or Made-in-China Trade Assurance. | DHgate payment is available only for orders of <strong>$350 USD and above</strong> due to transaction processing fees.<br><br>For orders below $350 USD, please use USDT, Bank Transfer, Western Union, or Made-in-China Trade Assurance. | REVIEW
+need_assistance | Need assistance? Contact us on WhatsApp: | Need assistance? Contact us on WhatsApp: | TRANSLATE
+go_back | Go Back | Go Back | TRANSLATE
+i_understand_continue | I Understand & Continue | I Understand & Continue | TRANSLATE
+chat_with_us | Chat with Velora Peptide | Chat with Velora Peptide | TRANSLATE
+back_to_top | Back to top | Back to top | TRANSLATE
+official_exporter_tag | 🇨🇳 Official Chinese Pharmaceutical Manufacturer & Exporter | 🇨🇳 Official Chinese Pharmaceutical Manufacturer & Exporter | TRANSLATE
+hero_main_heading | Premium Research Peptides for Global Laboratories | Premium Research Peptides for Global Laboratories | TRANSLATE
+hero_sub_strip | High Purity • Reliable Quality • Worldwide Shipping | High Purity • Reliable Quality • Worldwide Shipping | TRANSLATE
+hero_company_desc | Velora Peptide is a professional manufacturer from China specializing in analytical-grade research peptides with strict quality control and global shipping support. | Velora Peptide is a professional manufacturer from China specializing in analytical-grade research peptides with strict quality control and global shipping support. | TRANSLATE
+view_products_btn | View Products | View Products | TRANSLATE
+request_a_quote_btn | Request a Quote | Request a Quote | TRANSLATE
+analytical_standard_vials | Analytical Standard Vials | Analytical Standard Vials | TRANSLATE
+hero_vial_desc | High-Performance Liquid Chromatography (HPLC) & Mass Spectrometry (MS) Certified ≥99.8% Purity. | High-Performance Liquid Chromatography (HPLC) & Mass Spectrometry (MS) Certified ≥99.8% Purity. | REVIEW
+browse_batch_coa | Browse Batch COA Reports | Browse Batch COA Reports | TRANSLATE
+hplc_tested_label | HPLC Tested | HPLC Tested | TRANSLATE
+analytical_verification_label | Analytical Verification | Analytical Verification | TRANSLATE
+highest_standard_grade | Highest Standard Grade | Highest Standard Grade | TRANSLATE
+coa_verified_label | COA Verified | COA Verified | TRANSLATE
+batch_specific_reports | Batch Specific Reports | Batch Specific Reports | TRANSLATE
+gmp_process_label | GMP Process | GMP Process | TRANSLATE
+cleanroom_mfg_label | Cleanroom Manufacturing | Cleanroom Manufacturing | TRANSLATE
+global_export_label | Global Export | Global Export | TRANSLATE
+worldwide_cold_chain_label | Worldwide Cold-Chain | Worldwide Cold-Chain | TRANSLATE
+cat_metabolic | Metabolic & GLP-1 | Metabolic & GLP-1 | TRANSLATE
+cat_recovery | Tissue Recovery | Tissue Recovery | TRANSLATE
+cat_gh | GH Secretagogues | GH Secretagogues | TRANSLATE
+cat_wellness | Pigmentation & Wellness | Pigmentation & Wellness | TRANSLATE
+cat_other | Other Peptides | Other Peptides | TRANSLATE
+precision_standards_tag | Analytical Precision Standards | Analytical Precision Standards | TRANSLATE
+featured_compounds_desc | Explore our primary GLP-1 analogues, tissue regeneration peptides, and somatropin research compounds. | Explore our primary GLP-1 analogues, tissue regeneration peptides, and somatropin research compounds. | REVIEW
+general_peptides | General Peptides | General Peptides | TRANSLATE
+view_details | View Details | View Details | TRANSLATE
+add_to_cart_tooltip | Add 1 to Quotation Cart | Add 1 to Quotation Cart | TRANSLATE
+view_all_wholesale_prefix | View All | View All | TRANSLATE
+view_all_wholesale_suffix | Wholesale Products | Wholesale Products | TRANSLATE
+analytical_catalog_tag | High-Purity Analytical Research Peptide Catalog | High-Purity Analytical Research Peptide Catalog | TRANSLATE
+showing_all_prefix | Showing all | Showing all | TRANSLATE
+showing_all_suffix | Products | Products | TRANSLATE
+select_quantity_title | Select quantity | Select quantity | TRANSLATE
+hplc_certified_tag | Certified | Certified | TRANSLATE
+research_compound | Research Compound | Research Compound | TRANSLATE
+climate_controlled_storage | -20°C Desiccated / Climate Controlled | -20°C Desiccated / Climate Controlled | TRANSLATE
+related_peptides_title | Related Research Peptides | Related Research Peptides | TRANSLATE
+about_warehouse_tag | 📦 Specialized Peptide Warehouse & Supply Facility | 📦 Specialized Peptide Warehouse & Supply Facility | TRANSLATE
+about_hero_title | About Velora Peptide | About Velora Peptide | TRANSLATE
+about_hero_subtitle | Professional Peptide Warehouse & Global Supply Partner | Professional Peptide Warehouse & Global Supply Partner | TRANSLATE
+view_catalog_btn | View Peptide Catalog | View Peptide Catalog | TRANSLATE
+contact_export_desk | Contact Export Desk | Contact Export Desk | TRANSLATE
+warehouse_storage_label | Peptide Warehouse Storage | Peptide Warehouse Storage | TRANSLATE
+bulk_stocks_sublabel | Bulk Stocks & Lyophilized Vial Inventory | Bulk Stocks & Lyophilized Vial Inventory | TRANSLATE
+exclusive_specialization | EXCLUSIVE SPECIALIZATION | EXCLUSIVE SPECIALIZATION | TRANSLATE
+who_we_are_title | Who We Are | Who We Are | TRANSLATE
+who_we_are_text | Velora Peptide is a China-based peptide warehouse and supply company focused exclusively on research peptide products. We provide high-purity peptide compounds for laboratories, distributors, resellers, and research buyers worldwide. Our operation is built around quality verification, secure packaging, and reliable international shipping. | Velora Peptide is a China-based peptide warehouse and supply company focused exclusively on research peptide products. We provide high-purity peptide compounds for laboratories, distributors, resellers, and research buyers worldwide. Our operation is built around quality verification, secure packaging, and reliable international shipping. | TRANSLATE
+product_scope | PRODUCT SCOPE | PRODUCT SCOPE | TRANSLATE
+what_we_sell_title | What We Sell | What We Sell | TRANSLATE
+research_peptides_only | Research peptides only | Research peptides only | TRANSLATE
+lyophilized_peptide_vials | Lyophilized peptide vials | Lyophilized peptide vials | TRANSLATE
+bulk_peptide_supply | Bulk peptide supply | Bulk peptide supply | TRANSLATE
+wholesale_peptide_orders | Wholesale peptide orders | Wholesale peptide orders | TRANSLATE
+normal_quantity_orders | Normal quantity orders | Normal quantity orders | TRANSLATE
+coa_supported_products | COA-supported products | COA-supported products | TRANSLATE
+order_flexibility | ORDER FLEXIBILITY | ORDER FLEXIBILITY | TRANSLATE
+supply_options_title | Supply Options | Supply Options | TRANSLATE
+supply_options_desc | We support both large distributor shipments and small individual research orders. | We support both large distributor shipments and small individual research orders. | TRANSLATE
+bulk_and_wholesale | Bulk & Wholesale | Bulk & Wholesale | TRANSLATE
+distributor_tier | DISTRIBUTOR TIER | DISTRIBUTOR TIER | TRANSLATE
+large_quantity_supply | Large quantity supply | Large quantity supply | TRANSLATE
+distributor_support | Distributor support | Distributor support | TRANSLATE
+warehouse_stock | Warehouse stock | Warehouse stock | TRANSLATE
+export_packaging | Export packaging | Export packaging | TRANSLATE
+normal_quantity | Normal Quantity | Normal Quantity | TRANSLATE
+flexible_tier | FLEXIBLE TIER | FLEXIBLE TIER | TRANSLATE
+small_quantity_orders | Small quantity orders | Small quantity orders | TRANSLATE
+individual_research_needs | Individual research needs | Individual research needs | TRANSLATE
+flexible_ordering | Flexible ordering | Flexible ordering | TRANSLATE
+analytical_integrity | ANALYTICAL INTEGRITY | ANALYTICAL INTEGRITY | TRANSLATE
+quality_documentation | Quality & Documentation | Quality & Documentation | TRANSLATE
+hplc_tested_peptides_list | HPLC-tested peptides | HPLC-tested peptides | TRANSLATE
+batch_specific_coa_reports | Batch-specific COA reports | Batch-specific COA reports | TRANSLATE
+secure_sealed_packaging | Secure sealed packaging | Secure sealed packaging | TRANSLATE
+consistent_inventory | Consistent warehouse inventory | Consistent warehouse inventory | TRANSLATE
+export_handling | Export-oriented handling | Export-oriented handling | TRANSLATE
+global_logistics | GLOBAL LOGISTICS | GLOBAL LOGISTICS | TRANSLATE
+worldwide_supply_title | Worldwide Peptide Supply | Worldwide Peptide Supply | TRANSLATE
+worldwide_supply_text | We support customers across Europe, North America, Asia-Pacific, the Middle East, and other international destinations through secure export and shipping procedures. | We support customers across Europe, North America, Asia-Pacific, the Middle East, and other international destinations through secure export and shipping procedures. | TRANSLATE
+dispatch_tracking_support | International Dispatch & Tracking Support | International Dispatch & Tracking Support | TRANSLATE
+discreet_packaging_sub | Discreet Packaging • Express Courier • Cold-Chain Monitoring | Discreet Packaging • Express Courier • Cold-Chain Monitoring | TRANSLATE
+why_choose_us_tag | WHY CHOOSE US | WHY CHOOSE US | TRANSLATE
+why_choose_title | Why Choose Velora Peptide? | Why Choose Velora Peptide? | TRANSLATE
+why_choose_subtitle | Specialized warehouse operations built for reliable peptide supply. | Specialized warehouse operations built for reliable peptide supply. | TRANSLATE
+pep_only_spec | Peptide-only specialization | Peptide-only specialization | TRANSLATE
+bulk_small_supply | Bulk and small-quantity supply | Bulk and small-quantity supply | TRANSLATE
+verified_doc | Verified product documentation | Verified product documentation | TRANSLATE
+responsive_comm | Responsive communication | Responsive communication | TRANSLATE
+confidential_handling | Confidential order handling | Confidential order handling | TRANSLATE
+reliable_dispatch | Reliable dispatch process | Reliable dispatch process | TRANSLATE
+partner_with_title | Partner with Velora Peptide | Partner with Velora Peptide | TRANSLATE
+partner_with_desc | Contact our export desk to request pricing, warehouse stock availability, or direct wholesale quotations. | Contact our export desk to request pricing, warehouse stock availability, or direct wholesale quotations. | TRANSLATE
+request_peptide_quote_btn | Request a Peptide Quote | Request a Peptide Quote | TRANSLATE
+products_label | Products | Products | TRANSLATE
+message | Message | Message | TRANSLATE
+description | Description | Description | TRANSLATE
+standard | Standard | Standard | TRANSLATE
+slug | Slug | Slug | TRANSLATE
+date | Date | Date | TRANSLATE
+photo | Photo | Photo | TRANSLATE
+destination | Destination | Destination | TRANSLATE
+
+TOTAL_IDENTICAL 572
+TOTAL_TRANSLATE 553
+TOTAL_NEUTRAL 4
+TOTAL_REVIEW 15

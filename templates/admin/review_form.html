@@ -1,15 +1,15 @@
 {% extends 'admin/base.html' %}
 
-{% block title %}{% if is_edit %}Edit Review{% else %}Add Review{% endif %} | Velora Admin Portal{% endblock %}
+{% block title %}{% if is_edit %}{{ _('edit') }}{% else %}{{ _('add') }}{% endif %} {{ _('reviews_link') }} | Velora Admin Portal{% endblock %}
 
 {% block content %}
 <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
   <div>
-    <h1 class="h3 fw-bold text-dark mb-1">{% if is_edit %}Edit Review{% else %}Add Review{% endif %}</h1>
-    <p class="text-muted mb-0 small">Publish a client testimonial for the homepage and public reviews page.</p>
+    <h1 class="h3 fw-bold text-dark mb-1">{% if is_edit %}{{ _('edit') }}{% else %}{{ _('add') }}{% endif %} {{ _('reviews_link') }}</h1>
+    <p class="text-muted mb-0 small">{{ _('review_form_description') }}</p>
   </div>
-  <a href="{{ url_for('admin.reviews') }}" class="btn btn-outline-secondary">
-    <i class="bi bi-arrow-left me-1"></i> Back to Reviews
+  <a href="{{ url_for('admin.reviews_index') }}" class="btn btn-outline-secondary">
+    <i class="bi bi-arrow-left me-1"></i> {{ _('back') }} {{ _('reviews_link') }}
   </a>
 </div>
 
@@ -19,31 +19,31 @@
 
     <div class="row g-3">
       <div class="col-md-6">
-        <label for="customerNameInput" class="form-label fw-semibold">{{ form.customer_name.label.text }}</label>
+        <label for="customerNameInput" class="form-label fw-semibold">{{ _('customer_name') }}</label>
         {{ form.customer_name(class='form-control', placeholder='Dr. Anna Becker', id='customerNameInput') }}
       </div>
       <div class="col-md-6">
-        <label for="countryInput" class="form-label fw-semibold">{{ form.country.label.text }}</label>
+        <label for="countryInput" class="form-label fw-semibold">{{ _('country') }}</label>
         {{ form.country(class='form-control', placeholder='Germany', id='countryInput') }}
       </div>
       <div class="col-md-4">
-        <label for="ratingSelect" class="form-label fw-semibold">{{ form.rating.label.text }}</label>
+        <label for="ratingSelect" class="form-label fw-semibold">{{ _('rating_label') }}</label>
         {{ form.rating(class='form-select', id='ratingSelect') }}
       </div>
       <div class="col-md-8 d-flex align-items-end">
         <div class="form-check mb-2">
           {{ form.featured(class='form-check-input', id='featuredCheckbox') }}
-          <label class="form-check-label fw-semibold" for="featuredCheckbox">{{ form.featured.label.text }}</label>
+          <label class="form-check-label fw-semibold" for="featuredCheckbox">{{ _('featured') }}</label>
         </div>
       </div>
       <div class="col-12">
-        <label for="reviewTextarea" class="form-label fw-semibold">{{ form.review_text.label.text }}</label>
+        <label for="reviewTextarea" class="form-label fw-semibold">{{ _('review_message_field') }}</label>
         {{ form.review_text(class='form-control', rows='6', placeholder='Write the review text here.', id='reviewTextarea') }}
       </div>
     </div>
 
     <div class="d-flex justify-content-end gap-2 mt-4">
-      <a href="{{ url_for('admin.reviews') }}" class="btn btn-outline-secondary">Cancel</a>
+      <a href="{{ url_for('admin.reviews_index') }}" class="btn btn-outline-secondary">{{ _('cancel') }}</a>
       {{ form.submit(class='btn btn-primary') }}
     </div>
   </form>

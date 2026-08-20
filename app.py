@@ -142,7 +142,7 @@ def create_app():
             in_progress_orders_count=in_progress_orders_count,
             company_name=Setting.get_val('company_name', 'Velora Peptide'),
             whatsapp_number=Setting.get_val('whatsapp_number', app.config.get('WHATSAPP_NUMBER', '447763743631')),
-            business_email=Setting.get_val('business_email', app.config.get('BUSINESS_EMAIL', 'info@velorapeptide.com'))
+            business_email=Setting.get_val('business_email', app.config.get('BUSINESS_EMAIL', 'velorapeptide@gmail.com'))
         )
 
     # Register Blueprints

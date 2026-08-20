@@ -384,7 +384,7 @@ CREATE TABLE `settings` (
   UNIQUE KEY `key` (`key`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO `settings` (`id`, `key`, `value`) VALUES (1, 'whatsapp_number', '447763743631');
-INSERT INTO `settings` (`id`, `key`, `value`) VALUES (2, 'email', 'info@velorapeptide.com');
+INSERT INTO `settings` (`id`, `key`, `value`) VALUES (2, 'email', 'velorapeptide@gmail.com');
 DROP TABLE IF EXISTS `alembic_version`;
 CREATE TABLE `alembic_version` (
   `version_num` varchar(32) NOT NULL,

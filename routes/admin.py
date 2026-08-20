@@ -754,7 +754,7 @@ def settings():
     if request.method == 'GET':
         form.company_name.data = Setting.get_val('company_name', 'Velora Peptide')
         form.whatsapp_number.data = Setting.get_val('whatsapp_number', '447763743631')
-        form.email.data = Setting.get_val('email', 'info@velorapeptide.com')
+        form.email.data = Setting.get_val('email', 'velorapeptide@gmail.com')
         form.address.data = Setting.get_val('address', 'Velora Biotechnology Facility, Cleanroom Suite 4')
         form.default_language.data = Setting.get_val('default_language', 'en')
         form.seo_title.data = Setting.get_val('seo_title', 'Velora Peptide | HPLC Certified Wholesale Peptides')

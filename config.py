@@ -26,7 +26,7 @@ class Config:
     
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024
     WHATSAPP_NUMBER = '447763743631'
-    BUSINESS_EMAIL = 'info@velorapeptide.com'
+    BUSINESS_EMAIL = 'velorapeptide@gmail.com'
     BRAND_NAME = 'Velora Peptide'
 
     # Session & Security Settings

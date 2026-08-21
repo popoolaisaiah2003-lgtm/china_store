@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ _('admin_login') }} | Velora Peptide</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin-login.css') }}">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body style="background: var(--navy-deep); display: flex; align-items: center; justify-content: center; min-height: 100vh;">
@@ -52,7 +54,12 @@
 
         <div class="order-form-group" style="margin-bottom: 1.5rem;">
           <label for="password">{{ _('password') }}</label>
-          {{ form.password(class="form-control", placeholder=_('password_placeholder'), id="password") }}
+          <div class="admin-password-field">
+            {{ form.password(class="form-control admin-password-input", placeholder=_('password_placeholder'), id="password") }}
+            <button type="button" class="admin-password-toggle" id="passwordToggle" aria-label="Show password" aria-pressed="false">
+              <i class="bi bi-eye" aria-hidden="true"></i>
+            </button>
+          </div>
         </div>
 
         <button type="submit" class="btn btn-navy" style="width: 100%; padding: 0.85rem;">{{ _('sign_in') }}</button>
@@ -60,12 +67,13 @@
     </div>
 
     <div style="text-align: center; margin-top: 1.5rem;">
-      <a href="{{ url_for('main.index') }}" style="color: #94A3B8; font-size: 0.85rem;">&larr; Return to Public Website</a>
+      <a href="{{ url_for('main.index') }}" style="color: #94A3B8; font-size: 0.85rem;">&larr; {{ _('return_public_site') }}</a>
     </div>
 
   </div>
 
   <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/admin-login.js') }}"></script>
 
 </body>
 </html>

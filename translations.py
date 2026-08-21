@@ -1238,7 +1238,7 @@ COMMON_UI_TRANSLATIONS = {
         'dashboard': 'Dashboard', 'categories': 'Categories', 'blog_cms': 'Blog CMS',
         'product_reviews': 'Product Reviews', 'orders_inquiry': 'Orders Inquiry', 'inquiries': 'Inquiries',
         'global_shipments': 'Global Shipments', 'languages': 'Languages', 'settings': 'Settings',
-        'change_password': 'Change Password', 'view_public_site': 'View Public Site', 'logout': 'Logout',
+        'change_password': 'Change Password', 'view_public_site': 'View Public Site', 'return_public_site': 'Return to Public Website', 'logout': 'Logout',
         'admin_portal': 'ADMIN PORTAL', 'toggle_admin_sidebar': 'Toggle admin sidebar',
         'username': 'Username', 'password': 'Password', 'username_placeholder': 'Enter admin username',
         'password_placeholder': 'Enter password', 'sign_in': 'Sign In to Console',
@@ -1256,7 +1256,7 @@ COMMON_UI_TRANSLATIONS = {
     'zh': {
         'dashboard': '仪表板', 'categories': '分类', 'blog_cms': '博客管理', 'product_reviews': '产品评价',
         'orders_inquiry': '订单咨询', 'inquiries': '咨询', 'global_shipments': '全球发货', 'languages': '语言',
-        'settings': '设置', 'change_password': '修改密码', 'view_public_site': '查看网站', 'logout': '退出登录',
+        'settings': '设置', 'change_password': '修改密码', 'view_public_site': '查看网站', 'return_public_site': '返回网站', 'logout': '退出登录',
         'admin_portal': '管理后台', 'toggle_admin_sidebar': '切换管理侧栏', 'username': '用户名', 'password': '密码',
         'username_placeholder': '请输入管理员用户名', 'password_placeholder': '请输入密码', 'sign_in': '登录管理后台',
         'added_to_cart': '已添加到报价单', 'quotation_updated': '报价单已更新', 'favorites_updated': '收藏已更新',
@@ -1270,7 +1270,7 @@ COMMON_UI_TRANSLATIONS = {
     'es': {
         'dashboard': 'Panel', 'categories': 'Categorías', 'blog_cms': 'Gestión del Blog', 'product_reviews': 'Reseñas de Productos',
         'orders_inquiry': 'Consultas de Pedidos', 'inquiries': 'Consultas', 'global_shipments': 'Envíos Globales', 'languages': 'Idiomas',
-        'settings': 'Configuración', 'change_password': 'Cambiar Contraseña', 'view_public_site': 'Ver Sitio Público', 'logout': 'Cerrar Sesión',
+        'settings': 'Configuración', 'change_password': 'Cambiar Contraseña', 'view_public_site': 'Ver Sitio Público', 'return_public_site': 'Volver al Sitio Público', 'logout': 'Cerrar Sesión',
         'admin_portal': 'PORTAL ADMINISTRATIVO', 'toggle_admin_sidebar': 'Alternar barra lateral administrativa', 'username': 'Usuario',
         'password': 'Contraseña', 'username_placeholder': 'Ingrese el usuario administrador', 'password_placeholder': 'Ingrese la contraseña',
         'sign_in': 'Iniciar Sesión', 'added_to_cart': 'Añadido al carrito de cotización', 'quotation_updated': 'Cotización actualizada',
@@ -1285,7 +1285,7 @@ COMMON_UI_TRANSLATIONS = {
     'ar': {
         'dashboard': 'لوحة المعلومات', 'categories': 'الفئات', 'blog_cms': 'إدارة المدونة', 'product_reviews': 'مراجعات المنتجات',
         'orders_inquiry': 'استفسارات الطلبات', 'inquiries': 'الاستفسارات', 'global_shipments': 'الشحنات العالمية', 'languages': 'اللغات',
-        'settings': 'الإعدادات', 'change_password': 'تغيير كلمة المرور', 'view_public_site': 'عرض الموقع العام', 'logout': 'تسجيل الخروج',
+        'settings': 'الإعدادات', 'change_password': 'تغيير كلمة المرور', 'view_public_site': 'عرض الموقع العام', 'return_public_site': 'العودة إلى الموقع العام', 'logout': 'تسجيل الخروج',
         'admin_portal': 'بوابة الإدارة', 'toggle_admin_sidebar': 'تبديل الشريط الجانبي للإدارة', 'username': 'اسم المستخدم',
         'password': 'كلمة المرور', 'username_placeholder': 'أدخل اسم مستخدم الإدارة', 'password_placeholder': 'أدخل كلمة المرور',
         'sign_in': 'تسجيل الدخول إلى لوحة التحكم', 'added_to_cart': 'تمت الإضافة إلى سلة عرض الأسعار', 'quotation_updated': 'تم تحديث عرض السعر',
@@ -1299,7 +1299,7 @@ COMMON_UI_TRANSLATIONS = {
     'fr': {
         'dashboard': 'Tableau de bord', 'categories': 'Catégories', 'blog_cms': 'Gestion du Blog', 'product_reviews': 'Avis sur les Produits',
         'orders_inquiry': 'Demandes de Commandes', 'inquiries': 'Demandes', 'global_shipments': 'Expéditions Mondiales', 'languages': 'Langues',
-        'settings': 'Paramètres', 'change_password': 'Changer le Mot de Passe', 'view_public_site': 'Voir le Site Public', 'logout': 'Déconnexion',
+        'settings': 'Paramètres', 'change_password': 'Changer le Mot de Passe', 'view_public_site': 'Voir le Site Public', 'return_public_site': 'Retour au site public', 'logout': 'Déconnexion',
         'admin_portal': 'PORTAIL ADMIN', 'toggle_admin_sidebar': 'Basculer la barre latérale admin', 'username': 'Nom d’utilisateur',
         'password': 'Mot de passe', 'username_placeholder': 'Saisissez le nom d’utilisateur admin', 'password_placeholder': 'Saisissez le mot de passe',
         'sign_in': 'Se connecter', 'added_to_cart': 'Ajouté au panier de devis', 'quotation_updated': 'Devis mis à jour',
